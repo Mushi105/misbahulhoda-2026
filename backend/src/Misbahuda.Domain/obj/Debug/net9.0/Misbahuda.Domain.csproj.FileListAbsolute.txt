@@ -20,3 +20,4 @@
 /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/backend/src/Misbahuda.Domain/obj/Debug/net9.0/refint/Misbahuda.Domain.dll
 /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/backend/src/Misbahuda.Domain/obj/Debug/net9.0/Misbahuda.Domain.pdb
 /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/backend/src/Misbahuda.Domain/obj/Debug/net9.0/ref/Misbahuda.Domain.dll
+/Users/smmubashirhasan/Documents/claudeai/arbeen-2026/backend/src/Misbahuda.Domain/obj/Debug/net9.0/Misbahuda.Domain.sourcelink.json

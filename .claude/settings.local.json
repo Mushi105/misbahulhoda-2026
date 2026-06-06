@@ -164,7 +164,11 @@
       "Bash(xargs sed -i '' 's/color:#6ee7b7/color:#9a6f00/g; *)",
       "Bash(xargs sed -i '' 's/background:rgba\\(10,8,0,0.7\\)/background:#ffffff/g; *)",
       "Bash(sed -i '' 's/hover:text-emerald-400/hover:text-amber-400/g; *)",
-      "Bash(sed -i '' 's/text-emerald-500 text-xs/text-xs\" style=\"color:#D4A800;/g; *)"
+      "Bash(sed -i '' 's/text-emerald-500 text-xs/text-xs\" style=\"color:#D4A800;/g; *)",
+      "Bash(git push *)",
+      "Bash(kill -9 12699)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['data']['accessToken'][:50]\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); rows=d.get\\('data',[]\\); print\\('Count:',len\\(rows\\)\\); print\\('First row:',json.dumps\\(rows[0]\\) if rows else 'EMPTY'\\)\")"
     ]
   }
 }
