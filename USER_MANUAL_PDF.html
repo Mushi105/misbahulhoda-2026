@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Misbah ul Hoda — User Manual 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --gold: #C49A00;
+  --gold2: #e8b800;
+  --dark: #0a0800;
+  --text: #1a2033;
+  --muted: #4a5568;
+  --light: #f8f6f0;
+  --border: #e2ddd0;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10.5pt; }
+body { font-family: 'Inter', 'Segoe UI', sans-serif; color: var(--text); background: #fff; }
+
+/* ── PAGE SETUP ── */
+@page { size: A4; margin: 0; }
+@page :first { margin: 0; }
+
+.page { width: 210mm; min-height: 297mm; position: relative; page-break-after: always; overflow: hidden; }
+.page:last-child { page-break-after: avoid; }
+
+/* ── COVER PAGE ── */
+.cover {
+  background: linear-gradient(160deg, #0a0800 0%, #130f00 40%, #080414 100%);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 0;
+}
+.cover-top-bar { height: 6px; background: linear-gradient(90deg, transparent, var(--gold), #d97706, var(--gold), transparent); }
+.cover-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; }
+.cover-arabic { color: rgba(212,168,0,0.4); font-size: 15pt; direction: rtl; margin-bottom: 28px; letter-spacing: 2px; }
+.cover-emblem { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #b88a00, var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 42pt; margin-bottom: 28px; box-shadow: 0 0 60px rgba(212,168,0,0.3); }
+.cover h1 { color: #fff; font-size: 30pt; font-weight: 900; text-align: center; line-height: 1.15; letter-spacing: -0.5px; }
+.cover h1 span { color: var(--gold); display: block; font-size: 22pt; margin-top: 4px; }
+.cover-line { width: 60px; height: 2px; background: var(--gold); margin: 24px auto; }
+.cover-subtitle { color: rgba(212,168,0,0.7); font-size: 11pt; font-weight: 600; text-align: center; letter-spacing: 3px; text-transform: uppercase; }
+.cover-desc { color: #94a3b8; font-size: 10pt; text-align: center; margin-top: 14px; line-height: 1.7; max-width: 340px; }
+.cover-badges { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; justify-content: center; }
+.cover-badge { background: rgba(212,168,0,0.1); border: 1px solid rgba(212,168,0,0.3); color: var(--gold); padding: 5px 14px; border-radius: 20px; font-size: 8.5pt; font-weight: 600; }
+.cover-stats { display: flex; gap: 0; margin-top: 40px; width: 100%; border-top: 1px solid rgba(212,168,0,0.15); }
+.cover-stat { flex: 1; text-align: center; padding: 18px 8px; border-right: 1px solid rgba(212,168,0,0.1); }
+.cover-stat:last-child { border-right: none; }
+.cover-stat .num { color: var(--gold); font-size: 20pt; font-weight: 800; line-height: 1; }
+.cover-stat .lbl { color: #64748b; font-size: 7.5pt; margin-top: 4px; }
+.cover-footer { padding: 16px 40px; border-top: 1px solid rgba(212,168,0,0.12); display: flex; justify-content: space-between; align-items: center; }
+.cover-footer-left { color: #fff; font-size: 9pt; font-weight: 600; }
+.cover-footer-right { color: rgba(212,168,0,0.4); font-size: 8pt; }
+
+/* ── TOC PAGE ── */
+.toc-page { background: var(--light); }
+.toc-header { background: var(--dark); padding: 32px 44px 28px; }
+.toc-header h2 { color: #fff; font-size: 18pt; font-weight: 800; }
+.toc-header p { color: rgba(212,168,0,0.6); font-size: 9pt; margin-top: 4px; }
+.toc-body { padding: 32px 44px; }
+.toc-section-title { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin: 20px 0 8px; }
+.toc-item { display: flex; align-items: center; padding: 6px 0; border-bottom: 1px dotted #d4c8a8; }
+.toc-item:last-child { border-bottom: none; }
+.toc-icon { font-size: 11pt; margin-right: 10px; flex-shrink: 0; }
+.toc-label { font-size: 10pt; color: var(--text); font-weight: 500; flex: 1; }
+.toc-role { font-size: 8pt; color: var(--gold); background: rgba(196,154,0,0.1); padding: 1px 8px; border-radius: 10px; margin-right: 8px; }
+.toc-pg { font-size: 9pt; color: #94a3b8; font-weight: 600; }
+.toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+
+/* ── CONTENT PAGES ── */
+.content-page { background: #fff; }
+.page-header { background: var(--dark); padding: 18px 44px; display: flex; align-items: center; justify-content: space-between; }
+.ph-left { display: flex; align-items: center; gap: 10px; }
+.ph-logo { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg,#b88a00,var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 11pt; }
+.ph-title { color: #fff; font-size: 9pt; font-weight: 700; }
+.ph-section { color: var(--gold); font-size: 8pt; font-weight: 600; }
+.page-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 44px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: #fff; }
+.pf-text { font-size: 7.5pt; color: #94a3b8; }
+.pf-pg { font-size: 8pt; font-weight: 700; color: var(--gold); }
+.pf-dot { width: 20px; height: 2px; background: var(--gold); border-radius: 2px; }
+
+/* ── SECTION HEADERS ── */
+.role-banner { margin-bottom: 24px; padding: 16px 44px; display: flex; align-items: center; gap: 14px; }
+.rb-pilgrim { background: linear-gradient(135deg,rgba(196,154,0,0.08),rgba(196,154,0,0.03)); border-left: 4px solid var(--gold); }
+.rb-volunteer { background: linear-gradient(135deg,rgba(59,130,246,0.08),rgba(59,130,246,0.03)); border-left: 4px solid #3b82f6; }
+.rb-admin { background: linear-gradient(135deg,rgba(217,119,6,0.08),rgba(217,119,6,0.03)); border-left: 4px solid #d97706; }
+.rb-icon { font-size: 24pt; }
+.rb-title { font-size: 16pt; font-weight: 800; color: var(--text); }
+.rb-desc { font-size: 9pt; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+
+.body-content { padding: 0 44px 60px; }
+
+/* ── SECTION BLOCK ── */
+.sec-block { margin-bottom: 22px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); page-break-inside: avoid; }
+.sec-head { background: #1e2533; padding: 12px 18px; display: flex; align-items: center; gap: 10px; }
+.sec-head-icon { font-size: 14pt; flex-shrink: 0; }
+.sec-head-title { color: #fff; font-size: 11pt; font-weight: 700; flex: 1; }
+.sec-head-badge { background: rgba(196,154,0,0.2); color: var(--gold); font-size: 7.5pt; font-weight: 700; padding: 2px 9px; border-radius: 12px; }
+.sec-body { padding: 16px 18px; background: #fff; }
+
+/* ── STEPS ── */
+.steps { list-style: none; counter-reset: st; }
+.steps li { counter-increment: st; display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid #f5f0e8; }
+.steps li:last-child { border-bottom: none; }
+.steps li::before { content: counter(st); min-width: 22px; height: 22px; background: linear-gradient(135deg,#b88a00,var(--gold)); color: #000; font-size: 8.5pt; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.steps li p { font-size: 9.5pt; line-height: 1.65; color: var(--text); }
+.steps li strong { color: #0f172a; }
+.steps li em { color: var(--muted); font-style: italic; }
+
+/* ── TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 8px; }
+.data-table th { text-align: left; padding: 8px 12px; background: #faf6ee; color: #7a5800; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 2px solid #e8dfc0; }
+.data-table td { padding: 9px 12px; border-bottom: 1px solid #f0ece0; color: var(--text); vertical-align: top; line-height: 1.5; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: #fdfaf4; }
+.data-table td:first-child { font-weight: 600; color: #0f172a; white-space: nowrap; }
+
+/* ── CALLOUTS ── */
+.callout { display: flex; gap: 10px; padding: 11px 14px; border-radius: 7px; margin: 12px 0; }
+.c-warn { background: #fffbeb; border: 1px solid #fde68a; border-left: 3px solid #f59e0b; }
+.c-info { background: #eff6ff; border: 1px solid #bfdbfe; border-left: 3px solid #3b82f6; }
+.c-tip  { background: rgba(196,154,0,0.06); border: 1px solid rgba(196,154,0,0.25); border-left: 3px solid var(--gold); }
+.c-auto { background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 3px solid #22c55e; }
+.c-icon { font-size: 13pt; flex-shrink: 0; }
+.c-text { font-size: 9pt; line-height: 1.65; color: var(--text); }
+.c-text strong { color: #0f172a; }
+.c-title { font-weight: 700; font-size: 9.5pt; color: #0f172a; margin-bottom: 2px; }
+
+/* ── BADGES ── */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; border-radius: 12px; font-size: 8.5pt; font-weight: 600; }
+.b-pend { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.b-rev  { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+.b-app  { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.b-rej  { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* ── INFO GRID ── */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+.info-card { padding: 12px 14px; border-radius: 7px; background: rgba(196,154,0,0.05); border: 1px solid rgba(196,154,0,0.2); }
+.ic-icon { font-size: 16pt; margin-bottom: 5px; }
+.ic-title { font-size: 9pt; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+.ic-desc { font-size: 8.5pt; color: var(--muted); line-height: 1.5; }
+
+/* ── STATUS FLOW ── */
+.flow { display: flex; align-items: center; gap: 0; margin: 12px 0; }
+.flow-item { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+.flow-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14pt; border: 2px solid #e8e2d8; background: #fff; }
+.flow-dot.active { border-color: var(--gold); background: rgba(196,154,0,0.1); }
+.flow-label { font-size: 7.5pt; font-weight: 600; color: var(--muted); text-align: center; }
+.flow-arrow { font-size: 14pt; color: #cbd5e1; margin-bottom: 16px; flex-shrink: 0; }
+
+/* ── NOTIF LIST ── */
+.notif-list { display: flex; flex-direction: column; gap: 8px; }
+.notif-item { display: flex; gap: 11px; padding: 11px 14px; border-radius: 7px; border: 1px solid var(--border); background: #fdfaf4; page-break-inside: avoid; }
+.ni-icon { font-size: 16pt; flex-shrink: 0; }
+.ni-title { font-size: 9.5pt; font-weight: 700; color: #0f172a; }
+.ni-who { display: inline-block; font-size: 7.5pt; color: #7a5800; background: rgba(196,154,0,0.12); padding: 1px 7px; border-radius: 10px; margin-left: 5px; }
+.ni-desc { font-size: 8.5pt; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+/* ── BENEFIT GRID ── */
+.benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 8px; }
+.benefit-card { padding: 12px 12px; border-radius: 7px; border: 1px solid var(--border); background: #fff; page-break-inside: avoid; }
+.bc-icon { font-size: 16pt; margin-bottom: 5px; }
+.bc-title { font-size: 9pt; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+.bc-desc { font-size: 8pt; color: var(--muted); line-height: 1.45; }
+
+/* ── DIVIDER ── */
+.divider { display: flex; align-items: center; gap: 10px; margin: 20px 0 14px; }
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-text { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); white-space: nowrap; }
+
+/* ── PRINT ── */
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { page-break-after: always; }
+  .sec-block { page-break-inside: avoid; }
+  .notif-item { page-break-inside: avoid; }
+}
+
+/* ── SCREEN PREVIEW ── */
+@media screen {
+  body { background: #e8e0d0; }
+  .page { max-width: 210mm; margin: 20px auto; box-shadow: 0 4px 40px rgba(0,0,0,0.2); }
+  .print-btn { position: fixed; bottom: 28px; right: 28px; background: linear-gradient(135deg,#b88a00,#D4A800); color: #000; font-weight: 700; font-size: 13px; padding: 14px 22px; border-radius: 50px; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(212,168,0,0.4); z-index: 999; }
+  .print-btn:hover { box-shadow: 0 6px 28px rgba(212,168,0,0.6); transform: translateY(-2px); }
+}
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">🖨️ Save as PDF</button>
+
+<!-- ══ PAGE 1: COVER ══ -->
+<div class="page cover">
+  <div class="cover-top-bar"></div>
+  <div class="cover-body">
+    <div class="cover-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="cover-emblem">📿</div>
+    <h1>Misbah ul Hoda<span>Arbaeen 2026</span></h1>
+    <div class="cover-line"></div>
+    <div class="cover-subtitle">Complete User Manual</div>
+    <div class="cover-desc">A step-by-step guide for pilgrims, volunteers, and administrators of the Arbaeen 2026 Pilgrimage Management System</div>
+    <div class="cover-badges">
+      <span class="cover-badge">🕌 Pilgrim Guide</span>
+      <span class="cover-badge">🤝 Volunteer Guide</span>
+      <span class="cover-badge">⚙️ Admin Guide</span>
+      <span class="cover-badge">🔔 Auto Notifications</span>
+    </div>
+  </div>
+  <div class="cover-stats">
+    <div class="cover-stat"><div class="num">1000+</div><div class="lbl">Concurrent Users</div></div>
+    <div class="cover-stat"><div class="num">3</div><div class="lbl">User Roles</div></div>
+    <div class="cover-stat"><div class="num">15+</div><div class="lbl">Core Features</div></div>
+    <div class="cover-stat"><div class="num">8</div><div class="lbl">Auto Notifications</div></div>
+  </div>
+  <div class="cover-footer">
+    <div class="cover-footer-left">misbahulhoda.mubashirhasan.dev</div>
+    <div class="cover-footer-right">Version 1.1 · June 2026</div>
+  </div>
+</div>
+
+<!-- ══ PAGE 2: TABLE OF CONTENTS ══ -->
+<div class="page toc-page">
+  <div class="toc-header">
+    <h2>Table of Contents</h2>
+    <p>Navigate quickly to any section</p>
+  </div>
+  <div class="toc-body">
+    <div class="toc-grid">
+      <div>
+        <div class="toc-section-title">Getting Started</div>
+        <div class="toc-item"><span class="toc-icon">📖</span><span class="toc-label">What is this System?</span><span class="toc-pg">3</span></div>
+        <div class="toc-item"><span class="toc-icon">👥</span><span class="toc-label">User Roles Overview</span><span class="toc-pg">3</span></div>
+
+        <div class="toc-section-title" style="margin-top:20px">🕌 Pilgrim Guide</div>
+        <div class="toc-item"><span class="toc-icon">📝</span><span class="toc-label">Step 1 — Register & Login</span><span class="toc-pg">4</span></div>
+        <div class="toc-item"><span class="toc-icon">👤</span><span class="toc-label">Step 2 — Complete Profile</span><span class="toc-pg">4</span></div>
+        <div class="toc-item"><span class="toc-icon">✈️</span><span class="toc-label">Step 3 — Travel Dates</span><span class="toc-pg">5</span></div>
+        <div class="toc-item"><span class="toc-icon">📊</span><span class="toc-label">Step 4 — Application Status</span><span class="toc-pg">5</span></div>
+        <div class="toc-item"><span class="toc-icon">🏨</span><span class="toc-label">Step 5 — Hotel & Room</span><span class="toc-pg">5</span></div>
+        <div class="toc-item"><span class="toc-icon">📿</span><span class="toc-label">Majalis, Namaz & Food</span><span class="toc-pg">6</span></div>
+        <div class="toc-item"><span class="toc-icon">📍</span><span class="toc-label">Live Karwan Tracking</span><span class="toc-pg">6</span></div>
+        <div class="toc-item"><span class="toc-icon">🗓️</span><span class="toc-label">Ziyarat Tours</span><span class="toc-pg">6</span></div>
+      </div>
+      <div>
+        <div class="toc-section-title">🤝 Volunteer Guide</div>
+        <div class="toc-item"><span class="toc-icon">🖥️</span><span class="toc-label">Dashboard Overview</span><span class="toc-pg">7</span></div>
+        <div class="toc-item"><span class="toc-icon">✅</span><span class="toc-label">Tasks & Attendance</span><span class="toc-pg">7</span></div>
+
+        <div class="toc-section-title" style="margin-top:20px">⚙️ Admin Guide</div>
+        <div class="toc-item"><span class="toc-icon">📊</span><span class="toc-label">Admin Dashboard</span><span class="toc-pg">8</span></div>
+        <div class="toc-item"><span class="toc-icon">🕌</span><span class="toc-label">Managing Pilgrims</span><span class="toc-pg">8</span></div>
+        <div class="toc-item"><span class="toc-icon">🏨</span><span class="toc-label">Accommodation</span><span class="toc-pg">9</span></div>
+        <div class="toc-item"><span class="toc-icon">✈️</span><span class="toc-label">Itinerary & Airport Transfers</span><span class="toc-pg">9</span></div>
+        <div class="toc-item"><span class="toc-icon">📿</span><span class="toc-label">Majalis Management</span><span class="toc-pg">10</span></div>
+        <div class="toc-item"><span class="toc-icon">🔔</span><span class="toc-label">Notifications & Notice Board</span><span class="toc-pg">10</span></div>
+        <div class="toc-item"><span class="toc-icon">💰</span><span class="toc-label">Finance Tracking</span><span class="toc-pg">11</span></div>
+
+        <div class="toc-section-title" style="margin-top:20px">Reference</div>
+        <div class="toc-item"><span class="toc-icon">⚡</span><span class="toc-label">All Auto Notifications</span><span class="toc-pg">11</span></div>
+        <div class="toc-item"><span class="toc-icon">🌟</span><span class="toc-label">Key Benefits</span><span class="toc-pg">12</span></div>
+      </div>
+    </div>
+    <div style="margin-top:32px;padding:16px 18px;border-radius:8px;background:rgba(196,154,0,0.06);border:1px solid rgba(196,154,0,0.2)">
+      <p style="font-size:9pt;color:var(--muted);line-height:1.7"><strong style="color:var(--text)">How to use this manual:</strong> This document is organized by user role — Pilgrim, Volunteer, and Admin. Find your role section and follow the steps in order. Each section includes step-by-step instructions, tables, and important tips highlighted in colored boxes.</p>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">2</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 3: OVERVIEW ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">📿</div><div><div class="ph-title">Misbah ul Hoda</div><div class="ph-section">Getting Started</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">User Manual 2026</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+
+  <div class="body-content" style="padding-top:20px">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">📖</span><span class="sec-head-title">What is Misbah ul Hoda?</span></div>
+      <div class="sec-body">
+        <p style="font-size:9.5pt;line-height:1.75;color:var(--muted);margin-bottom:14px"><strong style="color:var(--text)">Misbah ul Hoda — Arbaeen 2026</strong> is a complete digital management platform for pilgrims traveling to Karbala. Everything previously done on paper, WhatsApp groups, or phone calls is now managed in one professional system — accessible from any device, anywhere in the world.</p>
+        <div class="benefit-grid">
+          <div class="benefit-card"><div class="bc-icon">🕌</div><div class="bc-title">Pilgrim Registration</div><div class="bc-desc">Online application, document upload, status tracking</div></div>
+          <div class="benefit-card"><div class="bc-icon">🏨</div><div class="bc-title">Hotel & Room Allocation</div><div class="bc-desc">Room assignment with GPS navigation to hotel</div></div>
+          <div class="benefit-card"><div class="bc-icon">✈️</div><div class="bc-title">Airport Pickup</div><div class="bc-desc">Driver assignment with automatic notifications</div></div>
+          <div class="benefit-card"><div class="bc-icon">📿</div><div class="bc-title">Majalis Schedule</div><div class="bc-desc">Full program with scholar photos and timings</div></div>
+          <div class="benefit-card"><div class="bc-icon">📍</div><div class="bc-title">Live Karwan Tracking</div><div class="bc-desc">Real-time GPS map of your Karwan bus</div></div>
+          <div class="benefit-card"><div class="bc-icon">🔔</div><div class="bc-title">Auto Notifications</div><div class="bc-desc">Email + app alerts for every key event</div></div>
+          <div class="benefit-card"><div class="bc-icon">🗓️</div><div class="bc-title">Ziyarat Tours</div><div class="bc-desc">Day-by-day tour schedule and applications</div></div>
+          <div class="benefit-card"><div class="bc-icon">🤝</div><div class="bc-title">Volunteer System</div><div class="bc-desc">Task management, attendance, zone coordination</div></div>
+          <div class="benefit-card"><div class="bc-icon">💰</div><div class="bc-title">Finance Tracking</div><div class="bc-desc">Budget, expenses, international payments</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">👥</span><span class="sec-head-title">User Roles</span></div>
+      <div class="sec-body">
+        <table class="data-table">
+          <thead><tr><th>Role</th><th>Who</th><th>What They Can Do</th></tr></thead>
+          <tbody>
+            <tr><td>🕌 Pilgrim</td><td>Registered pilgrims</td><td>Apply for Arbaeen, submit travel details, track status, view hotel/room, see Majalis schedule, track Karwan live on map</td></tr>
+            <tr><td>🤝 Volunteer</td><td>Ground support staff</td><td>View assigned tasks, check in/out for attendance, coordinate pilgrim support, receive emergency alerts</td></tr>
+            <tr><td>⚙️ Admin</td><td>Office managers</td><td>Approve/reject pilgrims, allocate rooms and buses, manage Majalis, coordinate airport transfers, send notifications</td></tr>
+            <tr><td>👑 Super Admin</td><td>System owner</td><td>All admin features plus: create users, manage roles, full finance access, system reports, all settings</td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-tip" style="margin-top:12px">
+          <span class="c-icon">💡</span>
+          <div class="c-text"><strong>How to log in:</strong> Go to the website → click your portal (Pilgrim Portal / Volunteer Portal / Admin Panel) → enter your email and password. First-time users click <strong>"Register"</strong> to create a Pilgrim account. Volunteer and Admin accounts are created by the system administrator.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">3</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 4: PILGRIM — REGISTER & PROFILE ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">🕌</div><div><div class="ph-title">Pilgrim Guide</div><div class="ph-section">Registration & Profile</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Section 1 of 3</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+
+  <div class="role-banner rb-pilgrim" style="margin-top:16px">
+    <span class="rb-icon">🕌</span>
+    <div><div class="rb-title">Pilgrim Guide</div><div class="rb-desc">Follow these steps in order to complete your registration and get approved for Arbaeen 2026. Each step is required before proceeding to the next.</div></div>
+  </div>
+
+  <div class="body-content">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">📝</span><span class="sec-head-title">Step 1 — Register & Log In</span><span class="sec-head-badge">Start Here</span></div>
+      <div class="sec-body">
+        <ol class="steps">
+          <li><p>Open the website and click <strong>"Pilgrim Portal"</strong> on the homepage</p></li>
+          <li><p>Click <strong>"Register"</strong> — enter your full name, email address, and choose a password</p></li>
+          <li><p>Click <strong>"Create Account"</strong> — you will be logged in automatically</p></li>
+          <li><p>You will land on your personal <strong>Pilgrim Dashboard</strong> — this is your home screen</p></li>
+        </ol>
+        <div class="callout c-info" style="margin-top:10px">
+          <span class="c-icon">ℹ️</span>
+          <div class="c-text">If you already have an account, simply click <strong>"Sign In"</strong> and enter your email and password. Forgot password? Click <strong>"Forgot Password"</strong> and a reset link will be sent to your email.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">👤</span><span class="sec-head-title">Step 2 — Complete Your Profile</span><span class="sec-head-badge">Required</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">After logging in, go to <strong>Profile</strong> and fill in all information. Incomplete or incorrect details may delay your approval.</p>
+        <table class="data-table">
+          <thead><tr><th>Field</th><th>What to Enter</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Full Name</td><td>Complete name as printed on passport</td><td>Muhammad Ali Khan</td></tr>
+            <tr><td>Phone Number</td><td>Mobile number with country code</td><td>+923001234567</td></tr>
+            <tr><td>WhatsApp</td><td>WhatsApp number (if different from phone)</td><td>+923001234567</td></tr>
+            <tr><td>Country</td><td>Your home country</td><td>Pakistan</td></tr>
+            <tr><td>Passport Number</td><td>Exactly as shown on your passport</td><td>AB1234567</td></tr>
+            <tr><td>Visa Number</td><td>Your Iraq visa number</td><td>IQ-2026-XXXXX</td></tr>
+            <tr><td>Family Members</td><td>Total people traveling with you</td><td>4 (including yourself)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Adding Family Members</div><div class="divider-line"></div></div>
+        <ol class="steps">
+          <li><p>Go to the <strong>"Family"</strong> section in your portal</p></li>
+          <li><p>Click <strong>"Add Family Member"</strong></p></li>
+          <li><p>Enter their: full name, relationship (Spouse/Child/Parent), and passport number</p></li>
+          <li><p>Repeat for each family member traveling with you</p></li>
+        </ol>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Uploading Documents</div><div class="divider-line"></div></div>
+        <ol class="steps">
+          <li><p>Go to <strong>"Documents"</strong> in the left menu</p></li>
+          <li><p>Click <strong>"Upload Passport"</strong> — select a clear photo or scanned PDF (max 5MB)</p></li>
+          <li><p>Click <strong>"Upload Visa"</strong> — upload your Iraq visa copy</p></li>
+          <li><p>Wait for the green checkmark ✅ confirming the upload was successful</p></li>
+        </ol>
+        <div class="callout c-warn">
+          <span class="c-icon">⚠️</span>
+          <div class="c-text"><strong>Important:</strong> Documents must be clearly readable. Blurry or cropped images will be rejected. Accepted formats: JPG, PNG, PDF. Maximum file size: 5MB per file.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026 · Pilgrim Guide</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">4</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 5: PILGRIM — TRAVEL & STATUS ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">🕌</div><div><div class="ph-title">Pilgrim Guide</div><div class="ph-section">Travel Dates & Application Status</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Section 1 of 3</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+
+  <div class="body-content" style="padding-top:18px">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">✈️</span><span class="sec-head-title">Step 3 — Set Your Travel Dates</span><span class="sec-head-badge">Required</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">Under <strong>"Travel Details"</strong> in your dashboard, enter your flight information for both arrival and departure:</p>
+        <table class="data-table">
+          <thead><tr><th>Field</th><th>What to Enter</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Arrival Date</td><td>Date you land in Iraq</td><td>15 September 2026</td></tr>
+            <tr><td>Arrival Time</td><td>Landing time (local Iraq time)</td><td>14:30</td></tr>
+            <tr><td>Arrival Flight</td><td>Flight number</td><td>PK-745</td></tr>
+            <tr><td>Arrival Airport</td><td>Which airport you land at</td><td>Baghdad International (BGW)</td></tr>
+            <tr><td>Departure Date</td><td>Date you fly back home</td><td>25 September 2026</td></tr>
+            <tr><td>Departure Time</td><td>Departure time</td><td>09:00</td></tr>
+            <tr><td>Departure Flight</td><td>Return flight number</td><td>PK-746</td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-warn">
+          <span class="c-icon">⚠️</span>
+          <div class="c-text"><strong>Critical:</strong> Enter accurate travel dates. The admin team uses this information to arrange your airport pickup and prepare the reception team. If your dates are wrong, there may be <strong>no driver waiting for you</strong> when you arrive.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">📊</span><span class="sec-head-title">Step 4 — Track Your Application Status</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:14px">Once your profile is complete, your application enters the review process. You can see your current status on your dashboard at any time.</p>
+
+        <div class="flow">
+          <div class="flow-item"><div class="flow-dot">📝</div><div class="flow-label">Profile<br>Submitted</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item"><div class="flow-dot active">🟡</div><div class="flow-label">Pending<br>Review</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item"><div class="flow-dot">🔵</div><div class="flow-label">Under<br>Review</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item"><div class="flow-dot active">✅</div><div class="flow-label">Approved<br>✓</div></div>
+        </div>
+
+        <table class="data-table" style="margin-top:8px">
+          <thead><tr><th>Status</th><th>Meaning</th><th>What to Do</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge b-pend">🟡 Pending</span></td><td>Submitted, waiting for admin review</td><td>Wait — you will be notified when reviewed</td></tr>
+            <tr><td><span class="badge b-rev">🔵 Under Review</span></td><td>Admin is actively checking your documents</td><td>Wait — do not resubmit documents</td></tr>
+            <tr><td><span class="badge b-app">✅ Approved</span></td><td>You are confirmed for Arbaeen 2026</td><td>Check your hotel and room assignment</td></tr>
+            <tr><td><span class="badge b-rej">❌ Rejected</span></td><td>Application not accepted</td><td>Read the reason shown → contact admin for clarification</td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-auto">
+          <span class="c-icon">📧</span>
+          <div class="c-text">You will automatically receive an <strong>email + app notification</strong> every time your status changes. You do not need to keep checking — the system will notify you instantly.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">🏨</span><span class="sec-head-title">Step 5 — Your Hotel & Room</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">Once approved, the admin will assign your hotel and room. You will receive a notification, and your dashboard will show:</p>
+        <div class="info-grid">
+          <div class="info-card"><div class="ic-icon">🏨</div><div class="ic-title">Hotel Details</div><div class="ic-desc">Hotel name, full address, floor number, and your room number</div></div>
+          <div class="info-card"><div class="ic-icon">🕌</div><div class="ic-title">Distance to Haram</div><div class="ic-desc">Walking distance from your hotel to Haram Imam Hussain (AS)</div></div>
+          <div class="info-card"><div class="ic-icon">🗺️</div><div class="ic-title">Navigate to Hotel</div><div class="ic-desc">Tap to open Google Maps — show this to your taxi driver at the airport</div></div>
+          <div class="info-card"><div class="ic-icon">🚶</div><div class="ic-title">Navigate to Haram</div><div class="ic-desc">Walking route from your hotel to Haram Imam Hussain (AS)</div></div>
+        </div>
+        <div class="callout c-tip" style="margin-top:10px">
+          <span class="c-icon">💡</span>
+          <div class="c-text"><strong>Tip:</strong> Screenshot your hotel navigation before you travel. In Iraq, mobile data or WiFi may not always be available immediately upon arrival. Having the map screenshot saved offline ensures you can always show your taxi driver where to go.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026 · Pilgrim Guide</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">5</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 6: PILGRIM — MAJALIS & TRACKING ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">🕌</div><div><div class="ph-title">Pilgrim Guide</div><div class="ph-section">Majalis, Tracking & Tours</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Section 1 of 3</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+
+  <div class="body-content" style="padding-top:18px">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">📿</span><span class="sec-head-title">Majalis, Namaz Timings & Food Schedule</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">Go to <strong>"Majalis"</strong> from the navigation menu. You will see three tabs:</p>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="padding:12px 14px;border-radius:7px;border:1px solid var(--border);background:#fdfaf4">
+            <p style="font-weight:700;font-size:9.5pt;color:#0f172a;margin-bottom:7px">📿 Majalis Tab — Daily Program</p>
+            <ul style="font-size:9pt;color:var(--muted);line-height:2.1;padding-left:18px">
+              <li>Today's Majalis with the scholar's photo</li>
+              <li>Full program timeline: Opening → Hadith → Marsiya → Salam → Noha → Closing</li>
+              <li>Each item shows: start time, performer name, and performer photo</li>
+              <li>Venue name and address</li>
+              <li>Language (Urdu / English)</li>
+            </ul>
+          </div>
+          <div style="padding:12px 14px;border-radius:7px;border:1px solid var(--border);background:#fdfaf4">
+            <p style="font-weight:700;font-size:9.5pt;color:#0f172a;margin-bottom:7px">🕌 Namaz Timings Tab</p>
+            <ul style="font-size:9pt;color:var(--muted);line-height:2.1;padding-left:18px">
+              <li>Today's prayer times: Fajr, Zuhr, Asr, Maghrib, Isha</li>
+              <li>Location for Jamaat prayers</li>
+            </ul>
+          </div>
+          <div style="padding:12px 14px;border-radius:7px;border:1px solid var(--border);background:#fdfaf4">
+            <p style="font-weight:700;font-size:9.5pt;color:#0f172a;margin-bottom:7px">🍽️ Food Schedule Tab</p>
+            <ul style="font-size:9pt;color:var(--muted);line-height:2.1;padding-left:18px">
+              <li>Meal times: Breakfast, Lunch, Dinner, Sehri, Iftaar (during Ramadan)</li>
+              <li>Location and estimated number of servings</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout c-tip" style="margin-top:10px">
+          <span class="c-icon">🔔</span>
+          <div class="c-text"><strong>Automatic Reminder:</strong> You receive a push notification and email <strong>30 minutes before every Majalis</strong> — with the scholar's photo, time, and venue. You will never miss a Majalis.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">📍</span><span class="sec-head-title">Live Karwan Tracking</span></div>
+      <div class="sec-body">
+        <ol class="steps">
+          <li><p>Go to <strong>"Live Tracking"</strong> from the navigation menu</p></li>
+          <li><p>You will see a list of all active Karwans — select your Karwan</p></li>
+          <li><p>A live GPS map opens showing the exact current location of your Karwan bus</p></li>
+          <li><p>The map updates automatically in real-time — no need to refresh</p></li>
+          <li><p>Tap any bus icon to see: driver name, bus number, next stop, and ETA</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">🗓️</span><span class="sec-head-title">Ziyarat Tours</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">If Ziyarat tours are available, you can browse and apply:</p>
+        <ol class="steps">
+          <li><p>Go to <strong>"Tours"</strong> → <strong>"Available Tours"</strong> from the menu</p></li>
+          <li><p>Each tour shows: destination, total days, day-by-day schedule, and package price</p></li>
+          <li><p>Click a tour → <strong>"View Details"</strong> to see the complete daily itinerary</p></li>
+          <li><p>Select a package (Economy / Standard / Premium) and click <strong>"Apply"</strong></p></li>
+          <li><p>Your application is sent to admin — you will be notified of approval</p></li>
+          <li><p>As the tour date approaches, the system automatically sends you reminder notifications</p></li>
+        </ol>
+        <div class="callout c-info">
+          <span class="c-icon">ℹ️</span>
+          <div class="c-text">Tour places are limited. Apply early to secure your spot. Once a tour is full, the status changes to <strong>"Full"</strong> and no more applications are accepted.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026 · Pilgrim Guide</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">6</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 7: VOLUNTEER ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">🤝</div><div><div class="ph-title">Volunteer Guide</div><div class="ph-section">Dashboard, Tasks & Attendance</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Section 2 of 3</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,#3b82f6,transparent)"></div>
+
+  <div class="role-banner rb-volunteer" style="margin-top:16px">
+    <span class="rb-icon">🤝</span>
+    <div><div class="rb-title">Volunteer Guide</div><div class="rb-desc">Your credentials are provided by the system administrator. Use the Volunteer Portal to manage your tasks and attendance during the Arbaeen program.</div></div>
+  </div>
+
+  <div class="body-content">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">🖥️</span><span class="sec-head-title">Your Dashboard Overview</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">Log in via <strong>Volunteer Portal</strong> with your provided credentials. Your dashboard shows all the information you need for your shift:</p>
+        <div class="info-grid">
+          <div class="info-card"><div class="ic-icon">🟢</div><div class="ic-title">Current Status</div><div class="ic-desc">Available / Busy / Offline — visible to admin in real-time</div></div>
+          <div class="info-card"><div class="ic-icon">📋</div><div class="ic-title">Your Tasks</div><div class="ic-desc">All assigned tasks with priority level and deadline</div></div>
+          <div class="info-card"><div class="ic-icon">📍</div><div class="ic-title">Your Zone</div><div class="ic-desc">The area or location you are responsible for</div></div>
+          <div class="info-card"><div class="ic-icon">👥</div><div class="ic-title">Assigned Pilgrims</div><div class="ic-desc">Pilgrims assigned to you for support — their contact and hotel details</div></div>
+          <div class="info-card"><div class="ic-icon">🕐</div><div class="ic-title">Attendance History</div><div class="ic-desc">Your complete check-in and check-out record</div></div>
+          <div class="info-card"><div class="ic-icon">📊</div><div class="ic-title">Performance Report</div><div class="ic-desc">Tasks completed, hours worked, attendance rate</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">🕐</span><span class="sec-head-title">Check In & Check Out</span></div>
+      <div class="sec-body">
+        <ol class="steps">
+          <li><p>When your shift starts, open the app → click <strong>"Check In"</strong></p></li>
+          <li><p>Your attendance is recorded with timestamp automatically</p></li>
+          <li><p>When your shift ends, click <strong>"Check Out"</strong></p></li>
+          <li><p>Your total hours worked are calculated automatically</p></li>
+          <li><p>View your full attendance history under <strong>"Reports"</strong></p></li>
+        </ol>
+        <div class="callout c-warn">
+          <span class="c-icon">⚠️</span>
+          <div class="c-text"><strong>Remember:</strong> Always check in at the start of your shift and check out at the end. Attendance is used for volunteer performance reports. Missing check-ins cannot be added retroactively.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">✅</span><span class="sec-head-title">Managing Your Tasks</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">All tasks assigned to you appear in your <strong>Tasks</strong> section. Each task shows:</p>
+        <table class="data-table">
+          <thead><tr><th>Priority</th><th>Color</th><th>What it Means</th><th>Response Required</th></tr></thead>
+          <tbody>
+            <tr><td>🔴 Emergency</td><td>Red banner</td><td>Urgent situation requiring immediate attention</td><td>Act within minutes — notify admin</td></tr>
+            <tr><td>🟠 High</td><td>Orange</td><td>Important task that must be done today</td><td>Complete before shift ends</td></tr>
+            <tr><td>🟡 Medium</td><td>Yellow</td><td>Regular task within this shift</td><td>Complete this shift</td></tr>
+            <tr><td>🟢 Low</td><td>Green</td><td>Non-urgent, can be done when time permits</td><td>Complete today</td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-tip" style="margin-top:10px">
+          <span class="c-icon">✅</span>
+          <div class="c-text">Click <strong>"Mark Complete"</strong> as soon as a task is done. The admin dashboard shows real-time task completion — this helps coordination across all volunteers. Do not leave tasks marked incomplete after finishing them.</div>
+        </div>
+        <p style="font-size:9pt;color:var(--muted);margin-top:12px">If pilgrims are assigned to you, their <strong>name, phone number, hotel, floor, room, and flight details</strong> are all visible in your dashboard — so you can assist them directly without needing to contact admin.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026 · Volunteer Guide</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">7</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 8: ADMIN — DASHBOARD & PILGRIMS ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">⚙️</div><div><div class="ph-title">Admin Guide</div><div class="ph-section">Dashboard & Pilgrim Management</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Section 3 of 3</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,#d97706,transparent)"></div>
+
+  <div class="role-banner rb-admin" style="margin-top:16px">
+    <span class="rb-icon">⚙️</span>
+    <div><div class="rb-title">Admin Guide</div><div class="rb-desc">The admin panel gives you full control over all operations. Log in via the Admin Panel at /admin. This section covers daily management tasks.</div></div>
+  </div>
+
+  <div class="body-content">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">📊</span><span class="sec-head-title">Admin Dashboard — Real-Time Overview</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">The dashboard gives a live snapshot of the entire operation:</p>
+        <table class="data-table">
+          <thead><tr><th>Widget</th><th>What It Shows</th></tr></thead>
+          <tbody>
+            <tr><td>📊 Pilgrim Stats</td><td>Total pilgrims broken down by status (Pending / Under Review / Approved / Rejected)</td></tr>
+            <tr><td>🤝 Volunteer Status</td><td>How many volunteers are Available, Busy, or Offline right now</td></tr>
+            <tr><td>🏨 Accommodation</td><td>Occupancy rate with progress bar — rooms used vs. total capacity</td></tr>
+            <tr><td>✈️ Today's Arrivals</td><td>All pilgrims flying in today with flight number, time, airport, driver status</td></tr>
+            <tr><td>🛫 Today's Departures</td><td>All pilgrims flying out today — driver assigned or not</td></tr>
+            <tr><td>⚠️ No Driver Alert</td><td>Pilgrims arriving soon with no driver assigned — highlighted red</td></tr>
+            <tr><td>📅 3-Day Schedule</td><td>Next 3 days of arrivals and departures at a glance</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">🕌</span><span class="sec-head-title">Managing Pilgrims — Full Actions</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">Go to <strong>Admin → Pilgrims</strong>. Use the search box to find pilgrims by name, or filter by status, country, or arrival date.</p>
+        <table class="data-table">
+          <thead><tr><th>Action</th><th>How to Do It</th><th>What Happens Automatically</th></tr></thead>
+          <tbody>
+            <tr><td>Approve pilgrim</td><td>Click pilgrim row → <strong>"Approve"</strong> button</td><td>Pilgrim receives instant email + notification</td></tr>
+            <tr><td>Reject pilgrim</td><td>Click pilgrim → <strong>"Reject"</strong> → type rejection reason</td><td>Pilgrim notified with the reason you entered</td></tr>
+            <tr><td>Under Review</td><td>Click pilgrim → <strong>"Under Review"</strong></td><td>Status updated, pilgrim notified</td></tr>
+            <tr><td>Allocate Room</td><td>Click pilgrim → <strong>"Allocate Room"</strong> → select hotel & room from dropdown</td><td>Pilgrim receives room details notification</td></tr>
+            <tr><td>Allocate Bus</td><td>Click pilgrim → <strong>"Allocate Bus"</strong> → select Karwan & bus</td><td>Pilgrim notified of their bus and Karwan</td></tr>
+            <tr><td>View Documents</td><td>Click pilgrim → <strong>"Documents"</strong> tab</td><td>View passport and visa uploads</td></tr>
+          </tbody>
+        </table>
+        <div class="callout c-tip" style="margin-top:10px">
+          <span class="c-icon">💡</span>
+          <div class="c-text"><strong>Bulk Actions:</strong> To approve multiple pilgrims at once, use the checkboxes on the left of each row to select multiple pilgrims, then click <strong>"Bulk Approve"</strong> at the top of the list. This saves time during peak registration periods.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026 · Admin Guide</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">8</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 9: ADMIN — ACCOMMODATION & ITINERARY ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">⚙️</div><div><div class="ph-title">Admin Guide</div><div class="ph-section">Accommodation & Airport Transfers</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Section 3 of 3</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,#d97706,transparent)"></div>
+
+  <div class="body-content" style="padding-top:18px">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">🏨</span><span class="sec-head-title">Accommodation Management</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">Go to <strong>Admin → Accommodation</strong>. This section manages all hotels, buildings, floors, and rooms.</p>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Adding a New Hotel</div><div class="divider-line"></div></div>
+        <ol class="steps">
+          <li><p>Click <strong>"+ Add Hotel"</strong></p></li>
+          <li><p>Enter: hotel name, city (Karbala / Najaf / Baghdad), full address, phone number</p></li>
+          <li><p>Enter GPS coordinates (latitude, longitude) — pilgrims use this to navigate from airport</p></li>
+          <li><p>Enter Haram distance text — e.g. <em>"800 meters walking from Haram Imam Hussain (AS)"</em> — this is shown to pilgrims</p></li>
+          <li><p>Click <strong>"Save Hotel"</strong></p></li>
+        </ol>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Adding Rooms to a Hotel</div><div class="divider-line"></div></div>
+        <ol class="steps">
+          <li><p>Click on any hotel card → click <strong>"Add Rooms"</strong> or <strong>"Manage Rooms"</strong></p></li>
+          <li><p>Set: floor number, room number, room type (Single / Double / Family / Suite), bed capacity</p></li>
+          <li><p>Set current status: Available / Occupied / Maintenance</p></li>
+          <li><p>Click <strong>"Save"</strong> — room is now available for pilgrim allocation</p></li>
+        </ol>
+        <div class="callout c-info">
+          <span class="c-icon">ℹ️</span>
+          <div class="c-text">Rooms are automatically marked <strong>"Occupied"</strong> when a pilgrim is allocated to them, and return to <strong>"Available"</strong> when deallocated. The occupancy rate on the dashboard updates in real-time.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">✈️</span><span class="sec-head-title">Itinerary & Airport Transfer Management</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">Go to <strong>Admin → Itinerary</strong>. This page shows all arrivals and departures, organized by date.</p>
+        <table class="data-table" style="margin-bottom:12px">
+          <thead><tr><th>Column</th><th>What it Shows</th></tr></thead>
+          <tbody>
+            <tr><td>Pilgrim Name</td><td>Name, phone, and link to their full profile</td></tr>
+            <tr><td>Flight Details</td><td>Flight number, arrival time, airport name</td></tr>
+            <tr><td>Transfer Status</td><td>🟢 Driver Assigned / 🔴 No Driver (highlighted red)</td></tr>
+            <tr><td>Driver Details</td><td>Driver name, phone, vehicle if assigned</td></tr>
+          </tbody>
+        </table>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Assigning a Driver</div><div class="divider-line"></div></div>
+        <ol class="steps">
+          <li><p>Click on a pilgrim row that shows <strong>"No Driver"</strong> (red)</p></li>
+          <li><p>Click <strong>"Assign Driver"</strong></p></li>
+          <li><p>Enter: driver full name, driver phone number, vehicle type (e.g. Toyota Corolla), meeting point (e.g. Arrivals Hall Gate 3), scheduled pickup time</p></li>
+          <li><p>Click <strong>"Confirm Assignment"</strong></p></li>
+          <li><p>The pilgrim automatically receives all driver details via notification + email immediately</p></li>
+        </ol>
+        <div class="callout c-warn">
+          <span class="c-icon">⚠️</span>
+          <div class="c-text"><strong>Nightly Auto-Alert at 20:00:</strong> Every evening, the system automatically emails ALL admins with a list of every pilgrim arriving the next day who has no driver assigned. This ensures no pilgrim is left unattended at the airport.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026 · Admin Guide</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">9</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 10: ADMIN — MAJALIS & NOTIFICATIONS ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">⚙️</div><div><div class="ph-title">Admin Guide</div><div class="ph-section">Majalis & Notifications</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Section 3 of 3</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,#d97706,transparent)"></div>
+
+  <div class="body-content" style="padding-top:18px">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">📿</span><span class="sec-head-title">Majalis Management</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">Go to <strong>Admin → Majalis</strong>. This section manages the full Majalis schedule that pilgrims see in their portal.</p>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Creating a Majalis</div><div class="divider-line"></div></div>
+        <ol class="steps">
+          <li><p>Click <strong>"+ Add Majalis"</strong></p></li>
+          <li><p>Enter: title, language (Urdu / English), venue name and address</p></li>
+          <li><p>Set: start time and end time</p></li>
+          <li><p>Enter: Molana / Scholar name</p></li>
+          <li><p>Upload scholar photo (JPG/PNG, clear face photo) — appears in notifications sent to pilgrims</p></li>
+          <li><p>Click <strong>"Create Majalis"</strong></p></li>
+        </ol>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Setting the Full Program</div><div class="divider-line"></div></div>
+        <ol class="steps">
+          <li><p>Click <strong>"📋 Program"</strong> button on any Majalis card</p></li>
+          <li><p>Click <strong>"+ Add Item"</strong> — select type: Opening / Hadith / Marsiya / Salam / Noha / Closing / Break</p></li>
+          <li><p>For each item enter: time (e.g. 08:15), performer name, and upload their photo</p></li>
+          <li><p>Continue adding all items in chronological order</p></li>
+          <li><p>Use the <strong>▲▼ arrows</strong> to reorder items if needed</p></li>
+          <li><p>Click <strong>"Save Program"</strong> — pilgrims can now see the full detailed program</p></li>
+        </ol>
+
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Namaz Timings & Food Schedule</div><div class="divider-line"></div></div>
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:8px">Within the Majalis section, you can also manage:</p>
+        <ul style="font-size:9pt;color:var(--muted);line-height:2.1;padding-left:18px">
+          <li>Click <strong>"Set Namaz Timings"</strong> → select date → enter time and venue for each of the 5 prayers</li>
+          <li>Click <strong>"+ Add Food Schedule"</strong> → select meal type → enter date, time, location, and estimated servings</li>
+        </ul>
+        <div class="callout c-auto" style="margin-top:10px">
+          <span class="c-icon">🔔</span>
+          <div class="c-text"><strong>Automatic:</strong> 30 minutes before any Majalis starts, the system automatically sends a push notification + email to all approved pilgrims — including the scholar's photo, exact time, and venue. <strong>No manual action needed.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">🔔</span><span class="sec-head-title">Sending Notifications & Notice Board</span></div>
+      <div class="sec-body">
+        <table class="data-table" style="margin-bottom:12px">
+          <thead><tr><th>Target Audience</th><th>Use Case</th><th>How to Send</th></tr></thead>
+          <tbody>
+            <tr><td>Specific user</td><td>Personal message, update</td><td>Search by name → send</td></tr>
+            <tr><td>All Pilgrims</td><td>General announcement, schedule change</td><td>Select "All Pilgrims" → type message → send</td></tr>
+            <tr><td>All Volunteers</td><td>Shift change, zone update, meeting</td><td>Select "Volunteers" → type message → send</td></tr>
+            <tr><td>Everyone</td><td>Emergency alert, major announcement</td><td>Select "Everyone" → mark as Emergency → send</td></tr>
+          </tbody>
+        </table>
+        <div class="divider"><div class="divider-line"></div><div class="divider-text">Notice Board</div><div class="divider-line"></div></div>
+        <ol class="steps">
+          <li><p>Go to <strong>Admin → Notice Board</strong> → click <strong>"+ Add Notice"</strong></p></li>
+          <li><p>Enter notice title, body text, and set an expiry date</p></li>
+          <li><p>Click <strong>"Publish"</strong> — notice appears on all pilgrims' dashboards immediately</p></li>
+          <li><p>Notices auto-expire on the date you set and are removed from pilgrim view automatically</p></li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026 · Admin Guide</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">10</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 11: ADMIN FINANCE + AUTO NOTIFS ══ -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">⚙️</div><div><div class="ph-title">Admin Guide + Reference</div><div class="ph-section">Finance & Auto Notifications</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Reference</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,#d97706,transparent)"></div>
+
+  <div class="body-content" style="padding-top:18px">
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">💰</span><span class="sec-head-title">Finance Tracking</span></div>
+      <div class="sec-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <p style="font-size:9pt;font-weight:700;color:#0f172a;margin-bottom:8px">💰 Local Finance (Admin → Finance)</p>
+            <ul style="font-size:9pt;color:var(--muted);line-height:2;padding-left:16px">
+              <li>Add expenses by category (Transport, Food, Accommodation, etc.)</li>
+              <li>Set budget limits per category — system shows budget vs. actual</li>
+              <li>Record staff salary payments — mark as paid</li>
+              <li>Add ticket / flight costs</li>
+              <li>Export full finance report as PDF or Excel</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-size:9pt;font-weight:700;color:#0f172a;margin-bottom:8px">🌍 International Finance (Admin → International)</p>
+            <ul style="font-size:9pt;color:var(--muted);line-height:2;padding-left:16px">
+              <li>Record incoming payments from pilgrims</li>
+              <li>Manage vendor contracts (hotels, bus companies)</li>
+              <li>Track money transfers sent to Iraq</li>
+              <li>Multi-currency support</li>
+              <li>Balance sheets and payment reconciliation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout c-tip" style="margin-top:10px">
+          <span class="c-icon">📊</span>
+          <div class="c-text">Go to <strong>Admin → Reports</strong> to export the full pilgrim list and volunteer list as CSV/Excel. Useful for submitting to Iraqi authorities or for documentation purposes.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-head"><span class="sec-head-icon">⚡</span><span class="sec-head-title">Complete List of Automatic Notifications</span></div>
+      <div class="sec-body">
+        <p style="font-size:9pt;color:var(--muted);margin-bottom:12px">These notifications are sent <strong>automatically by the system</strong> — no manual action is required from admin or pilgrim:</p>
+        <div class="notif-list">
+          <div class="notif-item"><span class="ni-icon">✅</span><div><div class="ni-title">Application Approved <span class="ni-who">→ Pilgrim</span></div><div class="ni-desc">Sent instantly via email + in-app push when admin clicks Approve. Contains confirmation message and next steps.</div></div></div>
+          <div class="notif-item"><span class="ni-icon">❌</span><div><div class="ni-title">Application Rejected <span class="ni-who">→ Pilgrim</span></div><div class="ni-desc">Sent via email + push with the rejection reason text entered by admin.</div></div></div>
+          <div class="notif-item"><span class="ni-icon">🏨</span><div><div class="ni-title">Room Allocated <span class="ni-who">→ Pilgrim</span></div><div class="ni-desc">Sent when admin assigns a hotel room. Contains hotel name, floor, room number, and navigation links.</div></div></div>
+          <div class="notif-item"><span class="ni-icon">📿</span><div><div class="ni-title">Majalis Reminder — 30 minutes before <span class="ni-who">→ All Approved Pilgrims</span></div><div class="ni-desc">Email + push with scholar's photo, Majalis title, exact time, and venue address. Sent to every approved pilgrim.</div></div></div>
+          <div class="notif-item"><span class="ni-icon">✈️</span><div><div class="ni-title">2-Day Travel Reminder <span class="ni-who">→ Pilgrim</span></div><div class="ni-desc">Sent 2 days before departure date. Includes flight number, departure time, airport, and packing reminder.</div></div></div>
+          <div class="notif-item"><span class="ni-icon">🛫</span><div><div class="ni-title">5-Hour Flight Reminder <span class="ni-who">→ Pilgrim</span></div><div class="ni-desc">Final reminder 5 hours before flight. Includes driver details if assigned, check-in reminder, and departure time.</div></div></div>
+          <div class="notif-item"><span class="ni-icon">🚗</span><div><div class="ni-title">Driver Assigned <span class="ni-who">→ Pilgrim</span></div><div class="ni-desc">Sent immediately when admin assigns a driver. Contains driver's full name, phone number, vehicle type, meeting point, and scheduled pickup time.</div></div></div>
+          <div class="notif-item"><span class="ni-icon">⚠️</span><div><div class="ni-title">Unassigned Driver Alert — sent at 20:00 every evening <span class="ni-who">→ All Admins</span></div><div class="ni-desc">Email listing every pilgrim arriving the next day who has no driver assigned yet. Allows admin to act before it's too late.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026 · Reference</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">11</span>
+  </div>
+</div>
+
+<!-- ══ PAGE 12: BENEFITS ══ -->
+<div class="page content-page" style="page-break-after:avoid">
+  <div class="page-header">
+    <div class="ph-left"><div class="ph-logo">🌟</div><div><div class="ph-title">Key Benefits</div><div class="ph-section">Why use Misbah ul Hoda?</div></div></div>
+    <div style="color:rgba(212,168,0,0.4);font-size:8pt">Reference</div>
+  </div>
+  <div style="height:6px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+
+  <div class="body-content" style="padding-top:18px">
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">🕌 For Pilgrims</div><div class="divider-line"></div></div>
+    <div class="benefit-grid">
+      <div class="benefit-card"><div class="bc-icon">📱</div><div class="bc-title">Everything in one place</div><div class="bc-desc">Hotel name, room number, Majalis time, driver details — all in one app. No more asking on WhatsApp.</div></div>
+      <div class="benefit-card"><div class="bc-icon">🗺️</div><div class="bc-title">Hotel navigation</div><div class="bc-desc">One tap opens Google Maps. Show your taxi driver exactly where to go — even offline with a screenshot.</div></div>
+      <div class="benefit-card"><div class="bc-icon">🕌</div><div class="bc-title">Haram navigation</div><div class="bc-desc">Walking directions from your hotel directly to Haram Imam Hussain (AS).</div></div>
+      <div class="benefit-card"><div class="bc-icon">✈️</div><div class="bc-title">Travel reminders</div><div class="bc-desc">Automatic reminders 2 days and 5 hours before your flight — never miss it.</div></div>
+      <div class="benefit-card"><div class="bc-icon">🚗</div><div class="bc-title">Driver details</div><div class="bc-desc">Pickup driver name, phone, and vehicle sent directly to your email and phone.</div></div>
+      <div class="benefit-card"><div class="bc-icon">📿</div><div class="bc-title">Majalis alerts</div><div class="bc-desc">30-minute advance notification before every Majalis with scholar photo — never miss a program.</div></div>
+      <div class="benefit-card"><div class="bc-icon">📍</div><div class="bc-title">Live Karwan tracking</div><div class="bc-desc">See exactly where your Karwan bus is at any moment on a live map.</div></div>
+      <div class="benefit-card"><div class="bc-icon">🏨</div><div class="bc-title">Room details before arrival</div><div class="bc-desc">Hotel name, floor, room number visible in your portal before you even land in Iraq.</div></div>
+      <div class="benefit-card"><div class="bc-icon">🔔</div><div class="bc-title">Zero manual follow-ups</div><div class="bc-desc">System notifies you automatically for every important event — no need to keep calling admin.</div></div>
+    </div>
+
+    <div class="divider" style="margin-top:20px"><div class="divider-line"></div><div class="divider-text">⚙️ For Admin</div><div class="divider-line"></div></div>
+    <div class="benefit-grid">
+      <div class="benefit-card"><div class="bc-icon">📊</div><div class="bc-title">Real-time dashboard</div><div class="bc-desc">Arrivals, occupancy, volunteers, pending approvals — all at a glance on one screen.</div></div>
+      <div class="benefit-card"><div class="bc-icon">⚠️</div><div class="bc-title">Automatic safety net</div><div class="bc-desc">System emails you every evening if any tomorrow's pilgrim has no driver. No pilgrim left at airport.</div></div>
+      <div class="benefit-card"><div class="bc-icon">📧</div><div class="bc-title">Zero manual emails</div><div class="bc-desc">Approval confirmations, travel reminders, Majalis alerts — all sent automatically by the system.</div></div>
+      <div class="benefit-card"><div class="bc-icon">🏨</div><div class="bc-title">Full room management</div><div class="bc-desc">Track every room — available, occupied, under maintenance — across all hotels in real-time.</div></div>
+      <div class="benefit-card"><div class="bc-icon">📋</div><div class="bc-title">Professional Majalis program</div><div class="bc-desc">Detailed program with performer photos looks professional and impresses pilgrims.</div></div>
+      <div class="benefit-card"><div class="bc-icon">📤</div><div class="bc-title">Export reports instantly</div><div class="bc-desc">Download full pilgrim lists for Iraqi authorities or documentation in seconds.</div></div>
+    </div>
+
+    <div style="margin-top:28px;padding:18px 20px;border-radius:8px;background:var(--dark);text-align:center">
+      <p style="color:rgba(212,168,0,0.5);font-size:11pt;direction:rtl;margin-bottom:10px">اَللّٰهُمَّ صَلِّ عَلٰى مُحَمَّدٍ وَّاٰلِ مُحَمَّدٍ</p>
+      <p style="color:#fff;font-size:11pt;font-weight:700">May Allah (SWT) accept the ziyarat of all pilgrims 🌿</p>
+      <p style="color:#64748b;font-size:8.5pt;margin-top:6px">Misbah ul Hoda — Arbaeen 2026 Pilgrimage Management System · misbahulhoda.mubashirhasan.dev</p>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="pf-text">Misbah ul Hoda — Arbaeen 2026</span>
+    <div class="pf-dot"></div>
+    <span class="pf-pg">12</span>
+  </div>
+</div>
+
+</body>
+</html>
