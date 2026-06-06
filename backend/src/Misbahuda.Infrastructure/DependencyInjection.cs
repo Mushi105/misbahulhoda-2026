@@ -59,6 +59,7 @@ public static class DependencyInjection
             });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IWhatsAppService, WhatsAppService>();
         services.AddScoped<IEmailService, EmailService>();

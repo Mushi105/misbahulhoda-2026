@@ -78,7 +78,7 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("MisbahudaPolicy");
 app.UseStaticFiles();
-app.UseHttpsRedirection();
+// HTTPS handled by reverse proxy (Nginx Proxy Manager) — do not redirect here
 app.UseAuthentication();
 app.UseAuthorization();
 
