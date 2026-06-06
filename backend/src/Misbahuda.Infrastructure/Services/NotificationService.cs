@@ -29,8 +29,9 @@ public class NotificationService(IUnitOfWork unitOfWork) : INotificationService
         NotificationType type, NotificationEvent notificationEvent,
         CancellationToken cancellationToken = default)
     {
+        var parsedRole = Enum.Parse<UserRole>(role, ignoreCase: true);
         var users = await unitOfWork.Users.FindAsync(
-            u => u.Role == role && u.IsActive && !u.IsDeleted, cancellationToken);
+            u => u.Role == parsedRole && u.IsActive && !u.IsDeleted, cancellationToken);
 
         var notifications = users.Select(u => new Notification
         {
