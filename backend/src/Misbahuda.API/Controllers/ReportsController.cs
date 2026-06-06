@@ -144,6 +144,8 @@ public class ReportsController(IMediator mediator, IUnitOfWork unitOfWork) : Bas
                 Email       = u?.Email ?? "",
                 Phone       = u?.PhoneNumber ?? "",
                 WhatsApp    = u?.WhatsAppNumber ?? "",
+                City        = u?.City ?? "",
+                Postcode    = u?.Postcode ?? "",
                 Country     = p.Country ?? "",
                 Passport    = p.PassportNumber ?? "",
                 Visa        = p.VisaNumber ?? "",
@@ -189,6 +191,67 @@ public class ReportsController(IMediator mediator, IUnitOfWork unitOfWork) : Bas
                 LastCheckIn     = v.LastCheckIn.HasValue ? v.LastCheckIn.Value.ToString("dd/MM/yyyy HH:mm") : "",
                 Registered      = v.CreatedAt.ToString("dd/MM/yyyy"),
             };
+        });
+
+        return Ok(ApiResponse<object>.Ok(rows));
+    }
+
+    [HttpGet("scholars/summary")]
+    public async Task<IActionResult> GetScholarsSummary(CancellationToken cancellationToken)
+    {
+        var scholars = (await unitOfWork.Scholars.GetAllAsync(cancellationToken)).ToList();
+
+        var allPrograms = new[] { "Majlis", "Noha", "Hadith", "Marsiya", "Dua", "Ziarat", "Lecture", "Manqabat" };
+
+        var byProgram = allPrograms.Select(p => new
+        {
+            Program = p,
+            Count   = scholars.Count(s => (s.Specialty ?? "").Contains(p))
+        }).Where(x => x.Count > 0).ToList();
+
+        var byLanguage = scholars
+            .GroupBy(s => s.Language ?? "Unknown")
+            .Select(g => new { Language = g.Key, Count = g.Count() })
+            .OrderByDescending(x => x.Count).ToList();
+
+        var byLocation = scholars
+            .GroupBy(s => s.Location ?? "Unknown")
+            .Select(g => new { Location = g.Key, Count = g.Count() })
+            .OrderByDescending(x => x.Count).ToList();
+
+        return Ok(ApiResponse<object>.Ok(new
+        {
+            total     = scholars.Count,
+            scholars  = scholars.Count(s => !s.IsReciter),
+            reciters  = scholars.Count(s => s.IsReciter),
+            active    = scholars.Count(s => s.IsActive),
+            inactive  = scholars.Count(s => !s.IsActive),
+            byProgram,
+            byLanguage,
+            byLocation,
+        }));
+    }
+
+    [HttpGet("scholars/export")]
+    public async Task<IActionResult> ExportScholars(CancellationToken cancellationToken)
+    {
+        var scholars = (await unitOfWork.Scholars.GetAllAsync(cancellationToken))
+            .OrderBy(s => s.IsReciter).ThenBy(s => s.SortOrder).ThenBy(s => s.FullName)
+            .ToList();
+
+        var rows = scholars.Select((s, i) => new
+        {
+            No           = i + 1,
+            Type         = s.IsReciter ? "Reciter" : "Scholar",
+            FullName     = s.FullName,
+            Title        = s.Title ?? "",
+            ProgramTypes = s.Specialty ?? "",
+            Language     = s.Language ?? "",
+            Location     = s.Location ?? "",
+            Tags         = s.Tags ?? "",
+            Website      = s.Website ?? "",
+            YouTube      = s.YoutubeUrl ?? "",
+            Active       = s.IsActive ? "Yes" : "No",
         });
 
         return Ok(ApiResponse<object>.Ok(rows));

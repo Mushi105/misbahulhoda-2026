@@ -5,15 +5,20 @@ import * as XLSX from 'xlsx'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
-const summary  = ref(null)
-const loading  = ref(true)
-const error    = ref('')
-const exporting = ref('')
+const summary        = ref(null)
+const scholarSummary = ref(null)
+const loading        = ref(true)
+const error          = ref('')
+const exporting      = ref('')
 
 async function load() {
   try {
-    const res = await reportsApi.getSummary()
-    summary.value = res.data.data
+    const [sumRes, schRes] = await Promise.all([
+      reportsApi.getSummary(),
+      reportsApi.getScholarsSummary(),
+    ])
+    summary.value        = sumRes.data.data
+    scholarSummary.value = schRes.data.data
   } catch {
     error.value = 'Failed to load report data.'
   } finally { loading.value = false }
@@ -55,11 +60,13 @@ async function exportPdf(type) {
     const rows = res.data.data
     const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
-    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' })
+    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a3' })
+
+    const pageW = doc.internal.pageSize.getWidth()
 
     // Header
     doc.setFillColor(15, 23, 42)
-    doc.rect(0, 0, 297, 22, 'F')
+    doc.rect(0, 0, pageW, 22, 'F')
     doc.setTextColor(217, 119, 6)
     doc.setFontSize(14)
     doc.setFont('helvetica', 'bold')
@@ -68,15 +75,15 @@ async function exportPdf(type) {
     doc.setTextColor(148, 163, 184)
     doc.text(`${type === 'pilgrims' ? 'Pilgrims' : 'Volunteers'} Report  |  Generated: ${today}`, 14, 17)
     doc.setTextColor(217, 119, 6)
-    doc.text(`Total: ${rows.length}`, 260, 17)
+    doc.text(`Total: ${rows.length}`, pageW - 40, 17)
 
     const columns = type === 'pilgrims'
-      ? ['No','Full Name','Country','Passport','Status','Family','Arrival','Departure','Room','Bus','Registered']
+      ? ['No','Full Name','City','Postcode','Country','Passport','Status','Family','Arrival','Departure','Room','Bus','Registered']
       : ['No','Full Name','Phone','Status','Checked In','Area','Tasks Done','Last Check-in','Registered']
 
     const dataRows = type === 'pilgrims'
-      ? rows.map(r => [r.No, r.FullName, r.Country, r.Passport, r.Status, r.Family, r.Arrival, r.Departure, r.Room, r.Bus, r.Registered])
-      : rows.map(r => [r.No, r.FullName, r.Phone, r.Status, r.IsCheckedIn, r.Area, r.TasksCompleted, r.LastCheckIn, r.Registered])
+      ? rows.map(r => [r.no ?? r.No, r.fullName || r.FullName || '', r.city || r.City || '', r.postcode || r.Postcode || '', r.country || r.Country || '', r.passport || r.Passport || '', r.status || r.Status || '', r.family ?? r.Family ?? '', r.arrival || r.Arrival || '', r.departure || r.Departure || '', r.room || r.Room || '', r.bus || r.Bus || '', r.registered || r.Registered || ''])
+      : rows.map(r => [r.no ?? r.No, r.fullName || r.FullName || '', r.phone || r.Phone || '', r.status || r.Status || '', r.isCheckedIn ?? r.IsCheckedIn ?? '', r.area || r.Area || '', r.tasksCompleted ?? r.TasksCompleted ?? '', r.lastCheckIn || r.LastCheckIn || '', r.registered || r.Registered || ''])
 
     const statusColors = {
       'Approved':    [16, 185, 129],
@@ -89,6 +96,9 @@ async function exportPdf(type) {
       'Offline':     [100, 116, 139],
     }
 
+    const pilgrimColWidths = { 0:8, 1:38, 2:22, 3:18, 4:22, 5:22, 6:20, 7:10, 8:20, 9:20, 10:20, 11:20, 12:26 }
+    const volunteerColWidths = { 0:8, 1:38, 2:26, 3:18, 4:16, 5:26, 6:18, 7:26, 8:26 }
+
     autoTable(doc, {
       startY: 25,
       head: [columns],
@@ -100,6 +110,7 @@ async function exportPdf(type) {
         textColor: [30, 41, 59],
         lineColor: [203, 213, 225],
         lineWidth: 0.1,
+        overflow: 'ellipsize',
       },
       headStyles: {
         fillColor: [15, 23, 42],
@@ -107,10 +118,11 @@ async function exportPdf(type) {
         fontStyle: 'bold',
         fontSize: 7.5,
       },
+      columnStyles: type === 'pilgrims' ? pilgrimColWidths : volunteerColWidths,
       alternateRowStyles: { fillColor: [248, 250, 252] },
       didParseCell(data) {
         if (data.section === 'body') {
-          const statusCol = type === 'pilgrims' ? 4 : 3
+          const statusCol = type === 'pilgrims' ? 6 : 3
           if (data.column.index === statusCol) {
             const color = statusColors[data.cell.raw] || [30, 41, 59]
             data.cell.styles.textColor = color
@@ -247,6 +259,85 @@ function exportSummaryPdf() {
   } finally { exporting.value = '' }
 }
 
+// ─── Scholar Export ───────────────────────────────────────────
+async function exportScholarsExcel() {
+  exporting.value = 'scholars_excel'
+  try {
+    const res = await reportsApi.exportScholars()
+    const rows = res.data.data
+    const ws = XLSX.utils.json_to_sheet(rows)
+    ws['!cols'] = Object.keys(rows[0] || {}).map(k => ({ wch: Math.max(k.length + 2, 16) }))
+    const wb = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(wb, ws, 'Scholars & Reciters')
+    XLSX.writeFile(wb, `Misbahuda_Scholars_${new Date().toISOString().slice(0,10)}.xlsx`)
+  } catch { error.value = 'Scholar Excel export failed.' }
+  finally { exporting.value = '' }
+}
+
+async function exportScholarsPdf() {
+  exporting.value = 'scholars_pdf'
+  try {
+    const res = await reportsApi.exportScholars()
+    const rows = res.data.data
+    const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+
+    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' })
+    const pageW = doc.internal.pageSize.getWidth()
+
+    doc.setFillColor(15, 23, 42)
+    doc.rect(0, 0, pageW, 22, 'F')
+    doc.setTextColor(217, 119, 6)
+    doc.setFontSize(14)
+    doc.setFont('helvetica', 'bold')
+    doc.text('Misbah ul Hoda — Arbaeen 2026', 14, 10)
+    doc.setFontSize(9)
+    doc.setTextColor(148, 163, 184)
+    doc.text(`Scholars & Reciters Report  |  Generated: ${today}`, 14, 17)
+    doc.setTextColor(217, 119, 6)
+    doc.text(`Total: ${rows.length}`, pageW - 40, 17)
+
+    const columns = ['No', 'Type', 'Full Name', 'Title', 'Program Types', 'Language', 'Location', 'Active']
+    const dataRows = rows.map(r => [
+      r.no ?? r.No,
+      r.type || r.Type || '',
+      r.fullName || r.FullName || '',
+      r.title || r.Title || '',
+      r.programTypes || r.ProgramTypes || '',
+      r.language || r.Language || '',
+      r.location || r.Location || '',
+      r.active || r.Active || '',
+    ])
+
+    autoTable(doc, {
+      startY: 25,
+      head: [columns],
+      body: dataRows,
+      theme: 'grid',
+      styles: { fontSize: 7.5, cellPadding: 2.5, textColor: [30, 41, 59], overflow: 'ellipsize' },
+      headStyles: { fillColor: [15, 23, 42], textColor: [217, 119, 6], fontStyle: 'bold' },
+      columnStyles: { 0:{ cellWidth:8 }, 1:{ cellWidth:18 }, 2:{ cellWidth:45 }, 3:{ cellWidth:30 }, 4:{ cellWidth:50 }, 5:{ cellWidth:22 }, 6:{ cellWidth:30 }, 7:{ cellWidth:12 } },
+      alternateRowStyles: { fillColor: [248, 250, 252] },
+      didParseCell(data) {
+        if (data.section === 'body' && data.column.index === 1) {
+          data.cell.styles.textColor = data.cell.raw === 'Reciter' ? [217, 119, 6] : [59, 130, 246]
+          data.cell.styles.fontStyle = 'bold'
+        }
+      },
+      margin: { left: 14, right: 14 },
+    })
+
+    const pageCount = doc.internal.getNumberOfPages()
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i)
+      doc.setFontSize(7)
+      doc.setTextColor(148, 163, 184)
+      doc.text(`Page ${i} of ${pageCount}  |  Misbahuda System — Confidential`, 14, doc.internal.pageSize.height - 6)
+    }
+    doc.save(`Misbahuda_Scholars_${new Date().toISOString().slice(0,10)}.pdf`)
+  } catch (e) { console.error(e); error.value = 'Scholar PDF export failed.' }
+  finally { exporting.value = '' }
+}
+
 onMounted(load)
 </script>
 
@@ -279,6 +370,14 @@ onMounted(load)
         <button @click="exportPdf('volunteers')" :disabled="exporting === 'volunteers_pdf'"
                 class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-300 text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50">
           {{ exporting === 'volunteers_pdf' ? '⏳ Generating...' : '📄 Volunteers PDF' }}
+        </button>
+        <button @click="exportScholarsExcel" :disabled="exporting === 'scholars_excel'"
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-300 text-amber-700 hover:bg-amber-50 transition-colors disabled:opacity-50">
+          {{ exporting === 'scholars_excel' ? '⏳ Exporting...' : '📊 Scholars Excel' }}
+        </button>
+        <button @click="exportScholarsPdf" :disabled="exporting === 'scholars_pdf'"
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-300 text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50">
+          {{ exporting === 'scholars_pdf' ? '⏳ Generating...' : '📄 Scholars PDF' }}
         </button>
       </div>
     </div>
@@ -489,6 +588,78 @@ onMounted(load)
             <div class="h-3 rounded-full transition-all"
                  :class="summary.accommodation.occupancyRate > 80 ? 'bg-red-500' : summary.accommodation.occupancyRate > 50 ? 'bg-amber-500' : 'bg-emerald-500'"
                  :style="`width: ${summary.accommodation.occupancyRate}%`"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Scholars & Reciters ───────────────────── -->
+      <div v-if="scholarSummary">
+        <h2 class="text-sm font-semibold uppercase tracking-wider mb-3" style="color:#b88a00;">Scholars & Reciters</h2>
+
+        <!-- Stat cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
+          <div class="card text-center py-4 border border-gray-200">
+            <div class="text-3xl font-bold text-gray-900">{{ scholarSummary.total }}</div>
+            <div class="text-xs text-gray-600 mt-1">Total</div>
+          </div>
+          <div class="card text-center py-4 border border-blue-200">
+            <div class="text-3xl font-bold text-blue-600">{{ scholarSummary.scholars }}</div>
+            <div class="text-xs text-gray-600 mt-1">📚 Scholars</div>
+          </div>
+          <div class="card text-center py-4 border border-amber-200">
+            <div class="text-3xl font-bold text-amber-600">{{ scholarSummary.reciters }}</div>
+            <div class="text-xs text-gray-600 mt-1">🎤 Reciters</div>
+          </div>
+          <div class="card text-center py-4 border border-emerald-200">
+            <div class="text-3xl font-bold text-amber-700">{{ scholarSummary.active }}</div>
+            <div class="text-xs text-gray-600 mt-1">✅ Active</div>
+          </div>
+          <div class="card text-center py-4 border border-gray-200">
+            <div class="text-3xl font-bold text-gray-500">{{ scholarSummary.inactive }}</div>
+            <div class="text-xs text-gray-600 mt-1">Inactive</div>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4">
+          <!-- By Program Type -->
+          <div class="card border border-gray-200">
+            <h3 class="text-sm font-semibold text-gray-900 mb-3">📿 By Program Type</h3>
+            <div v-if="!scholarSummary.byProgram?.length" class="text-gray-500 text-sm text-center py-4">No program data yet<br><span class="text-xs">Edit scholars and select program types</span></div>
+            <div v-else class="space-y-2">
+              <div v-for="item in scholarSummary.byProgram" :key="item.program"
+                   class="flex items-center gap-3">
+                <span class="text-gray-700 text-sm flex-1">{{ item.program }}</span>
+                <div class="flex-1 bg-gray-200 rounded-full h-2">
+                  <div class="bg-amber-500 h-2 rounded-full"
+                       :style="`width:${scholarSummary.total ? Math.round(item.count/scholarSummary.total*100) : 0}%`"></div>
+                </div>
+                <span class="font-bold text-gray-900 text-sm w-5 text-right">{{ item.count }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- By Language -->
+          <div class="card border border-gray-200">
+            <h3 class="text-sm font-semibold text-gray-900 mb-3">🌐 By Language</h3>
+            <div class="space-y-2">
+              <div v-for="item in scholarSummary.byLanguage" :key="item.language"
+                   class="flex items-center justify-between py-1 border-b border-gray-100 last:border-0">
+                <span class="text-gray-600 text-sm">{{ item.language }}</span>
+                <span class="font-bold text-gray-900 text-sm">{{ item.count }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- By Location -->
+          <div class="card border border-gray-200">
+            <h3 class="text-sm font-semibold text-gray-900 mb-3">📍 By Location</h3>
+            <div class="space-y-2">
+              <div v-for="item in scholarSummary.byLocation" :key="item.location"
+                   class="flex items-center justify-between py-1 border-b border-gray-100 last:border-0">
+                <span class="text-gray-600 text-sm truncate flex-1">{{ item.location }}</span>
+                <span class="font-bold text-gray-900 text-sm ml-2">{{ item.count }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

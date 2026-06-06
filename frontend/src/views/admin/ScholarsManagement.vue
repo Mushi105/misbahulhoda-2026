@@ -1,6 +1,29 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import api from '@/api/client'
+
+const programTypes = [
+  { value: 'Majlis',   icon: '📿', label: 'Majlis'   },
+  { value: 'Noha',     icon: '🎤', label: 'Noha'     },
+  { value: 'Hadith',   icon: '📖', label: 'Hadith'   },
+  { value: 'Marsiya',  icon: '🎵', label: 'Marsiya'  },
+  { value: 'Dua',      icon: '🤲', label: 'Dua'      },
+  { value: 'Ziarat',   icon: '🕌', label: 'Ziarat'   },
+  { value: 'Lecture',  icon: '🎙️', label: 'Lecture'  },
+  { value: 'Manqabat', icon: '🌹', label: 'Manqabat' },
+]
+
+const selectedPrograms = ref([])
+
+// Sync selectedPrograms → form.specialty
+watch(selectedPrograms, val => {
+  if (val.length) form.value.specialty = val.join(', ')
+})
+
+function programsFromSpecialty(specialty) {
+  if (!specialty) return []
+  return specialty.split(',').map(s => s.trim()).filter(s => programTypes.some(p => p.value === s))
+}
 
 const scholars = ref([])
 const loading = ref(true)
@@ -53,6 +76,7 @@ async function load() {
 
 function startAdd() {
   form.value = emptyForm()
+  selectedPrograms.value = []
   editingId.value = null
   showForm.value = true
   error.value = ''
@@ -67,6 +91,7 @@ function startEdit(s) {
     website: s.website || '',
     isReciter: s.isReciter, sortOrder: s.sortOrder, isActive: s.isActive
   }
+  selectedPrograms.value = programsFromSpecialty(s.specialty)
   photoMode.value = 'url'
   editingId.value = s.id
   showForm.value = true
@@ -234,10 +259,24 @@ onMounted(load)
           <input v-model="form.quote" class="input" placeholder='"A meaningful quote from this scholar about Hussain (AS), Karbala, or the spiritual journey..."' />
         </div>
 
-        <!-- Tags -->
-        <div>
-          <label class="label">Tags <span class="text-gray-600 text-xs">(comma-separated)</span></label>
-          <input v-model="form.tags" class="input" placeholder="YouTube Lectures, English Podcast, UK Based, Youth Speaker" />
+        <!-- Program Types -->
+        <div class="md:col-span-2">
+          <label class="label">Program Types <span class="text-gray-600 text-xs">(select all that apply)</span></label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-1">
+            <label v-for="pt in programTypes" :key="pt.value"
+              :class="['flex items-center gap-2 px-3 py-2 rounded-xl border cursor-pointer transition-all text-sm',
+                selectedPrograms.includes(pt.value)
+                  ? 'border-amber-400 bg-amber-50 text-amber-800 font-medium'
+                  : 'border-gray-200 text-gray-600 hover:border-amber-300']">
+              <input type="checkbox" :value="pt.value" v-model="selectedPrograms" class="hidden" />
+              <span>{{ pt.icon }}</span>
+              <span>{{ pt.label }}</span>
+            </label>
+          </div>
+          <div class="mt-2">
+            <label class="label text-xs">Additional Tags <span class="text-gray-400">(optional)</span></label>
+            <input v-model="form.tags" class="input text-sm" placeholder="e.g. UK Based, Youth Speaker, Online Lectures" />
+          </div>
         </div>
         <div>
           <label class="label">YouTube Search Hint <span class="text-gray-600 text-xs">(shown as "Search: ..." text)</span></label>

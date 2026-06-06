@@ -163,6 +163,8 @@ export const reportsApi = {
   getSummary: () => api.get('/reports/summary'),
   exportPilgrims: () => api.get('/reports/pilgrims/export'),
   exportVolunteers: () => api.get('/reports/volunteers/export'),
+  getScholarsSummary: () => api.get('/reports/scholars/summary'),
+  exportScholars: () => api.get('/reports/scholars/export'),
 }
 
 export const karwanApi = {
