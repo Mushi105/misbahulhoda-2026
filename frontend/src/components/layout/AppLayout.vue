@@ -10,6 +10,7 @@ const router = useRouter()
 const route  = useRoute()
 
 const drawerOpen = ref(false)
+const appVersion = import.meta.env.VITE_APP_VERSION || 'dev'
 
 function logout() { auth.logout(); router.replace('/') }
 function navigate(path) { router.push(path); drawerOpen.value = false }
@@ -204,6 +205,7 @@ function isActive(path) {
               </svg>
               Logout
             </button>
+            <p class="text-center text-emerald-900 text-xs mt-3">{{ appVersion }}</p>
           </div>
         </div>
       </div>

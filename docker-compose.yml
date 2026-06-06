@@ -64,7 +64,7 @@ services:
       dockerfile: Dockerfile
     container_name: misbahuda_frontend
     ports:
-      - "80:80"
+      - "3456:80"
     depends_on:
       - api
     restart: unless-stopped

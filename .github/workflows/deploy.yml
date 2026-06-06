@@ -2,18 +2,15 @@ name: Deploy to Production
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'   # triggers on v1.0.0, v1.2.3, etc.
 
 jobs:
   deploy:
-    name: Deploy to Contabo Server
+    name: Deploy ${{ github.ref_name }} to Production
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -24,19 +21,23 @@ jobs:
           script: |
             set -e
             APP_DIR="/opt/misbahulhoda"
+            VERSION="${{ github.ref_name }}"
 
-            echo "=== Pulling latest code ==="
+            echo "=== Deploying $VERSION ==="
+
             cd "$APP_DIR"
-            git pull origin main
+            git fetch --tags
+            git checkout "$VERSION"
 
-            echo "=== Building and restarting containers ==="
+            echo "=== Building containers (version: $VERSION) ==="
             docker compose down --remove-orphans
-            docker compose up -d --build
+            docker compose build --build-arg APP_VERSION="$VERSION"
+            docker compose up -d
 
-            echo "=== Cleaning up old Docker images ==="
+            echo "=== Cleaning old images ==="
             docker image prune -f
 
             echo "=== Status ==="
             docker compose ps
 
-            echo "=== Done: https://misbahulhoda.mubashirhasan.dev ==="
+            echo "=== Live: https://misbahulhoda.mubashirhasan.dev ($VERSION) ==="

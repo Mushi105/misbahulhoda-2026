@@ -11,6 +11,7 @@ const route  = useRoute()
 
 const sidebarOpen = ref(window.innerWidth >= 768)
 const drawerOpen  = ref(false)
+const appVersion  = import.meta.env.VITE_APP_VERSION || 'dev'
 
 function logout() { auth.logout(); router.replace('/') }
 function navigate(path) { router.push(path); drawerOpen.value = false }
@@ -113,6 +114,9 @@ const navGroups = [
 
       <!-- User footer -->
       <div class="flex-shrink-0 p-3" style="border-top:1px solid rgba(16,185,129,0.12);">
+        <div v-if="sidebarOpen" class="text-center mb-2">
+          <span class="text-emerald-900 text-xs">{{ appVersion }}</span>
+        </div>
         <div class="flex items-center gap-3 px-2 py-2 rounded-xl" style="background:rgba(16,185,129,0.06);">
           <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
                style="background:linear-gradient(135deg,#065f46,#047857); box-shadow:0 0 10px rgba(16,185,129,0.3);">

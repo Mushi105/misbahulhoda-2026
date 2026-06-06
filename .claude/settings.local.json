@@ -142,7 +142,8 @@
       "Bash(kill 42593)",
       "Bash(kill 42576)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" -X POST http://localhost:5025/api/v1/images/upload)",
-      "Bash(chmod +x /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/scripts/server-setup.sh /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/scripts/deploy.sh)"
+      "Bash(chmod +x /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/scripts/server-setup.sh /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/scripts/deploy.sh)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://github.com/Mushi105/misbahulhoda-2026)"
     ]
   }
 }
