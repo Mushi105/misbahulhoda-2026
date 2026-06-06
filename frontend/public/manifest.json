@@ -1,0 +1,43 @@
+{
+  "name": "Misbah ul Hoda — Arbaeen 2026",
+  "short_name": "Misbah ul Hoda",
+  "description": "Arbaeen 2026 Pilgrimage Management System",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "categories": ["travel", "lifestyle"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "https://www.misbahulhoda.org/wp-content/uploads/2023/10/Logo-white-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://www.misbahulhoda.org/wp-content/uploads/2023/10/Logo-white-512-512.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "My Portal",
+      "url": "/pilgrim/portal",
+      "description": "Open Pilgrim Portal"
+    },
+    {
+      "name": "Majalis",
+      "url": "/majalis",
+      "description": "View Majalis Schedule"
+    },
+    {
+      "name": "Live Tracking",
+      "url": "/tracking",
+      "description": "Karwan Live Tracking"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: misbahuda_postgres_dev
+    environment:
+      POSTGRES_DB: misbahuda_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Misbahuda@2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: misbahuda_redis_dev
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  postgres_dev_data:

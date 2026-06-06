@@ -1,0 +1,74 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: misbahuda_postgres
+    environment:
+      POSTGRES_DB: misbahuda_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Misbahuda@2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: misbahuda_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: src/Misbahuda.API/Dockerfile
+    container_name: misbahuda_api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=misbahuda_db;Username=postgres;Password=Misbahuda@2026
+      - ConnectionStrings__Redis=redis:6379
+      - Jwt__Secret=Misbahuda_Super_Secret_Key_2026_Change_In_Production!
+      - Jwt__Issuer=Misbahuda.API
+      - Jwt__Audience=Misbahuda.Client
+      - Jwt__ExpiryMinutes=60
+      - Cors__AllowedOrigins__0=http://localhost:5173
+      - Cors__AllowedOrigins__1=http://localhost:3000
+      - Cors__AllowedOrigins__2=https://misbahulhoda.mubashirhasan.dev
+      - Cors__AllowedOrigins__3=http://misbahulhoda.mubashirhasan.dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: misbahuda_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:

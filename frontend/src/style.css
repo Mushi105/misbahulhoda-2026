@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #010f05;
+    color: #f1f5f9;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+    /* Allow scrolling on body for pages that need it */
+    overscroll-behavior-x: none;
+  }
+  #app {
+    height: 100%;
+  }
+  /* Remove iOS tap highlight */
+  * { -webkit-tap-highlight-color: transparent; }
+  /* Touch-friendly — no 300ms delay, no double-tap zoom */
+  button, a, [role="button"], input[type="checkbox"], input[type="radio"] {
+    touch-action: manipulation;
+    cursor: pointer;
+  }
+  /* Buttons in scroll containers — prevent scroll stealing tap events */
+  button {
+    -webkit-user-select: none;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+  }
+  /* Prevent iOS input zoom (font-size < 16px triggers zoom) */
+  input, select, textarea { font-size: 16px !important; }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #0f172a; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #b45309, #78350f); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #d97706; }
+  /* Safe area support for iPhone notch / home bar */
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+  .pt-safe { padding-top: env(safe-area-inset-top); }
+}
+
+@layer components {
+  .btn-primary {
+    @apply text-white font-semibold py-3 px-5 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    min-height: 48px;
+    background: linear-gradient(135deg, #065f46, #047857);
+    box-shadow: 0 4px 16px rgba(16,185,129,0.3);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #047857, #059669);
+    box-shadow: 0 6px 20px rgba(16,185,129,0.4);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    @apply text-white font-medium py-2.5 px-5 rounded-xl border transition-all duration-200;
+    background: rgba(16,185,129,0.06);
+    border-color: rgba(16,185,129,0.2);
+  }
+  .btn-secondary:hover {
+    background: rgba(16,185,129,0.12);
+    border-color: rgba(16,185,129,0.35);
+  }
+  .btn-gold {
+    @apply text-white font-semibold py-2.5 px-5 rounded-xl transition-all duration-200;
+    background: linear-gradient(135deg, #d97706, #b45309);
+    box-shadow: 0 4px 16px rgba(180,83,9,0.3);
+  }
+  .card {
+    @apply rounded-xl p-4 md:p-6;
+    background: rgba(2,20,10,0.5);
+    border: 1px solid rgba(16,185,129,0.15);
+    backdrop-filter: blur(8px);
+  }
+  .card-gold {
+    @apply rounded-xl p-6;
+    background: rgba(2,20,10,0.5);
+    border: 1px solid rgba(16,185,129,0.2);
+    backdrop-filter: blur(8px);
+  }
+  .input {
+    @apply w-full text-white rounded-xl px-4 py-3 focus:outline-none placeholder-slate-500 transition-all duration-200;
+    background: rgba(2,20,10,0.6);
+    border: 1px solid rgba(16,185,129,0.2);
+    min-height: 48px; /* iOS recommended touch target */
+  }
+  .input:focus {
+    border-color: rgba(16,185,129,0.5);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-300 mb-1.5;
+  }
+  .badge-green  { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-900 text-primary-300; }
+  .badge-gold   { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gold-900 text-gold-300; }
+  .badge-red    { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-900 text-red-300; }
+  .badge-gray   { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300; }
+  .stat-card {
+    @apply card flex items-center gap-4;
+  }
+  .stat-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.2);
+  }
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-400 hover:text-emerald-300 transition-all duration-200 font-medium text-sm;
+    background: transparent;
+  }
+  .sidebar-link:hover {
+    background: rgba(16,185,129,0.08);
+  }
+  .sidebar-link.active {
+    color: #6ee7b7;
+    background: rgba(16,185,129,0.12);
+    border-left: 2px solid #10b981;
+    box-shadow: inset 0 0 16px rgba(16,185,129,0.06);
+  }
+  .btn-outline {
+    @apply text-slate-300 hover:text-white font-medium py-2.5 px-5 rounded-xl transition-all duration-200 disabled:opacity-50;
+    background: rgba(16,185,129,0.04);
+    border: 1px solid rgba(16,185,129,0.2);
+  }
+  .btn-outline:hover:not(:disabled) {
+    background: rgba(16,185,129,0.10);
+    border-color: rgba(16,185,129,0.35);
+  }
+  .btn-danger {
+    @apply bg-red-700 hover:bg-red-600 text-white font-medium py-2.5 px-5 rounded-lg transition-all duration-200 disabled:opacity-50;
+  }
+  .btn-sm-outline {
+    @apply bg-transparent hover:bg-dark-700 text-slate-300 hover:text-white text-xs font-medium py-1.5 px-3 rounded-lg border border-slate-700 transition-all duration-200 disabled:opacity-50;
+  }
+  .form-label {
+    @apply block text-sm font-medium text-slate-300 mb-1.5;
+  }
+  .form-input {
+    @apply w-full bg-dark-900 border border-dark-700 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-gold-600 placeholder-slate-500 transition-colors;
+  }
+}
