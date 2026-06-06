@@ -113,7 +113,7 @@ function finish() {
       <!-- Logo -->
       <div class="text-center mb-6">
         <div class="flex justify-center mb-3"><MHLogo size="lg" /></div>
-        <h1 class="text-3xl font-bold text-white">Misbahuda</h1>
+        <h1 class="text-3xl font-bold text-gray-900">Misbahuda</h1>
         <p class="text-gold-400 font-arabic text-lg mt-1">Arbaeen 2026</p>
       </div>
 
@@ -129,7 +129,7 @@ function finish() {
           <div v-if="n < 3" :class="['w-12 h-0.5 transition-all', step > n ? 'bg-green-600' : 'bg-dark-700']"></div>
         </template>
       </div>
-      <p class="text-center text-slate-400 text-sm mb-6">
+      <p class="text-center text-gray-700 text-sm mb-6">
         Step {{ step }} of 3 — <span class="text-gold-400">{{ stepLabel }}</span>
       </p>
 
@@ -140,8 +140,8 @@ function finish() {
 
       <!-- ── STEP 1: Account ─────────────────────────────── -->
       <div v-if="step === 1" class="card border-primary-900">
-        <h2 class="text-xl font-semibold text-white mb-1">Create Account</h2>
-        <p class="text-slate-400 text-sm mb-5">Basic account information</p>
+        <h2 class="text-xl font-semibold text-gray-900 mb-1">Create Account</h2>
+        <p class="text-gray-700 text-sm mb-5">Basic account information</p>
 
         <form @submit.prevent="submitAccount" class="space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -158,7 +158,7 @@ function finish() {
               <input v-model="account.phoneNumber" type="tel" class="input" placeholder="+923001234567" required />
             </div>
             <div>
-              <label class="label">WhatsApp <span class="text-slate-500 text-xs">(optional)</span></label>
+              <label class="label">WhatsApp <span class="text-gray-600 text-xs">(optional)</span></label>
               <input v-model="account.whatsAppNumber" type="tel" class="input" placeholder="+923001234567" />
             </div>
             <div>
@@ -171,15 +171,15 @@ function finish() {
           </button>
         </form>
 
-        <p class="text-center text-slate-400 text-sm mt-5">
-          Already registered? <router-link to="/login" class="text-primary-400 hover:text-primary-300">Sign in</router-link>
+        <p class="text-center text-gray-700 text-sm mt-5">
+          Already registered? <router-link to="/login" class="text-amber-700 hover:text-amber-600">Sign in</router-link>
         </p>
       </div>
 
       <!-- ── STEP 2: Pilgrim Profile ────────────────────── -->
       <div v-else-if="step === 2" class="card border-gold-900">
-        <h2 class="text-xl font-semibold text-white mb-1">Travel Details</h2>
-        <p class="text-slate-400 text-sm mb-5">Fill in your travel information</p>
+        <h2 class="text-xl font-semibold text-gray-900 mb-1">Travel Details</h2>
+        <p class="text-gray-700 text-sm mb-5">Fill in your travel information</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -234,8 +234,8 @@ function finish() {
       <!-- ── STEP 3: Family Members ─────────────────────── -->
       <div v-else-if="step === 3" class="card border-green-900 space-y-5">
         <div>
-          <h2 class="text-xl font-semibold text-white mb-1">Family Members</h2>
-          <p class="text-slate-400 text-sm">Add family members traveling with you. <span class="text-slate-500">(You can skip this and add later from your portal)</span></p>
+          <h2 class="text-xl font-semibold text-gray-900 mb-1">Family Members</h2>
+          <p class="text-gray-700 text-sm">Add family members traveling with you. <span class="text-slate-500">(You can skip this and add later from your portal)</span></p>
         </div>
 
         <!-- Added members list -->
@@ -246,7 +246,7 @@ function finish() {
             <span :class="m.gender === 1 ? 'text-blue-400' : 'text-pink-400'" class="text-xs">
               {{ m.gender === 1 ? '♂' : '♀' }}
             </span>
-            <span class="text-slate-500 text-xs">{{ relationshipOptions.find(r => r.value === m.relationship)?.label }}</span>
+            <span class="text-gray-600 text-xs">{{ relationshipOptions.find(r => r.value === m.relationship)?.label }}</span>
             <span v-if="m.isMinor" class="text-xs bg-gold-900 text-gold-400 px-1.5 py-0.5 rounded ml-auto">Minor</span>
           </div>
         </div>
@@ -289,11 +289,11 @@ function finish() {
             <div class="flex items-center gap-6 pt-1">
               <label class="flex items-center gap-2 cursor-pointer">
                 <input v-model="memberForm.requiresWheelchair" type="checkbox" class="w-4 h-4" />
-                <span class="text-slate-300 text-sm">Needs Wheelchair ♿</span>
+                <span class="text-gray-600 text-sm">Needs Wheelchair ♿</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
                 <input v-model="memberForm.isMinor" type="checkbox" class="w-4 h-4" />
-                <span class="text-slate-300 text-sm">Minor (under 18)</span>
+                <span class="text-gray-600 text-sm">Minor (under 18)</span>
               </label>
             </div>
             <div>
@@ -305,7 +305,7 @@ function finish() {
             <button @click="addMember" :disabled="loading || !memberForm.fullName" class="btn-primary text-sm">
               {{ loading ? 'Saving...' : '+ Add Member' }}
             </button>
-            <button @click="showMemberForm = false" class="px-4 py-2 text-sm text-slate-400 hover:text-white">Cancel</button>
+            <button @click="showMemberForm = false" class="px-4 py-2 text-sm text-gray-700 hover:text-white">Cancel</button>
           </div>
         </div>
 

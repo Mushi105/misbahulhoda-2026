@@ -215,23 +215,23 @@ onMounted(loadAll)
     <!-- Header -->
     <div class="flex items-center justify-between flex-wrap gap-3">
       <div>
-        <h1 class="text-2xl font-bold text-white">🌍 International Dealings</h1>
-        <p class="text-slate-400 text-sm mt-0.5">Pilgrim payments · Vendor contracts · Money transfers · Currency balance</p>
+        <h1 class="text-2xl font-bold text-gray-900">🌍 International Dealings</h1>
+        <p class="text-gray-700 text-sm mt-0.5">Pilgrim payments · Vendor contracts · Money transfers · Currency balance</p>
       </div>
     </div>
 
     <!-- Alert -->
     <div v-if="msg.text"
-         :class="msg.type==='success' ? 'bg-emerald-900/50 border-emerald-700 text-emerald-300' : 'bg-red-900/50 border-red-700 text-red-300'"
+         :class="msg.type==='success' ? 'bg-green-100 border-green-300 text-green-700' : 'bg-red-100 border-red-300 text-red-600'"
          class="border rounded-lg px-4 py-3 text-sm flex justify-between">
       {{ msg.text }}<button @click="msg.text=''" class="opacity-60 hover:opacity-100">✕</button>
     </div>
 
     <!-- Tabs -->
-    <div class="flex gap-1 bg-dark-800 p-1 rounded-xl w-fit flex-wrap">
+    <div class="flex gap-1 bg-gray-100 p-1 rounded-xl w-fit flex-wrap">
       <button v-for="t in [{k:'balance',l:'⚖️ Balance Sheet'},{k:'incoming',l:'💵 Incoming'},{k:'contracts',l:'📄 Contracts'},{k:'transfers',l:'🔁 Transfers'}]"
               :key="t.k" @click="activeTab=t.k"
-              :class="['px-4 py-2 rounded-lg text-sm font-semibold transition-all', activeTab===t.k ? 'bg-dark-600 text-white' : 'text-slate-400 hover:text-white']">
+              :class="['px-4 py-2 rounded-lg text-sm font-semibold transition-all', activeTab===t.k ? 'bg-amber-600 text-white' : 'text-gray-700 hover:text-gray-900']">
         {{ t.l }}
       </button>
     </div>
@@ -239,48 +239,48 @@ onMounted(loadAll)
     <!-- ── BALANCE SHEET ──────────────────────────────────── -->
     <template v-if="activeTab==='balance'">
       <div v-if="balance">
-        <div class="card border border-dark-600 mb-4 flex items-center justify-between flex-wrap gap-2 px-6 py-4">
+        <div class="card border border-gray-200 mb-4 flex items-center justify-between flex-wrap gap-2 px-6 py-4">
           <div>
-            <p class="text-slate-400 text-xs uppercase tracking-wider">Grand Net Position (all currencies in PKR)</p>
-            <p class="text-3xl font-bold mt-1" :class="balance.grandNetPkr >= 0 ? 'text-emerald-400' : 'text-red-400'">
+            <p class="text-gray-600 text-xs uppercase tracking-wider">Grand Net Position (all currencies in PKR)</p>
+            <p class="text-3xl font-bold mt-1" :class="balance.grandNetPkr >= 0 ? 'text-amber-700' : 'text-red-500'">
               {{ fmt(Math.abs(balance.grandNetPkr)) }} PKR
             </p>
-            <p class="text-slate-500 text-xs mt-0.5">{{ balance.grandNetPkr >= 0 ? 'Net positive — more received than spent' : 'Net negative — more spent than received' }}</p>
+            <p class="text-gray-600 text-xs mt-0.5">{{ balance.grandNetPkr >= 0 ? 'Net positive — more received than spent' : 'Net negative — more spent than received' }}</p>
           </div>
           <div class="text-5xl">{{ balance.grandNetPkr >= 0 ? '📈' : '📉' }}</div>
         </div>
 
-        <div v-if="!balance.balance?.length" class="card text-center py-10 text-slate-400">
+        <div v-if="!balance.balance?.length" class="card text-center py-10 text-gray-700">
           No international transactions yet. Add incoming payments, contracts or transfers to see balance.
         </div>
 
-        <div v-else class="overflow-x-auto rounded-xl border border-dark-600">
+        <div v-else class="overflow-x-auto rounded-xl border border-gray-200">
           <table class="w-full text-sm">
             <thead>
-              <tr style="background:#0f172a" class="border-b border-dark-600">
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Currency</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Total In</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Total Out</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Net Balance</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">≈ PKR</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Rate / PKR</th>
+              <tr class="border-b border-gray-200 bg-gray-50">
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Currency</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Total In</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Total Out</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Net Balance</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">≈ PKR</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Rate / PKR</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="b in balance.balance" :key="b.currency"
-                  class="border-b border-dark-700 hover:bg-dark-800/50">
+                  class="border-b border-gray-200 hover:bg-gray-50">
                 <td class="px-4 py-3">
-                  <span class="text-white font-bold text-base">{{ b.currency }}</span>
+                  <span class="text-gray-900 font-bold text-base">{{ b.currency }}</span>
                 </td>
-                <td class="px-4 py-3 text-right text-emerald-400 font-semibold">{{ fmt(b.totalIn) }}</td>
-                <td class="px-4 py-3 text-right text-red-400 font-semibold">{{ fmt(b.totalOut) }}</td>
-                <td class="px-4 py-3 text-right font-bold text-lg" :class="b.net >= 0 ? 'text-emerald-400' : 'text-orange-400'">
+                <td class="px-4 py-3 text-right text-amber-700 font-semibold">{{ fmt(b.totalIn) }}</td>
+                <td class="px-4 py-3 text-right text-red-500 font-semibold">{{ fmt(b.totalOut) }}</td>
+                <td class="px-4 py-3 text-right font-bold text-lg" :class="b.net >= 0 ? 'text-amber-700' : 'text-orange-600'">
                   {{ b.net >= 0 ? '+' : '' }}{{ fmt(b.net) }}
                 </td>
-                <td class="px-4 py-3 text-right" :class="b.netPkr >= 0 ? 'text-emerald-300' : 'text-orange-300'">
+                <td class="px-4 py-3 text-right" :class="b.netPkr >= 0 ? 'text-amber-600' : 'text-orange-600'">
                   {{ fmt(b.netPkr) }}
                 </td>
-                <td class="px-4 py-3 text-right text-slate-500 text-xs">
+                <td class="px-4 py-3 text-right text-gray-600 text-xs">
                   {{ b.currency === 'PKR' ? '1.00' : (b.rate ? fmt(b.rate) : '—') }}
                 </td>
               </tr>
@@ -293,76 +293,76 @@ onMounted(loadAll)
     <!-- ── INCOMING PAYMENTS ──────────────────────────────── -->
     <template v-if="activeTab==='incoming'">
       <div v-if="incoming" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="card border border-blue-900/50 text-center py-4">
-          <p class="text-slate-400 text-xs uppercase mb-1">Expected Total</p>
-          <p class="text-2xl font-bold text-blue-400">{{ fmt(incoming.totalExpectedPkr) }}</p>
-          <p class="text-slate-500 text-xs">PKR equiv.</p>
+        <div class="card border border-blue-200 text-center py-4">
+          <p class="text-gray-600 text-xs uppercase mb-1">Expected Total</p>
+          <p class="text-2xl font-bold text-blue-600">{{ fmt(incoming.totalExpectedPkr) }}</p>
+          <p class="text-gray-600 text-xs">PKR equiv.</p>
         </div>
-        <div class="card border border-emerald-900/50 text-center py-4">
-          <p class="text-slate-400 text-xs uppercase mb-1">✅ Received</p>
-          <p class="text-2xl font-bold text-emerald-400">{{ fmt(incoming.totalReceivedPkr) }}</p>
-          <p class="text-slate-500 text-xs">PKR equiv.</p>
+        <div class="card border border-emerald-200 text-center py-4">
+          <p class="text-gray-600 text-xs uppercase mb-1">✅ Received</p>
+          <p class="text-2xl font-bold text-amber-700">{{ fmt(incoming.totalReceivedPkr) }}</p>
+          <p class="text-gray-600 text-xs">PKR equiv.</p>
         </div>
-        <div class="card text-center py-4" :class="incoming.totalPendingPkr > 0 ? 'border border-orange-900/50' : 'border border-slate-700'">
-          <p class="text-slate-400 text-xs uppercase mb-1">⏳ Still Pending</p>
-          <p class="text-2xl font-bold" :class="incoming.totalPendingPkr > 0 ? 'text-orange-400' : 'text-slate-400'">{{ fmt(incoming.totalPendingPkr) }}</p>
-          <p class="text-slate-500 text-xs">PKR equiv.</p>
+        <div class="card text-center py-4" :class="incoming.totalPendingPkr > 0 ? 'border border-orange-200' : 'border border-gray-200'">
+          <p class="text-gray-600 text-xs uppercase mb-1">⏳ Still Pending</p>
+          <p class="text-2xl font-bold" :class="incoming.totalPendingPkr > 0 ? 'text-orange-600' : 'text-gray-600'">{{ fmt(incoming.totalPendingPkr) }}</p>
+          <p class="text-gray-600 text-xs">PKR equiv.</p>
         </div>
       </div>
 
       <div class="flex justify-end">
-        <button @click="openAddIncoming" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white" style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
+        <button @click="openAddIncoming" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-900" style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
           + Add Group Payment
         </button>
       </div>
 
       <div v-if="!incoming?.payments?.length" class="card text-center py-12">
         <div class="text-5xl mb-3">💵</div>
-        <p class="text-white font-semibold">No incoming payments yet</p>
-        <p class="text-slate-400 text-sm mt-1">Track UK groups (GBP), Pakistani groups (PKR) etc.</p>
+        <p class="text-gray-900 font-semibold">No incoming payments yet</p>
+        <p class="text-gray-700 text-sm mt-1">Track UK groups (GBP), Pakistani groups (PKR) etc.</p>
       </div>
 
-      <div v-else class="overflow-x-auto rounded-xl border border-dark-600">
+      <div v-else class="overflow-x-auto rounded-xl border border-gray-200">
         <table class="w-full text-sm">
           <thead>
-            <tr style="background:#0f172a" class="border-b border-dark-600">
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Group / Country</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Expected</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Received</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Remaining</th>
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Status</th>
+            <tr class="border-b border-gray-200 bg-gray-50">
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Group / Country</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Expected</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Received</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Remaining</th>
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Status</th>
               <th class="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="x in incoming.payments" :key="x.id" class="border-b border-dark-700 hover:bg-dark-800/50">
+            <tr v-for="x in incoming.payments" :key="x.id" class="border-b border-gray-200 hover:bg-gray-50">
               <td class="px-4 py-3">
-                <p class="text-white font-medium">{{ x.groupName }}</p>
-                <p class="text-slate-500 text-xs">🌍 {{ x.country }} · {{ x.pilgrimCount }} pilgrims</p>
-                <p v-if="x.contactName" class="text-slate-500 text-xs">{{ x.contactName }}</p>
-                <a v-if="x.contactPhone" :href="`https://wa.me/${x.contactPhone.replace(/[^\d]/g,'')}`" target="_blank" class="text-emerald-500 text-xs hover:underline">💬 {{ x.contactPhone }}</a>
+                <p class="text-gray-900 font-medium">{{ x.groupName }}</p>
+                <p class="text-gray-600 text-xs">🌍 {{ x.country }} · {{ x.pilgrimCount }} pilgrims</p>
+                <p v-if="x.contactName" class="text-gray-600 text-xs">{{ x.contactName }}</p>
+                <a v-if="x.contactPhone" :href="`https://wa.me/${x.contactPhone.replace(/[^\d]/g,'')}`" target="_blank" class="text-green-600 text-xs hover:underline">💬 {{ x.contactPhone }}</a>
               </td>
               <td class="px-4 py-3 text-right">
-                <p class="text-blue-400 font-semibold">{{ fmt(x.amountExpected) }} {{ x.currency }}</p>
-                <p class="text-slate-600 text-xs">≈ {{ fmt(x.amountExpectedPkr) }} PKR</p>
+                <p class="text-blue-600 font-semibold">{{ fmt(x.amountExpected) }} {{ x.currency }}</p>
+                <p class="text-gray-600 text-xs">≈ {{ fmt(x.amountExpectedPkr) }} PKR</p>
               </td>
               <td class="px-4 py-3 text-right">
-                <p class="text-emerald-400 font-semibold">{{ fmt(x.amountReceived) }} {{ x.currency }}</p>
-                <p class="text-slate-600 text-xs">≈ {{ fmt(x.amountReceivedPkr) }} PKR</p>
+                <p class="text-amber-700 font-semibold">{{ fmt(x.amountReceived) }} {{ x.currency }}</p>
+                <p class="text-gray-600 text-xs">≈ {{ fmt(x.amountReceivedPkr) }} PKR</p>
               </td>
               <td class="px-4 py-3 text-right">
-                <p :class="x.remaining > 0 ? 'text-orange-400' : 'text-emerald-400'" class="font-semibold">{{ fmt(x.remaining) }} {{ x.currency }}</p>
+                <p :class="x.remaining > 0 ? 'text-orange-600' : 'text-amber-700'" class="font-semibold">{{ fmt(x.remaining) }} {{ x.currency }}</p>
               </td>
               <td class="px-4 py-3">
                 <span class="text-xs px-2 py-1 rounded-lg"
-                      :class="{ 'bg-emerald-900/40 text-emerald-400': x.status==='Full', 'bg-orange-900/40 text-orange-400': x.status==='Partial', 'bg-slate-800 text-slate-400': x.status==='Pending' }">
+                      :class="{ 'bg-green-100 text-green-700': x.status==='Full', 'bg-orange-100 text-orange-600': x.status==='Partial', 'bg-gray-100 text-gray-700': x.status==='Pending' }">
                   {{ x.status==='Full'?'✅ Full':x.status==='Partial'?'⚡ Partial':'⏳ Pending' }}
                 </span>
               </td>
               <td class="px-4 py-3">
                 <div class="flex gap-1">
-                  <button @click="openEditIncoming(x)" class="text-xs px-2 py-1 rounded border border-blue-800/60 text-blue-400 hover:bg-blue-950/40">✏️</button>
-                  <button @click="deleteIncoming(x.id)" class="text-xs px-2 py-1 rounded border border-red-800/60 text-red-400 hover:bg-red-950/40">🗑</button>
+                  <button @click="openEditIncoming(x)" class="text-xs px-2 py-1 rounded border border-blue-300 text-blue-600 hover:bg-blue-50">✏️</button>
+                  <button @click="deleteIncoming(x.id)" class="text-xs px-2 py-1 rounded border border-red-300 text-red-600 hover:bg-red-50">🗑</button>
                 </div>
               </td>
             </tr>
@@ -374,75 +374,75 @@ onMounted(loadAll)
     <!-- ── VENDOR CONTRACTS ───────────────────────────────── -->
     <template v-if="activeTab==='contracts'">
       <div v-if="contracts" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="card border border-slate-700 text-center py-4">
-          <p class="text-slate-400 text-xs uppercase mb-1">Total Contract Value</p>
-          <p class="text-2xl font-bold text-white">{{ fmt(contracts.totalValuePkr) }}</p>
-          <p class="text-slate-500 text-xs">PKR equiv.</p>
+        <div class="card border border-gray-200 text-center py-4">
+          <p class="text-gray-600 text-xs uppercase mb-1">Total Contract Value</p>
+          <p class="text-2xl font-bold text-gray-900">{{ fmt(contracts.totalValuePkr) }}</p>
+          <p class="text-gray-600 text-xs">PKR equiv.</p>
         </div>
-        <div class="card border border-emerald-900/50 text-center py-4">
-          <p class="text-slate-400 text-xs uppercase mb-1">✅ Paid</p>
-          <p class="text-2xl font-bold text-emerald-400">{{ fmt(contracts.totalPaidPkr) }}</p>
-          <p class="text-slate-500 text-xs">PKR equiv.</p>
+        <div class="card border border-emerald-200 text-center py-4">
+          <p class="text-gray-600 text-xs uppercase mb-1">✅ Paid</p>
+          <p class="text-2xl font-bold text-amber-700">{{ fmt(contracts.totalPaidPkr) }}</p>
+          <p class="text-gray-600 text-xs">PKR equiv.</p>
         </div>
-        <div class="card text-center py-4" :class="contracts.totalDuePkr > 0 ? 'border border-orange-900/50' : 'border border-slate-700'">
-          <p class="text-slate-400 text-xs uppercase mb-1">⏳ Still Due</p>
-          <p class="text-2xl font-bold" :class="contracts.totalDuePkr > 0 ? 'text-orange-400' : 'text-slate-400'">{{ fmt(contracts.totalDuePkr) }}</p>
-          <p class="text-slate-500 text-xs">PKR equiv.</p>
+        <div class="card text-center py-4" :class="contracts.totalDuePkr > 0 ? 'border border-orange-200' : 'border border-gray-200'">
+          <p class="text-gray-600 text-xs uppercase mb-1">⏳ Still Due</p>
+          <p class="text-2xl font-bold" :class="contracts.totalDuePkr > 0 ? 'text-orange-600' : 'text-gray-600'">{{ fmt(contracts.totalDuePkr) }}</p>
+          <p class="text-gray-600 text-xs">PKR equiv.</p>
         </div>
       </div>
 
       <div class="flex justify-end">
-        <button @click="openAddContract" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white" style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
+        <button @click="openAddContract" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-900" style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
           + Add Contract
         </button>
       </div>
 
       <div v-if="!contracts?.contracts?.length" class="card text-center py-12">
         <div class="text-5xl mb-3">📄</div>
-        <p class="text-white font-semibold">No contracts yet</p>
-        <p class="text-slate-400 text-sm mt-1">Add Iraqi hotel deals, transport company contracts etc.</p>
+        <p class="text-gray-900 font-semibold">No contracts yet</p>
+        <p class="text-gray-700 text-sm mt-1">Add Iraqi hotel deals, transport company contracts etc.</p>
       </div>
 
-      <div v-else class="overflow-x-auto rounded-xl border border-dark-600">
+      <div v-else class="overflow-x-auto rounded-xl border border-gray-200">
         <table class="w-full text-sm">
           <thead>
-            <tr style="background:#0f172a" class="border-b border-dark-600">
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Vendor</th>
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Service</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Total</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Paid</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Due</th>
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Status</th>
+            <tr class="border-b border-gray-200 bg-gray-50">
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Vendor</th>
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Service</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Total</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Paid</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Due</th>
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Status</th>
               <th class="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="x in contracts.contracts" :key="x.id" class="border-b border-dark-700 hover:bg-dark-800/50">
+            <tr v-for="x in contracts.contracts" :key="x.id" class="border-b border-gray-200 hover:bg-gray-50">
               <td class="px-4 py-3">
-                <p class="text-white font-medium">{{ x.vendorName }}</p>
-                <p class="text-slate-500 text-xs">🌍 {{ x.country }}</p>
-                <a v-if="x.contactPhone" :href="`https://wa.me/${x.contactPhone.replace(/[^\d]/g,'')}`" target="_blank" class="text-emerald-500 text-xs hover:underline">💬 {{ x.contactPhone }}</a>
+                <p class="text-gray-900 font-medium">{{ x.vendorName }}</p>
+                <p class="text-gray-600 text-xs">🌍 {{ x.country }}</p>
+                <a v-if="x.contactPhone" :href="`https://wa.me/${x.contactPhone.replace(/[^\d]/g,'')}`" target="_blank" class="text-green-600 text-xs hover:underline">💬 {{ x.contactPhone }}</a>
               </td>
               <td class="px-4 py-3">
-                <span class="text-xs px-2 py-1 rounded bg-dark-700 text-slate-300">{{ x.serviceType }}</span>
-                <p v-if="x.description" class="text-slate-500 text-xs mt-1 truncate max-w-36">{{ x.description }}</p>
+                <span class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-600">{{ x.serviceType }}</span>
+                <p v-if="x.description" class="text-gray-600 text-xs mt-1 truncate max-w-36">{{ x.description }}</p>
               </td>
               <td class="px-4 py-3 text-right">
-                <p class="text-white font-semibold">{{ fmt(x.totalAmount) }} {{ x.currency }}</p>
-                <p class="text-slate-600 text-xs">≈ {{ fmt(x.totalAmountPkr) }} PKR</p>
+                <p class="text-gray-900 font-semibold">{{ fmt(x.totalAmount) }} {{ x.currency }}</p>
+                <p class="text-gray-600 text-xs">≈ {{ fmt(x.totalAmountPkr) }} PKR</p>
               </td>
-              <td class="px-4 py-3 text-right text-emerald-400 font-semibold">{{ fmt(x.paidAmount) }}</td>
-              <td class="px-4 py-3 text-right" :class="x.remaining > 0 ? 'text-orange-400' : 'text-emerald-400'">{{ fmt(x.remaining) }}</td>
+              <td class="px-4 py-3 text-right text-amber-700 font-semibold">{{ fmt(x.paidAmount) }}</td>
+              <td class="px-4 py-3 text-right" :class="x.remaining > 0 ? 'text-orange-600' : 'text-amber-700'">{{ fmt(x.remaining) }}</td>
               <td class="px-4 py-3">
                 <span class="text-xs px-2 py-1 rounded-lg"
-                      :class="{ 'bg-emerald-900/40 text-emerald-400': x.status==='Completed', 'bg-blue-900/40 text-blue-400': x.status==='Active', 'bg-red-900/40 text-red-400': x.status==='Cancelled' }">
+                      :class="{ 'bg-green-100 text-green-700': x.status==='Completed', 'bg-blue-100 text-blue-700': x.status==='Active', 'bg-red-100 text-red-600': x.status==='Cancelled' }">
                   {{ x.status }}
                 </span>
               </td>
               <td class="px-4 py-3">
                 <div class="flex gap-1">
-                  <button @click="openEditContract(x)" class="text-xs px-2 py-1 rounded border border-blue-800/60 text-blue-400 hover:bg-blue-950/40">✏️</button>
-                  <button @click="deleteContract(x.id)" class="text-xs px-2 py-1 rounded border border-red-800/60 text-red-400 hover:bg-red-950/40">🗑</button>
+                  <button @click="openEditContract(x)" class="text-xs px-2 py-1 rounded border border-blue-300 text-blue-600 hover:bg-blue-50">✏️</button>
+                  <button @click="deleteContract(x.id)" class="text-xs px-2 py-1 rounded border border-red-300 text-red-600 hover:bg-red-50">🗑</button>
                 </div>
               </td>
             </tr>
@@ -454,74 +454,74 @@ onMounted(loadAll)
     <!-- ── MONEY TRANSFERS ────────────────────────────────── -->
     <template v-if="activeTab==='transfers'">
       <div v-if="transfers" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div class="card border border-slate-700 text-center py-4">
-          <p class="text-slate-400 text-xs uppercase mb-1">Total Sent</p>
-          <p class="text-xl font-bold text-white">{{ fmt(transfers.totalSentPkr) }}</p>
-          <p class="text-slate-500 text-xs">PKR</p>
+        <div class="card border border-gray-200 text-center py-4">
+          <p class="text-gray-600 text-xs uppercase mb-1">Total Sent</p>
+          <p class="text-xl font-bold text-gray-900">{{ fmt(transfers.totalSentPkr) }}</p>
+          <p class="text-gray-600 text-xs">PKR</p>
         </div>
-        <div class="card border border-slate-700 text-center py-4">
-          <p class="text-slate-400 text-xs uppercase mb-1">Total</p>
-          <p class="text-xl font-bold text-white">{{ transfers.totalCount }}</p>
-          <p class="text-slate-500 text-xs">transfers</p>
+        <div class="card border border-gray-200 text-center py-4">
+          <p class="text-gray-600 text-xs uppercase mb-1">Total</p>
+          <p class="text-xl font-bold text-gray-900">{{ transfers.totalCount }}</p>
+          <p class="text-gray-600 text-xs">transfers</p>
         </div>
-        <div class="card border border-emerald-900/50 text-center py-4">
-          <p class="text-slate-400 text-xs uppercase mb-1">✅ Completed</p>
-          <p class="text-xl font-bold text-emerald-400">{{ transfers.completedCount }}</p>
+        <div class="card border border-emerald-200 text-center py-4">
+          <p class="text-gray-600 text-xs uppercase mb-1">✅ Completed</p>
+          <p class="text-xl font-bold text-amber-700">{{ transfers.completedCount }}</p>
         </div>
-        <div class="card text-center py-4" :class="transfers.pendingCount > 0 ? 'border border-orange-900/50' : 'border border-slate-700'">
-          <p class="text-slate-400 text-xs uppercase mb-1">⏳ Pending</p>
-          <p class="text-xl font-bold" :class="transfers.pendingCount > 0 ? 'text-orange-400' : 'text-slate-400'">{{ transfers.pendingCount }}</p>
+        <div class="card text-center py-4" :class="transfers.pendingCount > 0 ? 'border border-orange-200' : 'border border-gray-200'">
+          <p class="text-gray-600 text-xs uppercase mb-1">⏳ Pending</p>
+          <p class="text-xl font-bold" :class="transfers.pendingCount > 0 ? 'text-orange-600' : 'text-gray-600'">{{ transfers.pendingCount }}</p>
         </div>
       </div>
 
       <div class="flex justify-end">
-        <button @click="openAddTransfer" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white" style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
+        <button @click="openAddTransfer" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-900" style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
           + Add Transfer
         </button>
       </div>
 
       <div v-if="!transfers?.transfers?.length" class="card text-center py-12">
         <div class="text-5xl mb-3">🔁</div>
-        <p class="text-white font-semibold">No transfers yet</p>
-        <p class="text-slate-400 text-sm mt-1">Track hawala, wire transfers, cash movements between countries</p>
+        <p class="text-gray-900 font-semibold">No transfers yet</p>
+        <p class="text-gray-700 text-sm mt-1">Track hawala, wire transfers, cash movements between countries</p>
       </div>
 
-      <div v-else class="overflow-x-auto rounded-xl border border-dark-600">
+      <div v-else class="overflow-x-auto rounded-xl border border-gray-200">
         <table class="w-full text-sm">
           <thead>
-            <tr style="background:#0f172a" class="border-b border-dark-600">
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">From → To</th>
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Method</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Sent</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Received</th>
-              <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Rate</th>
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Date</th>
-              <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Status</th>
+            <tr class="border-b border-gray-200 bg-gray-50">
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">From → To</th>
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Method</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Sent</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Received</th>
+              <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Rate</th>
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Date</th>
+              <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Status</th>
               <th class="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="x in transfers.transfers" :key="x.id" class="border-b border-dark-700 hover:bg-dark-800/50">
+            <tr v-for="x in transfers.transfers" :key="x.id" class="border-b border-gray-200 hover:bg-gray-50">
               <td class="px-4 py-3">
-                <p class="text-white text-xs font-medium">{{ x.sentFrom }}</p>
-                <p class="text-slate-400 text-xs">→ {{ x.sentTo }}</p>
-                <p v-if="x.referenceNumber" class="text-slate-600 text-xs">Ref: {{ x.referenceNumber }}</p>
+                <p class="text-gray-900 text-xs font-medium">{{ x.sentFrom }}</p>
+                <p class="text-gray-600 text-xs">→ {{ x.sentTo }}</p>
+                <p v-if="x.referenceNumber" class="text-gray-600 text-xs">Ref: {{ x.referenceNumber }}</p>
               </td>
-              <td class="px-4 py-3"><span class="text-xs px-2 py-1 rounded bg-dark-700 text-slate-300">{{ x.method }}</span></td>
-              <td class="px-4 py-3 text-right font-semibold text-red-400">{{ fmt(x.amountSent) }} <span class="text-xs font-normal text-slate-500">{{ x.sentCurrency }}</span></td>
-              <td class="px-4 py-3 text-right font-semibold text-emerald-400">{{ fmt(x.amountReceived) }} <span class="text-xs font-normal text-slate-500">{{ x.receivedCurrency }}</span></td>
-              <td class="px-4 py-3 text-right text-slate-500 text-xs">{{ x.rateUsed ? fmt(x.rateUsed) : '—' }}</td>
-              <td class="px-4 py-3 text-slate-400 text-xs whitespace-nowrap">{{ new Date(x.transferDate).toLocaleDateString('en-GB') }}</td>
+              <td class="px-4 py-3"><span class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-600">{{ x.method }}</span></td>
+              <td class="px-4 py-3 text-right font-semibold text-red-500">{{ fmt(x.amountSent) }} <span class="text-xs font-normal text-gray-600">{{ x.sentCurrency }}</span></td>
+              <td class="px-4 py-3 text-right font-semibold text-amber-700">{{ fmt(x.amountReceived) }} <span class="text-xs font-normal text-gray-600">{{ x.receivedCurrency }}</span></td>
+              <td class="px-4 py-3 text-right text-gray-600 text-xs">{{ x.rateUsed ? fmt(x.rateUsed) : '—' }}</td>
+              <td class="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">{{ new Date(x.transferDate).toLocaleDateString('en-GB') }}</td>
               <td class="px-4 py-3">
                 <span class="text-xs px-2 py-1 rounded-lg"
-                      :class="{ 'bg-emerald-900/40 text-emerald-400': x.status==='Completed', 'bg-orange-900/40 text-orange-400': x.status==='Pending', 'bg-red-900/40 text-red-400': x.status==='Failed' }">
+                      :class="{ 'bg-green-100 text-green-700': x.status==='Completed', 'bg-orange-100 text-orange-600': x.status==='Pending', 'bg-red-100 text-red-600': x.status==='Failed' }">
                   {{ x.status }}
                 </span>
               </td>
               <td class="px-4 py-3">
                 <div class="flex gap-1">
-                  <button @click="openEditTransfer(x)" class="text-xs px-2 py-1 rounded border border-blue-800/60 text-blue-400 hover:bg-blue-950/40">✏️</button>
-                  <button @click="deleteTransfer(x.id)" class="text-xs px-2 py-1 rounded border border-red-800/60 text-red-400 hover:bg-red-950/40">🗑</button>
+                  <button @click="openEditTransfer(x)" class="text-xs px-2 py-1 rounded border border-blue-300 text-blue-600 hover:bg-blue-50">✏️</button>
+                  <button @click="deleteTransfer(x.id)" class="text-xs px-2 py-1 rounded border border-red-300 text-red-600 hover:bg-red-50">🗑</button>
                 </div>
               </td>
             </tr>
@@ -535,7 +535,7 @@ onMounted(loadAll)
       <div v-if="showIncomingForm" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.85);" @click.self="showIncomingForm=false">
         <div class="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl" style="background:#0f172a;border:1px solid rgba(180,83,9,0.35);">
           <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#d97706,transparent)"></div>
-          <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
+          <div class="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
             <h3 class="text-white font-bold text-lg">💵 {{ editingIncomingId ? 'Edit' : 'Add' }} Incoming Payment</h3>
             <button @click="showIncomingForm=false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>
@@ -563,7 +563,7 @@ onMounted(loadAll)
             <div><label class="form-label">Date Received</label><input v-model="incomingForm.receivedDate" type="date" class="input w-full" /></div>
             <div><label class="form-label">Notes</label><textarea v-model="incomingForm.notes" class="input w-full" rows="2"></textarea></div>
             <div class="flex gap-3">
-              <button @click="saveIncoming" :disabled="savingIncoming" class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-40" style="background:rgba(180,83,9,0.7);">{{ savingIncoming ? 'Saving...' : 'Save' }}</button>
+              <button @click="saveIncoming" :disabled="savingIncoming" class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 disabled:opacity-40" style="background:rgba(180,83,9,0.7);">{{ savingIncoming ? 'Saving...' : 'Save' }}</button>
               <button @click="showIncomingForm=false" class="btn-outline px-5">Cancel</button>
             </div>
           </div>
@@ -576,7 +576,7 @@ onMounted(loadAll)
       <div v-if="showContractForm" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.85);" @click.self="showContractForm=false">
         <div class="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl" style="background:#0f172a;border:1px solid rgba(59,130,246,0.35);">
           <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#3b82f6,transparent)"></div>
-          <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
+          <div class="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
             <h3 class="text-white font-bold text-lg">📄 {{ editingContractId ? 'Edit' : 'Add' }} Vendor Contract</h3>
             <button @click="showContractForm=false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>
@@ -614,7 +614,7 @@ onMounted(loadAll)
             <div><label class="form-label">Contract Date</label><input v-model="contractForm.contractDate" type="date" class="input w-full" /></div>
             <div><label class="form-label">Notes</label><textarea v-model="contractForm.notes" class="input w-full" rows="2"></textarea></div>
             <div class="flex gap-3">
-              <button @click="saveContract" :disabled="savingContract" class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-700 hover:bg-blue-600 disabled:opacity-40">{{ savingContract ? 'Saving...' : 'Save' }}</button>
+              <button @click="saveContract" :disabled="savingContract" class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 bg-blue-700 hover:bg-blue-600 disabled:opacity-40">{{ savingContract ? 'Saving...' : 'Save' }}</button>
               <button @click="showContractForm=false" class="btn-outline px-5">Cancel</button>
             </div>
           </div>
@@ -625,9 +625,9 @@ onMounted(loadAll)
     <!-- ── Money Transfer Modal ────────────────────────── -->
     <Teleport to="body">
       <div v-if="showTransferForm" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.85);" @click.self="showTransferForm=false">
-        <div class="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl" style="background:#0f172a;border:1px solid rgba(16,185,129,0.35);">
-          <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#10b981,transparent)"></div>
-          <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
+        <div class="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl" style="background:#0f172a;border:1px solid rgba(212,168,0,0.35);">
+          <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#D4A800,transparent)"></div>
+          <div class="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
             <h3 class="text-white font-bold text-lg">🔁 {{ editingTransferId ? 'Edit' : 'Add' }} Money Transfer</h3>
             <button @click="showTransferForm=false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>
@@ -669,7 +669,7 @@ onMounted(loadAll)
             <div><label class="form-label">Reference No.</label><input v-model="transferForm.referenceNumber" class="input w-full" placeholder="Transaction / hawala ref" /></div>
             <div><label class="form-label">Notes</label><textarea v-model="transferForm.notes" class="input w-full" rows="2"></textarea></div>
             <div class="flex gap-3">
-              <button @click="saveTransfer" :disabled="savingTransfer" class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white bg-emerald-700 hover:bg-emerald-600 disabled:opacity-40">{{ savingTransfer ? 'Saving...' : 'Save' }}</button>
+              <button @click="saveTransfer" :disabled="savingTransfer" class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 bg-emerald-700 hover:bg-emerald-600 disabled:opacity-40">{{ savingTransfer ? 'Saving...' : 'Save' }}</button>
               <button @click="showTransferForm=false" class="btn-outline px-5">Cancel</button>
             </div>
           </div>

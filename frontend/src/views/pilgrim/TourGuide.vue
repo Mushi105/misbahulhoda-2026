@@ -249,7 +249,7 @@ const hotels = computed(() =>
     phone: h.phoneNumber,
     haramLat: h.haramLatitude,
     haramLng: h.haramLongitude,
-    color: h.colorClass || 'border-dark-600 bg-dark-900',
+    color: h.colorClass || 'border-gray-300',
     icon: h.iconEmoji || '🏨',
     nearHaram: h.nearHaram || '',
     haramDistance: h.haramDistanceText || '',
@@ -473,36 +473,35 @@ const walkInfo = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-dark-950 pb-10">
+  <div class="min-h-screen pb-10">
     <!-- Header -->
-    <div class="relative overflow-hidden bg-gradient-to-br from-dark-900 via-dark-800 to-primary-950 border-b border-dark-700">
-      <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 40px)"></div>
+    <div class="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-amber-50 to-white">
       <div class="relative px-4 md:px-6 py-8">
         <div class="text-center">
-          <p class="text-gold-400 font-arabic text-2xl mb-2">یَا حُسَیْن</p>
-          <h1 class="text-3xl md:text-4xl font-bold text-white">Misbah ul Hoda</h1>
-          <p class="text-gold-500 text-xs mt-0.5">misbahulhoda.org</p>
-          <p class="text-primary-400 text-lg mt-2 font-semibold">Arbaeen 2026 — Complete Tour Guide</p>
-          <p class="text-slate-400 text-sm mt-2">14 Days · 3 Holy Cities · The World's Greatest Pilgrimage</p>
+          <p class="text-amber-700 font-arabic text-2xl mb-2">یَا حُسَیْن</p>
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Misbah ul Hoda</h1>
+          <p class="text-amber-600 text-xs mt-0.5">misbahulhoda.org</p>
+          <p class="text-amber-700 text-lg mt-2 font-semibold">Arbaeen 2026 — Complete Tour Guide</p>
+          <p class="text-gray-700 text-sm mt-2">14 Days · 3 Holy Cities · The World's Greatest Pilgrimage</p>
           <div class="flex flex-wrap justify-center gap-3 mt-4">
-            <span class="bg-dark-800/80 text-gold-400 text-xs px-3 py-1.5 rounded-full border border-gold-800">2 Aug – 15 Aug 2026</span>
-            <span class="bg-dark-800/80 text-primary-400 text-xs px-3 py-1.5 rounded-full border border-primary-800">Kadhimiyyah · Najaf · Karbala</span>
-            <span class="bg-dark-800/80 text-slate-300 text-xs px-3 py-1.5 rounded-full border border-dark-600">Arbaeen Walk ~80km</span>
+            <span class="bg-amber-100 text-amber-700 text-xs px-3 py-1.5 rounded-full border border-amber-300">2 Aug – 15 Aug 2026</span>
+            <span class="bg-green-100 text-green-700 text-xs px-3 py-1.5 rounded-full border border-green-300">Kadhimiyyah · Najaf · Karbala</span>
+            <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1.5 rounded-full border border-gray-300">Arbaeen Walk ~80km</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Tabs -->
-    <div class="sticky top-0 z-10 bg-dark-900 border-b border-dark-700 overflow-x-auto">
+    <div class="sticky top-0 z-10 bg-white border-b border-gray-200 overflow-x-auto">
       <div class="flex min-w-max px-4">
         <button
           v-for="tab in tabs" :key="tab.id"
           @click="activeTab = tab.id"
           :class="['flex items-center gap-1.5 px-4 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
             activeTab === tab.id
-              ? 'border-primary-500 text-primary-400'
-              : 'border-transparent text-slate-400 hover:text-white']">
+              ? 'border-amber-600 text-amber-700'
+              : 'border-transparent text-gray-700 hover:text-gray-900']">
           <span>{{ tab.icon }}</span>{{ tab.label }}
         </button>
       </div>
@@ -513,8 +512,8 @@ const walkInfo = [
       <!-- SCHEDULE TAB -->
       <div v-if="activeTab === 'schedule'" class="space-y-3 max-w-3xl mx-auto">
         <div class="text-center mb-6">
-          <h2 class="text-xl font-bold text-white">14-Day Itinerary</h2>
-          <p class="text-slate-400 text-sm mt-1">Tap on any day to see the full schedule</p>
+          <h2 class="text-xl font-bold text-gray-900">14-Day Itinerary</h2>
+          <p class="text-gray-700 text-sm mt-1">Tap on any day to see the full schedule</p>
         </div>
 
         <div v-for="day in itinerary" :key="day.day" class="card overflow-hidden">
@@ -523,31 +522,31 @@ const walkInfo = [
             @click="expandedDay = expandedDay === day.day ? null : day.day">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-4">
-                <div class="w-11 h-11 rounded-xl bg-primary-900 border border-primary-700 flex flex-col items-center justify-center shrink-0">
-                  <span class="text-xs text-primary-500 leading-none">Day</span>
-                  <span class="text-lg font-bold text-primary-300 leading-none">{{ day.day }}</span>
+                <div class="w-11 h-11 rounded-xl bg-amber-100 border border-amber-300 flex flex-col items-center justify-center shrink-0">
+                  <span class="text-xs text-amber-600 leading-none">Day</span>
+                  <span class="text-lg font-bold text-amber-700 leading-none">{{ day.day }}</span>
                 </div>
                 <div>
-                  <p class="font-semibold text-white text-sm">{{ day.theme }}</p>
-                  <p class="text-slate-500 text-xs mt-0.5">{{ day.date }}</p>
-                  <p class="text-primary-500 text-xs">📍 {{ day.city }}</p>
+                  <p class="font-semibold text-gray-900 text-sm">{{ day.theme }}</p>
+                  <p class="text-gray-600 text-xs mt-0.5">{{ day.date }}</p>
+                  <p class="text-amber-700 text-xs">📍 {{ day.city }}</p>
                 </div>
               </div>
-              <span class="text-slate-500 text-lg transition-transform" :class="expandedDay === day.day ? 'rotate-180' : ''">▾</span>
+              <span class="text-gray-600 text-lg transition-transform" :class="expandedDay === day.day ? 'rotate-180' : ''">▾</span>
             </div>
           </button>
 
-          <div v-if="expandedDay === day.day" class="mt-4 pt-4 border-t border-dark-600 space-y-2">
+          <div v-if="expandedDay === day.day" class="mt-4 pt-4 border-t border-gray-200 space-y-2">
             <div v-for="(event, i) in day.events" :key="i" class="flex gap-3">
               <div class="w-20 shrink-0">
-                <span class="text-xs text-gold-500 font-medium">{{ event.time }}</span>
+                <span class="text-xs text-amber-700 font-medium">{{ event.time }}</span>
               </div>
               <div class="flex-1">
-                <p class="text-sm text-slate-200">{{ event.activity }}</p>
+                <p class="text-sm text-gray-700">{{ event.activity }}</p>
               </div>
             </div>
-            <div class="mt-3 bg-dark-800 rounded-lg p-3">
-              <p class="text-xs text-gold-400">💡 {{ day.notes }}</p>
+            <div class="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <p class="text-xs text-amber-700">💡 {{ day.notes }}</p>
             </div>
           </div>
         </div>
@@ -556,33 +555,33 @@ const walkInfo = [
       <!-- HOTELS TAB -->
       <div v-if="activeTab === 'hotels'" class="space-y-6 max-w-2xl mx-auto">
         <div class="text-center mb-2">
-          <h2 class="text-xl font-bold text-white">Our Hotels</h2>
-          <p class="text-slate-400 text-sm mt-1">Accommodation across the 3 holy cities</p>
+          <h2 class="text-xl font-bold text-gray-900">Our Hotels</h2>
+          <p class="text-gray-700 text-sm mt-1">Accommodation across the 3 holy cities</p>
         </div>
 
-        <div v-if="hotelsLoading" class="text-center py-10 text-slate-400 text-sm">Loading hotels...</div>
-        <div v-else-if="!hotels.length" class="text-center py-10 text-slate-500 text-sm">No hotels found.</div>
+        <div v-if="hotelsLoading" class="text-center py-10 text-gray-700 text-sm">Loading hotels...</div>
+        <div v-else-if="!hotels.length" class="text-center py-10 text-gray-600 text-sm">No hotels found.</div>
 
-        <div v-for="hotel in hotels" :key="hotel.id || hotel.name" :class="['card border-l-4', hotel.color || 'border-dark-600 bg-dark-900']">
+        <div v-for="hotel in hotels" :key="hotel.id || hotel.name" :class="['card border-l-4', hotel.color || 'border-gray-300']">
           <!-- Header -->
           <div class="flex items-start justify-between mb-3">
             <div>
               <div class="flex items-center gap-2 mb-1">
                 <span class="text-2xl">{{ hotel.icon }}</span>
-                <span class="text-xs font-bold uppercase tracking-wider text-primary-500">{{ hotel.city }}</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700">{{ hotel.city }}</span>
               </div>
-              <h3 class="text-xl font-bold text-white">{{ hotel.name }}</h3>
-              <p class="text-slate-400 text-sm mt-1">📍 {{ hotel.address }}</p>
+              <h3 class="text-xl font-bold text-gray-900">{{ hotel.name }}</h3>
+              <p class="text-gray-700 text-sm mt-1">📍 {{ hotel.address }}</p>
             </div>
-            <span v-if="hotel.nights" class="bg-dark-700 text-slate-300 text-xs px-2 py-1 rounded-full shrink-0 ml-2">{{ hotel.nights }}</span>
+            <span v-if="hotel.nights" class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full shrink-0 ml-2">{{ hotel.nights }}</span>
           </div>
 
           <!-- Distance row -->
-          <div v-if="hotel.nearHaram" class="flex items-center gap-2 mb-3 bg-dark-800 rounded-lg px-3 py-2">
-            <span class="text-green-400 text-sm">🚶</span>
+          <div v-if="hotel.nearHaram" class="flex items-center gap-2 mb-3 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+            <span class="text-green-600 text-sm">🚶</span>
             <div class="flex-1">
-              <span class="text-green-400 text-sm font-medium">{{ hotel.nearHaram }}</span>
-              <span v-if="hotel.haramDistance" class="text-slate-500 text-xs ml-2">({{ hotel.haramDistance }})</span>
+              <span class="text-green-700 text-sm font-medium">{{ hotel.nearHaram }}</span>
+              <span v-if="hotel.haramDistance" class="text-gray-700 text-xs ml-2">({{ hotel.haramDistance }})</span>
             </div>
           </div>
           <!-- Maps + Phone buttons -->
@@ -590,57 +589,57 @@ const walkInfo = [
             <a v-if="hotel.lat && hotel.lng"
                :href="`https://www.google.com/maps?q=${hotel.lat},${hotel.lng}`"
                target="_blank" rel="noopener noreferrer"
-               class="flex items-center gap-1.5 bg-dark-700 hover:bg-dark-600 border border-dark-500 text-white text-xs px-3 py-1.5 rounded-lg transition-colors">
+               class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 text-xs px-3 py-1.5 rounded-lg transition-colors">
               📍 Hotel on Maps
             </a>
             <a v-if="hotel.lat && hotel.lng && hotel.haramLat && hotel.haramLng"
                :href="`https://www.google.com/maps/dir/${hotel.lat},${hotel.lng}/${hotel.haramLat},${hotel.haramLng}`"
                target="_blank" rel="noopener noreferrer"
-               class="flex items-center gap-1.5 bg-green-900 hover:bg-green-800 border border-green-700 text-green-300 text-xs px-3 py-1.5 rounded-lg transition-colors">
+               class="flex items-center gap-1.5 bg-green-100 hover:bg-green-200 border border-green-300 text-green-700 text-xs px-3 py-1.5 rounded-lg transition-colors">
               🕌 Directions to Haram
             </a>
             <a v-if="hotel.phone" :href="`tel:${hotel.phone}`"
-               class="flex items-center gap-1.5 bg-dark-700 hover:bg-dark-600 border border-dark-500 text-slate-300 text-xs px-3 py-1.5 rounded-lg transition-colors">
+               class="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-600 text-xs px-3 py-1.5 rounded-lg transition-colors">
               📞 {{ hotel.phone }}
             </a>
           </div>
 
           <!-- Jamat Timings -->
           <div v-if="hotel.jamat" class="mb-4">
-            <p class="text-xs text-slate-500 uppercase font-medium mb-2 flex items-center gap-1.5">
-              🕐 Namaz / Jamat Timings <span class="text-slate-600 normal-case">(approx. Aug 2026)</span>
+            <p class="text-xs text-gray-700 uppercase font-medium mb-2 flex items-center gap-1.5">
+              🕐 Namaz / Jamat Timings <span class="text-gray-600 normal-case">(approx. Aug 2026)</span>
             </p>
             <div class="grid grid-cols-5 gap-1">
               <div v-for="s in hotel.jamat" :key="s.salah"
-                   class="bg-dark-800 rounded-lg px-2 py-2 text-center border border-dark-600">
-                <p class="text-primary-400 text-xs font-bold mb-1">{{ s.salah }}</p>
-                <p class="text-slate-300 text-xs leading-tight">{{ s.jamat }}</p>
-                <p class="text-slate-600 text-xs leading-tight mt-0.5">Adhan {{ s.adhan }}</p>
+                   class="bg-gray-50 rounded-lg px-2 py-2 text-center border border-gray-200">
+                <p class="text-amber-700 text-xs font-bold mb-1">{{ s.salah }}</p>
+                <p class="text-gray-700 text-xs leading-tight">{{ s.jamat }}</p>
+                <p class="text-gray-600 text-xs leading-tight mt-0.5">Adhan {{ s.adhan }}</p>
               </div>
             </div>
-            <p class="text-slate-600 text-xs mt-1.5">Times shown are Jamat (congregational prayer) at the Haram. Arrive 10 min early.</p>
+            <p class="text-gray-600 text-xs mt-1.5">Times shown are Jamat (congregational prayer) at the Haram. Arrive 10 min early.</p>
           </div>
 
           <!-- Amenities -->
           <div class="mb-4">
-            <p class="text-xs text-slate-500 uppercase font-medium mb-2">Amenities</p>
+            <p class="text-xs text-gray-700 uppercase font-medium mb-2">Amenities</p>
             <div class="flex flex-wrap gap-2">
-              <span v-for="a in hotel.amenities" :key="a" class="bg-dark-700 text-slate-300 text-xs px-2.5 py-1 rounded-full">{{ a }}</span>
+              <span v-for="a in hotel.amenities" :key="a" class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full">{{ a }}</span>
             </div>
           </div>
 
-          <div class="bg-gold-950 border border-gold-800 rounded-lg p-3">
-            <p class="text-xs text-gold-400">💡 Tip: {{ hotel.tips }}</p>
+          <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+            <p class="text-xs text-amber-700">💡 Tip: {{ hotel.tips }}</p>
           </div>
         </div>
 
         <!-- Walk accommodation note -->
-        <div class="card border border-dashed border-dark-500">
+        <div class="card border border-dashed border-gray-300">
           <div class="flex gap-3">
             <span class="text-3xl">🏕</span>
             <div>
-              <h3 class="font-semibold text-white mb-1">Arbaeen Walk Accommodation</h3>
-              <p class="text-slate-400 text-sm">During the 3-day walk (Nights 7–9), you'll stay at Mawkabs — free hospitality tents set up by Iraqi families and organizations along the route. All food, water, and basic bedding is provided completely free by the Iraqi people as an act of devotion.</p>
+              <h3 class="font-semibold text-gray-900 mb-1">Arbaeen Walk Accommodation</h3>
+              <p class="text-gray-700 text-sm">During the 3-day walk (Nights 7–9), you'll stay at Mawkabs — free hospitality tents set up by Iraqi families and organizations along the route. All food, water, and basic bedding is provided completely free by the Iraqi people as an act of devotion.</p>
             </div>
           </div>
         </div>
@@ -649,21 +648,21 @@ const walkInfo = [
       <!-- SCHOLARS TAB -->
       <div v-if="activeTab === 'scholars'" class="max-w-3xl mx-auto">
         <div class="text-center mb-6">
-          <h2 class="text-xl font-bold text-white">Scholars & Reciters</h2>
-          <p class="text-slate-400 text-sm mt-1">World-class Islamic scholars accompanying the Arbaeen 2026 tour</p>
+          <h2 class="text-xl font-bold text-gray-900">Scholars & Reciters</h2>
+          <p class="text-gray-700 text-sm mt-1">World-class Islamic scholars accompanying the Arbaeen 2026 tour</p>
           <div class="flex justify-center gap-3 mt-3 flex-wrap">
-            <span class="text-xs bg-blue-900/50 text-blue-300 border border-blue-800 px-3 py-1 rounded-full">🇬🇧 UK · 🇺🇸 USA · 🇨🇦 Canada</span>
-            <span class="text-xs bg-green-900/50 text-green-300 border border-green-800 px-3 py-1 rounded-full">🇵🇰 Pakistan</span>
-            <span class="text-xs bg-dark-700 text-slate-300 border border-dark-600 px-3 py-1 rounded-full">English & Urdu</span>
+            <span class="text-xs bg-blue-100 text-blue-700 border border-blue-300 px-3 py-1 rounded-full">🇬🇧 UK · 🇺🇸 USA · 🇨🇦 Canada</span>
+            <span class="text-xs bg-green-100 text-green-700 border border-green-300 px-3 py-1 rounded-full">🇵🇰 Pakistan</span>
+            <span class="text-xs bg-gray-100 text-gray-600 border border-gray-300 px-3 py-1 rounded-full">English & Urdu</span>
           </div>
         </div>
 
         <!-- Loading -->
-        <div v-if="scholarsLoading" class="text-center py-8 text-slate-400 text-sm">Loading scholars...</div>
+        <div v-if="scholarsLoading" class="text-center py-8 text-gray-700 text-sm">Loading scholars...</div>
 
         <!-- Scholars -->
         <div v-else class="mb-8">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-primary-400 mb-4 flex items-center gap-2">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-amber-700 mb-4 flex items-center gap-2">
             <span>📚</span> Islamic Scholars
           </h3>
           <div class="space-y-5">
@@ -673,17 +672,17 @@ const walkInfo = [
                 <img v-if="s.photoUrl" :src="s.photoUrl" :alt="s.name"
                   class="w-16 h-16 rounded-2xl object-cover border-2 border-primary-800 flex-shrink-0 shadow-lg"
                   @error="e => e.target.style.display='none'" />
-                <div v-else :class="['w-16 h-16 rounded-2xl bg-gradient-to-br flex items-center justify-center text-xl font-bold text-white flex-shrink-0 shadow-lg', s.avatarColor]">
+                <div v-else :class="['w-16 h-16 rounded-2xl bg-gradient-to-br flex items-center justify-center text-xl font-bold text-gray-900 flex-shrink-0 shadow-lg', s.avatarColor]">
                   {{ s.initials }}
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-start justify-between gap-2">
                     <div>
-                      <p class="font-bold text-white text-base">{{ s.name }}</p>
-                      <p class="text-primary-400 text-xs mt-0.5">{{ s.specialty }}</p>
-                      <p class="text-slate-500 text-xs mt-0.5">{{ s.flag }} {{ s.location }}</p>
+                      <p class="font-bold text-gray-900 text-base">{{ s.name }}</p>
+                      <p class="text-amber-700 text-xs mt-0.5">{{ s.specialty }}</p>
+                      <p class="text-gray-600 text-xs mt-0.5">{{ s.flag }} {{ s.location }}</p>
                     </div>
-                    <span :class="['text-xs px-2 py-1 rounded-full font-medium flex-shrink-0', s.lang === 'English' ? 'bg-blue-900 text-blue-300 border border-blue-800' : 'bg-green-900 text-green-300 border border-green-800']">
+                    <span :class="['text-xs px-2 py-1 rounded-full font-medium flex-shrink-0', s.lang === 'English' ? 'bg-blue-100 text-blue-700 border border-blue-300' : 'bg-green-100 text-green-700 border border-green-300']">
                       {{ s.lang }}
                     </span>
                   </div>
@@ -691,31 +690,31 @@ const walkInfo = [
               </div>
 
               <!-- Quote -->
-              <div v-if="s.quote" class="bg-dark-700 border-l-4 border-primary-600 rounded-r-lg px-4 py-3 mb-4">
-                <p class="text-slate-300 text-sm italic leading-relaxed">{{ s.quote }}</p>
+              <div v-if="s.quote" class="bg-amber-50 border-l-4 border-amber-500 rounded-r-lg px-4 py-3 mb-4">
+                <p class="text-gray-700 text-sm italic leading-relaxed">{{ s.quote }}</p>
               </div>
 
               <!-- Bio -->
-              <p class="text-slate-400 text-sm leading-relaxed mb-4">{{ s.bio }}</p>
+              <p class="text-gray-700 text-sm leading-relaxed mb-4">{{ s.bio }}</p>
 
               <!-- Tags -->
               <div class="flex flex-wrap gap-2">
                 <span v-for="tag in s.tags" :key="tag"
-                  class="text-xs bg-dark-700 text-slate-400 border border-dark-500 px-2.5 py-1 rounded-full">
+                  class="text-xs bg-gray-100 text-gray-700 border border-gray-300 px-2.5 py-1 rounded-full">
                   {{ tag }}
                 </span>
-                <span v-if="s.youtube && !s.youtubeUrl" class="text-xs bg-primary-950 text-primary-400 border border-primary-900 px-2.5 py-1 rounded-full">
+                <span v-if="s.youtube && !s.youtubeUrl" class="text-xs bg-amber-100 text-amber-700 border border-amber-300 px-2.5 py-1 rounded-full">
                   🎥 {{ s.youtube }}
                 </span>
               </div>
               <!-- YouTube + Website links -->
               <div v-if="s.youtubeUrl || s.website" class="flex flex-wrap gap-2 mt-2">
                 <a v-if="s.youtubeUrl" :href="s.youtubeUrl" target="_blank" rel="noopener"
-                  class="flex items-center gap-1.5 text-xs bg-red-900/50 text-red-400 border border-red-800 px-3 py-1.5 rounded-full hover:bg-red-900 transition-colors font-medium">
+                  class="flex items-center gap-1.5 text-xs bg-red-100 text-red-600 border border-red-300 px-3 py-1.5 rounded-full hover:bg-red-200 transition-colors font-medium">
                   ▶ YouTube Channel
                 </a>
                 <a v-if="s.website" :href="s.website" target="_blank" rel="noopener"
-                  class="flex items-center gap-1.5 text-xs bg-dark-800 text-slate-300 border border-dark-600 px-3 py-1.5 rounded-full hover:bg-dark-700 transition-colors">
+                  class="flex items-center gap-1.5 text-xs bg-gray-100 text-gray-600 border border-gray-300 px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors">
                   🌐 Website
                 </a>
               </div>
@@ -725,7 +724,7 @@ const walkInfo = [
 
         <!-- Reciters -->
         <div v-if="(useApi ? dynamicReciters : reciters).length">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-gold-400 mb-4 flex items-center gap-2">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-amber-700 mb-4 flex items-center gap-2">
             <span>🎤</span> Noha Khuwan & Reciters
           </h3>
           <div class="space-y-4">
@@ -734,26 +733,26 @@ const walkInfo = [
                 <img v-if="r.photoUrl" :src="r.photoUrl" :alt="r.name"
                   class="w-14 h-14 rounded-2xl object-cover border-2 border-gold-800 flex-shrink-0"
                   @error="e => e.target.style.display='none'" />
-                <div v-else :class="['w-14 h-14 rounded-2xl bg-gradient-to-br flex items-center justify-center text-lg font-bold text-white flex-shrink-0', r.avatarColor]">
+                <div v-else :class="['w-14 h-14 rounded-2xl bg-gradient-to-br flex items-center justify-center text-lg font-bold text-gray-900 flex-shrink-0', r.avatarColor]">
                   {{ r.initials }}
                 </div>
                 <div class="flex-1">
                   <div class="flex items-start justify-between">
                     <div>
-                      <p class="font-bold text-white">{{ r.name }}</p>
-                      <p class="text-gold-400 text-xs mt-0.5">{{ r.specialty }}</p>
-                      <p class="text-slate-500 text-xs">{{ r.flag }} {{ r.location }}</p>
+                      <p class="font-bold text-gray-900">{{ r.name }}</p>
+                      <p class="text-amber-700 text-xs mt-0.5">{{ r.specialty }}</p>
+                      <p class="text-gray-600 text-xs">{{ r.flag }} {{ r.location }}</p>
                     </div>
-                    <span :class="['text-xs px-2 py-0.5 rounded-full', r.lang === 'English' ? 'bg-blue-900 text-blue-300' : 'bg-green-900 text-green-300']">
+                    <span :class="['text-xs px-2 py-0.5 rounded-full', r.lang === 'English' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700']">
                       {{ r.lang }}
                     </span>
                   </div>
                 </div>
               </div>
-              <p v-if="r.bio" class="text-slate-400 text-sm leading-relaxed mb-3">{{ r.bio }}</p>
-              <p v-else-if="r.note" class="text-slate-400 text-sm leading-relaxed mb-3">{{ r.note }}</p>
+              <p v-if="r.bio" class="text-gray-700 text-sm leading-relaxed mb-3">{{ r.bio }}</p>
+              <p v-else-if="r.note" class="text-gray-700 text-sm leading-relaxed mb-3">{{ r.note }}</p>
               <div class="flex flex-wrap gap-2">
-                <span v-for="tag in r.tags" :key="tag" class="text-xs bg-dark-700 text-slate-400 border border-dark-600 px-2 py-0.5 rounded-full">{{ tag }}</span>
+                <span v-for="tag in r.tags" :key="tag" class="text-xs bg-gray-100 text-gray-700 border border-gray-200 px-2 py-0.5 rounded-full">{{ tag }}</span>
               </div>
             </div>
           </div>
@@ -764,43 +763,43 @@ const walkInfo = [
       <div v-if="activeTab === 'walk'" class="max-w-2xl mx-auto">
         <div class="text-center mb-6">
           <div class="text-5xl mb-3">🚶</div>
-          <h2 class="text-xl font-bold text-white">The Arbaeen Walk</h2>
-          <p class="text-slate-400 text-sm mt-1">The world's largest human gathering — a walk of love and devotion</p>
+          <h2 class="text-xl font-bold text-gray-900">The Arbaeen Walk</h2>
+          <p class="text-gray-700 text-sm mt-1">The world's largest human gathering — a walk of love and devotion</p>
         </div>
 
         <!-- Highlight Banner -->
-        <div class="bg-gradient-to-r from-primary-900 to-dark-800 border border-primary-700 rounded-xl p-5 mb-6 text-center">
-          <p class="text-primary-300 text-sm font-medium">Every year, over</p>
-          <p class="text-4xl font-bold text-white my-1">20 Million+</p>
-          <p class="text-primary-300 text-sm">pilgrims walk from Najaf to Karbala in one of the greatest acts of love in human history.</p>
+        <div class="bg-gradient-to-r from-amber-50 to-green-50 border border-amber-200 rounded-xl p-5 mb-6 text-center">
+          <p class="text-amber-700 text-sm font-medium">Every year, over</p>
+          <p class="text-4xl font-bold text-gray-900 my-1">20 Million+</p>
+          <p class="text-amber-700 text-sm">pilgrims walk from Najaf to Karbala in one of the greatest acts of love in human history.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div v-for="info in walkInfo" :key="info.title" class="card flex gap-3">
             <span class="text-2xl">{{ info.icon }}</span>
             <div>
-              <p class="text-xs text-slate-500 uppercase font-medium">{{ info.title }}</p>
-              <p class="text-white text-sm font-medium mt-0.5">{{ info.value }}</p>
+              <p class="text-xs text-gray-600 uppercase font-medium">{{ info.title }}</p>
+              <p class="text-gray-900 text-sm font-medium mt-0.5">{{ info.value }}</p>
             </div>
           </div>
         </div>
 
         <div class="card mb-4">
-          <h3 class="font-semibold text-white mb-3">What are Mawkabs? 🏕</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Mawkabs are free hospitality tents set up by Iraqi families, organizations, and communities along the entire 80km route. They provide free food, water, tea, medical care, and sleeping space to all pilgrims — regardless of nationality or religion. This is considered one of the most remarkable acts of generosity in human history, repeated every year.</p>
+          <h3 class="font-semibold text-gray-900 mb-3">What are Mawkabs? 🏕</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">Mawkabs are free hospitality tents set up by Iraqi families, organizations, and communities along the entire 80km route. They provide free food, water, tea, medical care, and sleeping space to all pilgrims — regardless of nationality or religion. This is considered one of the most remarkable acts of generosity in human history, repeated every year.</p>
         </div>
 
         <div class="card">
-          <h3 class="font-semibold text-white mb-3">Essential Walk Tips</h3>
+          <h3 class="font-semibold text-gray-900 mb-3">Essential Walk Tips</h3>
           <ul class="space-y-2.5 text-sm">
-            <li class="flex gap-2 text-slate-300"><span class="text-primary-400 mt-0.5">✓</span>Break in your shoes/sandals well before the trip</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-primary-400 mt-0.5">✓</span>Carry only essential items — light backpack is best</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-primary-400 mt-0.5">✓</span>Stay with your group and know the pole numbers</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-primary-400 mt-0.5">✓</span>Drink water constantly even if not thirsty</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-primary-400 mt-0.5">✓</span>Many pilgrims walk barefoot the last 3km into Karbala</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-primary-400 mt-0.5">✓</span>Recite Ziyarat Arbaeen as you walk — this is the Sunnah of the Imams</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-primary-400 mt-0.5">✓</span>If you cannot walk, vehicles are available at additional cost</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400 mt-0.5">⚠</span>August is hot. Start walking early morning or after sunset</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700 mt-0.5">✓</span>Break in your shoes/sandals well before the trip</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700 mt-0.5">✓</span>Carry only essential items — light backpack is best</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700 mt-0.5">✓</span>Stay with your group and know the pole numbers</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700 mt-0.5">✓</span>Drink water constantly even if not thirsty</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700 mt-0.5">✓</span>Many pilgrims walk barefoot the last 3km into Karbala</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700 mt-0.5">✓</span>Recite Ziyarat Arbaeen as you walk — this is the Sunnah of the Imams</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700 mt-0.5">✓</span>If you cannot walk, vehicles are available at additional cost</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-600 mt-0.5">⚠</span>August is hot. Start walking early morning or after sunset</li>
           </ul>
         </div>
       </div>
@@ -808,25 +807,25 @@ const walkInfo = [
       <!-- HOLY SITES TAB -->
       <div v-if="activeTab === 'maps'" class="space-y-4 max-w-2xl mx-auto">
         <div class="text-center mb-6">
-          <h2 class="text-xl font-bold text-white">Holy Sites & Ziyarat</h2>
-          <p class="text-slate-400 text-sm mt-1">Guide to the sacred shrines and mosques on the tour</p>
+          <h2 class="text-xl font-bold text-gray-900">Holy Sites & Ziyarat</h2>
+          <p class="text-gray-700 text-sm mt-1">Guide to the sacred shrines and mosques on the tour</p>
         </div>
 
         <div v-for="site in holySites" :key="site.name" class="card">
           <div class="flex items-start gap-4 mb-3">
             <span class="text-3xl">{{ site.icon }}</span>
             <div class="flex-1">
-              <h3 class="font-bold text-white">{{ site.name }}</h3>
-              <p class="text-primary-400 text-xs mt-0.5">📍 {{ site.city }}</p>
+              <h3 class="font-bold text-gray-900">{{ site.name }}</h3>
+              <p class="text-amber-700 text-xs mt-0.5">📍 {{ site.city }}</p>
             </div>
           </div>
-          <p class="text-slate-300 text-sm mb-3">{{ site.description }}</p>
-          <div class="bg-dark-800 rounded-lg p-3 mb-2">
-            <p class="text-xs text-gold-500 font-semibold uppercase mb-1">Ziyarat Guide</p>
-            <p class="text-slate-300 text-sm">{{ site.ziyarat }}</p>
+          <p class="text-gray-600 text-sm mb-3">{{ site.description }}</p>
+          <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-2">
+            <p class="text-xs text-amber-700 font-semibold uppercase mb-1">Ziyarat Guide</p>
+            <p class="text-gray-600 text-sm">{{ site.ziyarat }}</p>
           </div>
-          <div class="bg-primary-950 border border-primary-900 rounded-lg p-3">
-            <p class="text-xs text-primary-400">💡 {{ site.tip }}</p>
+          <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+            <p class="text-xs text-green-700">💡 {{ site.tip }}</p>
           </div>
         </div>
       </div>
@@ -834,20 +833,19 @@ const walkInfo = [
       <!-- TEAM TAB -->
       <div v-if="activeTab === 'team'" class="max-w-2xl mx-auto">
         <div class="text-center mb-6">
-          <h2 class="text-xl font-bold text-white">Our Team — Khuddam Al-Hussain</h2>
-          <p class="text-slate-400 text-sm mt-1">Dedicated servants of Imam Hussain (A.S.) accompanying the pilgrimage</p>
+          <h2 class="text-xl font-bold text-gray-900">Our Team — Khuddam Al-Hussain</h2>
+          <p class="text-gray-700 text-sm mt-1">Dedicated servants of Imam Hussain (A.S.) accompanying the pilgrimage</p>
         </div>
 
         <!-- WhatsApp Group CTA -->
-        <div class="mb-5 rounded-2xl overflow-hidden border border-green-700/40"
-             style="background: linear-gradient(135deg, rgba(0,60,20,0.6) 0%, rgba(2,6,23,0.9) 100%);">
+        <div class="mb-5 rounded-2xl overflow-hidden border border-green-300 bg-green-50">
           <div class="p-5 flex flex-col sm:flex-row items-center gap-4">
-            <div class="w-14 h-14 rounded-full bg-green-800/40 border border-green-600/40 flex items-center justify-center text-3xl flex-shrink-0">
+            <div class="w-14 h-14 rounded-full bg-green-100 border border-green-300 flex items-center justify-center text-3xl flex-shrink-0">
               💬
             </div>
             <div class="flex-1 text-center sm:text-left">
-              <h3 class="text-white font-bold text-base">Join the Pilgrim WhatsApp Group</h3>
-              <p class="text-green-300/80 text-sm mt-0.5">Stay updated on schedule, announcements and get direct access to the team</p>
+              <h3 class="text-gray-900 font-bold text-base">Join the Pilgrim WhatsApp Group</h3>
+              <p class="text-green-700 text-sm mt-0.5">Stay updated on schedule, announcements and get direct access to the team</p>
             </div>
             <a href="https://chat.whatsapp.com/misbahulhoda2026" target="_blank"
                class="flex-shrink-0 px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all"
@@ -859,45 +857,45 @@ const walkInfo = [
 
         <!-- Direct Contacts -->
         <div class="card mb-5">
-          <h3 class="font-semibold text-white mb-3 flex items-center gap-2">
+          <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
             <span>📞</span> Direct Contact — Misbah ul Hoda
           </h3>
           <div class="space-y-2">
             <a href="https://wa.me/447825880549" target="_blank"
-               class="flex items-center gap-3 bg-dark-800 hover:bg-dark-700 rounded-lg px-4 py-3 transition-colors group">
-              <span class="text-green-400 text-xl">📱</span>
+               class="flex items-center gap-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 transition-colors group">
+              <span class="text-green-600 text-xl">📱</span>
               <div class="flex-1">
-                <p class="text-xs text-slate-500 uppercase font-medium">UK — WhatsApp</p>
-                <p class="text-white font-medium text-sm">+44 782 588 0549</p>
+                <p class="text-xs text-gray-600 uppercase font-medium">UK — WhatsApp</p>
+                <p class="text-gray-900 font-medium text-sm">+44 782 588 0549</p>
               </div>
-              <span class="text-green-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
+              <span class="text-green-600 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
             </a>
             <a href="https://wa.me/447305307650" target="_blank"
-               class="flex items-center gap-3 bg-dark-800 hover:bg-dark-700 rounded-lg px-4 py-3 transition-colors group">
-              <span class="text-green-400 text-xl">📱</span>
+               class="flex items-center gap-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 transition-colors group">
+              <span class="text-green-600 text-xl">📱</span>
               <div class="flex-1">
-                <p class="text-xs text-slate-500 uppercase font-medium">UK — WhatsApp</p>
-                <p class="text-white font-medium text-sm">+44 730 530 7650</p>
+                <p class="text-xs text-gray-600 uppercase font-medium">UK — WhatsApp</p>
+                <p class="text-gray-900 font-medium text-sm">+44 730 530 7650</p>
               </div>
-              <span class="text-green-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
+              <span class="text-green-600 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
             </a>
             <a href="https://wa.me/14254435786" target="_blank"
-               class="flex items-center gap-3 bg-dark-800 hover:bg-dark-700 rounded-lg px-4 py-3 transition-colors group">
-              <span class="text-green-400 text-xl">📱</span>
+               class="flex items-center gap-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 transition-colors group">
+              <span class="text-green-600 text-xl">📱</span>
               <div class="flex-1">
-                <p class="text-xs text-slate-500 uppercase font-medium">USA — WhatsApp</p>
-                <p class="text-white font-medium text-sm">+1 425 443 5786</p>
+                <p class="text-xs text-gray-600 uppercase font-medium">USA — WhatsApp</p>
+                <p class="text-gray-900 font-medium text-sm">+1 425 443 5786</p>
               </div>
-              <span class="text-green-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
+              <span class="text-green-600 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
             </a>
             <a href="mailto:info@misbahulhoda.org"
-               class="flex items-center gap-3 bg-dark-800 hover:bg-dark-700 rounded-lg px-4 py-3 transition-colors group">
-              <span class="text-gold-400 text-xl">✉️</span>
+               class="flex items-center gap-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 transition-colors group">
+              <span class="text-amber-700 text-xl">✉️</span>
               <div class="flex-1">
-                <p class="text-xs text-slate-500 uppercase font-medium">Email</p>
-                <p class="text-white font-medium text-sm">info@misbahulhoda.org</p>
+                <p class="text-xs text-gray-600 uppercase font-medium">Email</p>
+                <p class="text-gray-900 font-medium text-sm">info@misbahulhoda.org</p>
               </div>
-              <span class="text-gold-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
+              <span class="text-amber-700 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
             </a>
           </div>
         </div>
@@ -907,54 +905,54 @@ const walkInfo = [
           <div class="flex items-center gap-3 mb-4">
             <span class="text-2xl">🤲</span>
             <div>
-              <h3 class="font-semibold text-white">Khuddam Al-Hussain A.S.</h3>
-              <p class="text-slate-500 text-xs">On-call 24/7 throughout the pilgrimage</p>
+              <h3 class="font-semibold text-gray-900">Khuddam Al-Hussain A.S.</h3>
+              <p class="text-gray-600 text-xs">On-call 24/7 throughout the pilgrimage</p>
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div v-for="(member, i) in khuddamTeam" :key="i"
-                 class="flex items-center gap-3 bg-dark-800 rounded-lg px-3 py-2.5">
-              <div class="w-8 h-8 rounded-full bg-gold-900/40 border border-gold-700/50 flex items-center justify-center text-xs font-bold text-gold-400 flex-shrink-0">
+                 class="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5">
+              <div class="w-8 h-8 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center text-xs font-bold text-amber-700 flex-shrink-0">
                 {{ member.name.split(' ').map(n => n[0]).slice(0,2).join('') }}
               </div>
               <div class="flex-1 min-w-0">
-                <p class="text-slate-200 text-sm font-medium">{{ member.name }}</p>
-                <p class="text-slate-500 text-xs">{{ member.location }}</p>
+                <p class="text-gray-900 text-sm font-medium">{{ member.name }}</p>
+                <p class="text-gray-600 text-xs">{{ member.location }}</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="card">
-          <h3 class="font-semibold text-white mb-3">Emergency Contacts During Tour</h3>
+          <h3 class="font-semibold text-gray-900 mb-3">Emergency Contacts During Tour</h3>
           <div class="space-y-3">
-            <div class="bg-dark-800 rounded-lg p-3">
-              <p class="text-xs text-slate-500 uppercase font-medium">Group Leader</p>
-              <p class="text-white font-medium mt-1">Contact via Pilgrim WhatsApp Group (pinned message)</p>
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
+              <p class="text-xs text-gray-600 uppercase font-medium">Group Leader</p>
+              <p class="text-gray-900 font-medium mt-1">Contact via Pilgrim WhatsApp Group (pinned message)</p>
             </div>
-            <div class="bg-dark-800 rounded-lg p-3">
-              <p class="text-xs text-slate-500 uppercase font-medium">Emergency Helpline (Iraq)</p>
-              <p class="text-white font-medium mt-1">+964 7XX XXX XXXX — Available 24/7</p>
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
+              <p class="text-xs text-gray-600 uppercase font-medium">Emergency Helpline (Iraq)</p>
+              <p class="text-gray-900 font-medium mt-1">+964 7XX XXX XXXX — Available 24/7</p>
             </div>
-            <div class="bg-dark-800 rounded-lg p-3">
-              <p class="text-xs text-slate-500 uppercase font-medium">Pakistan Embassy Baghdad</p>
-              <p class="text-white font-medium mt-1">+964 7XX XXX XXXX</p>
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
+              <p class="text-xs text-gray-600 uppercase font-medium">Pakistan Embassy Baghdad</p>
+              <p class="text-gray-900 font-medium mt-1">+964 7XX XXX XXXX</p>
             </div>
           </div>
         </div>
 
         <!-- Important Reminders -->
-        <div class="mt-6 card border border-gold-800 bg-gold-950">
-          <h3 class="font-semibold text-gold-400 mb-3 flex items-center gap-2">⭐ Important Reminders</h3>
+        <div class="mt-6 card border border-amber-300 bg-amber-50">
+          <h3 class="font-semibold text-amber-700 mb-3 flex items-center gap-2">⭐ Important Reminders</h3>
           <ul class="space-y-2 text-sm">
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400">•</span>Always carry your passport and visa documents</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400">•</span>Keep emergency cash in USD and Iraqi Dinars</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400">•</span>Download offline maps before departure</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400">•</span>Inform family of your itinerary and check-in points</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400">•</span>Dress modestly at all times — this is sacred ground</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400">•</span>Follow group leader instructions, especially in crowds</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400">•</span>Take prescribed medications and carry a basic first aid kit</li>
-            <li class="flex gap-2 text-slate-300"><span class="text-gold-400">•</span>Join the WhatsApp group immediately — all updates shared there</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700">•</span>Always carry your passport and visa documents</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700">•</span>Keep emergency cash in USD and Iraqi Dinars</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700">•</span>Download offline maps before departure</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700">•</span>Inform family of your itinerary and check-in points</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700">•</span>Dress modestly at all times — this is sacred ground</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700">•</span>Follow group leader instructions, especially in crowds</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700">•</span>Take prescribed medications and carry a basic first aid kit</li>
+            <li class="flex gap-2 text-gray-700"><span class="text-amber-700">•</span>Join the WhatsApp group immediately — all updates shared there</li>
           </ul>
         </div>
       </div>

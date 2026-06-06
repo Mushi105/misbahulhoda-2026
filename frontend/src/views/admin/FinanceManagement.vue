@@ -429,21 +429,21 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
     <!-- Header -->
     <div class="flex items-center justify-between flex-wrap gap-3">
       <div>
-        <h1 class="text-2xl font-bold text-white">Finance</h1>
-        <p class="text-slate-400 text-sm mt-0.5">Budget tracking · Expenses · Cost analysis</p>
+        <h1 class="text-2xl font-bold text-gray-900">Finance</h1>
+        <p class="text-gray-700 text-sm mt-0.5">Budget tracking · Expenses · Cost analysis</p>
       </div>
       <div class="flex gap-2 flex-wrap">
-        <button @click="exportExcel" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-800/60 text-emerald-400 hover:bg-emerald-950/40 transition-colors">
+        <button @click="exportExcel" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-300 text-amber-700 hover:bg-amber-50 transition-colors">
           📊 Excel
         </button>
-        <button @click="exportPdf" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-800/60 text-red-400 hover:bg-red-950/40 transition-colors">
+        <button @click="exportPdf" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-300 text-red-600 hover:bg-red-50 transition-colors">
           📄 PDF
         </button>
-        <button @click="openBudget(null)" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-blue-800/60 text-blue-400 hover:bg-blue-950/40 transition-colors">
+        <button @click="openBudget(null)" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-blue-300 text-blue-600 hover:bg-blue-50 transition-colors">
           🎯 Set Budget
         </button>
         <button @click="openAdd(); activeTab='expenses'"
-                class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white"
+                class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-900"
                 style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
           + Add Expense
         </button>
@@ -452,20 +452,20 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
 
     <!-- Alert -->
     <div v-if="msg.text"
-         :class="msg.type==='success' ? 'bg-emerald-900/50 border-emerald-700 text-emerald-300' : 'bg-red-900/50 border-red-700 text-red-300'"
+         :class="msg.type==='success' ? 'bg-green-100 border-green-300 text-green-700' : 'bg-red-100 border-red-300 text-red-600'"
          class="border rounded-lg px-4 py-3 text-sm flex justify-between">
       {{ msg.text }}<button @click="msg.text=''" class="opacity-60 hover:opacity-100">✕</button>
     </div>
 
-    <div v-if="loading" class="card text-center py-16 text-slate-400">Loading financial data...</div>
+    <div v-if="loading" class="card text-center py-16 text-gray-700">Loading financial data...</div>
 
     <template v-else-if="summary">
 
       <!-- ── Tabs ──────────────────────────────────────────── -->
-      <div class="flex gap-1 bg-dark-800 p-1 rounded-xl w-fit">
+      <div class="flex gap-1 bg-gray-100 p-1 rounded-xl w-fit flex-wrap">
         <button v-for="t in [{k:'dashboard',l:'📊 Dashboard'},{k:'expenses',l:'📋 Expenses'},{k:'budget',l:'🎯 Budget'},{k:'staff',l:'👥 Staff Pay'},{k:'tickets',l:'✈️ Tickets'},{k:'rates',l:'💱 Rates'}]"
                 :key="t.k" @click="activeTab = t.k"
-                :class="['px-4 py-2 rounded-lg text-sm font-semibold transition-all', activeTab===t.k ? 'bg-dark-600 text-white' : 'text-slate-400 hover:text-white']">
+                :class="['px-4 py-2 rounded-lg text-sm font-semibold transition-all', activeTab===t.k ? 'bg-amber-600 text-white' : 'text-gray-700 hover:text-gray-900']">
           {{ t.l }}
         </button>
       </div>
@@ -475,37 +475,37 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
 
         <!-- Summary Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="card border border-blue-900/50 text-center py-5">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-2">💰 Total Budget</p>
-            <p class="text-3xl font-bold text-blue-400">{{ fmt(summary.totalBudgetPkr) }}</p>
-            <p class="text-slate-500 text-xs mt-1">PKR equivalent</p>
+          <div class="card border border-blue-200 text-center py-5">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-2">💰 Total Budget</p>
+            <p class="text-3xl font-bold text-blue-600">{{ fmt(summary.totalBudgetPkr) }}</p>
+            <p class="text-gray-600 text-xs mt-1">PKR equivalent</p>
           </div>
-          <div class="card border border-red-900/50 text-center py-5">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-2">💸 Total Spent</p>
-            <p class="text-3xl font-bold text-red-400">{{ fmt(summary.totalSpentPkr) }}</p>
-            <p class="text-slate-500 text-xs mt-1">{{ summary.expenseCount }} transactions</p>
+          <div class="card border border-red-200 text-center py-5">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-2">💸 Total Spent</p>
+            <p class="text-3xl font-bold text-red-500">{{ fmt(summary.totalSpentPkr) }}</p>
+            <p class="text-gray-600 text-xs mt-1">{{ summary.expenseCount }} transactions</p>
           </div>
           <div class="card text-center py-5"
-               :class="summary.totalSavingPkr >= 0 ? 'border border-emerald-900/50' : 'border border-orange-900/50'">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-2">
+               :class="summary.totalSavingPkr >= 0 ? 'border border-emerald-200' : 'border border-orange-200'">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-2">
               {{ summary.totalSavingPkr >= 0 ? '✅ Saving' : '⚠️ Over Budget' }}
             </p>
-            <p class="text-3xl font-bold" :class="summary.totalSavingPkr >= 0 ? 'text-emerald-400' : 'text-orange-400'">
+            <p class="text-3xl font-bold" :class="summary.totalSavingPkr >= 0 ? 'text-amber-700' : 'text-orange-600'">
               {{ fmt(Math.abs(summary.totalSavingPkr)) }}
             </p>
-            <p class="text-slate-500 text-xs mt-1">
+            <p class="text-gray-600 text-xs mt-1">
               {{ summary.totalBudgetPkr > 0 ? Math.round(summary.totalSpentPkr / summary.totalBudgetPkr * 100) : 0 }}% of budget used
             </p>
           </div>
         </div>
 
         <!-- Overall Progress Bar -->
-        <div v-if="summary.totalBudgetPkr > 0" class="card border border-dark-600">
-          <div class="flex justify-between text-xs text-slate-400 mb-2">
+        <div v-if="summary.totalBudgetPkr > 0" class="card border border-gray-200">
+          <div class="flex justify-between text-xs text-gray-600 mb-2">
             <span>Budget utilization</span>
             <span>{{ fmt(summary.totalSpentPkr) }} / {{ fmt(summary.totalBudgetPkr) }} PKR</span>
           </div>
-          <div class="w-full bg-dark-700 rounded-full h-4">
+          <div class="w-full bg-gray-200 rounded-full h-4">
             <div class="h-4 rounded-full transition-all text-xs text-white flex items-center justify-end pr-2 font-semibold"
                  :class="summary.totalSpentPkr/summary.totalBudgetPkr > 0.9 ? 'bg-red-500' : summary.totalSpentPkr/summary.totalBudgetPkr > 0.7 ? 'bg-orange-500' : 'bg-emerald-500'"
                  :style="`width:${Math.min(100, Math.round(summary.totalSpentPkr/summary.totalBudgetPkr*100))}%`">
@@ -519,39 +519,39 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
           <h2 class="text-sm font-semibold text-gold-500 uppercase tracking-wider mb-3">Category Breakdown</h2>
           <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <div v-for="cat in summary.byCategory" :key="cat.category"
-                 class="card border border-dark-600 hover:border-gold-800/40 transition-all">
+                 class="card border border-gray-200 hover:border-amber-400 transition-all">
               <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-2">
                   <span class="text-xl">{{ catIcon(categories.find(c => c.label.includes(cat.category))?.value) }}</span>
-                  <span class="text-white font-semibold text-sm">{{ cat.label }}</span>
+                  <span class="text-gray-900 font-semibold text-sm">{{ cat.label }}</span>
                 </div>
-                <span class="text-xs text-slate-500">{{ cat.count }} entries</span>
+                <span class="text-xs text-gray-600">{{ cat.count }} entries</span>
               </div>
               <div class="space-y-1 text-xs">
                 <div class="flex justify-between">
-                  <span class="text-slate-400">Spent</span>
-                  <span class="text-red-400 font-semibold">{{ fmt(cat.spentPkr) }} PKR</span>
+                  <span class="text-gray-700">Spent</span>
+                  <span class="text-red-500 font-semibold">{{ fmt(cat.spentPkr) }} PKR</span>
                 </div>
                 <div v-if="cat.budgetPkr > 0" class="flex justify-between">
-                  <span class="text-slate-400">Budget</span>
-                  <span class="text-blue-400">{{ fmt(cat.budgetPkr) }} PKR</span>
+                  <span class="text-gray-700">Budget</span>
+                  <span class="text-blue-600">{{ fmt(cat.budgetPkr) }} PKR</span>
                 </div>
                 <div v-if="cat.budgetPkr > 0" class="flex justify-between">
-                  <span class="text-slate-400">{{ cat.remainingPkr >= 0 ? 'Remaining' : 'Over by' }}</span>
-                  <span :class="cat.remainingPkr >= 0 ? 'text-emerald-400' : 'text-orange-400'" class="font-semibold">
+                  <span class="text-gray-700">{{ cat.remainingPkr >= 0 ? 'Remaining' : 'Over by' }}</span>
+                  <span :class="cat.remainingPkr >= 0 ? 'text-amber-700' : 'text-orange-600'" class="font-semibold">
                     {{ fmt(Math.abs(cat.remainingPkr)) }} PKR
                   </span>
                 </div>
               </div>
               <div v-if="cat.budgetPkr > 0" class="mt-3">
-                <div class="w-full bg-dark-700 rounded-full h-1.5">
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
                   <div class="h-1.5 rounded-full transition-all"
                        :class="cat.spentPkr/cat.budgetPkr > 1 ? 'bg-red-500' : cat.spentPkr/cat.budgetPkr > 0.8 ? 'bg-orange-500' : 'bg-emerald-500'"
                        :style="`width:${Math.min(100, Math.round(cat.spentPkr/cat.budgetPkr*100))}%`"></div>
                 </div>
               </div>
               <button @click="openBudget(categories.find(c => c.label.includes(cat.category)))"
-                      class="mt-2 text-xs text-slate-500 hover:text-gold-400 transition-colors">
+                      class="mt-2 text-xs text-gray-600 hover:text-amber-700 transition-colors">
                 {{ cat.budgetPkr > 0 ? '✏️ Edit Budget' : '+ Set Budget' }}
               </button>
             </div>
@@ -559,23 +559,23 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
         </div>
 
         <!-- Recent Expenses -->
-        <div v-if="summary.recentExpenses?.length" class="card border border-dark-600">
-          <h3 class="text-sm font-semibold text-white mb-3">Recent Transactions</h3>
+        <div v-if="summary.recentExpenses?.length" class="card border border-gray-200">
+          <h3 class="text-sm font-semibold text-gray-900 mb-3">Recent Transactions</h3>
           <div class="space-y-2">
             <div v-for="e in summary.recentExpenses" :key="e.id"
-                 class="flex items-center gap-3 py-2 border-b border-dark-700 last:border-0">
+                 class="flex items-center gap-3 py-2 border-b border-gray-200 last:border-0">
               <span class="text-2xl w-8 text-center">{{ catIcon(e.category) }}</span>
               <div class="flex-1 min-w-0">
-                <p class="text-white text-sm font-medium truncate">{{ e.title }}</p>
-                <p class="text-slate-500 text-xs">{{ e.label }} · {{ new Date(e.date).toLocaleDateString('en-GB') }}</p>
+                <p class="text-gray-900 text-sm font-medium truncate">{{ e.title }}</p>
+                <p class="text-gray-600 text-xs">{{ e.label }} · {{ new Date(e.date).toLocaleDateString('en-GB') }}</p>
               </div>
               <div class="text-right shrink-0">
-                <p class="text-red-400 font-semibold text-sm">{{ fmt(e.totalCost) }} <span class="text-xs font-normal">{{ e.currency }}</span></p>
-                <p v-if="e.currency !== 'PKR'" class="text-slate-500 text-xs">≈ {{ fmt(e.totalCostPkr) }} PKR</p>
+                <p class="text-red-500 font-semibold text-sm">{{ fmt(e.totalCost) }} <span class="text-xs font-normal">{{ e.currency }}</span></p>
+                <p v-if="e.currency !== 'PKR'" class="text-gray-600 text-xs">≈ {{ fmt(e.totalCostPkr) }} PKR</p>
               </div>
             </div>
           </div>
-          <button @click="activeTab='expenses'" class="mt-3 text-xs text-gold-500 hover:text-gold-400">View all expenses →</button>
+          <button @click="activeTab='expenses'" class="mt-3 text-xs text-amber-700 hover:text-amber-600">View all expenses →</button>
         </div>
 
       </template>
@@ -584,7 +584,7 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
       <template v-if="activeTab==='expenses'">
 
         <div class="flex justify-end">
-          <button @click="openAdd" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white"
+          <button @click="openAdd" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-900"
                   style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
             + Add Expense
           </button>
@@ -592,61 +592,61 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
 
         <div v-if="!expenses.length" class="card text-center py-12">
           <div class="text-5xl mb-4">💰</div>
-          <p class="text-white font-semibold">No expenses yet</p>
-          <p class="text-slate-400 text-sm mt-2">Start adding hotel, meals, transport costs etc.</p>
+          <p class="text-gray-900 font-semibold">No expenses yet</p>
+          <p class="text-gray-700 text-sm mt-2">Start adding hotel, meals, transport costs etc.</p>
         </div>
 
-        <div v-else class="overflow-x-auto rounded-xl border border-dark-600">
+        <div v-else class="overflow-x-auto rounded-xl border border-gray-200">
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-dark-600" style="background:#0f172a">
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Date</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Category</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Title</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Unit Cost</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Qty</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Total</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">≈ PKR</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Paid To</th>
+              <tr class="border-b border-gray-200 bg-gray-50">
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Date</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Category</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Title</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Unit Cost</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Qty</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Total</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">≈ PKR</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Paid To</th>
                 <th class="px-4 py-3"></th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="e in expenses" :key="e.id"
-                  class="border-b border-dark-700 hover:bg-dark-800/50 transition-colors">
-                <td class="px-4 py-3 text-slate-400 text-xs whitespace-nowrap">{{ new Date(e.date).toLocaleDateString('en-GB') }}</td>
+                  class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                <td class="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">{{ new Date(e.date).toLocaleDateString('en-GB') }}</td>
                 <td class="px-4 py-3">
-                  <span class="inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-lg bg-dark-700">
+                  <span class="inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-lg bg-gray-100 text-gray-600">
                     {{ catIcon(categories.find(c => c.label.includes(e.category))?.value) }} {{ e.label }}
                   </span>
                 </td>
-                <td class="px-4 py-3 text-white font-medium">
+                <td class="px-4 py-3 text-gray-900 font-medium">
                   {{ e.title }}
-                  <p v-if="e.notes" class="text-slate-500 text-xs mt-0.5 truncate max-w-48">{{ e.notes }}</p>
+                  <p v-if="e.notes" class="text-gray-600 text-xs mt-0.5 truncate max-w-48">{{ e.notes }}</p>
                   <div v-if="e.breakfastIncluded || e.lunchIncluded || e.dinnerIncluded" class="flex gap-1 mt-1">
-                    <span v-if="e.breakfastIncluded" class="text-xs px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-400">🍳 B</span>
-                    <span v-if="e.lunchIncluded"     class="text-xs px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-400">🍽 L</span>
-                    <span v-if="e.dinnerIncluded"    class="text-xs px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-400">🌙 D</span>
+                    <span v-if="e.breakfastIncluded" class="text-xs px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">🍳 B</span>
+                    <span v-if="e.lunchIncluded"     class="text-xs px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">🍽 L</span>
+                    <span v-if="e.dinnerIncluded"    class="text-xs px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">🌙 D</span>
                   </div>
                 </td>
-                <td class="px-4 py-3 text-right text-slate-300 text-xs">{{ fmt(e.unitCost) }} <span class="text-slate-600">{{ e.unit }}</span></td>
-                <td class="px-4 py-3 text-right text-slate-400">{{ e.quantity }}</td>
-                <td class="px-4 py-3 text-right font-bold text-red-400">{{ fmt(e.totalCost) }} <span class="text-slate-600 font-normal text-xs">{{ e.currency }}</span></td>
-                <td class="px-4 py-3 text-right text-slate-400 text-xs">{{ e.currency === 'PKR' ? '—' : fmt(e.totalCostPkr) }}</td>
-                <td class="px-4 py-3 text-slate-400 text-xs">{{ e.paidTo || '—' }}</td>
+                <td class="px-4 py-3 text-right text-gray-600 text-xs">{{ fmt(e.unitCost) }} <span class="text-gray-600">{{ e.unit }}</span></td>
+                <td class="px-4 py-3 text-right text-gray-700">{{ e.quantity }}</td>
+                <td class="px-4 py-3 text-right font-bold text-red-500">{{ fmt(e.totalCost) }} <span class="text-gray-600 font-normal text-xs">{{ e.currency }}</span></td>
+                <td class="px-4 py-3 text-right text-gray-600 text-xs">{{ e.currency === 'PKR' ? '—' : fmt(e.totalCostPkr) }}</td>
+                <td class="px-4 py-3 text-gray-600 text-xs">{{ e.paidTo || '—' }}</td>
                 <td class="px-4 py-3">
                   <div class="flex gap-1">
-                    <button @click="openEdit(e)" class="text-xs px-2 py-1 rounded border border-blue-800/60 text-blue-400 hover:bg-blue-950/40">✏️</button>
+                    <button @click="openEdit(e)" class="text-xs px-2 py-1 rounded border border-blue-300 text-blue-600 hover:bg-blue-50">✏️</button>
                     <button @click="deleteExpense(e.id)" :disabled="deleting===e.id"
-                            class="text-xs px-2 py-1 rounded border border-red-800/60 text-red-400 hover:bg-red-950/40 disabled:opacity-50">🗑</button>
+                            class="text-xs px-2 py-1 rounded border border-red-300 text-red-600 hover:bg-red-50 disabled:opacity-50">🗑</button>
                   </div>
                 </td>
               </tr>
             </tbody>
             <tfoot>
-              <tr style="background:#0f172a">
-                <td colspan="5" class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">Grand Total (PKR)</td>
-                <td colspan="2" class="px-4 py-3 text-right font-bold text-xl text-red-400">{{ fmt(summary.totalSpentPkr) }}</td>
+              <tr class="bg-gray-50">
+                <td colspan="5" class="px-4 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">Grand Total (PKR)</td>
+                <td colspan="2" class="px-4 py-3 text-right font-bold text-xl text-red-500">{{ fmt(summary.totalSpentPkr) }}</td>
                 <td colspan="2"></td>
               </tr>
             </tfoot>
@@ -660,26 +660,26 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
       <template v-if="activeTab==='budget'">
         <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <div v-for="cat in categories" :key="cat.value"
-               class="card border border-dark-600 hover:border-gold-800/40 transition-all">
+               class="card border border-gray-200 hover:border-amber-400 transition-all">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <span class="text-2xl">{{ cat.icon }}</span>
                 <div>
-                  <p class="text-white font-semibold text-sm">{{ cat.label.replace(/^.\s/,'') }}</p>
-                  <p class="text-xs text-slate-500">
-                    Spent: <span class="text-red-400">{{ fmt(summary.byCategory.find(c=>c.category===cat.label.replace(/^.\s/,''))?.spentPkr || 0) }}</span> PKR
+                  <p class="text-gray-900 font-semibold text-sm">{{ cat.label.replace(/^.\s/,'') }}</p>
+                  <p class="text-xs text-gray-600">
+                    Spent: <span class="text-red-500">{{ fmt(summary.byCategory.find(c=>c.category===cat.label.replace(/^.\s/,''))?.spentPkr || 0) }}</span> PKR
                   </p>
                 </div>
               </div>
               <div class="text-right">
-                <p class="text-blue-400 font-bold">
+                <p class="text-blue-600 font-bold">
                   {{ fmt(summary.byCategory.find(c=>c.category===cat.label.replace(/^.\s/,''))?.budgetPkr || 0) }}
                 </p>
-                <p class="text-slate-600 text-xs">PKR budgeted</p>
+                <p class="text-gray-600 text-xs">PKR budgeted</p>
               </div>
             </div>
             <button @click="openBudget(cat)"
-                    class="mt-3 w-full text-xs py-1.5 rounded-lg border border-dark-600 text-slate-400 hover:border-gold-700 hover:text-white transition-colors">
+                    class="mt-3 w-full text-xs py-1.5 rounded-lg border border-gray-200 text-gray-700 hover:border-amber-400 hover:text-amber-700 transition-colors">
               {{ summary.byCategory.find(c=>c.category===cat.label.replace(/^.\s/,''))?.budgetPkr ? '✏️ Edit Budget' : '+ Set Budget' }}
             </button>
           </div>
@@ -691,26 +691,26 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
 
         <!-- Summary cards -->
         <div v-if="staffData" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="card border border-slate-700 text-center py-4">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">👥 Total Payable</p>
-            <p class="text-2xl font-bold text-white">{{ fmt(staffData.totalPkr) }}</p>
-            <p class="text-slate-500 text-xs mt-0.5">PKR equivalent</p>
+          <div class="card border border-gray-200 text-center py-4">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-1">👥 Total Payable</p>
+            <p class="text-2xl font-bold text-gray-900">{{ fmt(staffData.totalPkr) }}</p>
+            <p class="text-gray-600 text-xs mt-0.5">PKR equivalent</p>
           </div>
-          <div class="card border border-emerald-900/50 text-center py-4">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">✅ Paid</p>
-            <p class="text-2xl font-bold text-emerald-400">{{ fmt(staffData.paidPkr) }}</p>
-            <p class="text-slate-500 text-xs mt-0.5">PKR</p>
+          <div class="card border border-emerald-200 text-center py-4">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-1">✅ Paid</p>
+            <p class="text-2xl font-bold text-amber-700">{{ fmt(staffData.paidPkr) }}</p>
+            <p class="text-gray-600 text-xs mt-0.5">PKR</p>
           </div>
-          <div class="card text-center py-4" :class="staffData.pendingPkr > 0 ? 'border border-orange-900/50' : 'border border-slate-700'">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">⏳ Pending</p>
-            <p class="text-2xl font-bold" :class="staffData.pendingPkr > 0 ? 'text-orange-400' : 'text-slate-400'">{{ fmt(staffData.pendingPkr) }}</p>
-            <p class="text-slate-500 text-xs mt-0.5">PKR</p>
+          <div class="card text-center py-4" :class="staffData.pendingPkr > 0 ? 'border border-orange-200' : 'border border-gray-200'">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-1">⏳ Pending</p>
+            <p class="text-2xl font-bold" :class="staffData.pendingPkr > 0 ? 'text-orange-600' : 'text-gray-600'">{{ fmt(staffData.pendingPkr) }}</p>
+            <p class="text-gray-600 text-xs mt-0.5">PKR</p>
           </div>
         </div>
 
         <div class="flex justify-end">
           <button @click="openAddStaff"
-                  class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white"
+                  class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-900"
                   style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
             + Add Payment
           </button>
@@ -718,52 +718,52 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
 
         <div v-if="!staffData?.payments?.length" class="card text-center py-12">
           <div class="text-5xl mb-3">👥</div>
-          <p class="text-white font-semibold">No staff payments yet</p>
-          <p class="text-slate-400 text-sm mt-1">Add Molana honorarium, part-time staff, servants etc.</p>
+          <p class="text-gray-900 font-semibold">No staff payments yet</p>
+          <p class="text-gray-700 text-sm mt-1">Add Molana honorarium, part-time staff, servants etc.</p>
         </div>
 
-        <div v-else class="overflow-x-auto rounded-xl border border-dark-600">
+        <div v-else class="overflow-x-auto rounded-xl border border-gray-200">
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-dark-600" style="background:#0f172a">
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Name</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Role</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Description</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Amount</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">≈ PKR</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Date</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Status</th>
+              <tr class="border-b border-gray-200 bg-gray-50">
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Name</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Role</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Description</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Amount</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">≈ PKR</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Date</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Status</th>
                 <th class="px-4 py-3"></th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="p in staffData.payments" :key="p.id"
-                  class="border-b border-dark-700 hover:bg-dark-800/50 transition-colors">
+                  class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
                 <td class="px-4 py-3">
-                  <p class="text-white font-medium">{{ p.name }}</p>
-                  <p v-if="p.phone" class="text-slate-500 text-xs">
-                    <a :href="`https://wa.me/${p.phone.replace(/[^\d]/g,'')}`" target="_blank" class="text-emerald-500 hover:underline">💬 {{ p.phone }}</a>
+                  <p class="text-gray-900 font-medium">{{ p.name }}</p>
+                  <p v-if="p.phone" class="text-gray-600 text-xs">
+                    <a :href="`https://wa.me/${p.phone.replace(/[^\d]/g,'')}`" target="_blank" class="text-green-600 hover:underline">💬 {{ p.phone }}</a>
                   </p>
                 </td>
                 <td class="px-4 py-3">
-                  <span class="text-xs px-2 py-1 rounded-lg bg-dark-700 text-slate-300">{{ p.roleLabel }}</span>
+                  <span class="text-xs px-2 py-1 rounded-lg bg-gray-100 text-gray-600">{{ p.roleLabel }}</span>
                 </td>
-                <td class="px-4 py-3 text-slate-400 text-xs max-w-40 truncate">{{ p.description || '—' }}</td>
-                <td class="px-4 py-3 text-right font-bold text-white">{{ fmt(p.amount) }} <span class="text-slate-500 font-normal text-xs">{{ p.currency }}</span></td>
-                <td class="px-4 py-3 text-right text-slate-400 text-xs">{{ p.currency === 'PKR' ? '—' : fmt(p.amountPkr) }}</td>
-                <td class="px-4 py-3 text-slate-400 text-xs whitespace-nowrap">{{ new Date(p.date).toLocaleDateString('en-GB') }}</td>
+                <td class="px-4 py-3 text-gray-600 text-xs max-w-40 truncate">{{ p.description || '—' }}</td>
+                <td class="px-4 py-3 text-right font-bold text-gray-900">{{ fmt(p.amount) }} <span class="text-gray-600 font-normal text-xs">{{ p.currency }}</span></td>
+                <td class="px-4 py-3 text-right text-gray-600 text-xs">{{ p.currency === 'PKR' ? '—' : fmt(p.amountPkr) }}</td>
+                <td class="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">{{ new Date(p.date).toLocaleDateString('en-GB') }}</td>
                 <td class="px-4 py-3">
                   <button v-if="!p.isPaid" @click="markStaffPaid(p.id)"
-                          class="text-xs px-2 py-1 rounded border border-orange-700/60 text-orange-400 hover:bg-orange-950/40 whitespace-nowrap">
+                          class="text-xs px-2 py-1 rounded border border-orange-300 text-orange-600 hover:bg-orange-50 whitespace-nowrap">
                     ⏳ Pending
                   </button>
-                  <span v-else class="text-xs px-2 py-1 rounded bg-emerald-900/40 text-emerald-400">✅ Paid</span>
+                  <span v-else class="text-xs px-2 py-1 rounded bg-green-100 text-green-700">✅ Paid</span>
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex gap-1">
-                    <button @click="openEditStaff(p)" class="text-xs px-2 py-1 rounded border border-blue-800/60 text-blue-400 hover:bg-blue-950/40">✏️</button>
+                    <button @click="openEditStaff(p)" class="text-xs px-2 py-1 rounded border border-blue-300 text-blue-600 hover:bg-blue-50">✏️</button>
                     <button @click="deleteStaff(p.id)" :disabled="deletingStaff===p.id"
-                            class="text-xs px-2 py-1 rounded border border-red-800/60 text-red-400 hover:bg-red-950/40 disabled:opacity-50">🗑</button>
+                            class="text-xs px-2 py-1 rounded border border-red-300 text-red-600 hover:bg-red-50 disabled:opacity-50">🗑</button>
                   </div>
                 </td>
               </tr>
@@ -777,29 +777,29 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
 
         <!-- Summary -->
         <div v-if="ticketData" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div class="card border border-slate-700 text-center py-4">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Total Cost</p>
-            <p class="text-xl font-bold text-white">{{ fmt(ticketData.totalCostPkr) }}</p>
-            <p class="text-slate-500 text-xs mt-0.5">PKR</p>
+          <div class="card border border-gray-200 text-center py-4">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-1">Total Cost</p>
+            <p class="text-xl font-bold text-gray-900">{{ fmt(ticketData.totalCostPkr) }}</p>
+            <p class="text-gray-600 text-xs mt-0.5">PKR</p>
           </div>
-          <div class="card border border-slate-700 text-center py-4">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Total</p>
-            <p class="text-xl font-bold text-white">{{ ticketData.totalCount }}</p>
-            <p class="text-slate-500 text-xs mt-0.5">tickets</p>
+          <div class="card border border-gray-200 text-center py-4">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-1">Total</p>
+            <p class="text-xl font-bold text-gray-900">{{ ticketData.totalCount }}</p>
+            <p class="text-gray-600 text-xs mt-0.5">tickets</p>
           </div>
-          <div class="card border border-emerald-900/50 text-center py-4">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">✅ Booked/Used</p>
-            <p class="text-xl font-bold text-emerald-400">{{ ticketData.bookedCount }}</p>
+          <div class="card border border-emerald-200 text-center py-4">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-1">✅ Booked/Used</p>
+            <p class="text-xl font-bold text-amber-700">{{ ticketData.bookedCount }}</p>
           </div>
-          <div class="card text-center py-4" :class="ticketData.pendingCount > 0 ? 'border border-orange-900/50' : 'border border-slate-700'">
-            <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">⏳ Pending</p>
-            <p class="text-xl font-bold" :class="ticketData.pendingCount > 0 ? 'text-orange-400' : 'text-slate-400'">{{ ticketData.pendingCount }}</p>
+          <div class="card text-center py-4" :class="ticketData.pendingCount > 0 ? 'border border-orange-200' : 'border border-gray-200'">
+            <p class="text-gray-600 text-xs uppercase tracking-wider mb-1">⏳ Pending</p>
+            <p class="text-xl font-bold" :class="ticketData.pendingCount > 0 ? 'text-orange-600' : 'text-gray-600'">{{ ticketData.pendingCount }}</p>
           </div>
         </div>
 
         <div class="flex justify-end">
           <button @click="openAddTicket"
-                  class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white"
+                  class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-900"
                   style="background:rgba(180,83,9,0.7);border:1px solid rgba(180,83,9,0.5);">
             + Add Ticket
           </button>
@@ -807,60 +807,60 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
 
         <div v-if="!ticketData?.tickets?.length" class="card text-center py-12">
           <div class="text-5xl mb-3">✈️</div>
-          <p class="text-white font-semibold">No tickets yet</p>
-          <p class="text-slate-400 text-sm mt-1">Add flight/bus tickets for Molana, staff, airport receivers etc.</p>
+          <p class="text-gray-900 font-semibold">No tickets yet</p>
+          <p class="text-gray-700 text-sm mt-1">Add flight/bus tickets for Molana, staff, airport receivers etc.</p>
         </div>
 
-        <div v-else class="overflow-x-auto rounded-xl border border-dark-600">
+        <div v-else class="overflow-x-auto rounded-xl border border-gray-200">
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-dark-600" style="background:#0f172a">
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Passenger</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Route</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Travel Date</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Airline / No.</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Cost</th>
-                <th class="text-right px-4 py-3 text-gold-500 font-semibold text-xs uppercase">≈ PKR</th>
-                <th class="text-left px-4 py-3 text-gold-500 font-semibold text-xs uppercase">Status</th>
+              <tr class="border-b border-gray-200 bg-gray-50">
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Passenger</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Route</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Travel Date</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Airline / No.</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Cost</th>
+                <th class="text-right px-4 py-3 text-amber-700 font-semibold text-xs uppercase">≈ PKR</th>
+                <th class="text-left px-4 py-3 text-amber-700 font-semibold text-xs uppercase">Status</th>
                 <th class="px-4 py-3"></th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="t in ticketData.tickets" :key="t.id"
-                  class="border-b border-dark-700 hover:bg-dark-800/50 transition-colors">
+                  class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
                 <td class="px-4 py-3">
-                  <p class="text-white font-medium">{{ t.passengerName }}</p>
-                  <p class="text-slate-500 text-xs">{{ t.roleLabel }}</p>
+                  <p class="text-gray-900 font-medium">{{ t.passengerName }}</p>
+                  <p class="text-gray-600 text-xs">{{ t.roleLabel }}</p>
                   <a v-if="t.phone" :href="`https://wa.me/${t.phone.replace(/[^\d]/g,'')}`" target="_blank"
-                     class="text-emerald-500 text-xs hover:underline">💬 {{ t.phone }}</a>
+                     class="text-green-600 text-xs hover:underline">💬 {{ t.phone }}</a>
                 </td>
                 <td class="px-4 py-3">
-                  <p class="text-white text-xs font-medium">{{ t.fromCity }} → {{ t.toCity }}</p>
-                  <p class="text-slate-500 text-xs">{{ t.ticketType }}</p>
+                  <p class="text-gray-900 text-xs font-medium">{{ t.fromCity }} → {{ t.toCity }}</p>
+                  <p class="text-gray-600 text-xs">{{ t.ticketType }}</p>
                 </td>
-                <td class="px-4 py-3 text-slate-400 text-xs whitespace-nowrap">{{ new Date(t.travelDate).toLocaleDateString('en-GB') }}</td>
-                <td class="px-4 py-3 text-slate-400 text-xs">
+                <td class="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">{{ new Date(t.travelDate).toLocaleDateString('en-GB') }}</td>
+                <td class="px-4 py-3 text-gray-600 text-xs">
                   <p>{{ t.airline || '—' }}</p>
-                  <p v-if="t.flightNumber" class="text-slate-600">{{ t.flightNumber }}</p>
-                  <p v-if="t.ticketNumber" class="text-slate-600">{{ t.ticketNumber }}</p>
+                  <p v-if="t.flightNumber" class="text-gray-600">{{ t.flightNumber }}</p>
+                  <p v-if="t.ticketNumber" class="text-gray-600">{{ t.ticketNumber }}</p>
                 </td>
-                <td class="px-4 py-3 text-right font-bold text-white">{{ fmt(t.cost) }} <span class="text-slate-500 font-normal text-xs">{{ t.currency }}</span></td>
-                <td class="px-4 py-3 text-right text-slate-400 text-xs">{{ t.currency === 'PKR' ? '—' : fmt(t.costPkr) }}</td>
+                <td class="px-4 py-3 text-right font-bold text-gray-900">{{ fmt(t.cost) }} <span class="text-gray-600 font-normal text-xs">{{ t.currency }}</span></td>
+                <td class="px-4 py-3 text-right text-gray-600 text-xs">{{ t.currency === 'PKR' ? '—' : fmt(t.costPkr) }}</td>
                 <td class="px-4 py-3">
                   <span class="text-xs px-2 py-1 rounded-lg"
                         :class="{
-                          'bg-orange-900/40 text-orange-400': t.status==='Pending',
-                          'bg-emerald-900/40 text-emerald-400': t.status==='Booked' || t.status==='Used',
-                          'bg-red-900/40 text-red-400': t.status==='Cancelled',
+                          'bg-orange-100 text-orange-600': t.status==='Pending',
+                          'bg-green-100 text-green-700': t.status==='Booked' || t.status==='Used',
+                          'bg-red-100 text-red-600': t.status==='Cancelled',
                         }">
                     {{ t.statusLabel }}
                   </span>
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex gap-1">
-                    <button @click="openEditTicket(t)" class="text-xs px-2 py-1 rounded border border-blue-800/60 text-blue-400 hover:bg-blue-950/40">✏️</button>
+                    <button @click="openEditTicket(t)" class="text-xs px-2 py-1 rounded border border-blue-300 text-blue-600 hover:bg-blue-50">✏️</button>
                     <button @click="deleteTicket(t.id)" :disabled="deletingTicket===t.id"
-                            class="text-xs px-2 py-1 rounded border border-red-800/60 text-red-400 hover:bg-red-950/40 disabled:opacity-50">🗑</button>
+                            class="text-xs px-2 py-1 rounded border border-red-300 text-red-600 hover:bg-red-50 disabled:opacity-50">🗑</button>
                   </div>
                 </td>
               </tr>
@@ -871,30 +871,30 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
 
       <!-- ── RATES TAB ─────────────────────────────────────── -->
       <template v-if="activeTab==='rates'">
-        <div class="card border border-dark-600 max-w-lg">
-          <h2 class="text-white font-bold mb-1">💱 Exchange Rates to PKR</h2>
-          <p class="text-slate-400 text-xs mb-5">Set how much 1 unit of each currency equals in Pakistani Rupees. All dashboard totals are auto-converted to PKR using these rates.</p>
+        <div class="card border border-gray-200 max-w-lg">
+          <h2 class="text-gray-900 font-bold mb-1">💱 Exchange Rates to PKR</h2>
+          <p class="text-gray-600 text-xs mb-5">Set how much 1 unit of each currency equals in Pakistani Rupees. All dashboard totals are auto-converted to PKR using these rates.</p>
           <div class="space-y-3">
             <div v-for="c in currencies.filter(x => x.code !== 'PKR')" :key="c.code"
-                 class="flex items-center gap-3 p-3 rounded-xl bg-dark-800 border border-dark-700">
+                 class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-200">
               <div class="w-14 text-center">
-                <span class="text-white font-bold text-sm">{{ c.code }}</span>
-                <p class="text-slate-500 text-xs">{{ c.name }}</p>
+                <span class="text-gray-900 font-bold text-sm">{{ c.code }}</span>
+                <p class="text-gray-600 text-xs">{{ c.name }}</p>
               </div>
               <div class="flex-1 flex items-center gap-2">
-                <span class="text-slate-400 text-xs">1 {{ c.code }} =</span>
+                <span class="text-gray-600 text-xs">1 {{ c.code }} =</span>
                 <input v-model="rateEdits[c.code]" type="number" min="0" step="0.01"
                        class="input flex-1 text-right" :placeholder="`e.g. ${c.code==='USD'?'280':c.code==='GBP'?'355':c.code==='IQD'?'0.21':c.code==='SAR'?'75':'120'}`" />
-                <span class="text-slate-400 text-xs">PKR</span>
+                <span class="text-gray-600 text-xs">PKR</span>
               </div>
               <button @click="saveRate(c.code)" :disabled="savingRate===c.code"
-                      class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white disabled:opacity-40 transition-colors"
+                      class="px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-900 disabled:opacity-40 transition-colors"
                       style="background:rgba(180,83,9,0.6);border:1px solid rgba(180,83,9,0.4);">
                 {{ savingRate===c.code ? '...' : 'Save' }}
               </button>
             </div>
           </div>
-          <p class="text-slate-600 text-xs mt-4">Last updated rates are shown in the input fields. Update any time exchange rates change.</p>
+          <p class="text-gray-600 text-xs mt-4">Last updated rates are shown in the input fields. Update any time exchange rates change.</p>
         </div>
       </template>
 
@@ -905,7 +905,7 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
       <div v-if="showForm" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.85);" @click.self="showForm=false">
         <div class="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl" style="background:#0f172a;border:1px solid rgba(180,83,9,0.35);">
           <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#d97706,transparent)"></div>
-          <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
+          <div class="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
             <h3 class="text-white font-bold text-lg">{{ editingId ? 'Edit Expense' : 'Add Expense' }}</h3>
             <button @click="showForm=false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>
@@ -946,7 +946,7 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
             </div>
             <!-- Meal inclusion — only for Hotel category -->
             <div v-if="form.category === 1" class="rounded-xl border border-emerald-900/40 bg-emerald-950/20 p-4">
-              <p class="text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">🍽 Meals Included in Hotel Deal?</p>
+              <p class="text-amber-700 text-xs font-semibold uppercase tracking-wider mb-3">🍽 Meals Included in Hotel Deal?</p>
               <div class="flex gap-6">
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" v-model="form.breakfastIncluded" class="w-4 h-4 accent-emerald-500 rounded" />
@@ -961,13 +961,13 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
                   <span class="text-sm text-white">🌙 Dinner</span>
                 </label>
               </div>
-              <p class="text-slate-500 text-xs mt-2">Tick what the hotel includes — no need to add a separate expense</p>
+              <p class="text-gray-600 text-xs mt-2">Tick what the hotel includes — no need to add a separate expense</p>
             </div>
 
             <!-- Total preview -->
-            <div class="bg-dark-700 rounded-xl p-3 flex justify-between items-center">
-              <span class="text-slate-400 text-sm">Total Amount</span>
-              <span class="text-white font-bold text-xl">{{ fmt(totalCalc) }} <span class="text-slate-500 text-sm font-normal">{{ form.currency }}</span></span>
+            <div class="bg-slate-800 rounded-xl p-3 flex justify-between items-center">
+              <span class="text-gray-600 text-sm">Total Amount</span>
+              <span class="text-white font-bold text-xl">{{ fmt(totalCalc) }} <span class="text-slate-400 text-sm font-normal">{{ form.currency }}</span></span>
             </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
@@ -985,7 +985,7 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
             </div>
             <div class="flex gap-3">
               <button @click="saveExpense" :disabled="saving"
-                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-40"
+                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 disabled:opacity-40"
                       style="background:rgba(180,83,9,0.7);">
                 {{ saving ? 'Saving...' : (editingId ? 'Update' : 'Add Expense') }}
               </button>
@@ -1001,7 +1001,7 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
       <div v-if="showTicketForm" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.85);" @click.self="showTicketForm=false">
         <div class="w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl" style="background:#0f172a;border:1px solid rgba(180,83,9,0.35);">
           <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#d97706,transparent)"></div>
-          <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
+          <div class="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
             <h3 class="text-white font-bold text-lg">{{ editingTicketId ? 'Edit Ticket' : '✈️ Add Travel Ticket' }}</h3>
             <button @click="showTicketForm=false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>
@@ -1084,7 +1084,7 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
             </div>
             <div class="flex gap-3">
               <button @click="saveTicket" :disabled="savingTicket"
-                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-40"
+                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 disabled:opacity-40"
                       style="background:rgba(180,83,9,0.7);">
                 {{ savingTicket ? 'Saving...' : (editingTicketId ? 'Update' : 'Add Ticket') }}
               </button>
@@ -1100,7 +1100,7 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
       <div v-if="showStaffForm" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.85);" @click.self="showStaffForm=false">
         <div class="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl" style="background:#0f172a;border:1px solid rgba(59,130,246,0.35);">
           <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#3b82f6,transparent)"></div>
-          <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
+          <div class="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
             <h3 class="text-white font-bold text-lg">{{ editingStaffId ? 'Edit Payment' : '👥 Add Staff Payment' }}</h3>
             <button @click="showStaffForm=false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>
@@ -1149,12 +1149,12 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
             </div>
             <label class="flex items-center gap-3 cursor-pointer">
               <input type="checkbox" v-model="staffForm.isPaid" class="w-4 h-4 accent-emerald-500 rounded" />
-              <span class="text-sm text-white">Already Paid</span>
-              <span class="text-xs text-slate-500">(uncheck = pending)</span>
+              <span class="text-sm text-gray-200">Already Paid</span>
+              <span class="text-xs text-gray-600">(uncheck = pending)</span>
             </label>
             <div class="flex gap-3">
               <button @click="saveStaff" :disabled="savingStaff"
-                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-700 hover:bg-blue-600 disabled:opacity-40">
+                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 bg-blue-700 hover:bg-blue-600 disabled:opacity-40">
                 {{ savingStaff ? 'Saving...' : (editingStaffId ? 'Update' : 'Add Payment') }}
               </button>
               <button @click="showStaffForm=false" class="btn-outline px-5">Cancel</button>
@@ -1169,7 +1169,7 @@ onMounted(() => { load(); loadRates(); loadStaff(); loadTickets() })
       <div v-if="showBudget" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.85);" @click.self="showBudget=false">
         <div class="w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl" style="background:#0f172a;border:1px solid rgba(59,130,246,0.35);">
           <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#3b82f6,transparent)"></div>
-          <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
+          <div class="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
             <h3 class="text-white font-bold text-lg">🎯 Set Budget</h3>
             <button @click="showBudget=false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>

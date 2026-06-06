@@ -31,7 +31,7 @@ async function login() {
       </button>
       <div class="flex items-center gap-2">
         <span>🤝</span>
-        <span class="text-white font-semibold text-sm">Volunteer Portal</span>
+        <span class="text-gray-900 font-semibold text-sm">Volunteer Portal</span>
       </div>
     </div>
 
@@ -40,9 +40,9 @@ async function login() {
 
         <div class="text-center mb-8">
           <div class="w-20 h-20 rounded-2xl bg-green-900/50 border border-green-700 flex items-center justify-center text-4xl mx-auto mb-4">🤝</div>
-          <h1 class="text-2xl font-bold text-white">Volunteer Portal</h1>
+          <h1 class="text-2xl font-bold text-gray-900">Volunteer Portal</h1>
           <p class="text-green-400 text-sm mt-2">Arbaeen 2026 — Volunteer Access</p>
-          <p class="text-slate-400 text-sm mt-1">Your account is created by the admin team.</p>
+          <p class="text-gray-700 text-sm mt-1">Your account is created by the admin team.</p>
         </div>
 
         <div v-if="error" class="mb-4 bg-red-900/50 border border-red-700 text-red-300 text-sm rounded-lg px-4 py-3">{{ error }}</div>
@@ -61,7 +61,7 @@ async function login() {
           </button>
         </form>
 
-        <div class="mt-6 p-4 bg-dark-800 rounded-xl border border-dark-600 text-sm text-slate-400 text-center">
+        <div class="mt-6 p-4 bg-dark-800 rounded-xl border border-dark-600 text-sm text-gray-700 text-center">
           Don't have access? Contact the admin team to get your volunteer account created.
         </div>
 

@@ -46,7 +46,7 @@ async function handleReset() {
 
       <div class="text-center mb-8">
         <div class="flex justify-center mb-3"><MHLogo size="lg" /></div>
-        <h1 class="text-2xl font-bold text-white">Misbah ul Hoda</h1>
+        <h1 class="text-2xl font-bold text-gray-900">Misbah ul Hoda</h1>
         <p class="text-gold-400 text-xs mt-1">Arbaeen 2026</p>
       </div>
 
@@ -55,8 +55,8 @@ async function handleReset() {
         <!-- Success -->
         <div v-if="done" class="text-center space-y-4">
           <div class="text-5xl">✅</div>
-          <h2 class="text-white font-bold text-xl">Password Reset!</h2>
-          <p class="text-slate-400 text-sm">Your password has been updated successfully. You can now sign in with your new password.</p>
+          <h2 class="text-gray-900 font-bold text-xl">Password Reset!</h2>
+          <p class="text-gray-700 text-sm">Your password has been updated successfully. You can now sign in with your new password.</p>
           <button @click="router.push('/')" class="btn-primary w-full py-3 font-semibold">
             Go to Sign In →
           </button>
@@ -64,8 +64,8 @@ async function handleReset() {
 
         <!-- Form -->
         <template v-else>
-          <h2 class="text-white font-bold text-xl mb-1">Reset Password</h2>
-          <p class="text-slate-400 text-sm mb-6">Enter your new password below.</p>
+          <h2 class="text-gray-900 font-bold text-xl mb-1">Reset Password</h2>
+          <p class="text-gray-700 text-sm mb-6">Enter your new password below.</p>
 
           <div v-if="error" class="mb-4 bg-red-900/40 border border-red-700 text-red-300 text-sm rounded-xl px-4 py-3 flex gap-2">
             <span>⚠️</span><span>{{ error }}</span>
@@ -76,7 +76,7 @@ async function handleReset() {
               <label class="label">New Password</label>
               <div class="relative">
                 <input v-model="password" :type="showPass ? 'text' : 'password'" class="input pr-10" placeholder="Min 8 characters" />
-                <button type="button" @click="showPass = !showPass" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 text-sm">
+                <button type="button" @click="showPass = !showPass" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-gray-600 text-sm">
                   {{ showPass ? '🙈' : '👁️' }}
                 </button>
               </div>
@@ -91,7 +91,7 @@ async function handleReset() {
               <label class="label">Confirm Password</label>
               <div class="relative">
                 <input v-model="confirm" type="password" class="input" placeholder="Repeat password" />
-                <span v-if="confirm && password === confirm" class="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400">✓</span>
+                <span v-if="confirm && password === confirm" class="absolute right-3 top-1/2 -translate-y-1/2 text-amber-700">✓</span>
               </div>
             </div>
             <button @click="handleReset" :disabled="loading || !token" class="btn-primary w-full py-3 font-semibold disabled:opacity-50">

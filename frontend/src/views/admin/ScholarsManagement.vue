@@ -125,26 +125,26 @@ onMounted(load)
 
     <div class="flex items-start justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-white">Scholars & Reciters</h1>
-        <p class="text-slate-400 text-sm mt-1">Manage scholars and noha khuwan shown on the Tour Guide page</p>
+        <h1 class="text-2xl font-bold text-gray-900">Scholars & Reciters</h1>
+        <p class="text-gray-700 text-sm mt-1">Manage scholars and noha khuwan shown on the Tour Guide page</p>
       </div>
       <button @click="startAdd" class="btn-primary flex items-center gap-2">
         + Add Scholar
       </button>
     </div>
 
-    <div v-if="success" class="bg-green-900/50 border border-green-700 text-green-300 rounded-lg px-4 py-3 flex justify-between text-sm">
+    <div v-if="success" class="bg-green-100 border border-green-300 text-green-700 rounded-lg px-4 py-3 flex justify-between text-sm">
       {{ success }}<button @click="success=''" class="text-green-500">✕</button>
     </div>
-    <div v-if="error" class="bg-red-900/50 border border-red-700 text-red-300 rounded-lg px-4 py-3 flex justify-between text-sm">
+    <div v-if="error" class="bg-red-100 border border-red-300 text-red-600 rounded-lg px-4 py-3 flex justify-between text-sm">
       {{ error }}<button @click="error=''" class="text-red-500">✕</button>
     </div>
 
     <!-- Form -->
     <div v-if="showForm" class="card border border-primary-800">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="text-lg font-semibold text-white">{{ editingId ? 'Edit Scholar' : 'Add New Scholar / Reciter' }}</h2>
-        <button @click="cancelForm" class="text-slate-400 hover:text-white text-sm">✕ Cancel</button>
+        <h2 class="text-lg font-semibold text-gray-900">{{ editingId ? 'Edit Scholar' : 'Add New Scholar / Reciter' }}</h2>
+        <button @click="cancelForm" class="text-gray-700 hover:text-gray-900 text-sm">✕ Cancel</button>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -184,11 +184,11 @@ onMounted(load)
           <label class="label">Photo</label>
           <div class="flex gap-1 mb-2">
             <button type="button" @click="photoMode = 'url'"
-              :class="['px-3 py-1 rounded-lg text-xs font-medium transition-colors', photoMode === 'url' ? 'bg-gold-700 text-white' : 'bg-dark-700 text-slate-400 hover:text-white']">
+              :class="['px-3 py-1 rounded-lg text-xs font-medium transition-colors', photoMode === 'url' ? 'bg-gold-700 text-white' : 'bg-gray-100 text-gray-700 hover:text-gray-900']">
               🔗 Paste URL
             </button>
             <button type="button" @click="photoMode = 'upload'"
-              :class="['px-3 py-1 rounded-lg text-xs font-medium transition-colors', photoMode === 'upload' ? 'bg-gold-700 text-white' : 'bg-dark-700 text-slate-400 hover:text-white']">
+              :class="['px-3 py-1 rounded-lg text-xs font-medium transition-colors', photoMode === 'upload' ? 'bg-gold-700 text-white' : 'bg-gray-100 text-gray-700 hover:text-gray-900']">
               📁 Upload File
             </button>
           </div>
@@ -196,14 +196,14 @@ onMounted(load)
           <!-- URL paste -->
           <div v-if="photoMode === 'url'">
             <input v-model="form.photoUrl" class="input" placeholder="https://... right-click photo → Copy image address" />
-            <p class="text-xs text-slate-600 mt-1">Google the scholar → Images → right-click → Copy image address</p>
+            <p class="text-xs text-gray-700 mt-1">Google the scholar → Images → right-click → Copy image address</p>
           </div>
 
           <!-- File upload -->
           <div v-else class="space-y-2">
             <input ref="photoFileInput" type="file" accept=".jpg,.jpeg,.png,.webp" class="hidden" @change="handlePhotoUpload" />
             <button type="button" @click="photoFileInput.click()" :disabled="uploading"
-              class="w-full border-2 border-dashed border-dark-600 hover:border-gold-700 rounded-lg py-4 text-slate-400 hover:text-gold-400 transition-colors text-sm disabled:opacity-50">
+              class="w-full border-2 border-dashed border-gray-300 hover:border-gold-500 rounded-lg py-4 text-gray-700 hover:text-gold-600 transition-colors text-sm disabled:opacity-50">
               <span v-if="uploading">⏳ Uploading...</span>
               <span v-else>📁 Click to select photo (JPG/PNG/WebP, max 5MB)</span>
             </button>
@@ -212,41 +212,41 @@ onMounted(load)
         </div>
 
         <!-- Photo preview -->
-        <div v-if="form.photoUrl" class="md:col-span-2 flex items-center gap-4 bg-dark-700 rounded-lg p-3">
+        <div v-if="form.photoUrl" class="md:col-span-2 flex items-center gap-4 bg-gray-100 rounded-lg p-3">
           <img :src="form.photoUrl" alt="Photo" class="w-16 h-16 rounded-full object-cover border-2 border-gold-600" @error="e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex' }" />
           <div class="w-16 h-16 rounded-full bg-gold-900/40 border-2 border-gold-700 items-center justify-center text-gold-400 font-bold text-lg hidden">?</div>
           <div class="flex-1">
-            <p class="text-slate-400 text-sm">Photo preview — if broken, URL is invalid</p>
+            <p class="text-gray-700 text-sm">Photo preview — if broken, URL is invalid</p>
             <button type="button" @click="form.photoUrl = ''" class="text-xs text-red-400 hover:text-red-300 mt-1">✕ Remove photo</button>
           </div>
         </div>
 
         <!-- Bio -->
         <div class="md:col-span-2">
-          <label class="label">Bio <span class="text-red-400">*</span> <span class="text-slate-500 text-xs">(detailed biography — shown publicly)</span></label>
+          <label class="label">Bio <span class="text-red-400">*</span> <span class="text-gray-600 text-xs">(detailed biography — shown publicly)</span></label>
           <textarea v-model="form.bio" class="input h-32 resize-none" placeholder="Write a detailed bio about this scholar. Include their background, where they studied, what they're known for, and why pilgrims should attend their sessions..."></textarea>
-          <p class="text-xs text-slate-600 text-right mt-1">{{ form.bio.length }} chars</p>
+          <p class="text-xs text-gray-700 text-right mt-1">{{ form.bio.length }} chars</p>
         </div>
 
         <!-- Quote -->
         <div class="md:col-span-2">
-          <label class="label">Inspirational Quote <span class="text-slate-500 text-xs">(optional — shown in a highlight box)</span></label>
+          <label class="label">Inspirational Quote <span class="text-gray-600 text-xs">(optional — shown in a highlight box)</span></label>
           <input v-model="form.quote" class="input" placeholder='"A meaningful quote from this scholar about Hussain (AS), Karbala, or the spiritual journey..."' />
         </div>
 
         <!-- Tags -->
         <div>
-          <label class="label">Tags <span class="text-slate-500 text-xs">(comma-separated)</span></label>
+          <label class="label">Tags <span class="text-gray-600 text-xs">(comma-separated)</span></label>
           <input v-model="form.tags" class="input" placeholder="YouTube Lectures, English Podcast, UK Based, Youth Speaker" />
         </div>
         <div>
-          <label class="label">YouTube Search Hint <span class="text-slate-500 text-xs">(shown as "Search: ..." text)</span></label>
+          <label class="label">YouTube Search Hint <span class="text-gray-600 text-xs">(shown as "Search: ..." text)</span></label>
           <input v-model="form.youtubeSearch" class="input" placeholder="e.g. Sayyid Ali Zaidi Karbala" />
         </div>
 
         <!-- YouTube URL (direct link) -->
         <div class="md:col-span-2">
-          <label class="label">YouTube Channel / Video Link <span class="text-slate-500 text-xs">(direct clickable link)</span></label>
+          <label class="label">YouTube Channel / Video Link <span class="text-gray-600 text-xs">(direct clickable link)</span></label>
           <input v-model="form.youtubeUrl" class="input" placeholder="https://www.youtube.com/@scholarname or https://youtu.be/..." />
           <p v-if="form.youtubeUrl" class="text-xs text-green-400 mt-1">✓ YouTube link set — will show as a button on the pilgrim Tour Guide</p>
         </div>
@@ -257,7 +257,7 @@ onMounted(load)
           <input v-model="form.website" class="input" placeholder="https://..." />
         </div>
         <div>
-          <label class="label">Sort Order <span class="text-slate-500 text-xs">(lower = appears first)</span></label>
+          <label class="label">Sort Order <span class="text-gray-600 text-xs">(lower = appears first)</span></label>
           <input v-model.number="form.sortOrder" type="number" min="0" max="999" class="input" />
         </div>
 
@@ -265,19 +265,19 @@ onMounted(load)
         <div class="flex items-center gap-6">
           <label class="flex items-center gap-3 cursor-pointer">
             <div @click="form.isReciter = !form.isReciter"
-              :class="['w-11 h-6 rounded-full transition-colors relative cursor-pointer', form.isReciter ? 'bg-gold-600' : 'bg-dark-600']">
+              :class="['w-11 h-6 rounded-full transition-colors relative cursor-pointer', form.isReciter ? 'bg-gold-600' : 'bg-gray-200']">
               <span :class="['absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow', form.isReciter ? 'translate-x-5' : 'translate-x-0.5']"></span>
             </div>
-            <span class="text-slate-300 text-sm">{{ form.isReciter ? '🎤 Noha Khuwan / Reciter' : '📚 Scholar / Zakir' }}</span>
+            <span class="text-gray-600 text-sm">{{ form.isReciter ? '🎤 Noha Khuwan / Reciter' : '📚 Scholar / Zakir' }}</span>
           </label>
         </div>
         <div class="flex items-center gap-6">
           <label class="flex items-center gap-3 cursor-pointer">
             <div @click="form.isActive = !form.isActive"
-              :class="['w-11 h-6 rounded-full transition-colors relative cursor-pointer', form.isActive ? 'bg-primary-600' : 'bg-dark-600']">
+              :class="['w-11 h-6 rounded-full transition-colors relative cursor-pointer', form.isActive ? 'bg-primary-600' : 'bg-gray-200']">
               <span :class="['absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow', form.isActive ? 'translate-x-5' : 'translate-x-0.5']"></span>
             </div>
-            <span class="text-slate-300 text-sm">{{ form.isActive ? 'Active (visible publicly)' : 'Hidden' }}</span>
+            <span class="text-gray-600 text-sm">{{ form.isActive ? 'Active (visible publicly)' : 'Hidden' }}</span>
           </label>
         </div>
       </div>
@@ -291,17 +291,17 @@ onMounted(load)
     </div>
 
     <!-- List -->
-    <div v-if="loading" class="text-center py-12 text-slate-400">Loading...</div>
+    <div v-if="loading" class="text-center py-12 text-gray-700">Loading...</div>
 
     <div v-else-if="scholars.length === 0 && !showForm" class="card text-center py-12">
       <div class="text-5xl mb-3">📚</div>
-      <p class="text-white font-medium">No scholars added yet</p>
-      <p class="text-slate-400 text-sm mt-1">Click "+ Add Scholar" to add the first scholar.</p>
-      <p class="text-slate-500 text-xs mt-3">The Tour Guide page will show scholars from the database once added here.</p>
+      <p class="text-gray-900 font-medium">No scholars added yet</p>
+      <p class="text-gray-700 text-sm mt-1">Click "+ Add Scholar" to add the first scholar.</p>
+      <p class="text-gray-600 text-xs mt-3">The Tour Guide page will show scholars from the database once added here.</p>
     </div>
 
     <div v-else class="space-y-4">
-      <div class="flex gap-3 text-xs text-slate-500 px-1">
+      <div class="flex gap-3 text-xs text-gray-600 px-1">
         <span>📚 Scholars: {{ scholars.filter(s => !s.isReciter).length }}</span>
         <span>🎤 Reciters: {{ scholars.filter(s => s.isReciter).length }}</span>
         <span>✓ Active: {{ scholars.filter(s => s.isActive).length }}</span>
@@ -315,7 +315,7 @@ onMounted(load)
               class="w-16 h-16 rounded-xl object-cover border-2 border-primary-800"
               @error="e => e.target.style.display='none'" />
             <div v-else
-              class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary-700 to-primary-900 flex items-center justify-center text-xl font-bold text-white">
+              class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary-700 to-primary-900 flex items-center justify-center text-xl font-bold text-gray-900">
               {{ s.fullName.split(' ').map(n=>n[0]).slice(0,2).join('') }}
             </div>
           </div>
@@ -324,34 +324,34 @@ onMounted(load)
             <div class="flex items-start justify-between gap-2">
               <div>
                 <div class="flex items-center gap-2">
-                  <p class="font-bold text-white">{{ s.fullName }}</p>
-                  <span class="text-xs bg-dark-700 text-slate-400 px-1.5 py-0.5 rounded">{{ s.isReciter ? '🎤 Reciter' : '📚 Scholar' }}</span>
-                  <span :class="['text-xs px-1.5 py-0.5 rounded', s.language === 'English' || s.language === 'English & Urdu' ? 'bg-blue-900 text-blue-300' : 'bg-green-900 text-green-300']">{{ s.language }}</span>
-                  <span v-if="!s.isActive" class="text-xs bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">Hidden</span>
+                  <p class="font-bold text-gray-900">{{ s.fullName }}</p>
+                  <span class="text-xs bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded">{{ s.isReciter ? '🎤 Reciter' : '📚 Scholar' }}</span>
+                  <span :class="['text-xs px-1.5 py-0.5 rounded', s.language === 'English' || s.language === 'English & Urdu' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700']">{{ s.language }}</span>
+                  <span v-if="!s.isActive" class="text-xs bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded">Hidden</span>
                 </div>
-                <p class="text-primary-400 text-xs mt-0.5">{{ s.specialty }}</p>
-                <p class="text-slate-500 text-xs">📍 {{ s.location }}</p>
+                <p class="text-amber-700 text-xs mt-0.5">{{ s.specialty }}</p>
+                <p class="text-gray-600 text-xs">📍 {{ s.location }}</p>
               </div>
               <div class="flex items-center gap-2 flex-shrink-0">
-                <button @click="toggleActive(s)" :class="['text-xs px-2 py-1 rounded border', s.isActive ? 'border-slate-600 text-slate-400 hover:text-red-400' : 'border-green-800 text-green-400 hover:text-green-300']">
+                <button @click="toggleActive(s)" :class="['text-xs px-2 py-1 rounded border', s.isActive ? 'border-gray-300 text-gray-700 hover:text-red-500' : 'border-green-300 text-green-700 hover:text-green-600']">
                   {{ s.isActive ? 'Hide' : 'Show' }}
                 </button>
-                <button @click="startEdit(s)" class="text-xs px-3 py-1 rounded bg-dark-700 text-slate-300 hover:bg-dark-600 border border-dark-500">Edit</button>
-                <button @click="remove(s)" class="text-xs px-2 py-1 rounded text-red-500 hover:text-red-400 border border-red-900 hover:bg-red-950">Del</button>
+                <button @click="startEdit(s)" class="text-xs px-3 py-1 rounded bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-300">Edit</button>
+                <button @click="remove(s)" class="text-xs px-2 py-1 rounded text-red-600 hover:text-red-700 border border-red-300 hover:bg-red-50">Del</button>
               </div>
             </div>
-            <p class="text-slate-400 text-sm mt-2 line-clamp-2">{{ s.bio }}</p>
+            <p class="text-gray-700 text-sm mt-2 line-clamp-2">{{ s.bio }}</p>
             <div class="flex flex-wrap gap-1.5 mt-2">
               <a v-if="s.youtubeUrl" :href="s.youtubeUrl" target="_blank" rel="noopener"
-                class="text-xs bg-red-900/50 text-red-400 border border-red-800 px-2 py-0.5 rounded-full hover:bg-red-900 transition-colors">
+                class="text-xs bg-red-100 text-red-600 border border-red-300 px-2 py-0.5 rounded-full hover:bg-red-200 transition-colors">
                 ▶ YouTube
               </a>
               <a v-if="s.website" :href="s.website" target="_blank" rel="noopener"
-                class="text-xs bg-dark-700 text-slate-400 border border-dark-600 px-2 py-0.5 rounded-full hover:bg-dark-600 transition-colors">
+                class="text-xs bg-gray-100 text-gray-700 border border-gray-300 px-2 py-0.5 rounded-full hover:bg-gray-200 transition-colors">
                 🌐 Website
               </a>
               <span v-for="tag in (s.tags || '').split(',').map(t=>t.trim()).filter(Boolean)" :key="tag"
-                class="text-xs bg-dark-700 text-slate-500 px-2 py-0.5 rounded-full">{{ tag }}</span>
+                class="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full">{{ tag }}</span>
             </div>
           </div>
         </div>

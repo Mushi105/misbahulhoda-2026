@@ -37,7 +37,7 @@ const saving = ref(false)
 const msg = ref({ type: '', text: '' })
 
 const statusColors = {
-  Available: 'bg-emerald-900/50 text-emerald-400 border border-emerald-700',
+  Available: 'bg-emerald-900/50 text-amber-700 border border-emerald-700',
   Busy: 'bg-yellow-900/50 text-yellow-400 border border-yellow-700',
   Offline: 'bg-slate-800 text-slate-400 border border-slate-600',
   EmergencyAssigned: 'bg-red-900/50 text-red-400 border border-red-700',
@@ -246,8 +246,8 @@ function formatHour(h) {
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h1 class="text-2xl font-bold text-white">Volunteers Management</h1>
-        <p class="text-slate-400 text-sm mt-1">Assign zones, tasks, track status and performance</p>
+        <h1 class="text-2xl font-bold text-gray-900">Volunteers Management</h1>
+        <p class="text-gray-700 text-sm mt-1">Assign zones, tasks, track status and performance</p>
       </div>
       <button @click="activeTab = 'emergency'" class="btn-danger text-sm">
         🚨 Emergency Broadcast
@@ -255,7 +255,7 @@ function formatHour(h) {
     </div>
 
     <!-- Alert -->
-    <div v-if="msg.text" :class="msg.type === 'success' ? 'bg-emerald-900/50 border-emerald-700 text-emerald-300' : 'bg-red-900/50 border-red-700 text-red-300'"
+    <div v-if="msg.text" :class="msg.type === 'success' ? 'bg-green-100 border-green-300 text-green-700' : 'bg-red-100 border-red-300 text-red-600'"
       class="border rounded-lg px-4 py-3 text-sm">
       {{ msg.text }}
     </div>
@@ -263,20 +263,20 @@ function formatHour(h) {
     <!-- Stats -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
       <div class="card text-center">
-        <div class="text-3xl font-bold text-emerald-400">{{ available }}</div>
-        <div class="text-slate-400 text-sm mt-1">Available</div>
+        <div class="text-3xl font-bold text-amber-700">{{ available }}</div>
+        <div class="text-gray-700 text-sm mt-1">Available</div>
       </div>
       <div class="card text-center">
         <div class="text-3xl font-bold text-yellow-400">{{ busy }}</div>
-        <div class="text-slate-400 text-sm mt-1">Busy</div>
+        <div class="text-gray-700 text-sm mt-1">Busy</div>
       </div>
       <div class="card text-center">
         <div class="text-3xl font-bold text-red-400">{{ emergency }}</div>
-        <div class="text-slate-400 text-sm mt-1">Emergency</div>
+        <div class="text-gray-700 text-sm mt-1">Emergency</div>
       </div>
       <div class="card text-center">
         <div class="text-3xl font-bold text-slate-400">{{ offline }}</div>
-        <div class="text-slate-400 text-sm mt-1">Offline</div>
+        <div class="text-gray-700 text-sm mt-1">Offline</div>
       </div>
     </div>
 
@@ -284,7 +284,7 @@ function formatHour(h) {
     <div class="flex gap-2 flex-wrap">
       <button v-for="t in ['list', 'create', 'zones', 'emergency']" :key="t"
         @click="activeTab = t"
-        :class="activeTab === t ? 'bg-primary-700 text-white' : 'bg-dark-700 text-slate-400 hover:text-white'"
+        :class="activeTab === t ? 'bg-amber-600 text-white' : 'bg-gray-100 text-gray-600 hover:text-gray-900'"
         class="px-4 py-2 rounded-lg text-sm font-medium capitalize transition-colors">
         {{ t === 'list' ? '👥 Volunteers' : t === 'create' ? '➕ Add Volunteer' : t === 'zones' ? '🗺 Zones' : '🚨 Emergency' }}
       </button>
@@ -292,8 +292,8 @@ function formatHour(h) {
 
     <!-- TAB: Volunteer List -->
     <div v-if="activeTab === 'list'">
-      <div v-if="loading" class="card text-center text-slate-400 py-12">Loading...</div>
-      <div v-else-if="!volunteers.length" class="card text-center text-slate-400 py-12">
+      <div v-if="loading" class="card text-center text-gray-700 py-12">Loading...</div>
+      <div v-else-if="!volunteers.length" class="card text-center text-gray-700 py-12">
         No volunteers yet. Add volunteers from the "Add Volunteer" tab.
       </div>
       <div v-else class="space-y-3">
@@ -304,7 +304,7 @@ function formatHour(h) {
           <div class="flex items-center gap-2 flex-wrap">
             <button v-for="s in ['', 'Available', 'Busy', 'Offline', 'EmergencyAssigned']" :key="s"
               @click="statusFilter = s; volPage = 1"
-              :class="statusFilter === s ? 'bg-primary-700 text-white border-primary-600' : 'bg-dark-800 text-slate-400 border-dark-600 hover:border-primary-700 hover:text-white'"
+              :class="statusFilter === s ? 'bg-amber-600 text-white border-primary-600' : 'bg-gray-100 text-gray-700 border-gray-200 hover:border-primary-400 hover:text-gray-900'"
               class="px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors">
               {{ s === '' ? 'All' : s === 'EmergencyAssigned' ? '🚨 Emergency' : s === 'Available' ? '🟢 ' + s : s === 'Busy' ? '🔵 ' + s : '⚫ ' + s }}
               <span class="ml-1 opacity-70">
@@ -312,7 +312,7 @@ function formatHour(h) {
               </span>
             </button>
           </div>
-          <span class="text-slate-500 text-sm ml-auto">{{ filteredVolunteers.length }} volunteers</span>
+          <span class="text-gray-700 text-sm ml-auto">{{ filteredVolunteers.length }} volunteers</span>
         </div>
 
         <div v-for="vol in pagedVolunteers" :key="vol.id"
@@ -320,19 +320,19 @@ function formatHour(h) {
           <!-- Info -->
           <div class="flex-1">
             <div class="flex items-center gap-3 flex-wrap">
-              <div class="w-10 h-10 rounded-full bg-primary-800 flex items-center justify-center text-white font-bold text-sm shrink-0">
+              <div class="w-10 h-10 rounded-full bg-amber-700 flex items-center justify-center text-gray-900 font-bold text-sm shrink-0">
                 {{ vol.fullName?.charAt(0) }}
               </div>
               <div>
-                <p class="text-white font-semibold">{{ vol.fullName }}</p>
+                <p class="text-gray-900 font-semibold">{{ vol.fullName }}</p>
                 <div class="flex items-center gap-2 flex-wrap mt-0.5">
-                  <span class="text-slate-500 text-xs">{{ vol.email }}</span>
+                  <span class="text-gray-600 text-xs">{{ vol.email }}</span>
                   <a v-if="vol.whatsApp" :href="waLink(vol.whatsApp)" target="_blank" rel="noopener"
-                     class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-emerald-900/40 border border-emerald-700/50 text-emerald-400 hover:bg-emerald-800/50 transition-colors">
+                     class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-emerald-900/40 border border-emerald-700/50 text-amber-700 hover:bg-emerald-800/50 transition-colors">
                     💬 WhatsApp
                   </a>
                   <a v-else-if="vol.phone" :href="waLink(vol.phone)" target="_blank" rel="noopener"
-                     class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:border-emerald-700 hover:text-emerald-400 transition-colors">
+                     class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:border-emerald-700 hover:text-amber-700 transition-colors">
                     📞 {{ vol.phone }}
                   </a>
                 </div>
@@ -340,15 +340,15 @@ function formatHour(h) {
               <span :class="statusColors[vol.status] || 'bg-slate-800 text-slate-400'" class="px-2 py-0.5 rounded-full text-xs font-medium">
                 {{ vol.status }}
               </span>
-              <span v-if="vol.isCheckedIn" class="bg-emerald-900/40 text-emerald-400 border border-emerald-700 px-2 py-0.5 rounded-full text-xs">
+              <span v-if="vol.isCheckedIn" class="bg-emerald-900/40 text-amber-700 border border-emerald-700 px-2 py-0.5 rounded-full text-xs">
                 ✓ Checked In
               </span>
             </div>
-            <div class="mt-2 flex flex-wrap gap-4 text-xs text-slate-400">
-              <span>🗺 Zone: <span class="text-slate-300">{{ vol.zoneName || '—' }}</span></span>
-              <span>🔧 Skills: <span class="text-slate-300">{{ vol.skills || '—' }}</span></span>
-              <span>📋 Tasks Done: <span class="text-slate-300">{{ vol.totalTasksCompleted }}</span></span>
-              <span>📍 Area: <span class="text-slate-300">{{ vol.assignedArea || '—' }}</span></span>
+            <div class="mt-2 flex flex-wrap gap-4 text-xs text-gray-600">
+              <span>🗺 Zone: <span class="text-gray-600">{{ vol.zoneName || '—' }}</span></span>
+              <span>🔧 Skills: <span class="text-gray-600">{{ vol.skills || '—' }}</span></span>
+              <span>📋 Tasks Done: <span class="text-gray-600">{{ vol.totalTasksCompleted }}</span></span>
+              <span>📍 Area: <span class="text-gray-600">{{ vol.assignedArea || '—' }}</span></span>
             </div>
           </div>
           <!-- Actions -->
@@ -367,8 +367,8 @@ function formatHour(h) {
     <!-- TAB: Create Volunteer -->
     <div v-if="activeTab === 'create'">
       <div class="card max-w-2xl">
-        <h2 class="text-lg font-semibold text-white mb-6">Create Volunteer Profile</h2>
-        <p class="text-slate-400 text-sm mb-4">Select an existing registered user and assign them the volunteer role.</p>
+        <h2 class="text-lg font-semibold text-gray-900 mb-6">Create Volunteer Profile</h2>
+        <p class="text-gray-700 text-sm mb-4">Select an existing registered user and assign them the volunteer role.</p>
         <div class="space-y-4">
           <div>
             <label class="form-label">Select User *</label>
@@ -421,7 +421,7 @@ function formatHour(h) {
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Create Zone -->
         <div class="card">
-          <h2 class="text-lg font-semibold text-white mb-4">Create New Zone</h2>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Create New Zone</h2>
           <div class="space-y-3">
             <div class="grid grid-cols-2 gap-3">
               <div>
@@ -455,13 +455,13 @@ function formatHour(h) {
 
         <!-- Zones List -->
         <div class="card">
-          <h2 class="text-lg font-semibold text-white mb-4">All Zones ({{ zones.length }})</h2>
-          <div v-if="!zones.length" class="text-slate-400 text-sm text-center py-8">No zones yet.</div>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">All Zones ({{ zones.length }})</h2>
+          <div v-if="!zones.length" class="text-gray-700 text-sm text-center py-8">No zones yet.</div>
           <div v-else class="space-y-2 max-h-96 overflow-y-auto pr-1">
-            <div v-for="z in zones" :key="z.id" class="flex items-center justify-between bg-dark-700 rounded-lg px-4 py-3">
+            <div v-for="z in zones" :key="z.id" class="flex items-center justify-between bg-gray-100 rounded-lg px-4 py-3">
               <div>
-                <p class="text-white font-medium">{{ z.name }}</p>
-                <p class="text-slate-400 text-xs">{{ z.zoneCode }} · Max: {{ z.maxVolunteers }} · Assigned: {{ z.assignedVolunteers }}</p>
+                <p class="text-gray-900 font-medium">{{ z.name }}</p>
+                <p class="text-gray-600 text-xs">{{ z.zoneCode }} · Max: {{ z.maxVolunteers }} · Assigned: {{ z.assignedVolunteers }}</p>
               </div>
               <button @click="deleteZone(z.id)" class="text-red-400 hover:text-red-300 text-sm px-2 py-1">🗑</button>
             </div>
@@ -476,14 +476,14 @@ function formatHour(h) {
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 rounded-full bg-red-900/50 flex items-center justify-center text-2xl">🚨</div>
           <div>
-            <h2 class="text-lg font-semibold text-white">Emergency Broadcast</h2>
+            <h2 class="text-lg font-semibold text-gray-900">Emergency Broadcast</h2>
             <p class="text-red-400 text-sm">This will notify ALL active users immediately</p>
           </div>
         </div>
 
         <!-- Quick Templates -->
         <div class="mb-4">
-          <p class="text-slate-400 text-xs mb-2 uppercase tracking-wide">Quick Templates</p>
+          <p class="text-gray-600 text-xs mb-2 uppercase tracking-wide">Quick Templates</p>
           <div class="flex flex-wrap gap-2">
             <button @click="emergencyForm = { title: 'Medical Emergency', message: 'A medical emergency is in progress. All medical volunteers please report to the first aid center immediately.', sendWhatsApp: false }"
               class="btn-sm-outline border-red-700 text-red-400">🏥 Medical</button>
@@ -506,15 +506,15 @@ function formatHour(h) {
             <textarea v-model="emergencyForm.message" class="form-input" rows="4"
               placeholder="Describe the emergency situation and what actions are required..."></textarea>
           </div>
-          <div class="flex items-center gap-3 p-3 bg-dark-700 rounded-lg">
+          <div class="flex items-center gap-3 p-3 bg-gray-100 rounded-lg">
             <input type="checkbox" v-model="emergencyForm.sendWhatsApp" id="sendWA" class="w-4 h-4 accent-primary-500" />
-            <label for="sendWA" class="text-slate-300 text-sm cursor-pointer">
+            <label for="sendWA" class="text-gray-600 text-sm cursor-pointer">
               Also send WhatsApp notification to all users with WhatsApp number
               <span class="text-slate-500">(requires Twilio credentials)</span>
             </label>
           </div>
           <button @click="sendEmergency" :disabled="saving"
-            class="w-full py-3 bg-red-700 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors disabled:opacity-50">
+            class="w-full py-3 bg-red-700 hover:bg-red-600 text-gray-900 font-semibold rounded-lg transition-colors disabled:opacity-50">
             {{ saving ? 'Sending...' : '🚨 Send Emergency Alert to All Users' }}
           </button>
         </div>
@@ -524,12 +524,12 @@ function formatHour(h) {
     <!-- MODAL: Assign Task -->
     <Teleport to="body">
       <div v-if="showTaskModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-        <div class="bg-dark-800 border border-dark-600 rounded-xl w-full max-w-md p-6">
+        <div class="bg-white border border-gray-200 rounded-xl w-full max-w-md p-6">
           <div class="flex items-center justify-between mb-5">
-            <h3 class="text-white font-semibold text-lg">Assign Task</h3>
-            <button @click="showTaskModal = false" class="text-slate-400 hover:text-white text-xl leading-none">×</button>
+            <h3 class="text-gray-900 font-semibold text-lg">Assign Task</h3>
+            <button @click="showTaskModal = false" class="text-gray-600 hover:text-gray-900 text-xl leading-none">×</button>
           </div>
-          <p class="text-slate-400 text-sm mb-4">Volunteer: <span class="text-white font-medium">{{ selectedVol?.fullName }}</span></p>
+          <p class="text-gray-700 text-sm mb-4">Volunteer: <span class="text-gray-900 font-medium">{{ selectedVol?.fullName }}</span></p>
           <div class="space-y-3">
             <div>
               <label class="form-label">Task Title *</label>
@@ -571,24 +571,24 @@ function formatHour(h) {
     <!-- MODAL: Assign Zone -->
     <Teleport to="body">
       <div v-if="showZoneModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-        <div class="bg-dark-800 border border-dark-600 rounded-xl w-full max-w-sm p-6">
+        <div class="bg-white border border-gray-200 rounded-xl w-full max-w-sm p-6">
           <div class="flex items-center justify-between mb-5">
-            <h3 class="text-white font-semibold text-lg">Assign Zone</h3>
-            <button @click="showZoneModal = false" class="text-slate-400 hover:text-white text-xl leading-none">×</button>
+            <h3 class="text-gray-900 font-semibold text-lg">Assign Zone</h3>
+            <button @click="showZoneModal = false" class="text-gray-600 hover:text-gray-900 text-xl leading-none">×</button>
           </div>
-          <p class="text-slate-400 text-sm mb-4">Volunteer: <span class="text-white font-medium">{{ selectedVol?.fullName }}</span></p>
-          <div v-if="!zones.length" class="text-slate-400 text-sm text-center py-6">
+          <p class="text-gray-700 text-sm mb-4">Volunteer: <span class="text-gray-900 font-medium">{{ selectedVol?.fullName }}</span></p>
+          <div v-if="!zones.length" class="text-gray-700 text-sm text-center py-6">
             No zones available. Create zones first from the Zones tab.
           </div>
           <div v-else class="space-y-2">
             <button v-for="z in zones" :key="z.id" @click="assignZone(z.id)"
               :disabled="saving"
-              class="w-full text-left flex items-center justify-between p-3 bg-dark-700 hover:bg-dark-600 rounded-lg transition-colors disabled:opacity-50">
+              class="w-full text-left flex items-center justify-between p-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-50">
               <div>
-                <p class="text-white font-medium">{{ z.name }}</p>
-                <p class="text-slate-400 text-xs">{{ z.zoneCode }} · Capacity: {{ z.assignedVolunteers }}/{{ z.maxVolunteers }}</p>
+                <p class="text-gray-900 font-medium">{{ z.name }}</p>
+                <p class="text-gray-600 text-xs">{{ z.zoneCode }} · Capacity: {{ z.assignedVolunteers }}/{{ z.maxVolunteers }}</p>
               </div>
-              <span v-if="selectedVol?.zoneId === z.id" class="text-emerald-400 text-xs">✓ Current</span>
+              <span v-if="selectedVol?.zoneId === z.id" class="text-amber-700 text-xs">✓ Current</span>
             </button>
           </div>
           <button @click="showZoneModal = false" class="btn-outline w-full mt-4">Cancel</button>
@@ -599,60 +599,60 @@ function formatHour(h) {
     <!-- MODAL: Performance Report -->
     <Teleport to="body">
       <div v-if="showReportModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-        <div class="bg-dark-800 border border-dark-600 rounded-xl w-full max-w-md p-6">
+        <div class="bg-white border border-gray-200 rounded-xl w-full max-w-md p-6">
           <div class="flex items-center justify-between mb-5">
-            <h3 class="text-white font-semibold text-lg">Performance Report</h3>
-            <button @click="showReportModal = false" class="text-slate-400 hover:text-white text-xl leading-none">×</button>
+            <h3 class="text-gray-900 font-semibold text-lg">Performance Report</h3>
+            <button @click="showReportModal = false" class="text-gray-600 hover:text-gray-900 text-xl leading-none">×</button>
           </div>
-          <div v-if="reportLoading" class="text-center text-slate-400 py-8">Loading report...</div>
+          <div v-if="reportLoading" class="text-center text-gray-700 py-8">Loading report...</div>
           <div v-else-if="report" class="space-y-3">
             <div class="text-center mb-4">
-              <div class="w-14 h-14 rounded-full bg-primary-800 flex items-center justify-center text-white font-bold text-xl mx-auto mb-2">
+              <div class="w-14 h-14 rounded-full bg-amber-700 flex items-center justify-center text-gray-900 font-bold text-xl mx-auto mb-2">
                 {{ report.volunteerName?.charAt(0) }}
               </div>
-              <p class="text-white font-semibold">{{ report.volunteerName }}</p>
+              <p class="text-gray-900 font-semibold">{{ report.volunteerName }}</p>
               <span :class="statusColors[report.status] || 'bg-slate-800 text-slate-400'" class="px-3 py-0.5 rounded-full text-xs font-medium">
                 {{ report.status }}
               </span>
             </div>
             <div class="grid grid-cols-2 gap-3">
-              <div class="bg-dark-700 rounded-lg p-3 text-center">
-                <div class="text-2xl font-bold text-white">{{ report.totalTasks }}</div>
-                <div class="text-slate-400 text-xs mt-1">Total Tasks</div>
+              <div class="bg-gray-100 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-gray-900">{{ report.totalTasks }}</div>
+                <div class="text-gray-600 text-xs mt-1">Total Tasks</div>
               </div>
-              <div class="bg-dark-700 rounded-lg p-3 text-center">
-                <div class="text-2xl font-bold text-emerald-400">{{ report.completedTasks }}</div>
-                <div class="text-slate-400 text-xs mt-1">Completed</div>
+              <div class="bg-gray-100 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-emerald-600">{{ report.completedTasks }}</div>
+                <div class="text-gray-600 text-xs mt-1">Completed</div>
               </div>
-              <div class="bg-dark-700 rounded-lg p-3 text-center">
-                <div class="text-2xl font-bold text-yellow-400">{{ report.pendingTasks }}</div>
-                <div class="text-slate-400 text-xs mt-1">Pending</div>
+              <div class="bg-gray-100 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-yellow-600">{{ report.pendingTasks }}</div>
+                <div class="text-gray-600 text-xs mt-1">Pending</div>
               </div>
-              <div class="bg-dark-700 rounded-lg p-3 text-center">
-                <div class="text-2xl font-bold text-red-400">{{ report.emergencyTasksHandled }}</div>
-                <div class="text-slate-400 text-xs mt-1">Emergency</div>
+              <div class="bg-gray-100 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-red-500">{{ report.emergencyTasksHandled }}</div>
+                <div class="text-gray-600 text-xs mt-1">Emergency</div>
               </div>
             </div>
-            <div class="bg-dark-700 rounded-lg p-3 flex justify-between">
-              <span class="text-slate-400 text-sm">Attendance Days</span>
-              <span class="text-white font-medium">{{ report.totalAttendanceDays }}</span>
+            <div class="bg-gray-100 rounded-lg p-3 flex justify-between">
+              <span class="text-gray-700 text-sm">Attendance Days</span>
+              <span class="text-gray-900 font-medium">{{ report.totalAttendanceDays }}</span>
             </div>
-            <div class="bg-dark-700 rounded-lg p-3 flex justify-between">
-              <span class="text-slate-400 text-sm">Total Hours Worked</span>
-              <span class="text-white font-medium">{{ report.totalHoursWorked }}h</span>
+            <div class="bg-gray-100 rounded-lg p-3 flex justify-between">
+              <span class="text-gray-700 text-sm">Total Hours Worked</span>
+              <span class="text-gray-900 font-medium">{{ report.totalHoursWorked }}h</span>
             </div>
-            <div class="bg-dark-700 rounded-lg p-3 flex justify-between">
-              <span class="text-slate-400 text-sm">Area</span>
-              <span class="text-white font-medium">{{ report.assignedArea || '—' }}</span>
+            <div class="bg-gray-100 rounded-lg p-3 flex justify-between">
+              <span class="text-gray-700 text-sm">Area</span>
+              <span class="text-gray-900 font-medium">{{ report.assignedArea || '—' }}</span>
             </div>
-            <div class="bg-dark-700 rounded-lg p-3 flex justify-between">
-              <span class="text-slate-400 text-sm">Last Check-In</span>
-              <span class="text-white font-medium text-xs">{{ report.lastCheckIn ? new Date(report.lastCheckIn).toLocaleString() : '—' }}</span>
+            <div class="bg-gray-100 rounded-lg p-3 flex justify-between">
+              <span class="text-gray-700 text-sm">Last Check-In</span>
+              <span class="text-gray-900 font-medium text-xs">{{ report.lastCheckIn ? new Date(report.lastCheckIn).toLocaleString() : '—' }}</span>
             </div>
           </div>
           <a v-if="report?.phone || report?.whatsApp"
              :href="waLink(report.whatsApp || report.phone)" target="_blank" rel="noopener"
-             class="flex items-center justify-center gap-2 w-full mt-3 py-2.5 rounded-xl text-sm font-semibold text-white transition-colors"
+             class="flex items-center justify-center gap-2 w-full mt-3 py-2.5 rounded-xl text-sm font-semibold text-gray-900 transition-colors"
              style="background: rgba(37,211,102,0.2); border: 1px solid rgba(37,211,102,0.4);">
             💬 Contact on WhatsApp
           </a>

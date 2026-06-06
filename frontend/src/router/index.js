@@ -37,7 +37,9 @@ const routes = [
       { path: 'itinerary', component: () => import('@/views/admin/ItineraryAdmin.vue') },
       { path: 'tours', component: () => import('@/views/admin/TourManagement.vue') },
       { path: 'tour-tracking', component: () => import('@/views/admin/TourLiveTracking.vue') },
-      { path: 'majalis', component: () => import('@/views/admin/MajalisManagement.vue') },
+      { path: 'majalis',       component: () => import('@/views/admin/MajalisManagement.vue') },
+      { path: 'tracking',      component: () => import('@/views/tracking/TrackingView.vue') },
+      { path: 'help',          component: () => import('@/views/HelpView.vue') },
     ]
   },
 
@@ -48,13 +50,16 @@ const routes = [
     meta: { requiresAuth: true, roles: ['Pilgrim'] },
     children: [
       { path: '', redirect: '/pilgrim/portal' },
-      { path: 'portal', component: () => import('@/views/pilgrim/PilgrimPortal.vue') },
-      { path: 'profile', component: () => import('@/views/pilgrim/PilgrimProfile.vue') },
-      { path: 'guide', component: () => import('@/views/pilgrim/TourGuide.vue') },
+      { path: 'portal',    component: () => import('@/views/pilgrim/PilgrimPortal.vue') },
+      { path: 'profile',   component: () => import('@/views/pilgrim/PilgrimProfile.vue') },
+      { path: 'guide',     component: () => import('@/views/pilgrim/TourGuide.vue') },
       { path: 'documents', component: () => import('@/views/pilgrim/DocumentsView.vue') },
-      { path: 'tours', component: () => import('@/views/pilgrim/TourApply.vue') },
-      { path: 'history', component: () => import('@/views/pilgrim/TourHistory.vue') },
-      { path: 'feedback', component: () => import('@/views/pilgrim/FeedbackSubmit.vue') },
+      { path: 'tours',     component: () => import('@/views/pilgrim/TourApply.vue') },
+      { path: 'history',   component: () => import('@/views/pilgrim/TourHistory.vue') },
+      { path: 'feedback',  component: () => import('@/views/pilgrim/FeedbackSubmit.vue') },
+      { path: 'tracking',  component: () => import('@/views/tracking/TrackingView.vue') },
+      { path: 'majalis',   component: () => import('@/views/MajalisView.vue') },
+      { path: 'help',      component: () => import('@/views/HelpView.vue') },
     ]
   },
 
@@ -67,12 +72,16 @@ const routes = [
       { path: '', redirect: '/volunteer/dashboard' },
       { path: 'dashboard', component: () => import('@/views/volunteer/VolunteerDashboard.vue') },
       { path: 'documents', component: () => import('@/views/pilgrim/DocumentsView.vue') },
+      { path: 'tracking',  component: () => import('@/views/tracking/TrackingView.vue') },
+      { path: 'majalis',   component: () => import('@/views/MajalisView.vue') },
+      { path: 'help',      component: () => import('@/views/HelpView.vue') },
     ]
   },
 
-  { path: '/tracking', component: () => import('@/views/tracking/TrackingView.vue'), meta: { requiresAuth: true } },
-  { path: '/majalis', component: () => import('@/views/MajalisView.vue'), meta: { requiresAuth: true } },
-  { path: '/help', component: () => import('@/views/HelpView.vue'), meta: { requiresAuth: true } },
+  // Redirects for old bare URLs → role-prefixed versions
+  { path: '/tracking', redirect: () => { const auth = useAuthStore(); return auth.isAdmin ? '/admin/tracking' : auth.isPilgrim ? '/pilgrim/tracking' : '/volunteer/tracking' } },
+  { path: '/majalis',  redirect: () => { const auth = useAuthStore(); return auth.isAdmin ? '/admin/majalis'  : auth.isPilgrim ? '/pilgrim/majalis'  : '/volunteer/majalis'  } },
+  { path: '/help',     redirect: () => { const auth = useAuthStore(); return auth.isAdmin ? '/admin/help'     : auth.isPilgrim ? '/pilgrim/help'     : '/volunteer/help'     } },
   { path: '/:pathMatch(.*)*', component: () => import('@/views/NotFoundView.vue') },
 ]
 

@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col" style="background: linear-gradient(160deg, #020617 0%, #0f1a0a 50%, #1a1200 100%);">
+  <div class="min-h-screen flex flex-col" style="background: linear-gradient(160deg, #020617 0%, #0f1a0a 50%, #0d0d0d 100%);">
 
     <!-- Islamic pattern overlay -->
     <div class="fixed inset-0 pointer-events-none opacity-5" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(180,83,9,0.5) 30px, rgba(180,83,9,0.5) 31px), repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(180,83,9,0.3) 30px, rgba(180,83,9,0.3) 31px);"></div>
@@ -30,11 +30,11 @@ onMounted(() => {
         <div class="flex items-center gap-3">
           <!-- Logo circle -->
           <div class="w-10 h-10 rounded-full border border-gold-700/60 flex items-center justify-center"
-               style="background: radial-gradient(circle, #1a1200, #020617); box-shadow: 0 0 15px rgba(180,83,9,0.25);">
+               style="background: radial-gradient(circle, #0d0d0d, #020617); box-shadow: 0 0 15px rgba(180,83,9,0.25);">
             <MHLogo size="sm" />
           </div>
           <div>
-            <p class="text-white font-bold text-base leading-none">Misbah ul Hoda</p>
+            <p class="text-gray-900 font-bold text-base leading-none">Misbah ul Hoda</p>
             <p class="text-gold-500 text-xs tracking-wider">misbahulhoda.org · Arbaeen 2026</p>
           </div>
         </div>
@@ -53,7 +53,7 @@ onMounted(() => {
 
         <!-- Ornate logo -->
         <div class="mx-auto w-24 h-24 rounded-full border-2 border-gold-600/50 flex items-center justify-center mb-6 shadow-2xl"
-             style="background: radial-gradient(circle, #1a1200 0%, #020617 100%); box-shadow: 0 0 50px rgba(180,83,9,0.25);">
+             style="background: radial-gradient(circle, #0d0d0d 0%, #020617 100%); box-shadow: 0 0 50px rgba(180,83,9,0.25);">
           <MHLogo size="3xl" />
         </div>
 
@@ -63,7 +63,7 @@ onMounted(() => {
           <div class="h-px w-16 bg-gradient-to-l from-transparent to-gold-600"></div>
         </div>
 
-        <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-1">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-1">
           Misbah ul <span class="text-gold-400">Hoda</span>
         </h1>
         <p class="text-gold-500 text-sm tracking-widest uppercase mb-3">Ziyarat with Ma'rifat</p>
@@ -88,11 +88,11 @@ onMounted(() => {
                  style="background: rgba(180,83,9,0.2);">
               🕌
             </div>
-            <h2 class="text-xl font-bold text-white mb-2">Pilgrim Portal</h2>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            <h2 class="text-xl font-bold text-gray-900 mb-2">Pilgrim Portal</h2>
+            <p class="text-gray-700 text-sm leading-relaxed mb-4">
               Register for Arbaeen 2026, manage your family, track room & bus allocation
             </p>
-            <div class="space-y-1 text-xs text-slate-500 mb-5">
+            <div class="space-y-1 text-xs text-gray-600 mb-5">
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Family registration</p>
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Application status</p>
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Room & bus details</p>
@@ -118,11 +118,11 @@ onMounted(() => {
                  style="background: rgba(180,83,9,0.3);">
               🤝
             </div>
-            <h2 class="text-xl font-bold text-white mb-2">Volunteer Portal</h2>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            <h2 class="text-xl font-bold text-gray-900 mb-2">Volunteer Portal</h2>
+            <p class="text-gray-700 text-sm leading-relaxed mb-4">
               View tasks, manage shifts, check in/out, coordinate with your team
             </p>
-            <div class="space-y-1 text-xs text-slate-500 mb-5">
+            <div class="space-y-1 text-xs text-gray-600 mb-5">
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Task management</p>
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Attendance & check-in</p>
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Emergency assignments</p>
@@ -146,11 +146,11 @@ onMounted(() => {
                  style="background: rgba(180,83,9,0.2);">
               🛡️
             </div>
-            <h2 class="text-xl font-bold text-white mb-2">Admin Panel</h2>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            <h2 class="text-xl font-bold text-gray-900 mb-2">Admin Panel</h2>
+            <p class="text-gray-700 text-sm leading-relaxed mb-4">
               Full system control — pilgrims, volunteers, accommodation and notices
             </p>
-            <div class="space-y-1 text-xs text-slate-500 mb-5">
+            <div class="space-y-1 text-xs text-gray-600 mb-5">
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Pilgrim approvals</p>
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Room & bus allocation</p>
               <p class="flex items-center gap-1.5"><span class="text-gold-500">✦</span> Notice board</p>

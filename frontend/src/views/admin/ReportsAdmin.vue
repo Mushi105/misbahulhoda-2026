@@ -256,38 +256,38 @@ onMounted(load)
     <!-- Header -->
     <div class="flex items-center justify-between flex-wrap gap-3">
       <div>
-        <h1 class="text-2xl font-bold text-white">Reports</h1>
-        <p class="text-slate-400 text-sm mt-0.5">System statistics and data exports</p>
+        <h1 class="text-2xl font-bold text-gray-900">Reports</h1>
+        <p class="text-gray-700 text-sm mt-0.5">System statistics and data exports</p>
       </div>
       <div class="flex gap-2 flex-wrap">
         <button @click="exportSummaryPdf" :disabled="!summary || exporting === 'summary_pdf'"
-                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-800/60 text-red-400 hover:bg-red-950/40 transition-colors disabled:opacity-50">
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-300 text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50">
           {{ exporting === 'summary_pdf' ? '⏳ Generating...' : '📄 Summary PDF' }}
         </button>
         <button @click="exportExcel('pilgrims')" :disabled="exporting === 'pilgrims_excel'"
-                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-800/60 text-emerald-400 hover:bg-emerald-950/40 transition-colors disabled:opacity-50">
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-300 text-amber-700 hover:bg-amber-50 transition-colors disabled:opacity-50">
           {{ exporting === 'pilgrims_excel' ? '⏳ Exporting...' : '📊 Pilgrims Excel' }}
         </button>
         <button @click="exportPdf('pilgrims')" :disabled="exporting === 'pilgrims_pdf'"
-                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-800/60 text-red-400 hover:bg-red-950/40 transition-colors disabled:opacity-50">
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-300 text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50">
           {{ exporting === 'pilgrims_pdf' ? '⏳ Generating...' : '📄 Pilgrims PDF' }}
         </button>
         <button @click="exportExcel('volunteers')" :disabled="exporting === 'volunteers_excel'"
-                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-800/60 text-emerald-400 hover:bg-emerald-950/40 transition-colors disabled:opacity-50">
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-emerald-300 text-amber-700 hover:bg-amber-50 transition-colors disabled:opacity-50">
           {{ exporting === 'volunteers_excel' ? '⏳ Exporting...' : '📊 Volunteers Excel' }}
         </button>
         <button @click="exportPdf('volunteers')" :disabled="exporting === 'volunteers_pdf'"
-                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-800/60 text-red-400 hover:bg-red-950/40 transition-colors disabled:opacity-50">
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-red-300 text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50">
           {{ exporting === 'volunteers_pdf' ? '⏳ Generating...' : '📄 Volunteers PDF' }}
         </button>
       </div>
     </div>
 
-    <div v-if="error" class="bg-red-900/50 border border-red-700 text-red-300 rounded-lg px-4 py-3 text-sm flex justify-between">
+    <div v-if="error" class="bg-red-100 border border-red-300 text-red-600 rounded-lg px-4 py-3 text-sm flex justify-between">
       {{ error }}<button @click="error=''" class="opacity-60 hover:opacity-100">✕</button>
     </div>
 
-    <div v-if="loading" class="card text-center py-16 text-slate-400">Loading report data...</div>
+    <div v-if="loading" class="card text-center py-16 text-gray-700">Loading report data...</div>
 
     <template v-else-if="summary">
 
@@ -295,90 +295,90 @@ onMounted(load)
       <div>
         <h2 class="text-sm font-semibold text-gold-500 uppercase tracking-wider mb-3">Pilgrim Applications</h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <div class="card text-center py-4 border border-dark-600">
-            <div class="text-3xl font-bold text-white">{{ summary.pilgrims.total }}</div>
-            <div class="text-xs text-slate-400 mt-1">Total Registered</div>
+          <div class="card text-center py-4 border border-gray-200">
+            <div class="text-3xl font-bold text-gray-900">{{ summary.pilgrims.total }}</div>
+            <div class="text-xs text-gray-600 mt-1">Total Registered</div>
           </div>
-          <div class="card text-center py-4 border border-gold-900/50">
-            <div class="text-3xl font-bold text-gold-400">{{ summary.pilgrims.pending }}</div>
-            <div class="text-xs text-slate-400 mt-1">⏳ Pending</div>
+          <div class="card text-center py-4 border border-amber-200">
+            <div class="text-3xl font-bold text-amber-600">{{ summary.pilgrims.pending }}</div>
+            <div class="text-xs text-gray-600 mt-1">⏳ Pending</div>
           </div>
-          <div class="card text-center py-4 border border-blue-900/50">
-            <div class="text-3xl font-bold text-blue-400">{{ summary.pilgrims.underReview }}</div>
-            <div class="text-xs text-slate-400 mt-1">🔍 Under Review</div>
+          <div class="card text-center py-4 border border-blue-200">
+            <div class="text-3xl font-bold text-blue-600">{{ summary.pilgrims.underReview }}</div>
+            <div class="text-xs text-gray-600 mt-1">🔍 Under Review</div>
           </div>
-          <div class="card text-center py-4 border border-emerald-900/50">
-            <div class="text-3xl font-bold text-emerald-400">{{ summary.pilgrims.approved }}</div>
-            <div class="text-xs text-slate-400 mt-1">✅ Approved</div>
+          <div class="card text-center py-4 border border-emerald-200">
+            <div class="text-3xl font-bold text-amber-700">{{ summary.pilgrims.approved }}</div>
+            <div class="text-xs text-gray-600 mt-1">✅ Approved</div>
           </div>
-          <div class="card text-center py-4 border border-red-900/50">
-            <div class="text-3xl font-bold text-red-400">{{ summary.pilgrims.rejected }}</div>
-            <div class="text-xs text-slate-400 mt-1">❌ Rejected</div>
+          <div class="card text-center py-4 border border-red-200">
+            <div class="text-3xl font-bold text-red-500">{{ summary.pilgrims.rejected }}</div>
+            <div class="text-xs text-gray-600 mt-1">❌ Rejected</div>
           </div>
         </div>
       </div>
 
       <!-- ── Room & Bus Allocation ───────────────────── -->
       <div class="grid sm:grid-cols-2 gap-4">
-        <div class="card border border-dark-600">
-          <h3 class="text-sm font-semibold text-white mb-4">🏨 Room Allocation</h3>
+        <div class="card border border-gray-200">
+          <h3 class="text-sm font-semibold text-gray-900 mb-4">🏨 Room Allocation</h3>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="text-slate-400 text-sm">Allocated</span>
-              <span class="text-emerald-400 font-bold text-lg">{{ summary.pilgrims.withRoom }}</span>
+              <span class="text-gray-700 text-sm">Allocated</span>
+              <span class="text-amber-700 font-bold text-lg">{{ summary.pilgrims.withRoom }}</span>
             </div>
-            <div class="w-full bg-dark-700 rounded-full h-2.5">
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
               <div class="bg-emerald-500 h-2.5 rounded-full transition-all"
                    :style="`width: ${summary.pilgrims.total ? Math.round(summary.pilgrims.withRoom / summary.pilgrims.total * 100) : 0}%`"></div>
             </div>
-            <div class="flex justify-between text-xs text-slate-500">
+            <div class="flex justify-between text-xs text-gray-600">
               <span>Without Room: {{ summary.pilgrims.withoutRoom }}</span>
               <span>{{ summary.pilgrims.total ? Math.round(summary.pilgrims.withRoom / summary.pilgrims.total * 100) : 0 }}%</span>
             </div>
-            <div class="pt-2 border-t border-dark-700 grid grid-cols-3 gap-2 text-center">
+            <div class="pt-2 border-t border-gray-200 grid grid-cols-3 gap-2 text-center">
               <div>
-                <div class="text-white font-semibold">{{ summary.accommodation.totalRooms }}</div>
-                <div class="text-xs text-slate-500">Total Rooms</div>
+                <div class="text-gray-900 font-semibold">{{ summary.accommodation.totalRooms }}</div>
+                <div class="text-xs text-gray-600">Total Rooms</div>
               </div>
               <div>
-                <div class="text-emerald-400 font-semibold">{{ summary.accommodation.availableRooms }}</div>
-                <div class="text-xs text-slate-500">Available</div>
+                <div class="text-amber-700 font-semibold">{{ summary.accommodation.availableRooms }}</div>
+                <div class="text-xs text-gray-600">Available</div>
               </div>
               <div>
-                <div class="text-red-400 font-semibold">{{ summary.accommodation.occupiedRooms }}</div>
-                <div class="text-xs text-slate-500">Occupied</div>
+                <div class="text-red-500 font-semibold">{{ summary.accommodation.occupiedRooms }}</div>
+                <div class="text-xs text-gray-600">Occupied</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card border border-dark-600">
-          <h3 class="text-sm font-semibold text-white mb-4">🚌 Bus Allocation</h3>
+        <div class="card border border-gray-200">
+          <h3 class="text-sm font-semibold text-gray-900 mb-4">🚌 Bus Allocation</h3>
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="text-slate-400 text-sm">Allocated</span>
-              <span class="text-blue-400 font-bold text-lg">{{ summary.pilgrims.withBus }}</span>
+              <span class="text-gray-700 text-sm">Allocated</span>
+              <span class="text-blue-600 font-bold text-lg">{{ summary.pilgrims.withBus }}</span>
             </div>
-            <div class="w-full bg-dark-700 rounded-full h-2.5">
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
               <div class="bg-blue-500 h-2.5 rounded-full transition-all"
                    :style="`width: ${summary.pilgrims.total ? Math.round(summary.pilgrims.withBus / summary.pilgrims.total * 100) : 0}%`"></div>
             </div>
-            <div class="flex justify-between text-xs text-slate-500">
+            <div class="flex justify-between text-xs text-gray-600">
               <span>Without Bus: {{ summary.pilgrims.withoutBus }}</span>
               <span>{{ summary.pilgrims.total ? Math.round(summary.pilgrims.withBus / summary.pilgrims.total * 100) : 0 }}%</span>
             </div>
-            <div class="pt-2 border-t border-dark-700 grid grid-cols-3 gap-2 text-center">
+            <div class="pt-2 border-t border-gray-200 grid grid-cols-3 gap-2 text-center">
               <div>
-                <div class="text-white font-semibold">{{ summary.transport.totalBuses }}</div>
-                <div class="text-xs text-slate-500">Total Buses</div>
+                <div class="text-gray-900 font-semibold">{{ summary.transport.totalBuses }}</div>
+                <div class="text-xs text-gray-600">Total Buses</div>
               </div>
               <div>
-                <div class="text-emerald-400 font-semibold">{{ summary.transport.totalCapacity }}</div>
-                <div class="text-xs text-slate-500">Capacity</div>
+                <div class="text-amber-700 font-semibold">{{ summary.transport.totalCapacity }}</div>
+                <div class="text-xs text-gray-600">Capacity</div>
               </div>
               <div>
-                <div class="text-gold-400 font-semibold">{{ summary.transport.totalPassengers }}</div>
-                <div class="text-xs text-slate-500">Passengers</div>
+                <div class="text-amber-600 font-semibold">{{ summary.transport.totalPassengers }}</div>
+                <div class="text-xs text-gray-600">Passengers</div>
               </div>
             </div>
           </div>
@@ -389,29 +389,29 @@ onMounted(load)
       <div>
         <h2 class="text-sm font-semibold text-gold-500 uppercase tracking-wider mb-3">Volunteers</h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <div class="card text-center py-4 border border-dark-600">
-            <div class="text-3xl font-bold text-white">{{ summary.volunteers.total }}</div>
-            <div class="text-xs text-slate-400 mt-1">Total</div>
+          <div class="card text-center py-4 border border-gray-200">
+            <div class="text-3xl font-bold text-gray-900">{{ summary.volunteers.total }}</div>
+            <div class="text-xs text-gray-600 mt-1">Total</div>
           </div>
-          <div class="card text-center py-4 border border-emerald-900/50">
-            <div class="text-3xl font-bold text-emerald-400">{{ summary.volunteers.available }}</div>
-            <div class="text-xs text-slate-400 mt-1">Available</div>
+          <div class="card text-center py-4 border border-emerald-200">
+            <div class="text-3xl font-bold text-amber-700">{{ summary.volunteers.available }}</div>
+            <div class="text-xs text-gray-600 mt-1">Available</div>
           </div>
-          <div class="card text-center py-4 border border-gold-900/50">
-            <div class="text-3xl font-bold text-gold-400">{{ summary.volunteers.busy }}</div>
-            <div class="text-xs text-slate-400 mt-1">Busy</div>
+          <div class="card text-center py-4 border border-amber-200">
+            <div class="text-3xl font-bold text-amber-600">{{ summary.volunteers.busy }}</div>
+            <div class="text-xs text-gray-600 mt-1">Busy</div>
           </div>
-          <div class="card text-center py-4 border border-slate-700">
-            <div class="text-3xl font-bold text-slate-400">{{ summary.volunteers.offline }}</div>
-            <div class="text-xs text-slate-400 mt-1">Offline</div>
+          <div class="card text-center py-4 border border-gray-200">
+            <div class="text-3xl font-bold text-gray-600">{{ summary.volunteers.offline }}</div>
+            <div class="text-xs text-gray-600 mt-1">Offline</div>
           </div>
-          <div class="card text-center py-4 border border-red-900/50">
-            <div class="text-3xl font-bold text-red-400">{{ summary.volunteers.emergencyAssigned }}</div>
-            <div class="text-xs text-slate-400 mt-1">Emergency</div>
+          <div class="card text-center py-4 border border-red-200">
+            <div class="text-3xl font-bold text-red-500">{{ summary.volunteers.emergencyAssigned }}</div>
+            <div class="text-xs text-gray-600 mt-1">Emergency</div>
           </div>
-          <div class="card text-center py-4 border border-blue-900/50">
-            <div class="text-3xl font-bold text-blue-400">{{ summary.volunteers.checkedIn }}</div>
-            <div class="text-xs text-slate-400 mt-1">Checked In</div>
+          <div class="card text-center py-4 border border-blue-200">
+            <div class="text-3xl font-bold text-blue-600">{{ summary.volunteers.checkedIn }}</div>
+            <div class="text-xs text-gray-600 mt-1">Checked In</div>
           </div>
         </div>
       </div>
@@ -419,82 +419,82 @@ onMounted(load)
       <!-- ── Users by Role + Top Countries ─────────────── -->
       <div class="grid sm:grid-cols-2 gap-4">
 
-        <div class="card border border-dark-600">
-          <h3 class="text-sm font-semibold text-white mb-4">👥 Users by Role</h3>
+        <div class="card border border-gray-200">
+          <h3 class="text-sm font-semibold text-gray-900 mb-4">👥 Users by Role</h3>
           <div class="space-y-2">
             <div v-for="(count, role) in summary.users.byRole" :key="role"
-                 class="flex items-center justify-between py-1.5 border-b border-dark-700 last:border-0">
-              <span class="text-slate-300 text-sm capitalize">{{ role.replace(/([A-Z])/g, ' $1').trim() }}</span>
-              <span class="font-bold text-white text-sm">{{ count }}</span>
+                 class="flex items-center justify-between py-1.5 border-b border-gray-200 last:border-0">
+              <span class="text-gray-600 text-sm capitalize">{{ role.replace(/([A-Z])/g, ' $1').trim() }}</span>
+              <span class="font-bold text-gray-900 text-sm">{{ count }}</span>
             </div>
             <div class="flex items-center justify-between pt-2">
-              <span class="text-gold-400 text-sm font-semibold">Total</span>
-              <span class="font-bold text-gold-400">{{ summary.users.total }}</span>
+              <span class="text-amber-700 text-sm font-semibold">Total</span>
+              <span class="font-bold text-amber-700">{{ summary.users.total }}</span>
             </div>
           </div>
         </div>
 
-        <div class="card border border-dark-600">
-          <h3 class="text-sm font-semibold text-white mb-4">🌍 Top Countries (Pilgrims)</h3>
-          <div v-if="!summary.pilgrims.byCountry?.length" class="text-slate-500 text-sm text-center py-6">No data yet</div>
+        <div class="card border border-gray-200">
+          <h3 class="text-sm font-semibold text-gray-900 mb-4">🌍 Top Countries (Pilgrims)</h3>
+          <div v-if="!summary.pilgrims.byCountry?.length" class="text-gray-700 text-sm text-center py-6">No data yet</div>
           <div class="space-y-2">
             <div v-for="item in summary.pilgrims.byCountry" :key="item.country"
                  class="flex items-center gap-3">
-              <span class="text-slate-300 text-sm flex-1 truncate">{{ item.country }}</span>
-              <div class="flex-1 bg-dark-700 rounded-full h-1.5">
-                <div class="bg-gold-600 h-1.5 rounded-full"
+              <span class="text-gray-600 text-sm flex-1 truncate">{{ item.country }}</span>
+              <div class="flex-1 bg-gray-200 rounded-full h-1.5">
+                <div class="bg-amber-500 h-1.5 rounded-full"
                      :style="`width: ${summary.pilgrims.total ? Math.round(item.count / summary.pilgrims.total * 100) : 0}%`"></div>
               </div>
-              <span class="text-white font-bold text-sm w-6 text-right">{{ item.count }}</span>
+              <span class="text-gray-900 font-bold text-sm w-6 text-right">{{ item.count }}</span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- ── Accommodation Summary ───────────────────── -->
-      <div class="card border border-dark-600">
-        <h3 class="text-sm font-semibold text-white mb-4">🏨 Accommodation Overview</h3>
+      <div class="card border border-gray-200">
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">🏨 Accommodation Overview</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
           <div>
-            <div class="text-2xl font-bold text-white">{{ summary.accommodation.totalRooms }}</div>
-            <div class="text-xs text-slate-400 mt-1">Total Rooms</div>
+            <div class="text-2xl font-bold text-gray-900">{{ summary.accommodation.totalRooms }}</div>
+            <div class="text-xs text-gray-600 mt-1">Total Rooms</div>
           </div>
           <div>
-            <div class="text-2xl font-bold text-emerald-400">{{ summary.accommodation.availableRooms }}</div>
-            <div class="text-xs text-slate-400 mt-1">Available</div>
+            <div class="text-2xl font-bold text-amber-700">{{ summary.accommodation.availableRooms }}</div>
+            <div class="text-xs text-gray-600 mt-1">Available</div>
           </div>
           <div>
-            <div class="text-2xl font-bold text-red-400">{{ summary.accommodation.occupiedRooms }}</div>
-            <div class="text-xs text-slate-400 mt-1">Occupied</div>
+            <div class="text-2xl font-bold text-red-500">{{ summary.accommodation.occupiedRooms }}</div>
+            <div class="text-xs text-gray-600 mt-1">Occupied</div>
           </div>
           <div>
-            <div class="text-2xl font-bold text-blue-400">{{ summary.accommodation.totalBeds }}</div>
-            <div class="text-xs text-slate-400 mt-1">Total Beds</div>
+            <div class="text-2xl font-bold text-blue-600">{{ summary.accommodation.totalBeds }}</div>
+            <div class="text-xs text-gray-600 mt-1">Total Beds</div>
           </div>
           <div>
-            <div class="text-2xl font-bold text-gold-400">{{ summary.accommodation.occupiedBeds }}</div>
-            <div class="text-xs text-slate-400 mt-1">Occupied Beds</div>
+            <div class="text-2xl font-bold text-amber-600">{{ summary.accommodation.occupiedBeds }}</div>
+            <div class="text-xs text-gray-600 mt-1">Occupied Beds</div>
           </div>
           <div>
-            <div class="text-2xl font-bold text-purple-400">{{ summary.accommodation.occupancyRate }}%</div>
-            <div class="text-xs text-slate-400 mt-1">Occupancy</div>
+            <div class="text-2xl font-bold text-purple-600">{{ summary.accommodation.occupancyRate }}%</div>
+            <div class="text-xs text-gray-600 mt-1">Occupancy</div>
           </div>
         </div>
         <div class="mt-4">
-          <div class="flex justify-between text-xs text-slate-500 mb-1">
+          <div class="flex justify-between text-xs text-gray-600 mb-1">
             <span>Room Occupancy</span>
             <span>{{ summary.accommodation.occupancyRate }}%</span>
           </div>
-          <div class="w-full bg-dark-700 rounded-full h-3">
+          <div class="w-full bg-gray-200 rounded-full h-3">
             <div class="h-3 rounded-full transition-all"
-                 :class="summary.accommodation.occupancyRate > 80 ? 'bg-red-500' : summary.accommodation.occupancyRate > 50 ? 'bg-gold-500' : 'bg-emerald-500'"
+                 :class="summary.accommodation.occupancyRate > 80 ? 'bg-red-500' : summary.accommodation.occupancyRate > 50 ? 'bg-amber-500' : 'bg-emerald-500'"
                  :style="`width: ${summary.accommodation.occupancyRate}%`"></div>
           </div>
         </div>
       </div>
 
       <!-- ── Generated At ────────────────────────────── -->
-      <p class="text-xs text-slate-600 text-center">
+      <p class="text-xs text-gray-700 text-center">
         Report generated at {{ new Date(summary.generatedAt).toLocaleString('en-GB') }} UTC
       </p>
 

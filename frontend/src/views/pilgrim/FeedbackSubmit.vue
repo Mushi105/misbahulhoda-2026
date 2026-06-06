@@ -31,7 +31,7 @@ function setHover(field, val) { hoverRatings.value[field] = val }
 function clearHover(field) { hoverRatings.value[field] = 0 }
 function starClass(field, i, ratingKey) {
   const active = hoverRatings.value[ratingKey] || form.value[field]
-  return i <= active ? 'text-gold-400' : 'text-slate-700'
+  return i <= active ? 'text-amber-500' : 'text-gray-300'
 }
 
 async function submit() {
@@ -53,9 +53,9 @@ if (!tourId) router.replace('/pilgrim/history')
 
     <div v-if="submitted" class="text-center py-16">
       <div class="text-6xl mb-4">🌹</div>
-      <h2 class="text-2xl font-bold text-white mb-2">JazakAllah Khair!</h2>
-      <p class="text-slate-400 mb-2">Thank you for your valuable feedback.</p>
-      <p class="text-slate-500 text-sm mb-8">Your input helps us serve pilgrims better in future tours.</p>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">JazakAllah Khair!</h2>
+      <p class="text-gray-700 mb-2">Thank you for your valuable feedback.</p>
+      <p class="text-gray-600 text-sm mb-8">Your input helps us serve pilgrims better in future tours.</p>
       <div class="flex justify-center gap-4">
         <button @click="router.push('/pilgrim/history')" class="btn-gold">View My History</button>
         <button @click="router.push('/pilgrim/portal')" class="btn-ghost">Back to Portal</button>
@@ -64,21 +64,21 @@ if (!tourId) router.replace('/pilgrim/history')
 
     <div v-else>
       <div class="mb-6">
-        <button @click="router.push('/pilgrim/history')" class="flex items-center gap-2 text-slate-400 hover:text-white mb-4">
+        <button @click="router.push('/pilgrim/history')" class="flex items-center gap-2 text-gray-700 hover:text-gray-900 mb-4">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
           </svg>
           Back
         </button>
-        <h2 class="text-2xl font-bold text-white">Tour Feedback</h2>
-        <p class="text-slate-400 text-sm mt-1">Your honest feedback helps us improve</p>
+        <h2 class="text-2xl font-bold text-gray-900">Tour Feedback</h2>
+        <p class="text-gray-700 text-sm mt-1">Your honest feedback helps us improve</p>
       </div>
 
       <div class="space-y-5">
 
         <!-- Overall Rating (required) -->
         <div class="card">
-          <h3 class="text-white font-medium mb-3">Overall Experience <span class="text-red-400">*</span></h3>
+          <h3 class="text-gray-900 font-medium mb-3">Overall Experience <span class="text-red-500">*</span></h3>
           <div class="flex gap-2">
             <button v-for="i in 5" :key="i"
               @click="setRating('overallRating', i)"
@@ -87,14 +87,14 @@ if (!tourId) router.replace('/pilgrim/history')
               ★
             </button>
           </div>
-          <p class="text-slate-500 text-xs mt-2">
+          <p class="text-gray-600 text-xs mt-2">
             {{ ['', 'Very Poor', 'Poor', 'Average', 'Good', 'Excellent'][form.overallRating] || 'Click to rate' }}
           </p>
         </div>
 
         <!-- Sub-ratings -->
         <div class="card">
-          <h3 class="text-white font-medium mb-4">Detailed Ratings <span class="text-slate-500 text-xs font-normal">(optional)</span></h3>
+          <h3 class="text-gray-900 font-medium mb-4">Detailed Ratings <span class="text-gray-600 text-xs font-normal">(optional)</span></h3>
           <div class="space-y-4">
             <div v-for="({label, field, hover}) in [
               {label: 'Hotel & Accommodation', field: 'hotelRating', hover: 'hotel'},
@@ -103,7 +103,7 @@ if (!tourId) router.replace('/pilgrim/history')
               {label: 'Food Quality', field: 'foodRating', hover: 'food'},
             ]" :key="field">
               <div class="flex items-center justify-between">
-                <span class="text-slate-300 text-sm">{{ label }}</span>
+                <span class="text-gray-600 text-sm">{{ label }}</span>
                 <div class="flex gap-1.5">
                   <button v-for="i in 5" :key="i"
                     @click="setRating(field, i)"
@@ -119,7 +119,7 @@ if (!tourId) router.replace('/pilgrim/history')
 
         <!-- Comment -->
         <div class="card">
-          <h3 class="text-white font-medium mb-3">Your Comments</h3>
+          <h3 class="text-gray-900 font-medium mb-3">Your Comments</h3>
           <div class="space-y-3">
             <div>
               <label class="label">What did you enjoy most?</label>
@@ -136,22 +136,22 @@ if (!tourId) router.replace('/pilgrim/history')
 
         <!-- Recommend & Return -->
         <div class="card">
-          <h3 class="text-white font-medium mb-4">Would you...</h3>
+          <h3 class="text-gray-900 font-medium mb-4">Would you...</h3>
           <div class="space-y-3">
             <label class="flex items-center gap-3 cursor-pointer">
               <input type="checkbox" v-model="form.wouldRecommend" class="w-5 h-5 rounded" />
-              <span class="text-slate-300">Recommend this tour to family & friends?</span>
+              <span class="text-gray-700">Recommend this tour to family & friends?</span>
             </label>
             <label class="flex items-center gap-3 cursor-pointer">
               <input type="checkbox" v-model="form.wouldReturn" class="w-5 h-5 rounded" />
-              <span class="text-slate-300">Join us again for a future tour?</span>
+              <span class="text-gray-700">Join us again for a future tour?</span>
             </label>
           </div>
         </div>
 
         <!-- Next year preference -->
         <div class="card">
-          <h3 class="text-white font-medium mb-2">Next Year</h3>
+          <h3 class="text-gray-900 font-medium mb-2">Next Year</h3>
           <label class="label">Which package would you prefer next year?</label>
           <input v-model="form.preferredPackageNextYear" class="input"
             placeholder="e.g. VIP Package, Economy, Premium..." />

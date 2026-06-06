@@ -18,7 +18,7 @@ const PROGRAM_TYPE_COLORS = {
   Hadith:   'text-amber-400',
   Marsiya:  'text-pink-400',
   Salam:    'text-blue-400',
-  Noha:     'text-emerald-400',
+  Noha:     'text-amber-700',
   Closing:  'text-purple-300',
   Break:    'text-slate-400',
 }
@@ -56,25 +56,25 @@ onMounted(load)
 
 <template>
   <div class="space-y-6">
-    <h1 class="text-2xl font-bold text-white">📿 Majalis & Schedule</h1>
+    <h1 class="text-2xl font-bold text-gray-900">📿 Majalis & Schedule</h1>
 
     <!-- Tabs -->
-    <div class="flex gap-2 border-b border-dark-700 pb-0">
+    <div class="flex gap-2 border-b border-gray-200 pb-0">
       <button v-for="tab in ['majalis', 'namaz', 'food']" :key="tab"
         @click="activeTab = tab"
-        :class="['px-4 py-2 text-sm font-medium rounded-t-lg transition-colors capitalize', activeTab === tab ? 'bg-dark-800 text-primary-400 border border-b-0 border-dark-700' : 'text-slate-400 hover:text-white']">
+        :class="['px-4 py-2 text-sm font-medium rounded-t-lg transition-colors capitalize', activeTab === tab ? 'bg-gray-100 text-amber-700 border border-b-0 border-gray-200' : 'text-gray-700 hover:text-gray-900']">
         {{ tab === 'namaz' ? '🕌 Namaz Timings' : tab === 'food' ? '🍽️ Food Schedule' : '📿 Majalis' }}
       </button>
     </div>
 
-    <div v-if="loading" class="text-slate-400 text-center py-8">Loading...</div>
+    <div v-if="loading" class="text-gray-700 text-center py-8">Loading...</div>
 
     <!-- Majalis -->
     <div v-else-if="activeTab === 'majalis'" class="space-y-4">
-      <div v-if="!majalis.length" class="text-slate-400 text-center py-8">No Majalis schedule found.</div>
+      <div v-if="!majalis.length" class="text-gray-700 text-center py-8">No Majalis schedule found.</div>
       <div v-for="m in majalis" :key="m.id"
-           class="rounded-xl overflow-hidden border border-dark-700"
-           style="background:rgba(15,7,36,0.8);">
+           class="rounded-xl overflow-hidden border border-gray-200"
+           style="background:#ffffff;">
 
         <!-- Scholar Image -->
         <div v-if="m.imageUrl" class="relative">
@@ -104,34 +104,34 @@ onMounted(load)
             </span>
           </div>
 
-          <p class="text-white font-bold text-lg leading-tight">{{ m.title }}</p>
+          <p class="text-gray-900 font-bold text-lg leading-tight">{{ m.title }}</p>
 
           <!-- Scholar & Noha Khuwan -->
           <div class="mt-2 space-y-1">
             <div v-if="m.molanaName" class="flex items-center gap-2">
               <span class="text-purple-400 text-lg">🎓</span>
               <div>
-                <p class="text-xs text-slate-400">Molana / Scholar</p>
+                <p class="text-xs text-gray-600">Molana / Scholar</p>
                 <p class="text-gold-300 font-semibold text-sm">{{ m.molanaName }}</p>
               </div>
             </div>
             <div v-if="m.nohaKhuwanName" class="flex items-center gap-2 mt-1">
               <span class="text-blue-400 text-lg">🎵</span>
               <div>
-                <p class="text-xs text-slate-400">Noha Khuwaan</p>
+                <p class="text-xs text-gray-600">Noha Khuwaan</p>
                 <p class="text-blue-300 font-semibold text-sm">{{ m.nohaKhuwanName }}</p>
               </div>
             </div>
           </div>
 
           <!-- Venue -->
-          <div class="mt-3 flex items-center gap-2 text-sm text-slate-400">
+          <div class="mt-3 flex items-center gap-2 text-sm text-gray-700">
             <span>📍</span>
             <span>{{ m.venue }}</span>
           </div>
 
           <!-- Description -->
-          <p v-if="m.description" class="mt-2 text-slate-400 text-sm border-t border-dark-700 pt-2">
+          <p v-if="m.description" class="mt-2 text-gray-700 text-sm border-t border-gray-200 pt-2">
             {{ m.description }}
           </p>
 
@@ -143,7 +143,7 @@ onMounted(load)
                  class="flex items-center gap-3">
               <!-- Time & connector line -->
               <div class="flex flex-col items-center shrink-0" style="width:48px;">
-                <p class="text-white text-xs font-bold">{{ item.time || '—' }}</p>
+                <p class="text-gray-900 text-xs font-bold">{{ item.time || '—' }}</p>
                 <div v-if="idx < programs[m.id].length - 1"
                      class="w-px flex-1 mt-1" style="min-height:20px; background:rgba(124,58,237,0.3);"></div>
               </div>
@@ -166,10 +166,10 @@ onMounted(load)
                     {{ PROGRAM_TYPE_ICONS[item.type] }} {{ item.type }}
                   </span>
                 </div>
-                <p v-if="item.performerName" class="text-white text-sm font-semibold leading-tight">
+                <p v-if="item.performerName" class="text-gray-900 text-sm font-semibold leading-tight">
                   {{ item.performerName }}
                 </p>
-                <p v-if="item.description" class="text-slate-500 text-xs mt-0.5">{{ item.description }}</p>
+                <p v-if="item.description" class="text-gray-600 text-xs mt-0.5">{{ item.description }}</p>
               </div>
             </div>
           </div>
@@ -179,34 +179,34 @@ onMounted(load)
 
     <!-- Namaz Timings -->
     <div v-else-if="activeTab === 'namaz'" class="space-y-2">
-      <div v-if="!namazTimings.length" class="text-slate-400 text-center py-8">No timings for today.</div>
+      <div v-if="!namazTimings.length" class="text-gray-700 text-center py-8">No timings for today.</div>
       <div v-for="t in namazTimings" :key="t.id" class="card flex items-center justify-between py-3">
         <div class="flex items-center gap-3">
           <span class="text-2xl">🕌</span>
-          <p class="text-white font-medium">{{ t.prayerName }}</p>
+          <p class="text-gray-900 font-medium">{{ t.prayerName }}</p>
         </div>
         <div class="text-right">
           <p class="text-gold-400 font-semibold">{{ t.time }}</p>
-          <p class="text-slate-500 text-xs">{{ t.venue || 'Main Masjid' }}</p>
+          <p class="text-gray-600 text-xs">{{ t.venue || 'Main Masjid' }}</p>
         </div>
       </div>
     </div>
 
     <!-- Food Schedule -->
     <div v-else-if="activeTab === 'food'" class="space-y-3">
-      <div v-if="!foodSchedule.length" class="text-slate-400 text-center py-8">No food schedule for today.</div>
+      <div v-if="!foodSchedule.length" class="text-gray-700 text-center py-8">No food schedule for today.</div>
       <div v-for="f in foodSchedule" :key="f.id" class="card flex items-center justify-between">
         <div class="flex items-center gap-3">
           <span class="text-2xl">🍽️</span>
           <div>
-            <p class="text-white font-medium">{{ f.mealType }}</p>
-            <p class="text-slate-400 text-xs">{{ f.location }}</p>
-            <p v-if="f.description" class="text-slate-500 text-xs">{{ f.description }}</p>
+            <p class="text-gray-900 font-medium">{{ f.mealType }}</p>
+            <p class="text-gray-600 text-xs">{{ f.location }}</p>
+            <p v-if="f.description" class="text-gray-600 text-xs">{{ f.description }}</p>
           </div>
         </div>
         <div class="text-right">
-          <p class="text-primary-400 font-semibold">{{ new Date(f.servedAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }}</p>
-          <p v-if="f.estimatedServings" class="text-slate-500 text-xs">~{{ f.estimatedServings }} servings</p>
+          <p class="text-amber-700 font-semibold">{{ new Date(f.servedAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }}</p>
+          <p v-if="f.estimatedServings" class="text-gray-600 text-xs">~{{ f.estimatedServings }} servings</p>
         </div>
       </div>
     </div>

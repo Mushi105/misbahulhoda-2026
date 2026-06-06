@@ -95,7 +95,7 @@ const filteredUsers = computed(() => {
 const roleColors = {
   SuperAdmin: 'bg-purple-900 text-purple-300',
   Admin: 'bg-blue-900 text-blue-300',
-  Pilgrim: 'bg-primary-900 text-primary-300',
+  Pilgrim: 'bg-primary-900 text-amber-600',
   Volunteer: 'bg-gold-900 text-gold-300',
   Driver: 'bg-orange-900 text-orange-300',
 }
@@ -178,12 +178,12 @@ onMounted(async () => {
   <div class="space-y-6">
     <div class="flex items-start justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-white">Send Notifications</h1>
-        <p class="text-slate-400 text-sm mt-1">Send to individual users or broadcast to entire groups</p>
+        <h1 class="text-2xl font-bold text-gray-900">Send Notifications</h1>
+        <p class="text-gray-700 text-sm mt-1">Send to individual users or broadcast to entire groups</p>
       </div>
       <div class="text-right">
-        <p class="text-slate-400 text-xs">Total Users</p>
-        <p class="text-2xl font-bold text-primary-400">{{ users.length }}</p>
+        <p class="text-gray-600 text-xs">Total Users</p>
+        <p class="text-2xl font-bold text-amber-700">{{ users.length }}</p>
       </div>
     </div>
 
@@ -201,14 +201,14 @@ onMounted(async () => {
 
         <!-- Quick Templates -->
         <div class="card">
-          <h2 class="text-sm font-bold text-white uppercase tracking-wide mb-3">Quick Templates</h2>
+          <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">Quick Templates</h2>
           <div class="space-y-2">
             <button v-for="t in quickTemplates" :key="t.label"
               @click="applyTemplate(t)"
-              class="w-full text-left p-2.5 rounded-lg border border-dark-600 hover:border-primary-700 hover:bg-dark-800 transition-all group">
+              class="w-full text-left p-2.5 rounded-lg border border-gray-200 hover:border-primary-500 hover:bg-gray-50 transition-all group">
               <div class="flex items-center gap-2">
                 <span class="text-base">{{ t.icon }}</span>
-                <span class="text-white text-xs font-medium group-hover:text-primary-300">{{ t.label }}</span>
+                <span class="text-gray-900 text-xs font-medium group-hover:text-primary-700">{{ t.label }}</span>
               </div>
             </button>
           </div>
@@ -217,7 +217,7 @@ onMounted(async () => {
         <!-- Broadcast Toggle -->
         <div class="card">
           <div class="flex items-center justify-between mb-3">
-            <h2 class="text-sm font-bold text-white uppercase tracking-wide">Broadcast Mode</h2>
+            <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wide">Broadcast Mode</h2>
             <button @click="form.broadcast = !form.broadcast"
               :class="['w-11 h-6 rounded-full transition-colors relative', form.broadcast ? 'bg-primary-600' : 'bg-dark-600']">
               <span :class="['absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform shadow', form.broadcast ? 'translate-x-5' : 'translate-x-0.5']"></span>
@@ -235,29 +235,29 @@ onMounted(async () => {
               </select>
             </div>
           </div>
-          <p v-else class="text-xs text-slate-500">Enable to send to all users in a group</p>
+          <p v-else class="text-xs text-gray-600">Enable to send to all users in a group</p>
         </div>
 
         <!-- User Search (individual mode) -->
         <div v-if="!form.broadcast" class="card">
-          <h2 class="text-sm font-bold text-white uppercase tracking-wide mb-3">Select Recipient</h2>
+          <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">Select Recipient</h2>
           <input v-model="searchQuery" class="input text-sm mb-3" placeholder="🔍 Search by name or email..." />
           <div class="flex gap-2 mb-3 flex-wrap">
-            <button @click="filterRole=''" :class="['text-xs px-2 py-1 rounded-full border', !filterRole ? 'bg-primary-700 border-primary-600 text-white' : 'border-dark-600 text-slate-400']">All</button>
-            <button @click="filterRole='Pilgrim'" :class="['text-xs px-2 py-1 rounded-full border', filterRole==='Pilgrim' ? 'bg-primary-700 border-primary-600 text-white' : 'border-dark-600 text-slate-400']">Pilgrims</button>
-            <button @click="filterRole='Volunteer'" :class="['text-xs px-2 py-1 rounded-full border', filterRole==='Volunteer' ? 'bg-primary-700 border-primary-600 text-white' : 'border-dark-600 text-slate-400']">Volunteers</button>
+            <button @click="filterRole=''" :class="['text-xs px-2 py-1 rounded-full border', !filterRole ? 'bg-amber-600 border-primary-600 text-white' : 'border-gray-200 text-gray-700']">All</button>
+            <button @click="filterRole='Pilgrim'" :class="['text-xs px-2 py-1 rounded-full border', filterRole==='Pilgrim' ? 'bg-amber-600 border-primary-600 text-white' : 'border-gray-200 text-gray-700']">Pilgrims</button>
+            <button @click="filterRole='Volunteer'" :class="['text-xs px-2 py-1 rounded-full border', filterRole==='Volunteer' ? 'bg-amber-600 border-primary-600 text-white' : 'border-gray-200 text-gray-700']">Volunteers</button>
           </div>
           <div class="space-y-1.5 max-h-64 overflow-y-auto">
             <button v-for="u in filteredUsers" :key="u.id"
               @click="selectUser(u)"
-              :class="['w-full text-left p-2.5 rounded-lg border transition-all', form.userId===u.id ? 'border-primary-500 bg-primary-900/30' : 'border-dark-600 hover:border-dark-500 hover:bg-dark-800']">
+              :class="['w-full text-left p-2.5 rounded-lg border transition-all', form.userId===u.id ? 'border-primary-500 bg-primary-50' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50']">
               <div class="flex items-center gap-2.5">
-                <div class="w-7 h-7 rounded-full bg-primary-800 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
+                <div class="w-7 h-7 rounded-full bg-amber-700 flex items-center justify-center text-xs font-bold text-gray-900 flex-shrink-0">
                   {{ u.fullName?.[0] || '?' }}
                 </div>
                 <div class="flex-1 min-w-0">
-                  <p class="text-white text-xs font-medium truncate">{{ u.fullName }}</p>
-                  <p class="text-slate-500 text-xs truncate">{{ u.email }}</p>
+                  <p class="text-gray-900 text-xs font-medium truncate">{{ u.fullName }}</p>
+                  <p class="text-gray-600 text-xs truncate">{{ u.email }}</p>
                 </div>
                 <span :class="['text-xs px-1.5 py-0.5 rounded', roleColors[u.role] || 'bg-slate-800 text-slate-400']">{{ u.role }}</span>
               </div>
@@ -273,14 +273,14 @@ onMounted(async () => {
         <!-- Compose -->
         <div class="card space-y-4">
           <div class="flex items-center justify-between">
-            <h2 class="text-base font-semibold text-white">Compose Message</h2>
+            <h2 class="text-base font-semibold text-gray-900">Compose Message</h2>
             <div v-if="form.broadcast" class="text-xs bg-gold-900 text-gold-400 border border-gold-800 px-2.5 py-1 rounded-full">
               📢 Broadcast to {{ form.broadcastRole || 'All' }} — {{ form.broadcastRole ? users.filter(u=>u.role===form.broadcastRole).length : users.length }} users
             </div>
-            <div v-else-if="form.userId" class="text-xs bg-primary-900 text-primary-400 border border-primary-800 px-2.5 py-1 rounded-full">
+            <div v-else-if="form.userId" class="text-xs bg-primary-900 text-amber-700 border border-primary-800 px-2.5 py-1 rounded-full">
               ✓ {{ users.find(u=>u.id===form.userId)?.fullName }}
             </div>
-            <div v-else class="text-xs text-slate-500">← Select recipient first</div>
+            <div v-else class="text-xs text-gray-600">← Select recipient first</div>
           </div>
 
           <div class="grid grid-cols-2 gap-4">
@@ -314,17 +314,17 @@ onMounted(async () => {
           <div>
             <label class="label">Also deliver via</label>
             <div class="flex gap-3 flex-wrap">
-              <label class="flex items-center gap-2 cursor-pointer select-none bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 hover:border-emerald-700 transition-colors"
-                     :class="form.sendWhatsApp ? 'border-emerald-600 bg-emerald-950/30' : ''">
+              <label class="flex items-center gap-2 cursor-pointer select-none bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 hover:border-emerald-500 transition-colors"
+                     :class="form.sendWhatsApp ? 'border-emerald-500 bg-emerald-50' : ''">
                 <input type="checkbox" v-model="form.sendWhatsApp" class="w-4 h-4 accent-emerald-500" />
                 <span class="text-sm">💬 WhatsApp</span>
-                <span class="text-xs text-slate-500">(registered numbers)</span>
+                <span class="text-xs text-gray-600">(registered numbers)</span>
               </label>
-              <label class="flex items-center gap-2 cursor-pointer select-none bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 hover:border-blue-700 transition-colors"
-                     :class="form.sendEmail ? 'border-blue-600 bg-blue-950/30' : ''">
+              <label class="flex items-center gap-2 cursor-pointer select-none bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 hover:border-blue-500 transition-colors"
+                     :class="form.sendEmail ? 'border-blue-500 bg-blue-50' : ''">
                 <input type="checkbox" v-model="form.sendEmail" class="w-4 h-4 accent-blue-500" />
                 <span class="text-sm">📧 Email</span>
-                <span class="text-xs text-slate-500">(requires SMTP config)</span>
+                <span class="text-xs text-gray-600">(requires SMTP config)</span>
               </label>
             </div>
           </div>
@@ -339,15 +339,15 @@ onMounted(async () => {
 
         <!-- Sent History -->
         <div v-if="history.length" class="card">
-          <h2 class="text-sm font-bold text-white uppercase tracking-wide mb-3">Recently Sent</h2>
+          <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">Recently Sent</h2>
           <div class="space-y-2">
             <div v-for="(h, i) in history.slice(0,5)" :key="i"
-              class="flex items-start gap-3 bg-dark-700 rounded-lg p-3">
-              <div class="w-8 h-8 rounded-full bg-primary-900 flex items-center justify-center text-primary-400 text-sm flex-shrink-0">✓</div>
+              class="flex items-start gap-3 bg-gray-100 rounded-lg p-3">
+              <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 text-sm flex-shrink-0">✓</div>
               <div class="flex-1 min-w-0">
-                <p class="text-white text-sm font-medium">{{ h.title }}</p>
-                <p class="text-slate-400 text-xs mt-0.5 truncate">To: {{ h.recipient }}</p>
-                <p class="text-slate-600 text-xs">{{ h.event }} · {{ h.time }}</p>
+                <p class="text-gray-900 text-sm font-medium">{{ h.title }}</p>
+                <p class="text-gray-600 text-xs mt-0.5 truncate">To: {{ h.recipient }}</p>
+                <p class="text-gray-600 text-xs">{{ h.event }} · {{ h.time }}</p>
               </div>
             </div>
           </div>

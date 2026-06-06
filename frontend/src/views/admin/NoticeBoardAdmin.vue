@@ -169,8 +169,8 @@ onMounted(load)
 
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-white">Notice Board</h1>
-        <p class="text-slate-400 text-sm">Post announcements visible to all users</p>
+        <h1 class="text-2xl font-bold text-gray-900">Notice Board</h1>
+        <p class="text-gray-700 text-sm">Post announcements visible to all users</p>
       </div>
       <button @click="showForm = !showForm; resetForm()" class="btn-primary">
         {{ showForm ? 'Cancel' : '+ New Notice' }}
@@ -191,22 +191,22 @@ onMounted(load)
 
         <!-- Quick Templates -->
         <div class="card">
-          <h2 class="text-base font-semibold text-white mb-3">Quick Templates</h2>
+          <h2 class="text-base font-semibold text-gray-900 mb-3">Quick Templates</h2>
           <div class="space-y-2">
             <button v-for="t in quickTemplates" :key="t.title"
               @click="applyTemplate(t)"
-              class="w-full text-left p-3 rounded-lg border border-dark-600 hover:border-primary-700 hover:bg-dark-800 transition-colors group">
-              <p class="text-white text-xs font-medium">
+              class="w-full text-left p-3 rounded-lg border border-gray-200 hover:border-primary-500 hover:bg-gray-50 transition-colors group">
+              <p class="text-gray-900 text-xs font-medium">
                 {{ categories.find(c => c.value === t.category)?.label }} — {{ t.title }}
               </p>
-              <p class="text-slate-500 text-xs mt-0.5 line-clamp-1">{{ t.content }}</p>
+              <p class="text-gray-600 text-xs mt-0.5 line-clamp-1">{{ t.content }}</p>
             </button>
           </div>
         </div>
 
         <!-- Form -->
         <div v-if="showForm" class="card space-y-4">
-          <h2 class="text-base font-semibold text-white">{{ editingId ? 'Edit Notice' : 'New Notice' }}</h2>
+          <h2 class="text-base font-semibold text-gray-900">{{ editingId ? 'Edit Notice' : 'New Notice' }}</h2>
 
           <div>
             <label class="label">Title *</label>
@@ -256,18 +256,18 @@ onMounted(load)
 
           <label class="flex items-center gap-2 cursor-pointer">
             <input v-model="form.isPinned" type="checkbox" class="w-4 h-4" />
-            <span class="text-slate-300 text-sm">📌 Pin to top</span>
+            <span class="text-gray-600 text-sm">📌 Pin to top</span>
           </label>
 
           <!-- Notification delivery options (only for new notices) -->
-          <div v-if="!editingId" class="rounded-xl border border-dark-600 bg-dark-800/60 p-4 space-y-3">
+          <div v-if="!editingId" class="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-3">
             <label class="flex items-center gap-2 cursor-pointer">
               <input v-model="form.notifyUsers" type="checkbox" class="w-4 h-4 accent-primary-500" />
-              <span class="text-white text-sm font-medium">🔔 Notify users when posted</span>
+              <span class="text-gray-900 text-sm font-medium">🔔 Notify users when posted</span>
             </label>
             <template v-if="form.notifyUsers">
               <div>
-                <label class="text-xs text-slate-400 block mb-1">Send to</label>
+                <label class="text-xs text-gray-600 block mb-1">Send to</label>
                 <select v-model="form.notifyRole" class="input text-sm py-1.5">
                   <option value="">All Users</option>
                   <option value="Pilgrim">Pilgrims only</option>
@@ -276,13 +276,13 @@ onMounted(load)
                 </select>
               </div>
               <div class="flex gap-3 flex-wrap">
-                <label class="flex items-center gap-2 cursor-pointer bg-dark-700 border rounded-lg px-3 py-2 text-sm transition-colors"
-                       :class="form.sendWhatsApp ? 'border-emerald-600 bg-emerald-950/30' : 'border-dark-600'">
+                <label class="flex items-center gap-2 cursor-pointer bg-gray-50 border rounded-lg px-3 py-2 text-sm transition-colors"
+                       :class="form.sendWhatsApp ? 'border-emerald-500 bg-emerald-50' : 'border-gray-200'">
                   <input type="checkbox" v-model="form.sendWhatsApp" class="w-4 h-4 accent-emerald-500" />
                   💬 Also send WhatsApp
                 </label>
-                <label class="flex items-center gap-2 cursor-pointer bg-dark-700 border rounded-lg px-3 py-2 text-sm transition-colors"
-                       :class="form.sendEmail ? 'border-blue-600 bg-blue-950/30' : 'border-dark-600'">
+                <label class="flex items-center gap-2 cursor-pointer bg-gray-50 border rounded-lg px-3 py-2 text-sm transition-colors"
+                       :class="form.sendEmail ? 'border-blue-500 bg-blue-50' : 'border-gray-200'">
                   <input type="checkbox" v-model="form.sendEmail" class="w-4 h-4 accent-blue-500" />
                   📧 Also send Email
                 </label>
@@ -294,7 +294,7 @@ onMounted(load)
             <button @click="save" :disabled="saving" class="btn-primary flex-1">
               {{ saving ? 'Saving...' : (editingId ? 'Update Notice' : 'Post Notice') }}
             </button>
-            <button @click="showForm = false; resetForm()" class="px-4 text-slate-400 hover:text-white text-sm">Cancel</button>
+            <button @click="showForm = false; resetForm()" class="px-4 text-gray-700 hover:text-gray-900 text-sm">Cancel</button>
           </div>
         </div>
       </div>
@@ -304,18 +304,18 @@ onMounted(load)
 
         <!-- Live Preview -->
         <div class="card">
-          <h2 class="text-base font-semibold text-white mb-4">Live Notice Board</h2>
+          <h2 class="text-base font-semibold text-gray-900 mb-4">Live Notice Board</h2>
           <NoticeBoard />
         </div>
 
         <!-- Management Table -->
         <div class="card overflow-hidden p-0">
-          <div class="px-4 py-3 border-b border-dark-700">
-            <h2 class="text-base font-semibold text-white">All Notices</h2>
+          <div class="px-4 py-3 border-b border-gray-200">
+            <h2 class="text-base font-semibold text-gray-900">All Notices</h2>
           </div>
-          <div v-if="loading" class="text-center py-8 text-slate-500 text-sm">Loading...</div>
+          <div v-if="loading" class="text-center py-8 text-gray-700 text-sm">Loading...</div>
           <table v-else class="w-full text-sm">
-            <thead class="bg-dark-800 text-xs text-slate-400 uppercase">
+            <thead class="bg-gray-50 text-xs text-gray-600 uppercase">
               <tr>
                 <th class="text-left px-4 py-2 font-medium">Title</th>
                 <th class="text-left px-4 py-2 font-medium hidden md:table-cell">Category</th>
@@ -324,29 +324,29 @@ onMounted(load)
                 <th class="px-4 py-2"></th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-dark-700">
-              <tr v-for="n in notices" :key="n.id" class="hover:bg-dark-800/50">
+            <tbody class="divide-y divide-gray-200">
+              <tr v-for="n in notices" :key="n.id" class="hover:bg-gray-50">
                 <td class="px-4 py-2.5">
                   <div class="flex items-center gap-2">
-                    <span v-if="n.isPinned" class="text-gold-400 text-xs">📌</span>
-                    <span class="text-white text-sm">{{ n.title }}</span>
+                    <span v-if="n.isPinned" class="text-gold-500 text-xs">📌</span>
+                    <span class="text-gray-900 text-sm">{{ n.title }}</span>
                   </div>
                 </td>
-                <td class="px-4 py-2.5 text-slate-400 hidden md:table-cell">{{ n.category }}</td>
+                <td class="px-4 py-2.5 text-gray-700 hidden md:table-cell">{{ n.category }}</td>
                 <td class="px-4 py-2.5 hidden lg:table-cell">
                   <span :class="n.priority === 'Urgent' ? 'text-red-400' : n.priority === 'Important' ? 'text-gold-400' : 'text-slate-500'" class="text-xs">
                     {{ n.priority }}
                   </span>
                 </td>
                 <td class="px-4 py-2.5">
-                  <span :class="n.isActive ? 'text-green-400 bg-green-900/40' : 'text-slate-500 bg-dark-700'" class="text-xs px-2 py-0.5 rounded">
+                  <span :class="n.isActive ? 'text-green-700 bg-green-100' : 'text-gray-700 bg-gray-100'" class="text-xs px-2 py-0.5 rounded">
                     {{ n.isActive ? 'Active' : 'Hidden' }}
                   </span>
                 </td>
                 <td class="px-4 py-2.5">
                   <div class="flex items-center gap-1 justify-end">
                     <button @click="startEdit(n)" class="text-xs text-blue-400 hover:text-blue-300 px-2 py-1 rounded hover:bg-blue-950">Edit</button>
-                    <button @click="toggleNotice(n.id)" class="text-xs text-slate-400 hover:text-white px-2 py-1 rounded hover:bg-dark-700">
+                    <button @click="toggleNotice(n.id)" class="text-xs text-gray-700 hover:text-gray-900 px-2 py-1 rounded hover:bg-gray-100">
                       {{ n.isActive ? 'Hide' : 'Show' }}
                     </button>
                     <button @click="deleteNotice(n.id)" class="text-xs text-red-500 hover:text-red-400 px-2 py-1 rounded hover:bg-red-950">Delete</button>

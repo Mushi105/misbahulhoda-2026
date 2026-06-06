@@ -323,25 +323,25 @@ async function deleteFloor(floor) {
     <!-- Header -->
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-white">Accommodation</h1>
-        <p class="text-slate-400 text-sm mt-0.5">Hotel setup · room management · pilgrim assignment</p>
+        <h1 class="text-2xl font-bold text-gray-900">Accommodation</h1>
+        <p class="text-gray-700 text-sm mt-0.5">Hotel setup · room management · pilgrim assignment</p>
       </div>
       <button @click="activeTab === 'rooms' ? load() : (activeTab === 'setup' ? loadHotelsSetup() : loadInTransit())"
               class="text-slate-400 hover:text-gold-400 text-sm">↻ Refresh</button>
     </div>
 
     <!-- Tabs -->
-    <div class="flex gap-1 bg-dark-800 rounded-xl p-1 w-fit">
+    <div class="flex gap-1 bg-gray-100 rounded-xl p-1 w-fit">
       <button @click="switchTab('rooms')"
-              :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors', activeTab === 'rooms' ? 'bg-gold-700 text-white' : 'text-slate-400 hover:text-white']">
+              :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors', activeTab === 'rooms' ? 'bg-gold-700 text-white' : 'text-gray-700 hover:text-gray-900']">
         🛏 Rooms
       </button>
       <button @click="switchTab('setup')"
-              :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors', activeTab === 'setup' ? 'bg-gold-700 text-white' : 'text-slate-400 hover:text-white']">
+              :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors', activeTab === 'setup' ? 'bg-gold-700 text-white' : 'text-gray-700 hover:text-gray-900']">
         🏨 Hotel Setup
       </button>
       <button @click="switchTab('transit')"
-              :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2', activeTab === 'transit' ? 'bg-orange-700 text-white' : 'text-slate-400 hover:text-white']">
+              :class="['px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2', activeTab === 'transit' ? 'bg-orange-700 text-white' : 'text-gray-700 hover:text-gray-900']">
         🚌 In Transit
         <span v-if="inTransit.length" class="bg-orange-500 text-white text-xs rounded-full px-1.5 py-0.5 leading-none">{{ inTransit.length }}</span>
       </button>
@@ -349,7 +349,7 @@ async function deleteFloor(floor) {
 
     <!-- Toast -->
     <div v-if="msg.text"
-         :class="['rounded-lg px-4 py-3 text-sm flex justify-between', msg.type === 'success' ? 'bg-green-900/50 border border-green-700 text-green-300' : 'bg-red-900/50 border border-red-700 text-red-300']">
+         :class="['rounded-lg px-4 py-3 text-sm flex justify-between', msg.type === 'success' ? 'bg-green-100 border border-green-300 text-green-700' : 'bg-red-100 border border-red-300 text-red-600']">
       {{ msg.text }}<button @click="msg.text=''" class="opacity-60 hover:opacity-100">✕</button>
     </div>
 
@@ -359,25 +359,25 @@ async function deleteFloor(floor) {
       <!-- Stats -->
       <div v-if="occupancy" class="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <div class="card flex items-center gap-3 py-3">
-          <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-xl">🏨</div>
-          <div><p class="text-xl font-bold text-white">{{ occupancy.totalRooms }}</p><p class="text-xs text-slate-400">Total Rooms</p></div>
+          <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl">🏨</div>
+          <div><p class="text-xl font-bold text-gray-900">{{ occupancy.totalRooms }}</p><p class="text-xs text-gray-600">Total Rooms</p></div>
         </div>
         <div class="card flex items-center gap-3 py-3">
-          <div class="w-10 h-10 rounded-xl bg-green-900/40 flex items-center justify-center text-xl">✅</div>
-          <div><p class="text-xl font-bold text-green-400">{{ occupancy.availableRooms }}</p><p class="text-xs text-slate-400">Available</p></div>
+          <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-xl">✅</div>
+          <div><p class="text-xl font-bold text-green-400">{{ occupancy.availableRooms }}</p><p class="text-xs text-gray-600">Available</p></div>
         </div>
         <div class="card flex items-center gap-3 py-3">
-          <div class="w-10 h-10 rounded-xl bg-red-900/40 flex items-center justify-center text-xl">🔒</div>
-          <div><p class="text-xl font-bold text-red-400">{{ occupancy.totalRooms - occupancy.availableRooms }}</p><p class="text-xs text-slate-400">Occupied</p></div>
+          <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-xl">���</div>
+          <div><p class="text-xl font-bold text-red-400">{{ occupancy.totalRooms - occupancy.availableRooms }}</p><p class="text-xs text-gray-600">Occupied</p></div>
         </div>
         <div class="card flex items-center gap-3 py-3">
-          <div class="w-10 h-10 rounded-xl bg-gold-900/40 flex items-center justify-center text-xl">📊</div>
-          <div><p class="text-xl font-bold text-gold-400">{{ occupancy.occupancyRate }}%</p><p class="text-xs text-slate-400">Occupancy</p></div>
+          <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">📊</div>
+          <div><p class="text-xl font-bold text-gold-400">{{ occupancy.occupancyRate }}%</p><p class="text-xs text-gray-600">Occupancy</p></div>
         </div>
       </div>
 
       <!-- Legend -->
-      <div class="flex items-center gap-5 text-xs text-slate-400">
+      <div class="flex items-center gap-5 text-xs text-gray-600">
         <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-green-400"></span> Empty</span>
         <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-gold-400"></span> Partially occupied</span>
         <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-red-400"></span> Full</span>
@@ -387,13 +387,13 @@ async function deleteFloor(floor) {
       <div v-if="hotelList.length > 1" class="flex flex-wrap gap-2">
         <button @click="selectedHotelId = ''; selectedFloor = null"
                 :class="['px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all',
-                  selectedHotelId === '' ? 'bg-gold-700 text-white border-gold-600' : 'bg-dark-800 text-slate-400 border-dark-600 hover:border-gold-700 hover:text-white']">
+                  selectedHotelId === '' ? 'bg-gold-700 text-white border-gold-600' : 'bg-gray-100 text-gray-700 border-gray-200 hover:border-gold-500 hover:text-gray-900']">
           🏘 All Hotels
         </button>
         <button v-for="h in hotelList" :key="h.id"
                 @click="selectedHotelId = h.id; selectedFloor = null"
                 :class="['px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all',
-                  selectedHotelId === h.id ? 'bg-gold-700 text-white border-gold-600' : 'bg-dark-800 text-slate-400 border-dark-600 hover:border-gold-700 hover:text-white']">
+                  selectedHotelId === h.id ? 'bg-gold-700 text-white border-gold-600' : 'bg-gray-100 text-gray-700 border-gray-200 hover:border-gold-500 hover:text-gray-900']">
           🏨 {{ h.name }}
         </button>
       </div>
@@ -402,42 +402,42 @@ async function deleteFloor(floor) {
       <div class="flex flex-wrap items-center gap-3">
         <div class="flex flex-wrap gap-1.5">
           <button @click="selectedFloor = null"
-                  :class="['px-3 py-1.5 rounded-lg text-xs font-medium transition-colors', selectedFloor === null ? 'bg-gold-700 text-white' : 'bg-dark-700 text-slate-400 hover:text-white']">
+                  :class="['px-3 py-1.5 rounded-lg text-xs font-medium transition-colors', selectedFloor === null ? 'bg-gold-700 text-white' : 'bg-gray-100 text-gray-700 hover:text-gray-900']">
             All Floors
           </button>
           <button v-for="[num, label] in floors" :key="num"
                   @click="selectedFloor = +num"
-                  :class="['px-3 py-1.5 rounded-lg text-xs font-medium transition-colors', selectedFloor === +num ? 'bg-gold-700 text-white' : 'bg-dark-700 text-slate-400 hover:text-white']">
+                  :class="['px-3 py-1.5 rounded-lg text-xs font-medium transition-colors', selectedFloor === +num ? 'bg-gold-700 text-white' : 'bg-gray-100 text-gray-700 hover:text-gray-900']">
             {{ label }}
           </button>
         </div>
         <div class="flex gap-1.5 ml-auto">
           <button v-for="opt in [{v:'all',l:'All'},{v:'available',l:'Available'},{v:'full',l:'Full'}]" :key="opt.v"
                   @click="filterStatus = opt.v"
-                  :class="['px-3 py-1.5 rounded-lg text-xs font-medium transition-colors', filterStatus === opt.v ? 'bg-slate-600 text-white' : 'bg-dark-700 text-slate-400 hover:text-white']">
+                  :class="['px-3 py-1.5 rounded-lg text-xs font-medium transition-colors', filterStatus === opt.v ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-700 hover:text-gray-900']">
             {{ opt.l }}
           </button>
         </div>
       </div>
 
       <!-- Loading -->
-      <div v-if="loading" class="text-center py-16 text-slate-400">Loading rooms...</div>
+      <div v-if="loading" class="text-center py-16 text-gray-700">Loading rooms...</div>
 
       <!-- Rooms Grid grouped by floor -->
       <template v-else>
         <div v-if="!rooms.length" class="card text-center py-12">
           <p class="text-2xl mb-2">🏨</p>
-          <p class="text-white font-semibold">No rooms yet</p>
-          <p class="text-slate-400 text-sm mt-1">Go to <button @click="switchTab('setup')" class="text-gold-400 hover:underline">Hotel Setup</button> to create hotels and add rooms.</p>
+          <p class="text-gray-900 font-semibold">No rooms yet</p>
+          <p class="text-gray-700 text-sm mt-1">Go to <button @click="switchTab('setup')" class="text-gold-400 hover:underline">Hotel Setup</button> to create hotels and add rooms.</p>
         </div>
 
         <template v-else>
           <div v-for="group in floorGroups" :key="group.num" class="space-y-3">
             <!-- Floor header -->
             <div class="flex items-center gap-3">
-              <div class="h-px flex-1 bg-dark-700"></div>
-              <span class="text-xs font-semibold text-gold-500 uppercase tracking-wider px-2">{{ group.label }}</span>
-              <div class="h-px flex-1 bg-dark-700"></div>
+              <div class="h-px flex-1 bg-gray-200"></div>
+              <span class="text-xs font-semibold text-gold-600 uppercase tracking-wider px-2">{{ group.label }}</span>
+              <div class="h-px flex-1 bg-gray-200"></div>
             </div>
             <!-- Room cards -->
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2">
@@ -445,21 +445,21 @@ async function deleteFloor(floor) {
                    @click="openRoom(room)"
                    :class="['relative rounded-xl border cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg p-3', roomColor(room)]">
                 <div :class="['absolute top-2 right-2 w-2 h-2 rounded-full', roomDot(room)]"></div>
-                <p class="text-white font-bold text-sm leading-none mb-1">{{ room.roomNumber }}</p>
-                <div class="w-full bg-dark-800 rounded-full h-1 mb-1.5">
+                <p class="text-gray-900 font-bold text-sm leading-none mb-1">{{ room.roomNumber }}</p>
+                <div class="w-full bg-gray-200 rounded-full h-1 mb-1.5">
                   <div :style="`width:${room.bedCapacity > 0 ? (room.occupiedBeds/room.bedCapacity)*100 : 0}%`"
                        :class="['h-1 rounded-full transition-all', room.occupiedBeds >= room.bedCapacity ? 'bg-red-400' : room.occupiedBeds > 0 ? 'bg-gold-400' : 'bg-green-400']">
                   </div>
                 </div>
-                <p class="text-slate-400 text-xs">{{ room.occupiedBeds }}/{{ room.bedCapacity }}</p>
+                <p class="text-gray-600 text-xs">{{ room.occupiedBeds }}/{{ room.bedCapacity }}</p>
                 <p v-if="room.isForFamily" class="text-gold-500 text-xs">Family</p>
               </div>
             </div>
           </div>
 
           <div v-if="filteredRooms.length === 0" class="card text-center py-12">
-            <p class="text-white">No rooms found</p>
-            <p class="text-slate-400 text-sm mt-1">Try changing the filters.</p>
+            <p class="text-gray-900">No rooms found</p>
+            <p class="text-gray-700 text-sm mt-1">Try changing the filters.</p>
           </div>
         </template>
       </template>
@@ -471,9 +471,9 @@ async function deleteFloor(floor) {
     <template v-if="activeTab === 'setup'">
 
       <div class="flex items-center justify-between">
-        <p class="text-slate-400 text-sm">{{ hotelsData.length }} hotel(s) configured</p>
+        <p class="text-gray-700 text-sm">{{ hotelsData.length }} hotel(s) configured</p>
         <button @click="openAddHotel"
-                class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg font-semibold text-white transition-colors"
+                class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg font-semibold text-gray-900 transition-colors"
                 style="background: rgba(180,83,9,0.7); border: 1px solid rgba(180,83,9,0.5);">
           + Add Hotel
         </button>
@@ -482,10 +482,10 @@ async function deleteFloor(floor) {
       <!-- No hotels state -->
       <div v-if="!hotelsData.length" class="card text-center py-16">
         <div class="text-5xl mb-4">🏨</div>
-        <p class="text-white font-bold text-lg">No hotels yet</p>
-        <p class="text-slate-400 text-sm mt-2 mb-6">Add your first hotel to start managing accommodation.</p>
+        <p class="text-gray-900 font-bold text-lg">No hotels yet</p>
+        <p class="text-gray-700 text-sm mt-2 mb-6">Add your first hotel to start managing accommodation.</p>
         <button @click="openAddHotel"
-                class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white"
+                class="px-6 py-2.5 rounded-xl text-sm font-semibold text-gray-900"
                 style="background: rgba(180,83,9,0.7);">
           + Add First Hotel
         </button>
@@ -494,15 +494,15 @@ async function deleteFloor(floor) {
       <!-- Hotel cards -->
       <div v-else class="space-y-4">
         <div v-for="hotel in hotelsData" :key="hotel.id"
-             class="card border border-dark-600">
+             class="card border border-gray-200">
 
           <!-- Hotel header -->
           <div class="flex items-start justify-between gap-4">
             <div class="flex items-center gap-3">
               <div class="w-12 h-12 rounded-xl bg-gold-900/40 border border-gold-700/50 flex items-center justify-center text-2xl flex-shrink-0">🏨</div>
               <div>
-                <p class="text-white font-bold text-lg">{{ hotel.name }}</p>
-                <p class="text-slate-400 text-sm">📍 {{ hotel.city }}<span v-if="hotel.address"> · {{ hotel.address }}</span></p>
+                <p class="text-gray-900 font-bold text-lg">{{ hotel.name }}</p>
+                <p class="text-gray-700 text-sm">📍 {{ hotel.city }}<span v-if="hotel.address"> · {{ hotel.address }}</span></p>
               </div>
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
@@ -523,36 +523,36 @@ async function deleteFloor(floor) {
 
           <!-- Stats row -->
           <div class="mt-4 grid grid-cols-4 gap-3">
-            <div class="bg-dark-900 rounded-lg p-3 text-center">
-              <p class="text-lg font-bold text-white">{{ hotel.totalRooms }}</p>
-              <p class="text-xs text-slate-500">Rooms</p>
+            <div class="bg-gray-50 rounded-lg p-3 text-center">
+              <p class="text-lg font-bold text-gray-900">{{ hotel.totalRooms }}</p>
+              <p class="text-xs text-gray-600">Rooms</p>
             </div>
-            <div class="bg-dark-900 rounded-lg p-3 text-center">
-              <p class="text-lg font-bold text-green-400">{{ hotel.availableRooms }}</p>
-              <p class="text-xs text-slate-500">Available</p>
+            <div class="bg-gray-50 rounded-lg p-3 text-center">
+              <p class="text-lg font-bold text-green-600">{{ hotel.availableRooms }}</p>
+              <p class="text-xs text-gray-600">Available</p>
             </div>
-            <div class="bg-dark-900 rounded-lg p-3 text-center">
-              <p class="text-lg font-bold text-red-400">{{ hotel.totalRooms - hotel.availableRooms }}</p>
-              <p class="text-xs text-slate-500">Occupied</p>
+            <div class="bg-gray-50 rounded-lg p-3 text-center">
+              <p class="text-lg font-bold text-red-500">{{ hotel.totalRooms - hotel.availableRooms }}</p>
+              <p class="text-xs text-gray-600">Occupied</p>
             </div>
-            <div class="bg-dark-900 rounded-lg p-3 text-center">
-              <p class="text-lg font-bold text-gold-400">{{ hotel.totalBeds }}</p>
-              <p class="text-xs text-slate-500">Total Beds</p>
+            <div class="bg-gray-50 rounded-lg p-3 text-center">
+              <p class="text-lg font-bold text-gold-600">{{ hotel.totalBeds }}</p>
+              <p class="text-xs text-gray-600">Total Beds</p>
             </div>
           </div>
 
           <!-- Floor breakdown -->
           <div v-if="hotel.floors?.length" class="mt-4">
-            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Floors</p>
+            <p class="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Floors</p>
             <div class="space-y-2">
               <div v-for="floor in hotel.floors" :key="floor.id"
-                   class="bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 flex items-center justify-between gap-3">
+                   class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 flex items-center justify-between gap-3">
                 <div class="text-xs">
-                  <p class="text-white font-medium">{{ floor.label }}</p>
-                  <p class="text-slate-500 mt-0.5">
-                    <span class="text-green-400">{{ floor.availableRooms }}</span>/{{ floor.totalRooms }} rooms ·
-                    <span class="text-gold-400">{{ floor.occupiedBeds }}</span>/{{ floor.totalBeds }} beds
-                    <span class="text-slate-600 ml-1">(Floor #{{ floor.floorNumber }})</span>
+                  <p class="text-gray-900 font-medium">{{ floor.label }}</p>
+                  <p class="text-gray-700 mt-0.5">
+                    <span class="text-green-600">{{ floor.availableRooms }}</span>/{{ floor.totalRooms }} rooms ·
+                    <span class="text-gold-600">{{ floor.occupiedBeds }}</span>/{{ floor.totalBeds }} beds
+                    <span class="text-gray-600 ml-1">(Floor #{{ floor.floorNumber }})</span>
                   </p>
                 </div>
                 <div class="flex gap-1.5 flex-shrink-0">
@@ -569,8 +569,8 @@ async function deleteFloor(floor) {
             </div>
           </div>
 
-          <div v-else class="mt-3 text-center py-4 bg-dark-900/50 rounded-lg border border-dashed border-dark-600">
-            <p class="text-slate-500 text-xs">No rooms added yet. Click <strong class="text-gold-500">+ Add Rooms</strong> to get started.</p>
+          <div v-else class="mt-3 text-center py-4 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+            <p class="text-gray-600 text-xs">No rooms added yet. Click <strong class="text-gold-500">+ Add Rooms</strong> to get started.</p>
           </div>
         </div>
       </div>
@@ -581,38 +581,38 @@ async function deleteFloor(floor) {
     <!-- ═══════════════ IN TRANSIT TAB ═══════════════ -->
     <template v-if="activeTab === 'transit'">
       <div class="card">
-        <div class="px-5 py-3 border-b border-dark-700 flex items-center justify-between">
+        <div class="px-5 py-3 border-b border-gray-200 flex items-center justify-between">
           <div>
-            <h3 class="text-white font-semibold">Pilgrims In Transit</h3>
-            <p class="text-slate-400 text-xs mt-0.5">Checked out but not yet assigned a new room</p>
+            <h3 class="text-gray-900 font-semibold">Pilgrims In Transit</h3>
+            <p class="text-gray-600 text-xs mt-0.5">Checked out but not yet assigned a new room</p>
           </div>
           <span v-if="inTransit.length" class="text-sm text-orange-400 font-medium">{{ inTransit.length }} waiting</span>
         </div>
-        <div v-if="transitLoading" class="p-8 text-center text-slate-400">Loading...</div>
+        <div v-if="transitLoading" class="p-8 text-center text-gray-700">Loading...</div>
         <div v-else-if="!inTransit.length" class="p-10 text-center">
           <div class="text-4xl mb-3">✅</div>
-          <p class="text-white font-medium">No pilgrims in transit</p>
-          <p class="text-slate-400 text-sm mt-1">All pilgrims are currently assigned to a room.</p>
+          <p class="text-gray-900 font-medium">No pilgrims in transit</p>
+          <p class="text-gray-700 text-sm mt-1">All pilgrims are currently assigned to a room.</p>
         </div>
-        <div v-else class="divide-y divide-dark-700">
+        <div v-else class="divide-y divide-gray-200">
           <div v-for="p in inTransit" :key="p.pilgrimId"
-               class="px-5 py-4 flex items-center gap-4 hover:bg-dark-800/50 transition-colors">
+               class="px-5 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
             <div class="w-10 h-10 rounded-full bg-orange-900/40 border border-orange-700/50 flex items-center justify-center text-sm font-bold text-orange-400 flex-shrink-0">
               {{ p.fullName?.split(' ').map(n=>n[0]).slice(0,2).join('') || '?' }}
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-white font-semibold text-sm">{{ p.fullName }}</p>
-              <p class="text-slate-500 text-xs">{{ p.country }}</p>
+              <p class="text-gray-900 font-semibold text-sm">{{ p.fullName }}</p>
+              <p class="text-gray-600 text-xs">{{ p.country }}</p>
               <div class="flex flex-wrap gap-2 mt-1">
-                <span class="text-xs text-slate-400">Last: <span class="text-orange-300">{{ p.lastHotel }}</span>, {{ p.lastCity }}</span>
-                <span class="text-xs text-slate-500">Room {{ p.lastRoom }}</span>
-                <span class="text-xs text-slate-500">Checked out {{ fmtDate(p.checkedOutAt) }}</span>
+                <span class="text-xs text-gray-600">Last: <span class="text-orange-600">{{ p.lastHotel }}</span>, {{ p.lastCity }}</span>
+                <span class="text-xs text-gray-600">Room {{ p.lastRoom }}</span>
+                <span class="text-xs text-gray-600">Checked out {{ fmtDate(p.checkedOutAt) }}</span>
               </div>
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
-              <span class="text-xs text-slate-500">{{ p.stayCount }} stay(s)</span>
+              <span class="text-xs text-gray-600">{{ p.stayCount }} stay(s)</span>
               <button @click="openTrail(p.pilgrimId)"
-                      class="text-xs px-3 py-1.5 rounded-lg font-medium text-primary-400 border border-primary-800 hover:bg-primary-900/30 transition-colors">
+                      class="text-xs px-3 py-1.5 rounded-lg font-medium text-amber-700 border border-primary-800 hover:bg-primary-900/30 transition-colors">
                 View Trail
               </button>
             </div>
@@ -632,8 +632,8 @@ async function deleteFloor(floor) {
         <div class="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
              style="background: #0f172a; border: 1px solid rgba(180,83,9,0.35);">
           <div class="h-0.5 w-full" style="background: linear-gradient(90deg, transparent, #d97706, transparent);"></div>
-          <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
-            <h3 class="text-white font-bold text-lg">Add Hotel</h3>
+          <div class="px-6 py-4 border-b border-amber-900/40 flex items-center justify-between">
+            <h3 class="text-gray-100 font-bold text-lg">Add Hotel</h3>
             <button @click="showAddHotel = false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>
           <div class="p-6 space-y-4">
@@ -655,12 +655,12 @@ async function deleteFloor(floor) {
             </div>
 
             <!-- Location section -->
-            <div class="rounded-xl border border-emerald-900/30 p-4 space-y-3" style="background:rgba(16,185,129,0.04);">
-              <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider">📍 Hotel Location (GPS)</p>
-              <p class="text-slate-500 text-xs">
+            <div class="rounded-xl border border-emerald-900/30 p-4 space-y-3" style="background:rgba(212,168,0,0.04);">
+              <p class="text-amber-700 text-xs font-bold uppercase tracking-wider">📍 Hotel Location (GPS)</p>
+              <p class="text-gray-600 text-xs">
                 Imam Hussain Haram coordinates in Karbala:
                 <button @click="addHotelForm.latitude='32.6160'; addHotelForm.longitude='44.0209'"
-                  class="text-emerald-400 hover:text-emerald-300 underline ml-1">Use Haram preset</button>
+                  class="text-amber-700 hover:text-amber-600 underline ml-1">Use Haram preset</button>
               </p>
               <div class="grid grid-cols-2 gap-3">
                 <div>
@@ -692,7 +692,7 @@ async function deleteFloor(floor) {
 
             <div class="flex gap-3 pt-2">
               <button @click="createHotel" :disabled="savingHotel"
-                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
+                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 disabled:opacity-50"
                       style="background: rgba(180,83,9,0.7);">
                 {{ savingHotel ? 'Creating...' : '✓ Create Hotel' }}
               </button>
@@ -715,7 +715,7 @@ async function deleteFloor(floor) {
           <div class="px-6 py-4 border-b border-dark-700 flex items-center justify-between">
             <div>
               <h3 class="text-white font-bold text-lg">Add Rooms</h3>
-              <p class="text-slate-400 text-xs mt-0.5">🏨 {{ addRoomsHotelName }}</p>
+              <p class="text-gray-600 text-xs mt-0.5">🏨 {{ addRoomsHotelName }}</p>
             </div>
             <button @click="showAddRooms = false" class="text-slate-400 hover:text-white text-2xl">✕</button>
           </div>
@@ -739,12 +739,12 @@ async function deleteFloor(floor) {
 
             <!-- Room number preview -->
             <div class="bg-dark-900 border border-dark-700 rounded-xl px-4 py-3">
-              <p class="text-xs text-slate-500 uppercase font-semibold mb-2">Room Numbers Preview</p>
+              <p class="text-xs text-gray-600 uppercase font-semibold mb-2">Room Numbers Preview</p>
               <div class="flex items-center gap-3 flex-wrap">
-                <span class="text-white font-bold text-lg">{{ roomPreview.first }}</span>
+                <span class="text-gray-900 font-bold text-lg">{{ roomPreview.first }}</span>
                 <span class="text-slate-500">→</span>
-                <span class="text-white font-bold text-lg">{{ roomPreview.last }}</span>
-                <span class="text-slate-500 text-xs ml-1">({{ addRoomsForm.totalRooms }} rooms)</span>
+                <span class="text-gray-900 font-bold text-lg">{{ roomPreview.last }}</span>
+                <span class="text-gray-600 text-xs ml-1">({{ addRoomsForm.totalRooms }} rooms)</span>
               </div>
               <p class="text-xs text-slate-600 mt-1">Floor {{ addRoomsForm.floorNumber }}, Room 1 = <span class="text-gold-400">{{ roomPreview.first }}</span> · Floor {{ addRoomsForm.floorNumber }}, Room {{ addRoomsForm.totalRooms }} = <span class="text-gold-400">{{ roomPreview.last }}</span></p>
             </div>
@@ -757,14 +757,14 @@ async function deleteFloor(floor) {
               <div class="flex items-end pb-1">
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input v-model="addRoomsForm.isForFamily" type="checkbox" class="w-4 h-4 accent-gold-500" />
-                  <span class="text-slate-300 text-sm">Family Rooms</span>
+                  <span class="text-gray-600 text-sm">Family Rooms</span>
                 </label>
               </div>
             </div>
 
             <div class="flex gap-3 pt-2">
               <button @click="submitAddRooms" :disabled="savingRooms"
-                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
+                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 disabled:opacity-50"
                       style="background: rgba(180,83,9,0.7);">
                 {{ savingRooms ? 'Adding...' : `✓ Add ${addRoomsForm.totalRooms} Rooms` }}
               </button>
@@ -794,7 +794,7 @@ async function deleteFloor(floor) {
               <label class="form-label">Floor Number *</label>
               <input v-model.number="editFloorForm.floorNumber" type="number" min="0" class="input w-full"
                      placeholder="e.g. 2" />
-              <p class="text-xs text-slate-500 mt-1">
+              <p class="text-xs text-gray-600 mt-1">
                 Changing floor number will also rename all rooms.
                 Floor <span class="text-gold-400">{{ editFloorForm.floorNumber }}</span> →
                 rooms <span class="text-gold-400">{{ editFloorForm.floorNumber }}01</span>,
@@ -809,7 +809,7 @@ async function deleteFloor(floor) {
 
             <div class="flex gap-3 pt-2">
               <button @click="submitEditFloor" :disabled="savingFloor"
-                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
+                      class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 disabled:opacity-50"
                       style="background: rgba(180,83,9,0.7);">
                 {{ savingFloor ? 'Saving...' : '✓ Save Changes' }}
               </button>
@@ -831,21 +831,21 @@ async function deleteFloor(floor) {
           <div class="flex items-center gap-3">
             <div :class="['w-10 h-10 rounded-xl flex items-center justify-center text-lg border', roomColor(activeRoom)]">🛏️</div>
             <div>
-              <h3 class="text-white font-bold text-base">Room {{ activeRoom.roomNumber }}</h3>
-              <p class="text-slate-400 text-xs">{{ activeRoom.floorLabel }} · {{ activeRoom.hotelName }} · {{ activeRoom.occupiedBeds }}/{{ activeRoom.bedCapacity }} beds</p>
+              <h3 class="text-gray-900 font-bold text-base">Room {{ activeRoom.roomNumber }}</h3>
+              <p class="text-gray-600 text-xs">{{ activeRoom.floorLabel }} · {{ activeRoom.hotelName }} · {{ activeRoom.occupiedBeds }}/{{ activeRoom.bedCapacity }} beds</p>
             </div>
           </div>
           <button @click="showModal = false" class="text-slate-400 hover:text-white text-xl leading-none">✕</button>
         </div>
         <div class="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
           <div class="grid grid-cols-3 gap-3 text-center">
-            <div class="bg-dark-800 rounded-lg p-3"><p class="text-xl font-bold text-white">{{ activeRoom.bedCapacity }}</p><p class="text-xs text-slate-500">Total Beds</p></div>
-            <div class="bg-dark-800 rounded-lg p-3"><p class="text-xl font-bold text-gold-400">{{ activeRoom.occupiedBeds }}</p><p class="text-xs text-slate-500">Occupied</p></div>
-            <div class="bg-dark-800 rounded-lg p-3"><p class="text-xl font-bold text-green-400">{{ activeRoom.bedCapacity - activeRoom.occupiedBeds }}</p><p class="text-xs text-slate-500">Free</p></div>
+            <div class="bg-dark-800 rounded-lg p-3"><p class="text-xl font-bold text-gray-900">{{ activeRoom.bedCapacity }}</p><p class="text-xs text-gray-600">Total Beds</p></div>
+            <div class="bg-dark-800 rounded-lg p-3"><p class="text-xl font-bold text-gold-400">{{ activeRoom.occupiedBeds }}</p><p class="text-xs text-gray-600">Occupied</p></div>
+            <div class="bg-dark-800 rounded-lg p-3"><p class="text-xl font-bold text-green-400">{{ activeRoom.bedCapacity - activeRoom.occupiedBeds }}</p><p class="text-xs text-gray-600">Free</p></div>
           </div>
           <div>
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-white font-semibold text-sm">Occupants ({{ activeRoom.occupants?.length || 0 }})</h4>
+              <h4 class="text-gray-900 font-semibold text-sm">Occupants ({{ activeRoom.occupants?.length || 0 }})</h4>
               <button v-if="activeRoom.isAvailable" @click="openAssign(activeRoom)"
                       class="text-xs px-3 py-1.5 rounded-lg font-medium text-white transition-colors"
                       style="background: rgba(180,83,9,0.7);">+ Assign Pilgrim</button>
@@ -858,22 +858,22 @@ async function deleteFloor(floor) {
                   {{ occ.fullName?.split(' ').map(n=>n[0]).slice(0,2).join('') || '?' }}
                 </div>
                 <div class="flex-1 min-w-0">
-                  <p class="text-white font-semibold text-sm">{{ occ.fullName }}</p>
-                  <p class="text-slate-500 text-xs">{{ occ.country }} · {{ occ.familyMemberCount }} member(s)</p>
+                  <p class="text-gray-900 font-semibold text-sm">{{ occ.fullName }}</p>
+                  <p class="text-gray-600 text-xs">{{ occ.country }} · {{ occ.familyMemberCount }} member(s)</p>
                   <div class="flex items-center gap-3 mt-1.5 flex-wrap">
                     <span class="flex items-center gap-1 text-xs text-green-400"><span>✈️ In:</span><span>{{ fmtDate(occ.checkIn) }}</span></span>
                     <span class="flex items-center gap-1 text-xs text-red-400"><span>✈️ Out:</span><span>{{ fmtDate(occ.checkOut) }}</span></span>
                   </div>
                 </div>
                 <div class="flex flex-col gap-1 flex-shrink-0 mt-1">
-                  <button @click="openTrail(occ.pilgrimId)" class="text-primary-400 hover:text-primary-300 text-xs" title="View hotel trail">🗺️</button>
+                  <button @click="openTrail(occ.pilgrimId)" class="text-amber-700 hover:text-amber-600 text-xs" title="View hotel trail">🗺️</button>
                   <button @click="deallocate(activeRoom, occ)" class="text-red-500 hover:text-red-300 text-xs" title="Remove from room">✕</button>
                 </div>
               </div>
             </div>
           </div>
           <button v-if="activeRoom.isAvailable" @click="openAssign(activeRoom)"
-                  class="w-full py-2.5 rounded-xl text-sm font-semibold text-white transition-colors"
+                  class="w-full py-2.5 rounded-xl text-sm font-semibold text-gray-900 transition-colors"
                   style="background: linear-gradient(135deg, rgba(180,83,9,0.6), rgba(180,83,9,0.4)); border: 1px solid rgba(180,83,9,0.4);">
             + Assign Pilgrim to This Room
           </button>
@@ -890,8 +890,8 @@ async function deleteFloor(floor) {
            style="background: #0a1208; border: 1px solid rgba(180,83,9,0.3);">
         <div class="px-5 py-4 border-b border-dark-700 flex items-center justify-between">
           <div>
-            <h3 class="text-white font-bold">Assign Pilgrim</h3>
-            <p class="text-slate-400 text-xs">Room {{ assignRoom.roomNumber }} · {{ assignRoom.floorLabel }} · {{ assignRoom.hotelName }}</p>
+            <h3 class="text-gray-900 font-bold">Assign Pilgrim</h3>
+            <p class="text-gray-600 text-xs">Room {{ assignRoom.roomNumber }} · {{ assignRoom.floorLabel }} · {{ assignRoom.hotelName }}</p>
           </div>
           <button @click="showAssign = false" class="text-slate-400 hover:text-white text-xl">✕</button>
         </div>
@@ -902,12 +902,12 @@ async function deleteFloor(floor) {
             <div v-for="p in assignablePilgrims" :key="p.id"
                  @click="assign(p)"
                  class="flex items-center gap-3 bg-dark-800 hover:bg-dark-700 rounded-xl px-3 py-2.5 cursor-pointer transition-colors group">
-              <div class="w-9 h-9 rounded-full bg-primary-900/50 border border-primary-800/50 flex items-center justify-center text-xs font-bold text-primary-400 flex-shrink-0">
+              <div class="w-9 h-9 rounded-full bg-primary-900/50 border border-primary-800/50 flex items-center justify-center text-xs font-bold text-amber-700 flex-shrink-0">
                 {{ p.fullName?.split(' ').map(n=>n[0]).slice(0,2).join('') }}
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-white text-sm font-medium">{{ p.fullName }}</p>
-                <p class="text-slate-500 text-xs">{{ p.country }} · {{ p.familyMemberCount }} member(s)</p>
+                <p class="text-gray-600 text-xs">{{ p.country }} · {{ p.familyMemberCount }} member(s)</p>
                 <div class="flex gap-3 mt-0.5 text-xs">
                   <span class="text-green-400">In: {{ fmtDate(p.arrivalDate) }}</span>
                   <span class="text-red-400">Out: {{ fmtDate(p.departureDate) }}</span>
@@ -931,8 +931,8 @@ async function deleteFloor(floor) {
         <div class="px-5 py-4 border-b border-dark-700 flex items-center justify-between"
              style="background: rgba(59,130,246,0.08);">
           <div>
-            <h3 class="text-white font-bold">Hotel Trail</h3>
-            <p v-if="trailData" class="text-slate-400 text-xs mt-0.5">{{ trailData.pilgrimName }} · {{ trailData.country }} · {{ trailData.trail?.length || 0 }} stay(s)</p>
+            <h3 class="text-gray-900 font-bold">Hotel Trail</h3>
+            <p v-if="trailData" class="text-gray-600 text-xs mt-0.5">{{ trailData.pilgrimName }} · {{ trailData.country }} · {{ trailData.trail?.length || 0 }} stay(s)</p>
           </div>
           <button @click="showTrail = false" class="text-slate-400 hover:text-white text-xl leading-none">✕</button>
         </div>
@@ -941,7 +941,7 @@ async function deleteFloor(floor) {
           <div v-else-if="!trailData?.trail?.length" class="text-center py-10">
             <div class="text-3xl mb-2">📋</div>
             <p class="text-white">No hotel history yet</p>
-            <p class="text-slate-400 text-sm mt-1">This pilgrim has not been assigned any room yet.</p>
+            <p class="text-gray-700 text-sm mt-1">This pilgrim has not been assigned any room yet.</p>
           </div>
           <div v-else class="relative">
             <div class="absolute left-5 top-0 bottom-0 w-0.5 bg-dark-700"></div>
@@ -952,8 +952,8 @@ async function deleteFloor(floor) {
                 <div :class="['flex-1 rounded-xl p-4 border', stay.isCurrentStay ? 'border-green-700/50 bg-green-900/10' : 'border-dark-700 bg-dark-800/60']">
                   <div class="flex items-start justify-between gap-2">
                     <div>
-                      <p class="text-white font-semibold text-sm">{{ stay.hotelName }}</p>
-                      <p class="text-slate-400 text-xs">{{ stay.hotelCity }}</p>
+                      <p class="text-gray-900 font-semibold text-sm">{{ stay.hotelName }}</p>
+                      <p class="text-gray-600 text-xs">{{ stay.hotelCity }}</p>
                     </div>
                     <span :class="['text-xs px-2 py-0.5 rounded-full flex-shrink-0', stay.isCurrentStay ? 'bg-green-900/60 text-green-400 border border-green-700/50' : 'bg-dark-700 text-slate-500']">
                       {{ stay.isCurrentStay ? 'Current' : 'Completed' }}

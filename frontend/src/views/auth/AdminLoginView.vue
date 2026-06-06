@@ -31,7 +31,7 @@ async function login() {
       </button>
       <div class="flex items-center gap-2">
         <span>🛡️</span>
-        <span class="text-white font-semibold text-sm">Admin Panel</span>
+        <span class="text-gray-900 font-semibold text-sm">Admin Panel</span>
       </div>
     </div>
 
@@ -40,9 +40,9 @@ async function login() {
 
         <div class="text-center mb-8">
           <div class="w-20 h-20 rounded-2xl bg-gold-900/50 border border-gold-700 flex items-center justify-center text-4xl mx-auto mb-4">🛡️</div>
-          <h1 class="text-2xl font-bold text-white">Admin Access</h1>
+          <h1 class="text-2xl font-bold text-gray-900">Admin Access</h1>
           <p class="text-gold-400 text-sm mt-2">Misbahuda Control Panel</p>
-          <p class="text-slate-500 text-xs mt-1">Restricted — Authorized personnel only</p>
+          <p class="text-gray-600 text-xs mt-1">Restricted — Authorized personnel only</p>
         </div>
 
         <div v-if="error" class="mb-4 bg-red-900/50 border border-red-700 text-red-300 text-sm rounded-lg px-4 py-3">{{ error }}</div>

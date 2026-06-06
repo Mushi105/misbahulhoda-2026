@@ -239,22 +239,22 @@ onMounted(load)
     <!-- Header -->
     <div class="flex items-center justify-between flex-wrap gap-3">
       <div>
-        <h1 class="text-2xl font-bold text-white">📿 Majalis Management</h1>
-        <p class="text-slate-400 text-sm mt-0.5">Manage Majalis, Namaz Timings and Food Schedule</p>
+        <h1 class="text-2xl font-bold text-gray-900">📿 Majalis Management</h1>
+        <p class="text-gray-700 text-sm mt-0.5">Manage Majalis, Namaz Timings and Food Schedule</p>
       </div>
       <div class="flex gap-2">
         <button v-if="tab==='majalis'" @click="openAddMajalis"
-          class="px-4 py-2 rounded-xl text-sm font-semibold text-white"
+          class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-900"
           style="background:linear-gradient(135deg,#d97706,#b45309);">
           + Add Majalis
         </button>
         <button v-if="tab==='namaz'" @click="openNamazModal"
-          class="px-4 py-2 rounded-xl text-sm font-semibold text-white"
-          style="background:linear-gradient(135deg,#065f46,#047857);">
+          class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-900"
+          style="background:linear-gradient(135deg,#b88a00,#D4A800);">
           🕌 Set Namaz Timings
         </button>
         <button v-if="tab==='food'" @click="openFoodModal"
-          class="px-4 py-2 rounded-xl text-sm font-semibold text-white"
+          class="px-4 py-2 rounded-xl text-sm font-semibold text-gray-900"
           style="background:linear-gradient(135deg,#1d4ed8,#1e40af);">
           + Add Food Schedule
         </button>
@@ -263,7 +263,7 @@ onMounted(load)
 
     <!-- Alert -->
     <div v-if="msg.text"
-         :class="msg.type==='success' ? 'bg-emerald-900/40 border-emerald-700 text-emerald-300' : 'bg-red-900/40 border-red-700 text-red-300'"
+         :class="msg.type==='success' ? 'bg-emerald-900/40 border-emerald-700 text-amber-600' : 'bg-red-900/40 border-red-700 text-red-300'"
          class="border rounded-lg px-4 py-3 text-sm flex justify-between items-center">
       {{ msg.text }}<button @click="msg.text=''" class="opacity-60 hover:opacity-100 ml-4">✕</button>
     </div>
@@ -273,12 +273,12 @@ onMounted(load)
       <button v-for="[t, label] in [['majalis','📿 Majalis'],['namaz','🕌 Namaz Timings'],['food','🍽️ Food Schedule']]"
         :key="t" @click="tab=t; load()"
         :class="['px-4 py-2 text-sm font-medium rounded-t-lg transition-colors',
-          tab===t ? 'bg-dark-800 text-emerald-400 border border-b-0 border-emerald-900/40' : 'text-slate-500 hover:text-white']">
+          tab===t ? 'bg-gray-100 text-amber-700 border border-b-0 border-gray-200' : 'text-gray-700 hover:text-gray-900']">
         {{ label }}
       </button>
     </div>
 
-    <div v-if="loading" class="text-center py-12 text-slate-400">Loading...</div>
+    <div v-if="loading" class="text-center py-12 text-gray-700">Loading...</div>
 
     <!-- ── Majalis List ─────────────────────────────────────────────────────── -->
     <template v-else-if="tab==='majalis'">
@@ -290,7 +290,7 @@ onMounted(load)
       </div>
       <div v-for="m in majalis" :key="m.id"
            class="rounded-xl border p-4 transition-all"
-           style="background:rgba(2,20,10,0.5); border-color:rgba(180,83,9,0.2);">
+           style="background:#ffffff; border-color:rgba(180,83,9,0.35);">
         <div class="flex items-start gap-3">
           <!-- Scholar thumbnail -->
           <div v-if="m.imageUrl" class="shrink-0 w-16 h-16 rounded-xl overflow-hidden border border-amber-900/30">
@@ -302,22 +302,22 @@ onMounted(load)
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
-              <p class="text-white font-bold">{{ m.title }}</p>
+              <p class="text-gray-900 font-bold">{{ m.title }}</p>
               <span class="text-xs px-2 py-0.5 rounded-full border"
-                    :class="m.language==='Urdu' ? 'bg-emerald-900/40 border-emerald-700 text-emerald-400' : 'bg-blue-900/40 border-blue-700 text-blue-400'">
+                    :class="m.language==='Urdu' ? 'bg-emerald-900/40 border-emerald-700 text-amber-700' : 'bg-blue-900/40 border-blue-700 text-blue-400'">
                 {{ m.language }}
               </span>
             </div>
-            <p class="text-slate-400 text-sm mt-1">📍 {{ m.venue }}</p>
-            <div class="flex gap-4 mt-1 text-xs text-slate-500">
+            <p class="text-gray-700 text-sm mt-1">📍 {{ m.venue }}</p>
+            <div class="flex gap-4 mt-1 text-xs text-gray-600">
               <span>🕐 {{ fmtDT(m.startTime) }}</span>
               <span v-if="m.endTime">— {{ fmtDT(m.endTime) }}</span>
             </div>
-            <div class="flex gap-4 mt-1 text-xs text-slate-500">
+            <div class="flex gap-4 mt-1 text-xs text-gray-600">
               <span v-if="m.molanaName">🎓 {{ m.molanaName }}</span>
               <span v-if="m.nohaKhuwanName">🎵 {{ m.nohaKhuwanName }}</span>
             </div>
-            <p v-if="m.description" class="text-slate-500 text-xs mt-1">{{ m.description }}</p>
+            <p v-if="m.description" class="text-gray-600 text-xs mt-1">{{ m.description }}</p>
           </div>
           <div class="flex flex-col gap-2 shrink-0">
             <button @click="openProgramModal(m)"
@@ -343,7 +343,7 @@ onMounted(load)
     <!-- ── Namaz Timings ────────────────────────────────────────────────────── -->
     <template v-else-if="tab==='namaz'">
       <div class="flex items-center gap-3">
-        <label class="text-slate-400 text-sm">Date:</label>
+        <label class="text-gray-700 text-sm">Date:</label>
         <input v-model="namazDate" @change="loadNamaz" type="date"
           class="input w-auto text-sm" style="min-height:40px;" />
       </div>
@@ -355,10 +355,10 @@ onMounted(load)
       <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
         <div v-for="n in namaz" :key="n.id"
              class="rounded-xl border p-4 text-center"
-             style="background:rgba(2,20,10,0.5); border-color:rgba(16,185,129,0.2);">
-          <p class="text-emerald-400 font-bold text-sm">{{ n.prayerName }}</p>
-          <p class="text-white text-xl font-bold mt-1">{{ n.time?.substring(0,5) || '—' }}</p>
-          <p v-if="n.venue" class="text-slate-500 text-xs mt-1">{{ n.venue }}</p>
+             style="background:#ffffff; border-color:rgba(212,168,0,0.35);">
+          <p class="text-amber-700 font-bold text-sm">{{ n.prayerName }}</p>
+          <p class="text-gray-900 text-xl font-bold mt-1">{{ n.time?.substring(0,5) || '—' }}</p>
+          <p v-if="n.venue" class="text-gray-600 text-xs mt-1">{{ n.venue }}</p>
         </div>
       </div>
     </template>
@@ -372,17 +372,17 @@ onMounted(load)
       </div>
       <div v-for="f in food" :key="f.id"
            class="rounded-xl border p-4 flex items-center gap-4"
-           style="background:rgba(2,20,10,0.5); border-color:rgba(16,185,129,0.15);">
+           style="background:#ffffff; border-color:rgba(212,168,0,0.35);">
         <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
-             style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2);">
+             style="background:rgba(212,168,0,0.1); border:1px solid rgba(212,168,0,0.2);">
           {{ f.mealType==='Breakfast'?'🌅':f.mealType==='Lunch'?'☀️':f.mealType==='Dinner'?'🌙':f.mealType==='Sehri'?'⭐':f.mealType==='Iftaar'?'🌙':'🍽️' }}
         </div>
         <div class="flex-1 min-w-0">
-          <p class="text-white font-semibold">{{ f.mealType }}</p>
-          <p class="text-emerald-400 text-sm">🕐 {{ fmtDT(f.servedAt) }}</p>
-          <p class="text-slate-400 text-xs">📍 {{ f.location }}</p>
-          <p v-if="f.description" class="text-slate-500 text-xs mt-0.5">{{ f.description }}</p>
-          <p v-if="f.estimatedServings" class="text-slate-500 text-xs">👥 ~{{ f.estimatedServings }} servings</p>
+          <p class="text-gray-900 font-semibold">{{ f.mealType }}</p>
+          <p class="text-amber-700 text-sm">🕐 {{ fmtDT(f.servedAt) }}</p>
+          <p class="text-gray-600 text-xs">📍 {{ f.location }}</p>
+          <p v-if="f.description" class="text-gray-600 text-xs mt-0.5">{{ f.description }}</p>
+          <p v-if="f.estimatedServings" class="text-gray-600 text-xs">👥 ~{{ f.estimatedServings }} servings</p>
         </div>
         <button @click="deleteFood(f.id)"
           class="text-xs px-3 py-1.5 rounded-lg border border-red-900/50 text-red-400 hover:bg-red-950/30 transition shrink-0"
@@ -401,7 +401,7 @@ onMounted(load)
            style="background:#0d1f14; border:1px solid rgba(180,83,9,0.3);">
         <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#d97706,transparent);"></div>
         <div class="flex items-center justify-between px-5 py-4 border-b border-amber-900/30">
-          <h3 class="text-white font-bold text-lg">{{ editingId ? '✏️ Edit Majalis' : '+ New Majalis' }}</h3>
+          <h3 class="text-gray-900 font-bold text-lg">{{ editingId ? '✏️ Edit Majalis' : '+ New Majalis' }}</h3>
           <button @click="showMajalisModal=false" class="text-slate-400 hover:text-white text-xl">✕</button>
         </div>
         <div class="p-5 space-y-4 max-h-[75vh] overflow-y-auto">
@@ -451,7 +451,7 @@ onMounted(load)
           </div>
           <div class="flex gap-3 pt-2">
             <button @click="saveMajalis" :disabled="saving"
-              class="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
+              class="flex-1 py-2.5 rounded-xl text-gray-900 font-semibold text-sm disabled:opacity-50"
               style="background:linear-gradient(135deg,#d97706,#b45309);">
               {{ saving ? 'Saving...' : editingId ? '✅ Update' : '✅ Create' }}
             </button>
@@ -466,22 +466,22 @@ onMounted(load)
          class="fixed inset-0 z-50 flex items-center justify-center p-4"
          style="background:rgba(0,0,0,0.85);" @click.self="showNamazModal=false">
       <div class="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
-           style="background:#0d1f14; border:1px solid rgba(16,185,129,0.25);">
+           style="background:#0d1f14; border:1px solid rgba(212,168,0,0.25);">
         <div class="flex items-center justify-between px-5 py-4 border-b border-emerald-900/30">
-          <h3 class="text-white font-bold text-lg">🕌 Namaz Timings — {{ namazDate }}</h3>
+          <h3 class="text-gray-900 font-bold text-lg">🕌 Namaz Timings — {{ namazDate }}</h3>
           <button @click="showNamazModal=false" class="text-slate-400 hover:text-white text-xl">✕</button>
         </div>
         <div class="p-5 space-y-3">
           <div v-for="n in namazForm" :key="n.prayerName"
                class="flex items-center gap-3">
-            <span class="text-emerald-400 font-semibold text-sm w-20 shrink-0">{{ n.prayerName }}</span>
+            <span class="text-amber-700 font-semibold text-sm w-20 shrink-0">{{ n.prayerName }}</span>
             <input v-model="n.time" type="time" class="input flex-1" style="min-height:40px;" />
             <input v-model="n.venue" class="input flex-1" placeholder="Venue" style="min-height:40px;" />
           </div>
           <div class="flex gap-3 pt-2">
             <button @click="saveNamaz" :disabled="saving"
-              class="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
-              style="background:linear-gradient(135deg,#065f46,#047857);">
+              class="flex-1 py-2.5 rounded-xl text-gray-900 font-semibold text-sm disabled:opacity-50"
+              style="background:linear-gradient(135deg,#b88a00,#D4A800);">
               {{ saving ? 'Saving...' : '✅ Save' }}
             </button>
             <button @click="showNamazModal=false" class="btn-outline px-5">Cancel</button>
@@ -497,7 +497,7 @@ onMounted(load)
       <div class="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
            style="background:#0d1f14; border:1px solid rgba(29,78,216,0.3);">
         <div class="flex items-center justify-between px-5 py-4 border-b border-blue-900/30">
-          <h3 class="text-white font-bold text-lg">🍽️ Add Food Schedule</h3>
+          <h3 class="text-gray-900 font-bold text-lg">🍽️ Add Food Schedule</h3>
           <button @click="showFoodModal=false" class="text-slate-400 hover:text-white text-xl">✕</button>
         </div>
         <div class="p-5 space-y-4">
@@ -525,7 +525,7 @@ onMounted(load)
           </div>
           <div class="flex gap-3 pt-1">
             <button @click="saveFood" :disabled="saving"
-              class="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
+              class="flex-1 py-2.5 rounded-xl text-gray-900 font-semibold text-sm disabled:opacity-50"
               style="background:linear-gradient(135deg,#1d4ed8,#1e40af);">
               {{ saving ? 'Saving...' : '✅ Add' }}
             </button>
@@ -544,7 +544,7 @@ onMounted(load)
         <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#7c3aed,transparent);"></div>
         <div class="flex items-center justify-between px-5 py-4 border-b border-purple-900/30">
           <div>
-            <h3 class="text-white font-bold text-lg">📋 Majalis Program Setup</h3>
+            <h3 class="text-gray-900 font-bold text-lg">📋 Majalis Program Setup</h3>
             <p class="text-purple-300 text-xs mt-0.5">{{ programMajalisTitle }}</p>
           </div>
           <button @click="showProgramModal=false" class="text-slate-400 hover:text-white text-xl">✕</button>
@@ -561,10 +561,10 @@ onMounted(load)
             <div class="flex items-center gap-2">
               <div class="flex flex-col gap-0.5 shrink-0">
                 <button @click="moveProgramItem(idx,-1)" :disabled="idx===0"
-                  class="w-6 h-6 rounded text-xs text-slate-400 hover:text-white disabled:opacity-20"
+                  class="w-6 h-6 rounded text-xs text-gray-600 hover:text-white disabled:opacity-20"
                   style="background:rgba(255,255,255,0.05);">▲</button>
                 <button @click="moveProgramItem(idx,1)" :disabled="idx===programItems.length-1"
-                  class="w-6 h-6 rounded text-xs text-slate-400 hover:text-white disabled:opacity-20"
+                  class="w-6 h-6 rounded text-xs text-gray-600 hover:text-white disabled:opacity-20"
                   style="background:rgba(255,255,255,0.05);">▼</button>
               </div>
               <div class="w-8 h-8 rounded-lg flex items-center justify-center text-lg shrink-0"
@@ -607,7 +607,7 @@ onMounted(load)
           <!-- Save button -->
           <div class="flex gap-3 pt-1">
             <button @click="saveProgram" :disabled="savingProgram"
-              class="flex-1 py-3 rounded-xl text-white font-bold text-sm disabled:opacity-50"
+              class="flex-1 py-3 rounded-xl text-gray-900 font-bold text-sm disabled:opacity-50"
               style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">
               {{ savingProgram ? 'Saving...' : '✅ Save Program' }}
             </button>

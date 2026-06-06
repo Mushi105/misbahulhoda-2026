@@ -49,7 +49,7 @@ async function register() {
       </button>
       <div class="flex items-center gap-2">
         <span>🕌</span>
-        <span class="text-white font-semibold text-sm">Pilgrim Portal</span>
+        <span class="text-gray-900 font-semibold text-sm">Pilgrim Portal</span>
       </div>
     </div>
 
@@ -59,19 +59,19 @@ async function register() {
         <!-- Icon + Title -->
         <div class="text-center mb-8">
           <div class="w-20 h-20 rounded-2xl bg-primary-900/50 border border-primary-700 flex items-center justify-center text-4xl mx-auto mb-4">🕌</div>
-          <h1 class="text-2xl font-bold text-white">Pilgrim Portal</h1>
+          <h1 class="text-2xl font-bold text-gray-900">Pilgrim Portal</h1>
           <p class="text-gold-400 font-arabic mt-1">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ</p>
-          <p class="text-slate-400 text-sm mt-2">Arbaeen 2026 Registration & Access</p>
+          <p class="text-gray-700 text-sm mt-2">Arbaeen 2026 Registration & Access</p>
         </div>
 
         <!-- Tabs -->
         <div class="flex bg-dark-800 rounded-xl p-1 mb-6">
           <button @click="tab = 'login'; error = ''"
-            :class="['flex-1 py-2 rounded-lg text-sm font-medium transition-all', tab === 'login' ? 'bg-primary-700 text-white' : 'text-slate-400 hover:text-white']">
+            :class="['flex-1 py-2 rounded-lg text-sm font-medium transition-all', tab === 'login' ? 'bg-amber-600 text-white' : 'text-slate-400 hover:text-white']">
             Sign In
           </button>
           <button @click="tab = 'register'; error = ''"
-            :class="['flex-1 py-2 rounded-lg text-sm font-medium transition-all', tab === 'register' ? 'bg-primary-700 text-white' : 'text-slate-400 hover:text-white']">
+            :class="['flex-1 py-2 rounded-lg text-sm font-medium transition-all', tab === 'register' ? 'bg-amber-600 text-white' : 'text-slate-400 hover:text-white']">
             Register
           </button>
         </div>
@@ -118,7 +118,7 @@ async function register() {
           <button type="submit" :disabled="loading" class="btn-primary w-full py-3 text-base">
             {{ loading ? 'Registering...' : 'Register as Pilgrim' }}
           </button>
-          <p class="text-slate-500 text-xs text-center">
+          <p class="text-gray-600 text-xs text-center">
             After registering, complete your travel profile to submit your application.
           </p>
         </form>

@@ -14,7 +14,7 @@ defineProps({
     'w-28 h-28': size === '3xl',
   }"
   class="rounded-full flex items-center justify-center overflow-hidden border border-gold-700/40 flex-shrink-0"
-  style="background: radial-gradient(circle, #1a1200 0%, #020617 100%); box-shadow: 0 0 16px rgba(180,83,9,0.25);">
+  style="background: radial-gradient(circle, #0d0d0d 0%, #020617 100%); box-shadow: 0 0 16px rgba(180,83,9,0.25);">
     <img
       src="https://www.misbahulhoda.org/wp-content/uploads/2023/10/Logo-white-512-512.png"
       alt="Misbah ul Hoda"

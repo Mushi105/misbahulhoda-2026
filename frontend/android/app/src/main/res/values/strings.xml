@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Misbah ul Hoda</string>
+    <string name="title_activity_main">Misbah ul Hoda</string>
+    <string name="package_name">com.misbahulhoda.arbaeen2026</string>
+    <string name="custom_url_scheme">com.misbahulhoda.arbaeen2026</string>
+</resources>

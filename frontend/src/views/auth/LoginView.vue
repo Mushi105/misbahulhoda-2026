@@ -299,30 +299,30 @@ onMounted(() => {
 <template>
   <!-- ══ Full-page canvas — Imam Zaman emerald theme ══ -->
   <div class="relative flex flex-col md:flex-row"
-       style="min-height:100dvh; overflow-x:hidden; overflow-y:auto; -webkit-overflow-scrolling:touch; background: linear-gradient(160deg, #010f05 0%, #021a08 30%, #041a10 55%, #020d1a 80%, #020617 100%);">
+       style="min-height:100dvh; overflow-x:hidden; overflow-y:auto; -webkit-overflow-scrolling:touch; background: #f8fafc;">
 
     <!-- Global ambient glows — full page -->
     <div class="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full pointer-events-none"
-         style="background: radial-gradient(circle, rgba(16,185,129,0.10) 0%, transparent 70%); animation: pulseGlow 5s ease-in-out infinite;"></div>
+         style="background: radial-gradient(circle, rgba(212,168,0,0.10) 0%, transparent 70%); "></div>
     <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
-         style="background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%); animation: pulseGlow 7s ease-in-out infinite reverse;"></div>
+         style="background: radial-gradient(circle, rgba(212,168,0,0.07) 0%, transparent 70%); "></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full pointer-events-none"
-         style="background: radial-gradient(ellipse, rgba(180,83,9,0.04) 0%, transparent 70%); animation: pulseGlow 9s ease-in-out infinite;"></div>
+         style="background: radial-gradient(ellipse, rgba(180,83,9,0.04) 0%, transparent 70%); "></div>
 
     <!-- Global Islamic grid pattern — full page -->
     <div class="absolute inset-0 opacity-[0.035] pointer-events-none"
-         style="background-image: repeating-linear-gradient(0deg, transparent, transparent 36px, rgba(16,185,129,0.7) 36px, rgba(16,185,129,0.7) 37px), repeating-linear-gradient(90deg, transparent, transparent 36px, rgba(16,185,129,0.7) 36px, rgba(16,185,129,0.7) 37px), repeating-linear-gradient(45deg, transparent, transparent 25px, rgba(16,185,129,0.35) 25px, rgba(16,185,129,0.35) 26px), repeating-linear-gradient(-45deg, transparent, transparent 25px, rgba(16,185,129,0.35) 25px, rgba(16,185,129,0.35) 26px);"></div>
+         style="background-image: repeating-linear-gradient(0deg, transparent, transparent 36px, rgba(212,168,0,0.7) 36px, rgba(212,168,0,0.7) 37px), repeating-linear-gradient(90deg, transparent, transparent 36px, rgba(212,168,0,0.7) 36px, rgba(212,168,0,0.7) 37px), repeating-linear-gradient(45deg, transparent, transparent 25px, rgba(212,168,0,0.35) 25px, rgba(212,168,0,0.35) 26px), repeating-linear-gradient(-45deg, transparent, transparent 25px, rgba(212,168,0,0.35) 25px, rgba(212,168,0,0.35) 26px);"></div>
 
     <!-- Top accent bar -->
     <div class="absolute top-0 left-0 right-0 h-0.5 z-50 pointer-events-none"
-         style="background: linear-gradient(90deg, transparent, #10b981, #d97706, #10b981, transparent);"></div>
+         style="background: linear-gradient(90deg, transparent, #D4A800, #d97706, #D4A800, transparent);"></div>
 
     <!-- ══════════ LEFT PANEL ══════════ -->
     <div class="hidden md:flex md:w-[42%] relative flex-col items-center justify-center px-10 overflow-hidden"
-         style="border-right: 1px solid rgba(16,185,129,0.15);">
+         style="border-right: 1px solid #e2e8f0;">
 
       <!-- Back to home -->
-      <router-link to="/" class="absolute top-6 left-6 flex items-center gap-1.5 text-xs text-emerald-700 hover:text-emerald-400 transition-colors z-20">
+      <router-link to="/" class="absolute top-6 left-6 flex items-center gap-1.5 text-xs hover:text-amber-700 transition-colors z-20">
         ← Back to Home
       </router-link>
 
@@ -332,70 +332,70 @@ onMounted(() => {
         <div class="relative mx-auto w-32 h-32 mb-6">
           <!-- Outer glow ring -->
           <div class="absolute inset-0 rounded-full opacity-40"
-               style="background: conic-gradient(from 0deg, #10b981, #d97706, #059669, #d97706, #10b981); padding: 2px; animation: spinSlow 8s linear infinite;">
-            <div class="w-full h-full rounded-full" style="background:#021a08;"></div>
+               style="background: conic-gradient(from 0deg, #D4A800, #d97706, #059669, #d97706, #D4A800); padding: 2px; animation: spinSlow 8s linear infinite;">
+            <div class="w-full h-full rounded-full" style="background:#f8fafc;"></div>
           </div>
           <!-- Inner ring -->
           <div class="absolute inset-1 rounded-full border border-emerald-500/30 flex items-center justify-center"
-               style="background: radial-gradient(circle, #031a0a 0%, #020617 100%); box-shadow: 0 0 32px rgba(16,185,129,0.25), inset 0 0 20px rgba(16,185,129,0.05);">
+               style="background: #f8fafc; box-shadow: 0 0 24px rgba(212,168,0,0.2);">
             <MHLogo size="3xl" />
           </div>
         </div>
 
         <!-- Brand -->
-        <h1 class="text-3xl font-bold text-white tracking-wide">Misbah ul Hoda</h1>
-        <p class="text-emerald-400 text-xs tracking-widest uppercase mt-1 font-medium">misbahulhoda.org</p>
+        <h1 class="text-3xl font-bold text-gray-900 tracking-wide">Misbah ul Hoda</h1>
+        <p class="text-xs tracking-widest font-semibold uppercase mt-1 font-medium">misbahulhoda.org</p>
 
         <!-- Imam Zaman calligraphy block -->
         <div class="mt-5 mb-5 py-4 px-5 rounded-2xl relative overflow-hidden"
-             style="background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); box-shadow: 0 0 20px rgba(16,185,129,0.08);">
-          <p class="font-arabic text-emerald-300 text-3xl mb-1.5 leading-relaxed"
-             style="text-shadow: 0 0 20px rgba(16,185,129,0.5);">
+             style="background: rgba(212,168,0,0.06); border: 1px solid rgba(212,168,0,0.2);">
+          <p class="font-arabic text-3xl mb-1.5 leading-relaxed"
+             style="color:#D4A800; font-size:1.8rem; text-shadow: 0 0 20px rgba(212,168,0,0.3);">
             يَا صَاحِبَ الزَّمَان
           </p>
-          <p class="text-emerald-500/70 text-xs font-medium tracking-wider">O Master of the Age</p>
-          <div class="mt-2.5 pt-2.5 border-t border-emerald-800/30">
+          <p class="text-xs font-medium tracking-wider">O Master of the Age</p>
+          <div class="mt-2.5 pt-2.5 border-t border-amber-200">
             <p class="font-arabic text-gold-400/80 text-sm leading-relaxed">
               اللَّهُمَّ عَجِّلْ لِوَلِيِّكَ الْفَرَجَ
             </p>
-            <p class="text-slate-500 text-xs mt-0.5">O Allah, hasten the reappearance of Your Wali</p>
+            <p class="text-gray-600 text-xs mt-0.5">O Allah, hasten the reappearance of Your Wali</p>
           </div>
         </div>
 
         <!-- Tagline -->
         <div class="flex items-center gap-2 justify-center mb-1">
-          <div class="h-px w-10" style="background: linear-gradient(to right, transparent, rgba(16,185,129,0.5));"></div>
+          <div class="h-px w-10" style="background: linear-gradient(to right, transparent, rgba(212,168,0,0.5));"></div>
           <span class="text-emerald-600 text-xs">✦</span>
-          <div class="h-px w-10" style="background: linear-gradient(to left, transparent, rgba(16,185,129,0.5));"></div>
+          <div class="h-px w-10" style="background: linear-gradient(to left, transparent, rgba(212,168,0,0.5));"></div>
         </div>
-        <p class="text-white text-sm font-semibold tracking-wider">Ziyarat with Ma'rifat</p>
-        <p class="text-slate-500 text-xs mt-1">Arbaeen 2026 — Pilgrimage Management</p>
+        <p class="text-gray-900 text-sm font-semibold tracking-wider">Ziyarat with Ma'rifat</p>
+        <p class="text-gray-600 text-xs mt-1">Arbaeen 2026 — Pilgrimage Management</p>
 
         <!-- Features -->
         <div class="mt-7 space-y-2.5 text-left">
           <div v-for="f in [
-            { icon: '🕌', text: 'Pilgrim registration & family management', color: 'rgba(16,185,129,0.15)', border: 'rgba(16,185,129,0.3)' },
-            { icon: '🚌', text: 'Room, bus & Karwan allocation', color: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.2)' },
+            { icon: '🕌', text: 'Pilgrim registration & family management', color: 'rgba(212,168,0,0.15)', border: 'rgba(212,168,0,0.3)' },
+            { icon: '🚌', text: 'Room, bus & Karwan allocation', color: 'rgba(212,168,0,0.1)', border: 'rgba(212,168,0,0.2)' },
             { icon: '📍', text: 'Live GPS Karwan tracking', color: 'rgba(180,83,9,0.12)', border: 'rgba(180,83,9,0.25)' },
             { icon: '📿', text: 'Majalis, Namaz & Ziyarat schedule', color: 'rgba(180,83,9,0.1)', border: 'rgba(180,83,9,0.2)' },
           ]" :key="f.text" class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
                   :style="`background:${f.color}; border:1px solid ${f.border};`">{{ f.icon }}</span>
-            <span class="text-slate-300 text-xs">{{ f.text }}</span>
+            <span class="text-gray-600 text-xs">{{ f.text }}</span>
           </div>
         </div>
 
         <!-- Date pill -->
         <div class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full"
-             style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25);">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-emerald-300 text-xs font-medium">Registrations Open · Arbaeen 2026</span>
+             style="background:rgba(212,168,0,0.08); border:1px solid rgba(212,168,0,0.25);">
+          <span class="w-2 h-2 rounded-full animate-pulse" style="background:#D4A800;"></span>
+          <span class="text-xs font-medium" style="color:#9a6f00;">Registrations Open · Arbaeen 2026</span>
         </div>
 
       </div>
 
       <!-- Bottom accent line -->
-      <div class="absolute bottom-0 left-0 right-0 h-0.5" style="background: linear-gradient(90deg, transparent, rgba(16,185,129,0.4), transparent);"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-0.5" style="background: linear-gradient(90deg, transparent, rgba(212,168,0,0.4), transparent);"></div>
     </div>
 
     <!-- ══════════ RIGHT PANEL — Form ══════════ -->
@@ -404,48 +404,48 @@ onMounted(() => {
 
         <!-- Glass card wraps entire form area -->
         <div class="rounded-2xl overflow-hidden"
-             style="background: rgba(2,20,10,0.55); border: 1px solid rgba(16,185,129,0.18); backdrop-filter: blur(20px); box-shadow: 0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(16,185,129,0.12);">
+             style="background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
 
           <!-- Emerald top bar on card -->
-          <div class="h-0.5 w-full" style="background: linear-gradient(90deg, transparent, #10b981, #d97706, #10b981, transparent);"></div>
+          <div class="h-0.5 w-full" style="background: linear-gradient(90deg, transparent, #D4A800, #d97706, #D4A800, transparent);"></div>
 
         <div class="p-6 sm:p-8">
 
         <!-- Mobile Logo -->
         <div class="md:hidden text-center mb-6">
-          <router-link to="/" class="inline-flex items-center gap-1 text-xs text-emerald-700 hover:text-emerald-400 transition-colors mb-4">← Back to Home</router-link>
+          <router-link to="/" class="inline-flex items-center gap-1 text-xs text-gray-700 hover:text-amber-700 transition-colors mb-4">← Back to Home</router-link>
           <div class="flex justify-center mb-3">
             <div class="relative">
-              <div class="absolute inset-0 rounded-full opacity-30" style="background:radial-gradient(circle, #10b981, transparent); transform:scale(1.4);"></div>
+              <div class="absolute inset-0 rounded-full" style="background:rgba(212,168,0,0.1); transform:scale(1.4);"></div>
               <MHLogo size="lg" />
             </div>
           </div>
-          <h1 class="text-2xl font-bold text-white">Misbah ul Hoda</h1>
-          <p class="text-emerald-400 text-xs mt-1">Ziyarat with Ma'rifat · Arbaeen 2026</p>
+          <h1 class="text-2xl font-bold text-gray-900">Misbah ul Hoda</h1>
+          <p class="text-xs mt-1 font-medium" style="color:#D4A800;">Ziyarat with Ma'rifat · Arbaeen 2026</p>
         </div>
 
         <!-- Tabs -->
-        <div class="flex rounded-xl p-1 mb-5" style="background:rgba(15,23,42,0.8); border:1px solid rgba(16,185,129,0.15);">
+        <div class="flex rounded-xl p-1 mb-5" style="background:#f1f5f9; border:1px solid #e2e8f0;">
           <button @click="switchTab('login')"
             :class="['flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200',
               tab === 'login'
                 ? 'text-white shadow-lg'
-                : 'text-slate-400 hover:text-white']"
-            :style="tab === 'login' ? 'background:linear-gradient(135deg,#065f46,#047857); box-shadow:0 4px 16px rgba(16,185,129,0.3);' : ''">
+                : 'text-gray-700 hover:text-gray-900']"
+            :style="tab === 'login' ? 'background:linear-gradient(135deg,#b88a00,#D4A800); box-shadow:0 4px 16px rgba(212,168,0,0.3);' : ''">
             🔐 Sign In
           </button>
           <button @click="switchTab('register')"
             :class="['flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200',
               tab === 'register'
                 ? 'text-white shadow-lg'
-                : 'text-slate-400 hover:text-white']"
-            :style="tab === 'register' ? 'background:linear-gradient(135deg,#065f46,#047857); box-shadow:0 4px 16px rgba(16,185,129,0.3);' : ''">
+                : 'text-gray-700 hover:text-gray-900']"
+            :style="tab === 'register' ? 'background:linear-gradient(135deg,#b88a00,#D4A800); box-shadow:0 4px 16px rgba(212,168,0,0.3);' : ''">
             🕌 New Pilgrim? Register
           </button>
         </div>
 
         <!-- Error -->
-        <div v-if="error" class="mb-4 flex items-start gap-2 bg-red-900/40 border border-red-700 text-red-300 text-sm rounded-xl px-4 py-3">
+        <div v-if="error" class="mb-4 flex items-start gap-2 text-sm rounded-lg px-4 py-3" style="background:#fef2f2; border:1px solid #fca5a5; color:#dc2626;">
           <span class="mt-0.5 flex-shrink-0">⚠️</span>
           <span>{{ error }}</span>
         </div>
@@ -455,41 +455,41 @@ onMounted(() => {
 
           <!-- Imam Zaman dua strip -->
           <div class="flex items-center gap-3 px-4 py-3 rounded-xl mb-1"
-               style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
-            <span class="text-emerald-400 text-xl flex-shrink-0">☪</span>
+               style="background:rgba(212,168,0,0.07); border:1px solid rgba(212,168,0,0.2);">
+            <span class="text-amber-700 text-xl flex-shrink-0">☪</span>
             <div>
-              <p class="font-arabic text-emerald-300 text-sm leading-snug">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-              <p class="text-slate-500 text-xs mt-0.5">In the name of Allah, the Most Gracious</p>
+              <p class="font-arabic text-sm leading-snug" style="color:#D4A800;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+              <p class="text-gray-600 text-xs mt-0.5">In the name of Allah, the Most Gracious</p>
             </div>
           </div>
 
           <div>
-            <label class="label" style="color:#a7f3d0;">Email Address</label>
+            <label class="label" style="color:#7a5800;">Email Address</label>
             <input v-model="loginForm.email" type="email" class="input" placeholder="you@example.com"
-                   style="border-color:rgba(16,185,129,0.2); background:rgba(2,26,14,0.6);"
+                   style=""
                    autocomplete="email" autofocus />
           </div>
           <div>
-            <label class="label" style="color:#a7f3d0;">Password</label>
+            <label class="label" style="color:#7a5800;">Password</label>
             <div class="relative">
               <input v-model="loginForm.password" :type="showPassword ? 'text' : 'password'" class="input pr-10"
-                     style="border-color:rgba(16,185,129,0.2); background:rgba(2,26,14,0.6);"
+                     style=""
                      placeholder="••••••••" autocomplete="current-password" />
               <button type="button" @click="showPassword = !showPassword"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-emerald-400 text-sm">
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-amber-700 text-sm">
                 {{ showPassword ? '🙈' : '👁️' }}
               </button>
             </div>
           </div>
           <div class="flex justify-end -mt-1">
-            <button type="button" @click="openForgot" class="text-xs text-emerald-600 hover:text-emerald-400 hover:underline transition-colors">
+            <button type="button" @click="openForgot" class="text-xs hover:underline transition-colors" style="color:#9a6f00;">
               Forgot Password?
             </button>
           </div>
 
           <button type="submit" :disabled="loading"
-            class="w-full py-3.5 rounded-xl text-base font-bold text-white transition-all duration-200 hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed"
-            style="background: linear-gradient(135deg, #065f46, #047857, #059669); box-shadow: 0 8px 28px rgba(16,185,129,0.35);">
+            class="w-full py-3.5 rounded-xl text-base font-bold text-gray-900 transition-all duration-200 hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed"
+            style="background: #D4A800; box-shadow: 0 4px 20px rgba(212,168,0,0.35);">
             <span v-if="loading" class="flex items-center justify-center gap-2">
               <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
@@ -499,21 +499,21 @@ onMounted(() => {
             <span v-else>🔐 Sign In</span>
           </button>
 
-          <div class="mt-2 p-3.5 rounded-xl text-xs text-slate-500 space-y-1.5"
-               style="background:rgba(15,23,42,0.6); border:1px solid rgba(16,185,129,0.1);">
-            <p class="text-slate-400 font-medium mb-2 flex items-center gap-1.5">
-              <span class="text-emerald-500">ℹ</span> How access works:
+          <div class="mt-2 p-3.5 rounded-xl text-xs text-gray-600 space-y-1.5"
+               style="background:#faf8f2; border:1px solid #e8dfc0;">
+            <p class="text-gray-600 font-medium mb-2 flex items-center gap-1.5">
+              <span style="color:#D4A800;">ℹ</span> How access works:
             </p>
-            <p>• <span class="text-emerald-400 font-medium">Pilgrims</span> — register below, then login</p>
-            <p>• <span class="text-teal-400 font-medium">Volunteers</span> — account created by admin</p>
-            <p>• <span class="text-gold-400 font-medium">Admins</span> — credentials assigned by SuperAdmin</p>
+            <p>• <span style="color:#D4A800;" class="font-medium">Pilgrims</span> — register below, then login</p>
+            <p>• <span class="text-gray-700 font-medium">Volunteers</span> — account created by admin</p>
+            <p>• <span class="text-gray-700 font-medium">Admins</span> — credentials assigned by SuperAdmin</p>
           </div>
         </form>
 
         <!-- ════════════════ REGISTER FORM ════════════════ -->
         <div v-else>
           <div class="p-3 rounded-xl text-xs mb-4 flex items-start gap-2"
-               style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); color:#6ee7b7;">
+               style="background:rgba(212,168,0,0.07); border:1px solid rgba(212,168,0,0.25); color:#7a5800;">
             <span class="text-lg flex-shrink-0">🕌</span>
             <span>Pilgrim self-registration. Fill all steps to complete your Arbaeen 2026 application.</span>
           </div>
@@ -528,11 +528,11 @@ onMounted(() => {
                   regStep === i + 1 ? 'text-white' :
                   'bg-dark-800 border-dark-600 text-slate-500'
                 ]"
-                :style="regStep > i + 1 ? 'background:#059669; border-color:#059669;' : regStep === i + 1 ? 'background:linear-gradient(135deg,#065f46,#047857); border-color:#10b981; box-shadow:0 0 10px rgba(16,185,129,0.4);' : ''">
+                :style="regStep > i + 1 ? 'background:#059669; border-color:#059669;' : regStep === i + 1 ? 'background:linear-gradient(135deg,#b88a00,#D4A800); border-color:#D4A800; box-shadow:0 0 10px rgba(212,168,0,0.4);' : ''">
                   {{ regStep > i + 1 ? '✓' : i + 1 }}
                 </div>
                 <span class="text-xs mt-1 hidden sm:block"
-                  :style="regStep === i + 1 ? 'color:#6ee7b7;' : 'color:#475569;'">{{ label }}</span>
+                  :style="regStep === i + 1 ? 'color:#9a6f00;' : 'color:#475569;'">{{ label }}</span>
               </div>
               <div v-if="i < stepLabels.length - 1" :class="['flex-1 h-0.5 mx-1', regStep > i + 1 ? 'bg-emerald-600' : 'bg-dark-700']"></div>
             </template>
@@ -540,10 +540,10 @@ onMounted(() => {
 
           <!-- ─ STEP 1: Personal Info ─ -->
           <div v-if="regStep === 1" class="space-y-4">
-            <h3 class="text-white font-semibold">Personal Information</h3>
+            <h3 class="text-gray-900 font-semibold">Personal Information</h3>
 
             <div>
-              <label class="label">Full Name <span class="text-red-400">*</span> <span class="text-slate-500 text-xs">(as on passport)</span></label>
+              <label class="label">Full Name <span class="text-red-400">*</span> <span class="text-gray-600 text-xs">(as on passport)</span></label>
               <input v-model="registerForm.fullName" class="input" placeholder="Muhammad Ali Khan" />
             </div>
 
@@ -556,7 +556,7 @@ onMounted(() => {
                 <div class="absolute right-3 top-1/2 -translate-y-1/2 text-sm">
                   <span v-if="checkingEmail" class="text-slate-400">⌛</span>
                   <span v-else-if="emailExists" class="text-red-400" title="Already registered">✗</span>
-                  <span v-else-if="registerForm.email && registerForm.email.includes('@')" class="text-emerald-400">✓</span>
+                  <span v-else-if="registerForm.email && registerForm.email.includes('@')" class="text-amber-700">✓</span>
                 </div>
               </div>
               <p v-if="emailExists" class="text-red-400 text-xs mt-1">
@@ -570,7 +570,7 @@ onMounted(() => {
                 <input v-model="registerForm.phoneNumber" type="tel" class="input" placeholder="+92 300 1234567" />
               </div>
               <div>
-                <label class="label">WhatsApp <span class="text-slate-500 text-xs">(optional)</span></label>
+                <label class="label">WhatsApp <span class="text-gray-600 text-xs">(optional)</span></label>
                 <input v-model="registerForm.whatsAppNumber" type="tel" class="input" placeholder="+92 300..." />
               </div>
             </div>
@@ -592,22 +592,22 @@ onMounted(() => {
             </div>
 
             <button type="button" @click="nextStep" :disabled="emailExists"
-              class="w-full py-3 rounded-xl font-semibold text-white transition-all hover:scale-[1.01] disabled:opacity-50"
-              style="background:linear-gradient(135deg,#065f46,#047857); box-shadow:0 6px 20px rgba(16,185,129,0.3);">
+              class="w-full py-3 rounded-xl font-semibold text-gray-900 transition-all hover:scale-[1.01] disabled:opacity-50"
+              style="background:linear-gradient(135deg,#b88a00,#D4A800); box-shadow:0 6px 20px rgba(212,168,0,0.3);">
               Continue → Address Details
             </button>
           </div>
 
           <!-- ─ STEP 2: Address ─ -->
           <div v-if="regStep === 2" class="space-y-4">
-            <h3 class="text-white font-semibold">Home Address</h3>
+            <h3 class="text-gray-900 font-semibold">Home Address</h3>
 
             <div>
               <label class="label">Address Line 1 <span class="text-red-400">*</span></label>
               <input v-model="registerForm.address1" class="input" placeholder="House no, Street / Mohalla" />
             </div>
             <div>
-              <label class="label">Address Line 2 <span class="text-slate-500 text-xs">(optional)</span></label>
+              <label class="label">Address Line 2 <span class="text-gray-600 text-xs">(optional)</span></label>
               <input v-model="registerForm.address2" class="input" placeholder="Area / Sector" />
             </div>
 
@@ -626,14 +626,14 @@ onMounted(() => {
             </div>
 
             <div class="flex gap-3">
-              <button type="button" @click="prevStep" class="flex-1 py-3 rounded-xl font-medium text-slate-300 hover:text-white border transition-all" style="border-color:rgba(16,185,129,0.2); background:rgba(16,185,129,0.05);">← Back</button>
-              <button type="button" @click="nextStep" class="flex-1 py-3 rounded-xl font-semibold text-white transition-all hover:scale-[1.01]" style="background:linear-gradient(135deg,#065f46,#047857); box-shadow:0 6px 20px rgba(16,185,129,0.3);">Continue → Travel Details</button>
+              <button type="button" @click="prevStep" class="flex-1 py-3 rounded-xl font-medium border transition-all" style="color:#64748b; border-color:#d1d5db; background:#f8fafc;">← Back</button>
+              <button type="button" @click="nextStep" class="flex-1 py-3 rounded-xl font-bold text-black transition-all hover:scale-[1.01]" style="background:#D4A800; box-shadow:0 6px 20px rgba(212,168,0,0.3);">Continue → Travel Details</button>
             </div>
           </div>
 
           <!-- ─ STEP 3: Travel Details ─ -->
           <div v-if="regStep === 3" class="space-y-4">
-            <h3 class="text-white font-semibold">Travel & Passport Details</h3>
+            <h3 class="text-gray-900 font-semibold">Travel & Passport Details</h3>
 
             <div class="grid grid-cols-2 gap-3">
               <div>
@@ -652,17 +652,17 @@ onMounted(() => {
               <div class="flex items-center justify-between mb-2">
                 <div>
                   <label class="label mb-0">Family Members Traveling With You</label>
-                  <p class="text-slate-500 text-xs mt-0.5">Total: <span class="text-primary-400 font-semibold">{{ totalTravelers }} {{ totalTravelers === 1 ? 'person (just you)' : 'people' }}</span></p>
+                  <p class="text-xs mt-0.5" style="color:#64748b;">Total: <span class="text-amber-700 font-semibold">{{ totalTravelers }} {{ totalTravelers === 1 ? 'person (just you)' : 'people' }}</span></p>
                 </div>
                 <button type="button" @click="showAddMember = !showAddMember"
-                  class="text-xs bg-primary-700 hover:bg-primary-600 text-white px-3 py-1.5 rounded-lg">
+                  class="text-xs font-bold px-3 py-1.5 rounded" style="background:#D4A800; color:#000;">
                   {{ showAddMember ? '✕ Cancel' : '+ Add Member' }}
                 </button>
               </div>
 
               <!-- Add Member Form -->
-              <div v-if="showAddMember" class="bg-dark-700 rounded-xl border border-dark-500 p-4 mb-3 space-y-3">
-                <p class="text-xs font-semibold text-primary-400 uppercase tracking-wide">New Family Member</p>
+              <div v-if="showAddMember" class="rounded-xl p-4 mb-3 space-y-3" style="background:#f8fafc; border:1px solid #e2e8f0;">
+                <p class="text-xs font-semibold uppercase tracking-wide" style="color:#D4A800;">New Family Member</p>
                 <p v-if="memberFormError" class="text-red-400 text-xs">{{ memberFormError }}</p>
 
                 <div class="grid grid-cols-2 gap-3">
@@ -686,10 +686,10 @@ onMounted(() => {
                     </select>
                   </div>
                   <div>
-                    <label class="label">Date of Birth <span class="text-slate-500 text-xs">(for age)</span></label>
+                    <label class="label">Date of Birth <span class="text-gray-600 text-xs">(for age)</span></label>
                     <input v-model="newMember.dateOfBirth" type="date" class="input" />
-                    <p v-if="newMember.dateOfBirth" class="text-xs text-slate-400 mt-1">
-                      Age: <span :class="calcAge(newMember.dateOfBirth) < 18 ? 'text-gold-400' : 'text-primary-400'">
+                    <p v-if="newMember.dateOfBirth" class="text-xs text-gray-600 mt-1">
+                      Age: <span :class="calcAge(newMember.dateOfBirth) < 18 ? 'text-amber-600' : 'text-amber-700'">
                         {{ calcAge(newMember.dateOfBirth) }} yrs {{ calcAge(newMember.dateOfBirth) < 18 ? '(Minor)' : '' }}
                       </span>
                     </p>
@@ -705,7 +705,7 @@ onMounted(() => {
                 </div>
 
                 <button type="button" @click="addMemberToList"
-                  class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 rounded-lg text-sm font-semibold">
+                  class="w-full bg-primary-600 hover:bg-amber-600 text-white py-2 rounded-lg text-sm font-semibold">
                   ✓ Add to List
                 </button>
               </div>
@@ -717,7 +717,7 @@ onMounted(() => {
                   <div class="text-xl">{{ relationships.find(r => r.value === m.relationship)?.icon || '🧑' }}</div>
                   <div class="flex-1 min-w-0">
                     <p class="text-white text-sm font-semibold truncate">{{ m.fullName }}</p>
-                    <p class="text-slate-400 text-xs">
+                    <p class="text-gray-600 text-xs">
                       {{ relationships.find(r => r.value === m.relationship)?.label || 'Other' }} ·
                       {{ m.gender === 1 ? '♂ Male' : '♀ Female' }}
                       <span v-if="m.dateOfBirth"> · {{ calcAge(m.dateOfBirth) }} yrs</span>
@@ -725,8 +725,8 @@ onMounted(() => {
                     </p>
                   </div>
                   <div class="text-right shrink-0">
-                    <p class="text-slate-400 text-xs">{{ m.passportNumber }}</p>
-                    <p class="text-slate-500 text-xs">Exp: {{ m.passportExpiry }}</p>
+                    <p class="text-gray-600 text-xs">{{ m.passportNumber }}</p>
+                    <p class="text-gray-600 text-xs">Exp: {{ m.passportExpiry }}</p>
                   </div>
                   <button type="button" @click="removeMemberFromList(i)"
                     class="text-red-500 hover:text-red-400 text-lg ml-1">✕</button>
@@ -753,27 +753,27 @@ onMounted(() => {
                   ]">
                   <div class="flex items-center gap-2 mb-1">
                     <span class="text-xl">{{ pkg.icon }}</span>
-                    <span class="text-white font-semibold text-sm">{{ pkg.label }}</span>
-                    <span v-if="registerForm.packageType == pkg.value" class="ml-auto text-emerald-400 text-sm">✓</span>
+                    <span class="text-gray-900 font-semibold text-sm">{{ pkg.label }}</span>
+                    <span v-if="registerForm.packageType == pkg.value" class="ml-auto text-amber-700 text-sm">✓</span>
                   </div>
-                  <p class="text-slate-400 text-xs">{{ pkg.desc }}</p>
+                  <p class="text-gray-600 text-xs">{{ pkg.desc }}</p>
                 </button>
               </div>
             </div>
 
             <div class="flex gap-3">
-              <button type="button" @click="prevStep" class="flex-1 py-3 rounded-xl font-medium text-slate-300 hover:text-white border transition-all" style="border-color:rgba(16,185,129,0.2); background:rgba(16,185,129,0.05);">← Back</button>
-              <button type="button" @click="nextStep" class="flex-1 py-3 rounded-xl font-semibold text-white transition-all hover:scale-[1.01]" style="background:linear-gradient(135deg,#065f46,#047857); box-shadow:0 6px 20px rgba(16,185,129,0.3);">Continue → Set Password</button>
+              <button type="button" @click="prevStep" class="flex-1 py-3 rounded-xl font-medium border transition-all" style="color:#64748b; border-color:#d1d5db; background:#f8fafc;">← Back</button>
+              <button type="button" @click="nextStep" class="flex-1 py-3 rounded-xl font-bold text-black transition-all hover:scale-[1.01]" style="background:#D4A800; box-shadow:0 6px 20px rgba(212,168,0,0.3);">Continue → Set Password</button>
             </div>
           </div>
 
           <!-- ─ STEP 4: Password ─ -->
           <div v-if="regStep === 4" class="space-y-4">
-            <h3 class="text-white font-semibold">Create Your Password</h3>
+            <h3 class="text-gray-900 font-semibold">Create Your Password</h3>
 
             <!-- Summary -->
             <div class="bg-dark-700 rounded-xl p-4 border border-dark-600 space-y-2 text-sm">
-              <p class="text-slate-400 text-xs uppercase tracking-wide mb-2">Registration Summary</p>
+              <p class="text-gray-600 text-xs uppercase tracking-wide mb-2">Registration Summary</p>
               <div class="grid grid-cols-2 gap-y-1 text-xs">
                 <span class="text-slate-500">Name:</span><span class="text-white">{{ registerForm.fullName }}</span>
                 <span class="text-slate-500">Email:</span><span class="text-white">{{ registerForm.email }}</span>
@@ -782,7 +782,7 @@ onMounted(() => {
                 <span class="text-slate-500">Passport:</span><span class="text-white">{{ registerForm.passportNumber }}</span>
                 <span class="text-slate-500">Family:</span><span class="text-white">{{ totalTravelers }} travelers ({{ registerForm.familyMembers.length }} members + you)</span>
                 <span class="text-slate-500">Package:</span>
-                <span class="text-primary-400 font-medium">{{ packages.find(p => p.value == registerForm.packageType)?.label || '—' }}</span>
+                <span class="text-amber-700 font-medium">{{ packages.find(p => p.value == registerForm.packageType)?.label || '—' }}</span>
               </div>
             </div>
 
@@ -801,15 +801,15 @@ onMounted(() => {
               <div class="relative">
                 <input v-model="registerForm.confirmPassword" type="password" class="input" placeholder="Repeat password" autocomplete="new-password" />
                 <span v-if="registerForm.confirmPassword && registerForm.password === registerForm.confirmPassword"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400">✓</span>
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-amber-700">✓</span>
               </div>
             </div>
 
             <div class="flex gap-3">
-              <button type="button" @click="prevStep" class="py-3 px-5 rounded-xl font-medium text-slate-300 hover:text-white border transition-all" style="border-color:rgba(16,185,129,0.2); background:rgba(16,185,129,0.05);">← Back</button>
+              <button type="button" @click="prevStep" class="py-3 px-5 rounded-xl font-medium text-slate-300 hover:text-white border transition-all" style="border-color:rgba(212,168,0,0.2); background:rgba(212,168,0,0.05);">← Back</button>
               <button type="button" @click="handleRegister" :disabled="loading"
-                class="flex-1 py-3 rounded-xl font-bold text-white transition-all hover:scale-[1.01] disabled:opacity-60"
-                style="background:linear-gradient(135deg,#065f46,#047857,#059669); box-shadow:0 8px 28px rgba(16,185,129,0.35);">
+                class="flex-1 py-3 rounded-xl font-bold text-gray-900 transition-all hover:scale-[1.01] disabled:opacity-60"
+                style="background:linear-gradient(135deg,#7a5800,#b88a00,#059669); box-shadow:0 8px 28px rgba(212,168,0,0.35);">
                 <span v-if="loading" class="flex items-center justify-center gap-2">
                   <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
@@ -840,49 +840,49 @@ onMounted(() => {
          style="background:rgba(1,9,4,0.92); backdrop-filter:blur(8px);"
          @click.self="showForgot=false">
       <div class="w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl"
-           style="background:linear-gradient(160deg,#010f05,#021a08,#020617); border:1px solid rgba(16,185,129,0.25); box-shadow:0 24px 64px rgba(0,0,0,0.6), 0 0 40px rgba(16,185,129,0.08);">
-        <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#10b981,#d97706,#10b981,transparent)"></div>
-        <div class="px-6 py-4 border-b flex items-center justify-between" style="border-color:rgba(16,185,129,0.15);">
-          <h3 class="text-white font-bold text-lg flex items-center gap-2">
-            <span class="text-emerald-400">🔑</span> Forgot Password
+           style="background:linear-gradient(160deg,#080808,#0d0d0d,#020617); border:1px solid rgba(212,168,0,0.25); box-shadow:0 24px 64px rgba(0,0,0,0.6), 0 0 40px rgba(212,168,0,0.08);">
+        <div class="h-0.5 w-full" style="background:linear-gradient(90deg,transparent,#D4A800,#d97706,#D4A800,transparent)"></div>
+        <div class="px-6 py-4 border-b flex items-center justify-between" style="border-color:rgba(212,168,0,0.15);">
+          <h3 class="text-gray-900 font-bold text-lg flex items-center gap-2">
+            <span class="text-amber-700">🔑</span> Forgot Password
           </h3>
-          <button @click="showForgot=false" class="text-slate-500 hover:text-emerald-400 text-2xl leading-none transition-colors">✕</button>
+          <button @click="showForgot=false" class="text-slate-500 hover:text-amber-700 text-2xl leading-none transition-colors">✕</button>
         </div>
         <div class="p-6">
 
           <!-- Sent confirmation -->
           <div v-if="forgotSent" class="text-center space-y-4 py-2">
             <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl"
-                 style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3);">📧</div>
-            <p class="text-white font-semibold text-lg">Check Your Email</p>
-            <p class="text-slate-400 text-sm">If <span class="text-emerald-400 font-medium">{{ forgotEmail }}</span> is registered, a reset link has been sent.</p>
-            <p class="text-slate-500 text-xs">Link expires in 2 hours. Check spam folder too.</p>
+                 style="background:rgba(212,168,0,0.12); border:1px solid rgba(212,168,0,0.3);">📧</div>
+            <p class="text-gray-900 font-semibold text-lg">Check Your Email</p>
+            <p class="text-gray-700 text-sm">If <span class="text-amber-700 font-medium">{{ forgotEmail }}</span> is registered, a reset link has been sent.</p>
+            <p class="text-gray-600 text-xs">Link expires in 2 hours. Check spam folder too.</p>
             <button @click="showForgot=false"
-              class="w-full py-2.5 rounded-xl font-semibold text-white transition-all"
-              style="background:linear-gradient(135deg,#065f46,#047857); box-shadow:0 6px 20px rgba(16,185,129,0.3);">
+              class="w-full py-2.5 rounded-xl font-semibold text-gray-900 transition-all"
+              style="background:linear-gradient(135deg,#b88a00,#D4A800); box-shadow:0 6px 20px rgba(212,168,0,0.3);">
               ✓ OK, Got It
             </button>
           </div>
 
           <!-- Email form -->
           <div v-else class="space-y-4">
-            <p class="text-slate-400 text-sm">Enter your registered email and we'll send a reset link.</p>
+            <p class="text-sm" style="color:#64748b;">Enter your registered email and we'll send a reset link.</p>
 
-            <div v-if="forgotError" class="bg-red-900/40 border border-red-700 text-red-300 text-sm rounded-xl px-3 py-2 flex gap-2">
+            <div v-if="forgotError" class="text-sm rounded px-3 py-2 flex gap-2" style="background:#fef2f2; border:1px solid #fca5a5; color:#dc2626;">
               <span>⚠️</span><span>{{ forgotError }}</span>
             </div>
 
             <div>
-              <label class="label" style="color:#a7f3d0;">Email Address</label>
+              <label class="label" style="color:#7a5800;">Email Address</label>
               <input v-model="forgotEmail" type="email" class="input w-full" placeholder="you@example.com"
-                     style="border-color:rgba(16,185,129,0.2); background:rgba(2,26,14,0.6);"
+                     style=""
                      @keyup.enter="handleForgotPassword" autofocus />
             </div>
 
             <div class="flex gap-3">
               <button @click="handleForgotPassword" :disabled="forgotLoading"
-                class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-40 transition-all"
-                style="background:linear-gradient(135deg,#065f46,#047857); box-shadow:0 4px 16px rgba(16,185,129,0.3);">
+                class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-900 disabled:opacity-40 transition-all"
+                style="background:linear-gradient(135deg,#b88a00,#D4A800); box-shadow:0 4px 16px rgba(212,168,0,0.3);">
                 <span v-if="forgotLoading" class="flex items-center justify-center gap-2">
                   <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
@@ -893,7 +893,7 @@ onMounted(() => {
               </button>
               <button @click="showForgot=false"
                 class="px-4 rounded-xl text-sm font-medium text-slate-400 hover:text-white border transition-all"
-                style="border-color:rgba(16,185,129,0.2); background:rgba(16,185,129,0.05);">Cancel</button>
+                style="border-color:rgba(212,168,0,0.2); background:rgba(212,168,0,0.05);">Cancel</button>
             </div>
           </div>
 
@@ -915,8 +915,8 @@ onMounted(() => {
   to   { transform: rotate(360deg); }
 }
 .input:focus {
-  border-color: rgba(16,185,129,0.5) !important;
-  box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
+  border-color: rgba(212,168,0,0.5) !important;
+  box-shadow: 0 0 0 3px rgba(212,168,0,0.12);
   outline: none;
 }
 </style>

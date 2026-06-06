@@ -155,12 +155,12 @@ function fmtTime(d) { return d ? new Date(d).toLocaleTimeString('en-GB', { hour:
     <!-- Header -->
     <div class="flex items-center justify-between flex-wrap gap-2">
       <div>
-        <h1 class="text-2xl font-bold text-white">📍 Live Karwan Tracking</h1>
-        <p class="text-slate-400 text-sm mt-0.5">Real-time GPS location of all Karwans</p>
+        <h1 class="text-2xl font-bold text-gray-900">📍 Live Karwan Tracking</h1>
+        <p class="text-gray-700 text-sm mt-0.5">Real-time GPS location of all Karwans</p>
       </div>
-      <div class="flex items-center gap-2 text-xs rounded-lg px-3 py-1.5 border border-slate-700 bg-slate-900/50">
+      <div class="flex items-center gap-2 text-xs rounded-lg px-3 py-1.5 border border-gray-300 bg-gray-100">
         <div :class="['w-2 h-2 rounded-full flex-shrink-0', dotColor[connStatus]]"></div>
-        <span class="text-slate-300">{{ dotLabel[connStatus] }}</span>
+        <span class="text-gray-600">{{ dotLabel[connStatus] }}</span>
       </div>
     </div>
 
@@ -178,8 +178,8 @@ function fmtTime(d) { return d ? new Date(d).toLocaleTimeString('en-GB', { hour:
         <div v-if="loading" class="text-center py-6 text-slate-500 text-sm">Loading…</div>
 
         <div v-else-if="!karwans.length"
-             class="rounded-xl border border-emerald-900/20 p-5 text-center text-slate-500 text-sm"
-             style="background:rgba(2,20,10,0.45);">
+             class="rounded-xl border border-gray-200 p-5 text-center text-gray-700 text-sm"
+             style="background:#ffffff;">
           <div class="text-3xl mb-2">🚌</div>
           No Karwan found.<br>
           <span class="text-xs text-slate-600">Create one from Admin → Tours.</span>
@@ -189,19 +189,19 @@ function fmtTime(d) { return d ? new Date(d).toLocaleTimeString('en-GB', { hour:
              @click="selectKarwan(k)"
              :class="['rounded-xl border p-3 cursor-pointer transition-all select-none',
                selected?.id === k.id
-                 ? 'border-emerald-600 bg-emerald-900/20'
-                 : 'border-emerald-900/20 hover:border-emerald-700/40']"
-             style="background:rgba(2,20,10,0.45); touch-action:manipulation; min-height:52px;">
+                 ? 'border-amber-500 bg-amber-50'
+                 : 'border-gray-200 hover:border-amber-300']"
+             style="background:#ffffff; touch-action:manipulation; min-height:52px;">
 
           <div class="flex items-center justify-between mb-1">
-            <p class="text-white font-semibold text-sm">{{ k.name }}</p>
+            <p class="text-gray-900 font-semibold text-sm">{{ k.name }}</p>
             <span :class="['text-xs px-2 py-0.5 rounded-full font-medium border',
-              k.isActive ? 'bg-emerald-900/50 text-emerald-400 border-emerald-700'
+              k.isActive ? 'bg-emerald-900/50 text-amber-700 border-emerald-700'
                          : 'bg-slate-800 text-slate-500 border-slate-600']">
               {{ k.isActive ? '● Active' : '○ Inactive' }}
             </span>
           </div>
-          <div class="text-xs text-slate-500 space-y-0.5">
+          <div class="text-xs text-gray-600 space-y-0.5">
             <p>🏛️ Pole: <span class="text-slate-300">{{ k.poleNumber || '—' }}</span></p>
             <p>🚌 {{ k.totalBuses || 0 }} buses · 🕌 {{ k.totalPilgrims || 0 }} pilgrims</p>
           </div>
@@ -218,7 +218,7 @@ function fmtTime(d) { return d ? new Date(d).toLocaleTimeString('en-GB', { hour:
           <!-- Overlay: no karwan selected -->
           <div v-if="!selected"
                class="absolute inset-0 z-10 flex items-center justify-center"
-               style="background:rgba(1,12,6,0.88); backdrop-filter:blur(4px);">
+               style="background:rgba(8,8,8,0.88); backdrop-filter:blur(4px);">
             <div class="text-center">
               <div class="text-5xl mb-3">🗺️</div>
               <p class="text-slate-300 font-medium">Select a Karwan</p>
@@ -230,7 +230,7 @@ function fmtTime(d) { return d ? new Date(d).toLocaleTimeString('en-GB', { hour:
           <div v-else-if="!lastLoc"
                class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10
                       rounded-lg px-3 py-1.5 text-xs text-yellow-400 border border-yellow-800/50"
-               style="background:rgba(1,12,6,0.9);">
+               style="background:rgba(8,8,8,0.9);">
             ⏳ GPS data not yet available — waiting for driver update
           </div>
         </div>
@@ -238,12 +238,12 @@ function fmtTime(d) { return d ? new Date(d).toLocaleTimeString('en-GB', { hour:
         <!-- Info strip -->
         <div v-if="selected"
              class="rounded-xl border border-emerald-900/20 p-4"
-             style="background:rgba(2,20,10,0.45);">
+             style="background:#ffffff;">
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-            <div><p class="text-slate-500 text-xs mb-0.5">KARWAN</p><p class="text-white font-semibold">{{ selected.name }}</p></div>
-            <div><p class="text-slate-500 text-xs mb-0.5">POLE</p><p class="text-white">{{ selected.poleNumber || '—' }}</p></div>
-            <div><p class="text-slate-500 text-xs mb-0.5">LAST UPDATE</p><p class="text-white">{{ fmtTime(lastLoc?.time) }}</p></div>
-            <div><p class="text-slate-500 text-xs mb-0.5">LOCATION</p><p class="text-emerald-400 text-xs truncate">{{ lastLoc?.label || '—' }}</p></div>
+            <div><p class="text-gray-700 text-xs mb-0.5">KARWAN</p><p class="text-gray-900 font-semibold">{{ selected.name }}</p></div>
+            <div><p class="text-gray-700 text-xs mb-0.5">POLE</p><p class="text-gray-900">{{ selected.poleNumber || '—' }}</p></div>
+            <div><p class="text-gray-700 text-xs mb-0.5">LAST UPDATE</p><p class="text-gray-900">{{ fmtTime(lastLoc?.time) }}</p></div>
+            <div><p class="text-gray-700 text-xs mb-0.5">LOCATION</p><p class="text-amber-700 text-xs truncate">{{ lastLoc?.label || '—' }}</p></div>
           </div>
           <a v-if="lastLoc"
              :href="`https://www.google.com/maps?q=${lastLoc.lat},${lastLoc.lng}`"

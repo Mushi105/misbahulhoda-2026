@@ -140,7 +140,7 @@ const statusOptions = [
 const statusStyle = {
   Pending: 'bg-yellow-900/50 text-yellow-400 border border-yellow-700',
   UnderReview: 'bg-blue-900/50 text-blue-400 border border-blue-700',
-  Approved: 'bg-emerald-900/50 text-emerald-400 border border-emerald-700',
+  Approved: 'bg-emerald-900/50 text-amber-700 border border-emerald-700',
   Rejected: 'bg-red-900/50 text-red-400 border border-red-700',
   Cancelled: 'bg-slate-800 text-slate-400 border border-slate-600',
 }
@@ -315,12 +315,12 @@ onMounted(() => {
   <div class="space-y-6">
     <!-- Header -->
     <div>
-      <h1 class="text-2xl font-bold text-white">Pilgrims Management</h1>
-      <p class="text-slate-400 text-sm mt-1">Review applications, approve/reject, allocate rooms and buses</p>
+      <h1 class="text-2xl font-bold text-gray-900">Pilgrims Management</h1>
+      <p class="text-gray-700 text-sm mt-1">Review applications, approve/reject, allocate rooms and buses</p>
     </div>
 
     <!-- Alert -->
-    <div v-if="msg.text" :class="msg.type === 'success' ? 'bg-emerald-900/50 border-emerald-700 text-emerald-300' : 'bg-red-900/50 border-red-700 text-red-300'"
+    <div v-if="msg.text" :class="msg.type === 'success' ? 'bg-emerald-900/50 border-emerald-700 text-amber-600' : 'bg-red-900/50 border-red-700 text-red-300'"
       class="border rounded-lg px-4 py-3 text-sm">
       {{ msg.text }}
     </div>
@@ -331,12 +331,12 @@ onMounted(() => {
       <select v-model="statusFilter" @change="load" class="form-input w-48">
         <option v-for="s in statusOptions" :key="s.value" :value="s.value">{{ s.label }}</option>
       </select>
-      <span class="text-slate-400 text-sm self-center">{{ totalCount }} total</span>
+      <span class="text-gray-700 text-sm self-center">{{ totalCount }} total</span>
     </div>
 
     <!-- Bulk Action Bar -->
     <div v-if="someSelected"
-         class="flex items-center gap-3 flex-wrap bg-dark-800 border border-gold-800/50 rounded-xl px-4 py-3">
+         class="flex items-center gap-3 flex-wrap bg-gray-100 border border-gold-500/50 rounded-xl px-4 py-3">
       <span class="text-gold-400 text-sm font-semibold">{{ selected.size }} selected</span>
       <button @click="bulkApprove" :disabled="bulkSaving"
         class="text-xs px-4 py-2 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-emerald-200 font-medium disabled:opacity-50 transition-colors">
@@ -346,18 +346,18 @@ onMounted(() => {
         class="text-xs px-4 py-2 rounded-lg bg-red-900/60 hover:bg-red-800 text-red-300 font-medium disabled:opacity-50 transition-colors">
         {{ bulkSaving ? '...' : '❌ Reject Selected' }}
       </button>
-      <button @click="selected = new Set()" class="text-xs text-slate-400 hover:text-white ml-auto">✕ Clear</button>
+      <button @click="selected = new Set()" class="text-xs text-gray-700 hover:text-gray-900 ml-auto">✕ Clear</button>
     </div>
 
     <!-- Table -->
-    <div v-if="loading" class="card text-center text-slate-400 py-12">Loading pilgrims...</div>
-    <div v-else-if="!pilgrims.length" class="card text-center text-slate-400 py-12">No pilgrims found.</div>
+    <div v-if="loading" class="card text-center text-gray-700 py-12">Loading pilgrims...</div>
+    <div v-else-if="!pilgrims.length" class="card text-center text-gray-700 py-12">No pilgrims found.</div>
     <div v-else class="space-y-2">
       <!-- Select All row -->
       <div class="flex items-center gap-3 px-1 pb-1">
         <input type="checkbox" :checked="allSelected" @change="toggleSelectAll"
           class="w-4 h-4 accent-gold-500 cursor-pointer" />
-        <span class="text-slate-400 text-xs">
+        <span class="text-gray-600 text-xs">
           {{ allSelected ? 'Deselect all' : 'Select all' }}
           <span class="text-slate-500">({{ pilgrims.length }} shown)</span>
         </span>
@@ -365,9 +365,9 @@ onMounted(() => {
 
       <div v-for="p in pilgrims" :key="p.id"
            :class="['rounded-xl border transition-all overflow-hidden',
-             selected.has(p.id) ? 'border-gold-700 bg-gold-950/20' : 'border-emerald-900/20 bg-dark-900/50',
-             expandedId === p.id ? 'border-emerald-700/40' : '']"
-           style="background:rgba(2,20,10,0.45);">
+             selected.has(p.id) ? 'border-gold-500 bg-amber-50' : 'border-gray-200',
+             expandedId === p.id ? 'border-amber-400' : '']"
+           style="background:#ffffff;">
 
         <!-- ── Compact row (always visible) ── -->
         <div class="flex items-center gap-3 px-3 py-2.5 cursor-pointer select-none"
@@ -378,15 +378,15 @@ onMounted(() => {
             class="w-4 h-4 accent-gold-500 cursor-pointer shrink-0" />
 
           <!-- Avatar -->
-          <div class="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-gray-900 font-bold text-sm shrink-0"
                style="background:linear-gradient(135deg,#92400e,#451a03);">
             {{ p.fullName?.charAt(0) || '?' }}
           </div>
 
           <!-- Name + status -->
           <div class="flex-1 min-w-0">
-            <p class="text-white text-sm font-semibold truncate">{{ p.fullName }}</p>
-            <p class="text-slate-500 text-xs truncate">{{ p.country || '—' }} · {{ p.passportNumber || 'No Passport' }}</p>
+            <p class="text-gray-900 text-sm font-semibold truncate">{{ p.fullName }}</p>
+            <p class="text-gray-600 text-xs truncate">{{ p.country || '—' }} · {{ p.passportNumber || 'No Passport' }}</p>
           </div>
 
           <!-- Status badge + expand arrow -->
@@ -408,13 +408,13 @@ onMounted(() => {
 
         <!-- ── Expanded section ── -->
         <div v-if="expandedId === p.id"
-             class="px-3 pb-3 border-t space-y-3" style="border-color:rgba(16,185,129,0.12);">
+             class="px-3 pb-3 border-t space-y-3" style="border-color:rgba(212,168,0,0.12);">
 
           <!-- Contact row -->
           <div class="flex items-center gap-2 flex-wrap pt-2">
-            <span class="text-slate-400 text-xs">{{ p.email }}</span>
+            <span class="text-gray-600 text-xs">{{ p.email }}</span>
             <a v-if="p.whatsApp" :href="waLink(p.whatsApp)" target="_blank" rel="noopener"
-               class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-emerald-900/40 border border-emerald-700/50 text-emerald-400">
+               class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-emerald-900/40 border border-emerald-700/50 text-amber-700">
               📱 WhatsApp
             </a>
             <a v-else-if="p.phone" :href="waLink(p.phone)" target="_blank" rel="noopener"
@@ -425,29 +425,29 @@ onMounted(() => {
 
           <!-- Details grid -->
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
-            <div class="bg-black/20 rounded-lg px-2 py-1.5">
-              <p class="text-slate-500">Arrival</p>
-              <p class="text-slate-200">{{ p.arrivalDate ? new Date(p.arrivalDate).toLocaleDateString('en-GB') : '—' }}</p>
+            <div class="bg-gray-50 rounded-lg px-2 py-1.5">
+              <p class="text-gray-700">Arrival</p>
+              <p class="text-gray-700">{{ p.arrivalDate ? new Date(p.arrivalDate).toLocaleDateString('en-GB') : '—' }}</p>
             </div>
-            <div class="bg-black/20 rounded-lg px-2 py-1.5">
-              <p class="text-slate-500">Family</p>
-              <p class="text-slate-200">{{ p.familyMemberCount || 0 }} members</p>
+            <div class="bg-gray-50 rounded-lg px-2 py-1.5">
+              <p class="text-gray-700">Family</p>
+              <p class="text-gray-700">{{ p.familyMemberCount || 0 }} members</p>
             </div>
-            <div class="bg-black/20 rounded-lg px-2 py-1.5">
-              <p class="text-slate-500">Status</p>
-              <p :class="p.status==='Approved'?'text-emerald-400':p.status==='Pending'?'text-yellow-400':p.status==='UnderReview'?'text-blue-400':'text-red-400'">
+            <div class="bg-gray-50 rounded-lg px-2 py-1.5">
+              <p class="text-gray-700">Status</p>
+              <p :class="p.status==='Approved'?'text-amber-700':p.status==='Pending'?'text-yellow-400':p.status==='UnderReview'?'text-blue-400':'text-red-400'">
                 {{ p.status }}
               </p>
             </div>
-            <div class="bg-black/20 rounded-lg px-2 py-1.5">
-              <p class="text-slate-500">🛏 Room</p>
-              <p :class="p.roomNumber ? 'text-emerald-400' : 'text-yellow-400'">
+            <div class="bg-gray-50 rounded-lg px-2 py-1.5">
+              <p class="text-gray-700">🛏 Room</p>
+              <p :class="p.roomNumber ? 'text-amber-700' : 'text-yellow-600'">
                 {{ p.roomNumber ? p.roomNumber + (p.hotelName ? ' · ' + p.hotelName : '') : 'Not Assigned' }}
               </p>
             </div>
-            <div class="bg-black/20 rounded-lg px-2 py-1.5">
-              <p class="text-slate-500">🚌 Bus</p>
-              <p :class="p.busNumber ? 'text-emerald-400' : 'text-yellow-400'">
+            <div class="bg-gray-50 rounded-lg px-2 py-1.5">
+              <p class="text-gray-700">🚌 Bus</p>
+              <p :class="p.busNumber ? 'text-amber-700' : 'text-yellow-600'">
                 {{ p.busNumber || 'Not Assigned' }}
               </p>
             </div>
@@ -460,7 +460,7 @@ onMounted(() => {
           <!-- Action buttons -->
           <div class="flex flex-wrap gap-2">
             <button @click="openDetail(p)"
-              class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-medium transition-colors">
+              class="text-xs px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 border border-gray-300 font-medium transition-colors">
               📋 Details
             </button>
             <button v-if="p.status === 'Pending'" @click="markUnderReview(p)" :disabled="saving === p.id+'-review'"
@@ -480,12 +480,12 @@ onMounted(() => {
               {{ saving === p.id+'-reset' ? '...' : '↩ Reset' }}
             </button>
             <button v-if="p.status === 'Approved'" @click="openRoomModal(p)"
-              :class="p.roomId ? 'bg-emerald-900/60 text-emerald-300' : 'bg-yellow-900/60 text-yellow-300'"
+              :class="p.roomId ? 'bg-emerald-900/60 text-amber-600' : 'bg-yellow-900/60 text-yellow-300'"
               class="text-xs px-3 py-1.5 rounded-lg hover:opacity-80 font-medium transition-colors">
               🛏 {{ p.roomId ? 'Room' : 'Assign Room' }}
             </button>
             <button v-if="p.status === 'Approved'" @click="openBusModal(p)"
-              :class="p.busId ? 'bg-emerald-900/60 text-emerald-300' : 'bg-yellow-900/60 text-yellow-300'"
+              :class="p.busId ? 'bg-emerald-900/60 text-amber-600' : 'bg-yellow-900/60 text-yellow-300'"
               class="text-xs px-3 py-1.5 rounded-lg hover:opacity-80 font-medium transition-colors">
               🚌 {{ p.busId ? 'Bus' : 'Assign Bus' }}
             </button>
@@ -502,7 +502,7 @@ onMounted(() => {
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-full bg-red-900/60 flex items-center justify-center text-xl shrink-0">❌</div>
             <div>
-              <h3 class="text-white font-semibold">Reject Application</h3>
+              <h3 class="text-gray-900 font-semibold">Reject Application</h3>
               <p class="text-red-400 text-xs mt-0.5">{{ selectedPilgrim?.fullName }}</p>
             </div>
           </div>
@@ -511,7 +511,7 @@ onMounted(() => {
             <textarea v-model="rejectReason" class="input" rows="3"
               placeholder="Please provide a clear reason for rejection..."></textarea>
           </div>
-          <p class="text-slate-500 text-xs mb-4">The pilgrim will receive an email and WhatsApp notification with this reason.</p>
+          <p class="text-gray-600 text-xs mb-4">The pilgrim will receive an email and WhatsApp notification with this reason.</p>
           <div class="flex gap-3">
             <button @click="submitReject" :disabled="saving === 'reject'"
               class="btn-danger flex-1">{{ saving === 'reject' ? 'Rejecting...' : 'Confirm Reject' }}</button>
@@ -529,7 +529,7 @@ onMounted(() => {
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-full bg-red-900/60 flex items-center justify-center text-xl shrink-0">❌</div>
             <div>
-              <h3 class="text-white font-semibold">Bulk Reject</h3>
+              <h3 class="text-gray-900 font-semibold">Bulk Reject</h3>
               <p class="text-red-400 text-xs mt-0.5">{{ selected.size }} pilgrim(s) selected</p>
             </div>
           </div>
@@ -538,7 +538,7 @@ onMounted(() => {
             <textarea v-model="bulkRejectReason" class="input" rows="3"
               placeholder="Reason applied to all selected pilgrims..."></textarea>
           </div>
-          <p class="text-slate-500 text-xs mb-4">Each pilgrim will receive an email and WhatsApp notification with this reason.</p>
+          <p class="text-gray-600 text-xs mb-4">Each pilgrim will receive an email and WhatsApp notification with this reason.</p>
           <div class="flex gap-3">
             <button @click="submitBulkReject" :disabled="bulkSaving"
               class="btn-danger flex-1">{{ bulkSaving ? 'Rejecting...' : 'Confirm Reject All' }}</button>
@@ -556,8 +556,8 @@ onMounted(() => {
           <!-- Header -->
           <div class="flex items-center justify-between px-6 py-4 border-b border-dark-600">
             <div>
-              <h3 class="text-white font-semibold text-lg">Assign Room</h3>
-              <p class="text-slate-400 text-xs mt-0.5">{{ selectedPilgrim?.fullName }}</p>
+              <h3 class="text-gray-900 font-semibold text-lg">Assign Room</h3>
+              <p class="text-gray-600 text-xs mt-0.5">{{ selectedPilgrim?.fullName }}</p>
             </div>
             <button @click="showRoomModal = false" class="text-slate-400 hover:text-white text-xl">×</button>
           </div>
@@ -565,7 +565,7 @@ onMounted(() => {
           <div class="p-6 space-y-4">
 
             <!-- No rooms -->
-            <div v-if="!rooms.length" class="text-slate-400 text-sm text-center py-6">
+            <div v-if="!rooms.length" class="text-gray-700 text-sm text-center py-6">
               No available rooms. Please add rooms in Accommodation management.
             </div>
 
@@ -573,7 +573,7 @@ onMounted(() => {
 
               <!-- STEP 1: Select Hotel -->
               <div>
-                <p class="text-xs text-slate-500 uppercase tracking-wider mb-2 font-semibold">Step 1 — Select Hotel</p>
+                <p class="text-xs text-gray-600 uppercase tracking-wider mb-2 font-semibold">Step 1 — Select Hotel</p>
                 <div class="space-y-2">
                   <button v-for="h in hotelGroups" :key="h.name"
                     @click="selectedHotel = h.name; selectedFloor = ''"
@@ -584,9 +584,9 @@ onMounted(() => {
                     <div class="flex items-center justify-between">
                       <div>
                         <p class="font-medium">🏨 {{ h.name }}</p>
-                        <p v-if="h.city" class="text-xs text-slate-500 mt-0.5">{{ h.city }}</p>
+                        <p v-if="h.city" class="text-xs text-gray-600 mt-0.5">{{ h.city }}</p>
                       </div>
-                      <span class="text-emerald-400 text-sm font-semibold">{{ h.available }} rooms free</span>
+                      <span class="text-amber-700 text-sm font-semibold">{{ h.available }} rooms free</span>
                     </div>
                   </button>
                 </div>
@@ -594,7 +594,7 @@ onMounted(() => {
 
               <!-- STEP 2: Select Floor (only if hotel chosen & has multiple floors) -->
               <div v-if="selectedHotel && floorGroups.length > 1">
-                <p class="text-xs text-slate-500 uppercase tracking-wider mb-2 font-semibold">Step 2 — Select Floor</p>
+                <p class="text-xs text-gray-600 uppercase tracking-wider mb-2 font-semibold">Step 2 — Select Floor</p>
                 <div class="flex flex-wrap gap-2">
                   <button
                     @click="selectedFloor = ''"
@@ -613,7 +613,7 @@ onMounted(() => {
 
               <!-- STEP 3: Select Room -->
               <div v-if="selectedHotel">
-                <p class="text-xs text-slate-500 uppercase tracking-wider mb-2 font-semibold">
+                <p class="text-xs text-gray-600 uppercase tracking-wider mb-2 font-semibold">
                   {{ floorGroups.length > 1 ? 'Step 3' : 'Step 2' }} — Select Room
                   <span class="text-slate-600 normal-case font-normal ml-1">({{ filteredRooms.length }} available)</span>
                 </p>
@@ -623,12 +623,12 @@ onMounted(() => {
                     :disabled="saving === 'room'"
                     class="w-full text-left flex items-center justify-between bg-dark-700 hover:bg-dark-600 border border-transparent hover:border-emerald-800/60 rounded-lg px-4 py-2.5 transition-colors disabled:opacity-50">
                     <div class="flex items-center gap-3">
-                      <span class="text-white font-semibold">{{ r.roomNumber }}</span>
-                      <span class="text-slate-500 text-xs">{{ r.floorLabel || `Floor ${r.floorNumber}` }}</span>
-                      <span v-if="r.isForFamily" class="text-xs bg-primary-900 text-primary-400 px-1.5 py-0.5 rounded">Family</span>
+                      <span class="text-gray-900 font-semibold">{{ r.roomNumber }}</span>
+                      <span class="text-gray-600 text-xs">{{ r.floorLabel || `Floor ${r.floorNumber}` }}</span>
+                      <span v-if="r.isForFamily" class="text-xs bg-primary-900 text-amber-700 px-1.5 py-0.5 rounded">Family</span>
                     </div>
                     <div class="text-right shrink-0">
-                      <span class="text-emerald-400 text-xs font-medium">{{ r.bedCapacity - r.occupiedBeds }} beds free</span>
+                      <span class="text-amber-700 text-xs font-medium">{{ r.bedCapacity - r.occupiedBeds }} beds free</span>
                       <span class="text-slate-600 text-xs ml-1">({{ r.bedCapacity }} total)</span>
                     </div>
                   </button>
@@ -651,11 +651,11 @@ onMounted(() => {
           <!-- Header -->
           <div class="sticky top-0 bg-dark-900 border-b border-dark-700 px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center text-white font-bold text-lg shrink-0">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center text-gray-900 font-bold text-lg shrink-0">
                 {{ pilgrimDetail?.user?.fullName?.charAt(0) || selectedPilgrim?.fullName?.charAt(0) || '?' }}
               </div>
               <div>
-                <p class="text-white font-semibold">{{ pilgrimDetail?.user?.fullName || selectedPilgrim?.fullName }}</p>
+                <p class="text-gray-900 font-semibold">{{ pilgrimDetail?.user?.fullName || selectedPilgrim?.fullName }}</p>
                 <span :class="statusStyle[pilgrimDetail?.status || selectedPilgrim?.status] || 'bg-slate-800 text-slate-400'" class="text-xs px-2 py-0.5 rounded-full">
                   {{ pilgrimDetail?.status || selectedPilgrim?.status }}
                 </span>
@@ -672,25 +672,25 @@ onMounted(() => {
             <section>
               <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Contact</h3>
               <div class="grid grid-cols-2 gap-3 text-sm">
-                <div><p class="text-slate-500 text-xs">Email</p><p class="text-white text-xs break-all">{{ pilgrimDetail.user?.email }}</p></div>
+                <div><p class="text-gray-600 text-xs">Email</p><p class="text-white text-xs break-all">{{ pilgrimDetail.user?.email }}</p></div>
                 <div>
-                  <p class="text-slate-500 text-xs">Phone</p>
+                  <p class="text-gray-600 text-xs">Phone</p>
                   <a v-if="pilgrimDetail.user?.phoneNumber" :href="waLink(pilgrimDetail.user.phoneNumber)" target="_blank" rel="noopener"
-                     class="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-xs font-medium transition-colors">
+                     class="inline-flex items-center gap-1 text-amber-700 hover:text-amber-600 text-xs font-medium transition-colors">
                     📞 {{ pilgrimDetail.user.phoneNumber }}
                   </a>
                   <p v-else class="text-white">—</p>
                 </div>
                 <div>
-                  <p class="text-slate-500 text-xs mb-1">WhatsApp</p>
+                  <p class="text-gray-600 text-xs mb-1">WhatsApp</p>
                   <a v-if="pilgrimDetail.user?.whatsAppNumber" :href="waLink(pilgrimDetail.user.whatsAppNumber)" target="_blank" rel="noopener"
-                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-colors"
+                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-900 transition-colors"
                      style="background: rgba(37,211,102,0.2); border: 1px solid rgba(37,211,102,0.4);">
                     <span>💬</span> Chat on WhatsApp
                   </a>
-                  <p v-else class="text-slate-500 text-xs">No WhatsApp number</p>
+                  <p v-else class="text-gray-600 text-xs">No WhatsApp number</p>
                 </div>
-                <div><p class="text-slate-500 text-xs">Country</p><p class="text-white">{{ pilgrimDetail.country || '—' }}</p></div>
+                <div><p class="text-gray-600 text-xs">Country</p><p class="text-white">{{ pilgrimDetail.country || '—' }}</p></div>
               </div>
             </section>
 
@@ -698,12 +698,12 @@ onMounted(() => {
             <section>
               <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Travel Details</h3>
               <div class="grid grid-cols-2 gap-3 text-sm">
-                <div><p class="text-slate-500 text-xs">Passport</p><p class="text-white">{{ pilgrimDetail.passportNumber || '—' }}</p></div>
-                <div><p class="text-slate-500 text-xs">Visa</p><p class="text-white">{{ pilgrimDetail.visaNumber || '—' }}</p></div>
-                <div><p class="text-slate-500 text-xs">Arrival</p><p class="text-white">{{ new Date(pilgrimDetail.arrivalDate).toLocaleDateString('en-GB') }}</p></div>
-                <div><p class="text-slate-500 text-xs">Departure</p><p class="text-white">{{ new Date(pilgrimDetail.departureDate).toLocaleDateString('en-GB') }}</p></div>
-                <div><p class="text-slate-500 text-xs">Arrival Flight</p><p class="text-white">{{ pilgrimDetail.arrivalFlight || '—' }}</p></div>
-                <div><p class="text-slate-500 text-xs">Departure Flight</p><p class="text-white">{{ pilgrimDetail.departureFlight || '—' }}</p></div>
+                <div><p class="text-gray-600 text-xs">Passport</p><p class="text-white">{{ pilgrimDetail.passportNumber || '—' }}</p></div>
+                <div><p class="text-gray-600 text-xs">Visa</p><p class="text-white">{{ pilgrimDetail.visaNumber || '—' }}</p></div>
+                <div><p class="text-gray-600 text-xs">Arrival</p><p class="text-white">{{ new Date(pilgrimDetail.arrivalDate).toLocaleDateString('en-GB') }}</p></div>
+                <div><p class="text-gray-600 text-xs">Departure</p><p class="text-white">{{ new Date(pilgrimDetail.departureDate).toLocaleDateString('en-GB') }}</p></div>
+                <div><p class="text-gray-600 text-xs">Arrival Flight</p><p class="text-white">{{ pilgrimDetail.arrivalFlight || '—' }}</p></div>
+                <div><p class="text-gray-600 text-xs">Departure Flight</p><p class="text-white">{{ pilgrimDetail.departureFlight || '—' }}</p></div>
               </div>
             </section>
 
@@ -711,11 +711,11 @@ onMounted(() => {
             <section v-if="pilgrimDetail.emergencyContactName">
               <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Emergency Contact</h3>
               <div class="grid grid-cols-2 gap-3 text-sm">
-                <div><p class="text-slate-500 text-xs">Name</p><p class="text-white">{{ pilgrimDetail.emergencyContactName }}</p></div>
+                <div><p class="text-gray-600 text-xs">Name</p><p class="text-white">{{ pilgrimDetail.emergencyContactName }}</p></div>
                 <div>
-                  <p class="text-slate-500 text-xs">Phone</p>
+                  <p class="text-gray-600 text-xs">Phone</p>
                   <a v-if="pilgrimDetail.emergencyContactPhone" :href="waLink(pilgrimDetail.emergencyContactPhone)" target="_blank" rel="noopener"
-                     class="text-emerald-400 hover:text-emerald-300 text-sm transition-colors">
+                     class="text-amber-700 hover:text-amber-600 text-sm transition-colors">
                     📞 {{ pilgrimDetail.emergencyContactPhone }}
                   </a>
                   <p v-else class="text-white">—</p>
@@ -728,18 +728,18 @@ onMounted(() => {
               <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Current Allocation</h3>
               <div class="grid grid-cols-2 gap-3 text-sm">
                 <div v-if="pilgrimDetail.currentRoom">
-                  <p class="text-slate-500 text-xs">Room</p>
-                  <p class="text-emerald-400 font-semibold">{{ pilgrimDetail.currentRoom.roomNumber }}</p>
-                  <p class="text-slate-500 text-xs">{{ pilgrimDetail.currentRoom.hotelName }} · {{ pilgrimDetail.currentRoom.floorLabel }}</p>
+                  <p class="text-gray-600 text-xs">Room</p>
+                  <p class="text-amber-700 font-semibold">{{ pilgrimDetail.currentRoom.roomNumber }}</p>
+                  <p class="text-gray-600 text-xs">{{ pilgrimDetail.currentRoom.hotelName }} · {{ pilgrimDetail.currentRoom.floorLabel }}</p>
                 </div>
-                <div v-else><p class="text-slate-500 text-xs">Room</p><p class="text-yellow-400 text-sm">Not assigned</p></div>
+                <div v-else><p class="text-gray-600 text-xs">Room</p><p class="text-yellow-400 text-sm">Not assigned</p></div>
 
                 <div v-if="pilgrimDetail.currentBus">
-                  <p class="text-slate-500 text-xs">Bus</p>
-                  <p class="text-emerald-400 font-semibold">Bus {{ pilgrimDetail.currentBus.busNumber }}</p>
-                  <p class="text-slate-500 text-xs">{{ pilgrimDetail.currentBus.driverName || 'Driver TBA' }}</p>
+                  <p class="text-gray-600 text-xs">Bus</p>
+                  <p class="text-amber-700 font-semibold">Bus {{ pilgrimDetail.currentBus.busNumber }}</p>
+                  <p class="text-gray-600 text-xs">{{ pilgrimDetail.currentBus.driverName || 'Driver TBA' }}</p>
                 </div>
-                <div v-else><p class="text-slate-500 text-xs">Bus</p><p class="text-yellow-400 text-sm">Not assigned</p></div>
+                <div v-else><p class="text-gray-600 text-xs">Bus</p><p class="text-yellow-400 text-sm">Not assigned</p></div>
               </div>
             </section>
 
@@ -756,7 +756,7 @@ onMounted(() => {
                   </div>
                   <div class="flex-1">
                     <p class="text-white font-medium">{{ stay.hotelName }} <span class="text-slate-500 font-normal">— {{ stay.hotelCity }}</span></p>
-                    <p class="text-slate-400 text-xs">Room {{ stay.roomNumber }} · {{ stay.floorLabel }}</p>
+                    <p class="text-gray-600 text-xs">Room {{ stay.roomNumber }} · {{ stay.floorLabel }}</p>
                     <p class="text-xs mt-0.5">
                       <span class="text-green-400">In: {{ new Date(stay.checkedInAt).toLocaleDateString('en-GB') }}</span>
                       <span v-if="stay.checkedOutAt" class="text-red-400 ml-3">Out: {{ new Date(stay.checkedOutAt).toLocaleDateString('en-GB') }} ({{ stay.checkedOutBy }})</span>
@@ -784,7 +784,7 @@ onMounted(() => {
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="text-white font-medium">{{ m.fullName }}</p>
-                    <p class="text-slate-500 text-xs">
+                    <p class="text-gray-600 text-xs">
                       {{ relLabel(m.relationship) }}
                       <span v-if="m.nationality"> · {{ m.nationality }}</span>
                       <span v-if="m.passportNumber"> · {{ m.passportNumber }}</span>
@@ -818,10 +818,10 @@ onMounted(() => {
       <div v-if="showBusModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
         <div class="bg-dark-800 border border-dark-600 rounded-xl w-full max-w-lg p-6">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-white font-semibold text-lg">Assign Bus</h3>
+            <h3 class="text-gray-900 font-semibold text-lg">Assign Bus</h3>
             <button @click="showBusModal = false" class="text-slate-400 hover:text-white text-xl">×</button>
           </div>
-          <p class="text-slate-400 text-sm mb-4">Pilgrim: <span class="text-white">{{ selectedPilgrim?.fullName }}</span></p>
+          <p class="text-gray-700 text-sm mb-4">Pilgrim: <span class="text-white">{{ selectedPilgrim?.fullName }}</span></p>
           <div v-if="!buses.length" class="text-yellow-400 text-sm text-center py-6">
             No buses available or bus data cannot be loaded. Please check Bus management.
           </div>
@@ -831,9 +831,9 @@ onMounted(() => {
               class="w-full text-left flex items-center justify-between bg-dark-700 hover:bg-dark-600 rounded-lg px-4 py-3 transition-colors disabled:opacity-50">
               <div>
                 <p class="text-white font-medium">Bus {{ b.busNumber }}</p>
-                <p class="text-slate-400 text-xs">{{ b.plateNumber }} · Driver: {{ b.driverName || 'TBA' }} · {{ b.currentPassengers }}/{{ b.capacity }}</p>
+                <p class="text-gray-600 text-xs">{{ b.plateNumber }} · Driver: {{ b.driverName || 'TBA' }} · {{ b.currentPassengers }}/{{ b.capacity }}</p>
               </div>
-              <span class="text-emerald-400 text-xs">{{ b.capacity - b.currentPassengers }} seats</span>
+              <span class="text-amber-700 text-xs">{{ b.capacity - b.currentPassengers }} seats</span>
             </button>
           </div>
           <button @click="showBusModal = false" class="btn-outline w-full mt-4">Cancel</button>

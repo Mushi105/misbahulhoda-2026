@@ -70,21 +70,21 @@ onMounted(load)
 
     <!-- Header -->
     <div>
-      <h1 class="text-2xl font-bold text-white">Documents & Guides</h1>
-      <p class="text-slate-400 text-sm mt-1">Tour guides, manuals and notices from Arbaeen 2026 team</p>
+      <h1 class="text-2xl font-bold text-gray-900">Documents & Guides</h1>
+      <p class="text-gray-700 text-sm mt-1">Tour guides, manuals and notices from Arbaeen 2026 team</p>
     </div>
 
-    <div v-if="error" class="bg-red-900/50 border border-red-700 text-red-300 rounded-lg px-4 py-3 text-sm">
+    <div v-if="error" class="bg-red-100 border border-red-300 text-red-600 rounded-lg px-4 py-3 text-sm">
       {{ error }}
     </div>
 
-    <div v-if="loading" class="text-center py-16 text-slate-400">Loading documents...</div>
+    <div v-if="loading" class="text-center py-16 text-gray-700">Loading documents...</div>
 
     <template v-else-if="!docs.length">
       <div class="card text-center py-16">
         <div class="text-5xl mb-4">📂</div>
-        <p class="text-white font-semibold">No documents available yet</p>
-        <p class="text-slate-400 text-sm mt-2">Tour guides and manuals will appear here once uploaded by the team.</p>
+        <p class="text-gray-900 font-semibold">No documents available yet</p>
+        <p class="text-gray-700 text-sm mt-2">Tour guides and manuals will appear here once uploaded by the team.</p>
       </div>
     </template>
 
@@ -98,8 +98,8 @@ onMounted(load)
                   @click="activeCategory = cat"
                   :class="['px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all',
                     activeCategory === cat
-                      ? 'bg-gold-700 text-white border-gold-600'
-                      : 'bg-dark-800 text-slate-400 border-dark-600 hover:border-gold-700 hover:text-white']">
+                      ? 'bg-amber-600 text-white border-amber-500'
+                      : 'bg-white text-gray-700 border-gray-300 hover:border-amber-500 hover:text-gray-900']">
             {{ cat === 'All' ? '📋 All' : `${categoryIcon[cat] || '📄'} ${cat}` }}
           </button>
         </div>
@@ -107,12 +107,12 @@ onMounted(load)
 
       <!-- Document list -->
       <div v-if="!filtered.length" class="card text-center py-10">
-        <p class="text-slate-400">No documents found for this filter.</p>
+        <p class="text-gray-600">No documents found for this filter.</p>
       </div>
 
       <div v-else class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div v-for="doc in filtered" :key="doc.id"
-             class="card border border-dark-600 hover:border-gold-800/40 transition-all">
+             class="card border border-gray-200 hover:border-amber-400 transition-all">
 
           <!-- Icon + Info -->
           <div class="flex items-start gap-3">
@@ -123,12 +123,12 @@ onMounted(load)
               {{ doc.contentType === 'application/pdf' ? '📕' : '🖼️' }}
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-xs px-2 py-0.5 rounded-full bg-gold-900/40 text-gold-400 border border-gold-800/40 font-medium">
+              <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-300 font-medium">
                 {{ categoryIcon[doc.category] || '📄' }} {{ doc.category }}
               </span>
-              <p class="text-white font-semibold text-sm mt-1.5 leading-snug">{{ doc.title }}</p>
-              <p v-if="doc.description" class="text-slate-400 text-xs mt-0.5 line-clamp-2">{{ doc.description }}</p>
-              <div class="flex items-center gap-2 mt-2 text-xs text-slate-500">
+              <p class="text-gray-900 font-semibold text-sm mt-1.5 leading-snug">{{ doc.title }}</p>
+              <p v-if="doc.description" class="text-gray-600 text-xs mt-0.5 line-clamp-2">{{ doc.description }}</p>
+              <div class="flex items-center gap-2 mt-2 text-xs text-gray-600">
                 <span>{{ doc.sizeLabel }}</span>
                 <span>·</span>
                 <span>{{ new Date(doc.createdAt).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }) }}</span>
@@ -139,11 +139,11 @@ onMounted(load)
           <!-- Action buttons -->
           <div class="flex gap-2 mt-4">
             <button @click="viewPdf(doc)"
-                    class="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold border border-blue-800/60 text-blue-400 hover:bg-blue-950/40 transition-colors">
+                    class="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold border border-blue-300 text-blue-600 hover:bg-blue-50 transition-colors">
               <span>👁</span> View
             </button>
             <button @click="download(doc)"
-                    class="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold text-white transition-colors"
+                    class="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold text-gray-900 transition-colors"
                     style="background: rgba(180,83,9,0.6); border: 1px solid rgba(180,83,9,0.4);">
               <span>⬇</span> Download
             </button>
