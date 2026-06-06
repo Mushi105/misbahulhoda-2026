@@ -271,7 +271,7 @@ public class AdminController(IMediator mediator, IUnitOfWork unitOfWork, IWhatsA
         var command = new Misbahuda.Application.Features.Auth.Commands.RegisterCommand(
             request.FullName, request.Email, request.PhoneNumber,
             request.Password, request.WhatsAppNumber,
-            null, null, null, null, null, null, null, null, null, null,
+            null, null, null, null, null, null, null, null, null, null, null,
             request.Role);
         var result = await Mediator.Send(command, cancellationToken);
         return result.Success ? Ok(result) : BadRequest(result);

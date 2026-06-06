@@ -9,6 +9,7 @@ public record RegisterRequest(
     string? Address1,
     string? Address2,
     string? City,
+    string? Postcode,
     string? Country,
     int? Gender,
     string? DateOfBirth,

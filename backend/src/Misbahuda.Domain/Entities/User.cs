@@ -19,6 +19,7 @@ public class User : BaseEntity
     public string? Address1 { get; set; }
     public string? Address2 { get; set; }
     public string? City { get; set; }
+    public string? Postcode { get; set; }
     public string? Country { get; set; }
     public Gender? Gender { get; set; }
     public DateTime? DateOfBirth { get; set; }

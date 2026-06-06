@@ -36,6 +36,7 @@ public class AuthController(IMediator mediator, IUnitOfWork unitOfWork, IEmailSe
             request.Address1,
             request.Address2,
             request.City,
+            request.Postcode,
             request.Country,
             request.Gender,
             request.DateOfBirth,

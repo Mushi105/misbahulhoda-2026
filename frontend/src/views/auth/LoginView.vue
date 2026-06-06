@@ -61,6 +61,7 @@ const registerForm = ref({
   address1: '',
   address2: '',
   city: '',
+  postcode: '',
   country: '',
   // Step 3 — Family Members (array, not count)
   familyMembers: [],
@@ -250,6 +251,7 @@ async function handleRegister() {
       address1: registerForm.value.address1,
       address2: registerForm.value.address2 || undefined,
       city: registerForm.value.city,
+      postcode: registerForm.value.postcode || undefined,
       country: registerForm.value.country,
       gender: parseInt(registerForm.value.gender),
       dateOfBirth: registerForm.value.dateOfBirth,
@@ -614,15 +616,20 @@ onMounted(() => {
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="label">City <span class="text-red-400">*</span></label>
-                <input v-model="registerForm.city" class="input" placeholder="e.g. Lahore, Karachi" />
+                <input v-model="registerForm.city" class="input" placeholder="e.g. Lahore, London, Toronto" />
               </div>
               <div>
-                <label class="label">Country <span class="text-red-400">*</span></label>
-                <select v-model="registerForm.country" class="input">
-                  <option value="">Select country</option>
-                  <option v-for="c in countries" :key="c" :value="c">{{ c }}</option>
-                </select>
+                <label class="label">Postcode / ZIP <span class="text-gray-600 text-xs">(optional)</span></label>
+                <input v-model="registerForm.postcode" class="input" placeholder="e.g. SW1A 1AA / 10001" />
               </div>
+            </div>
+
+            <div>
+              <label class="label">Country <span class="text-red-400">*</span></label>
+              <select v-model="registerForm.country" class="input">
+                <option value="">Select country</option>
+                <option v-for="c in countries" :key="c" :value="c">{{ c }}</option>
+              </select>
             </div>
 
             <div class="flex gap-3">
@@ -779,6 +786,9 @@ onMounted(() => {
                 <span class="text-slate-500">Email:</span><span class="text-white">{{ registerForm.email }}</span>
                 <span class="text-slate-500">Country:</span><span class="text-white">{{ registerForm.country }}</span>
                 <span class="text-slate-500">City:</span><span class="text-white">{{ registerForm.city }}</span>
+                <template v-if="registerForm.postcode">
+                  <span class="text-slate-500">Postcode:</span><span class="text-white">{{ registerForm.postcode }}</span>
+                </template>
                 <span class="text-slate-500">Passport:</span><span class="text-white">{{ registerForm.passportNumber }}</span>
                 <span class="text-slate-500">Family:</span><span class="text-white">{{ totalTravelers }} travelers ({{ registerForm.familyMembers.length }} members + you)</span>
                 <span class="text-slate-500">Package:</span>
