@@ -6,6 +6,7 @@ using Misbahuda.Application;
 using Misbahuda.Application.Interfaces;
 using Misbahuda.Infrastructure;
 using Misbahuda.Infrastructure.Data;
+using Misbahuda.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<IRealtimePusher, SignalRPusher>();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -84,6 +86,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<TrackingHub>("/hubs/tracking");
+app.MapHub<NotificationHub>("/hubs/notifications");
 app.MapHealthChecks("/health");
 
 using (var scope = app.Services.CreateScope())

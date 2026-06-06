@@ -78,6 +78,19 @@ const routes = [
     ]
   },
 
+  // Driver Portal
+  {
+    path: '/driver',
+    component: () => import('@/components/layout/AppLayout.vue'),
+    meta: { requiresAuth: true, roles: ['Driver'] },
+    children: [
+      { path: '', redirect: '/driver/dashboard' },
+      { path: 'dashboard', component: () => import('@/views/driver/DriverDashboard.vue') },
+      { path: 'tracking',  component: () => import('@/views/tracking/TrackingView.vue') },
+      { path: 'help',      component: () => import('@/views/HelpView.vue') },
+    ]
+  },
+
   // Redirects for old bare URLs → role-prefixed versions
   { path: '/tracking', redirect: () => { const auth = useAuthStore(); return auth.isAdmin ? '/admin/tracking' : auth.isPilgrim ? '/pilgrim/tracking' : '/volunteer/tracking' } },
   { path: '/majalis',  redirect: () => { const auth = useAuthStore(); return auth.isAdmin ? '/admin/majalis'  : auth.isPilgrim ? '/pilgrim/majalis'  : '/volunteer/majalis'  } },
@@ -96,6 +109,7 @@ router.beforeEach((to, from, next) => {
     if (auth.isAdmin) return next('/admin/dashboard')
     if (auth.isPilgrim) return next('/pilgrim/portal')
     if (auth.isVolunteer) return next('/volunteer/dashboard')
+    if (auth.isDriver) return next('/driver/dashboard')
     return next('/dashboard')
   }
 
@@ -103,6 +117,7 @@ router.beforeEach((to, from, next) => {
     if (auth.isAdmin) return next('/admin/dashboard')
     if (auth.isPilgrim) return next('/pilgrim/portal')
     if (auth.isVolunteer) return next('/volunteer/dashboard')
+    if (auth.isDriver) return next('/driver/dashboard')
     return next('/')
   }
 

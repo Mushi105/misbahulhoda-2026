@@ -38,7 +38,6 @@ const volunteerTabs = [
   { path: '/volunteer/help',      icon: '❓', label: 'Help'      },
 ]
 
-const bottomTabs = computed(() => auth.isPilgrim ? pilgrimTabs : volunteerTabs)
 
 const pilgrimGroups = [
   { label: 'My Journey', links: pilgrimTabs },
@@ -52,7 +51,27 @@ const volunteerGroups = [
   { label: 'My Work', links: volunteerTabs },
 ]
 
-const navGroups = computed(() => auth.isPilgrim ? pilgrimGroups : volunteerGroups)
+const driverTabs = [
+  { path: '/driver/dashboard', icon: '🚌', label: 'Dashboard' },
+  { path: '/driver/tracking',  icon: '📍', label: 'Tracking'  },
+  { path: '/driver/help',      icon: '❓', label: 'Help'       },
+]
+
+const driverGroups = [
+  { label: 'Driver', links: driverTabs },
+]
+
+const navGroups = computed(() =>
+  auth.isPilgrim  ? pilgrimGroups  :
+  auth.isDriver   ? driverGroups   :
+  volunteerGroups
+)
+
+const bottomTabsList = computed(() =>
+  auth.isPilgrim  ? pilgrimTabs  :
+  auth.isDriver   ? driverTabs   :
+  volunteerTabs
+)
 </script>
 
 <template>
@@ -81,7 +100,7 @@ const navGroups = computed(() => auth.isPilgrim ? pilgrimGroups : volunteerGroup
         </div>
         <div v-if="sidebarOpen">
           <p class="text-white font-bold text-sm leading-none">Misbah ul Hoda</p>
-          <p class="text-xs mt-0.5" style="color:#D4A800;">{{ auth.isPilgrim ? 'Pilgrim Portal' : 'Volunteer Portal' }} · 2026</p>
+          <p class="text-xs mt-0.5" style="color:#D4A800;">{{ auth.isPilgrim ? 'Pilgrim Portal' : auth.isDriver ? 'Driver Portal' : 'Volunteer Portal' }} · 2026</p>
         </div>
       </div>
 
@@ -144,10 +163,10 @@ const navGroups = computed(() => auth.isPilgrim ? pilgrimGroups : volunteerGroup
           <MHLogo size="sm" class="md:hidden" />
           <div class="leading-none md:hidden">
             <p class="text-white font-bold text-sm">Misbah ul Hoda</p>
-            <p class="text-xs font-semibold" style="color:#D4A800;">{{ auth.isPilgrim ? 'Pilgrim Portal' : 'Volunteer Portal' }}</p>
+            <p class="text-xs font-semibold" style="color:#D4A800;">{{ auth.isPilgrim ? 'Pilgrim Portal' : auth.isDriver ? 'Driver Portal' : 'Volunteer Portal' }}</p>
           </div>
           <div class="hidden md:block">
-            <span class="text-white font-semibold text-sm">{{ auth.isPilgrim ? 'Pilgrim Portal' : 'Volunteer Portal' }}</span>
+            <span class="text-white font-semibold text-sm">{{ auth.isPilgrim ? 'Pilgrim Portal' : auth.isDriver ? 'Driver Portal' : 'Volunteer Portal' }}</span>
             <span class="text-xs ml-2 hidden lg:inline" style="color:rgba(212,168,0,0.6);">· Arbaeen 2026</span>
           </div>
         </div>
@@ -176,7 +195,7 @@ const navGroups = computed(() => auth.isPilgrim ? pilgrimGroups : volunteerGroup
     <nav class="md:hidden fixed bottom-0 left-0 right-0 z-30 flex items-stretch"
          style="background:#000000; border-top:1px solid rgba(212,168,0,0.2); backdrop-filter:blur(16px); padding-bottom:env(safe-area-inset-bottom);">
       <button
-        v-for="tab in bottomTabs" :key="tab.path"
+        v-for="tab in bottomTabsList" :key="tab.path"
         @click="navigate(tab.path)"
         :class="['flex-1 flex flex-col items-center justify-center py-2 gap-0.5 transition-all',
           isActive(tab.path) ? '' : 'text-slate-500']"
@@ -208,7 +227,7 @@ const navGroups = computed(() => auth.isPilgrim ? pilgrimGroups : volunteerGroup
             <MHLogo size="sm" />
             <div class="flex-1">
               <p class="text-white font-bold text-sm">Misbah ul Hoda</p>
-              <p class="text-xs font-semibold" style="color:#D4A800;">{{ auth.isPilgrim ? 'Pilgrim Portal' : 'Volunteer Portal' }} · 2026</p>
+              <p class="text-xs font-semibold" style="color:#D4A800;">{{ auth.isPilgrim ? 'Pilgrim Portal' : auth.isDriver ? 'Driver Portal' : 'Volunteer Portal' }} · 2026</p>
             </div>
             <button @click="drawerOpen=false"
               class="text-slate-500 hover:text-white p-2 rounded-xl hover:bg-white/10 transition-colors"

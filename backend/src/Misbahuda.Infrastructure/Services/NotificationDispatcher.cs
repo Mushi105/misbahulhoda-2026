@@ -1,3 +1,4 @@
+using Misbahuda.Application.Interfaces;
 using Misbahuda.Domain.Entities;
 using Misbahuda.Domain.Enums;
 using Misbahuda.Domain.Interfaces;
@@ -5,12 +6,13 @@ using Misbahuda.Domain.Interfaces;
 namespace Misbahuda.Infrastructure.Services;
 
 /// <summary>
-/// Sends in-app notification + optional WhatsApp + optional Email in one call.
+/// Sends in-app notification + SignalR push + optional WhatsApp + optional Email.
 /// </summary>
 public class NotificationDispatcher(
     IUnitOfWork unitOfWork,
     IWhatsAppService whatsApp,
-    IEmailService email)
+    IEmailService email,
+    IRealtimePusher pusher)
 {
     public async Task SendAsync(
         User user,
@@ -21,7 +23,6 @@ public class NotificationDispatcher(
         bool sendEmail = false,
         CancellationToken cancellationToken = default)
     {
-        // 1. In-app notification
         var notif = new Notification
         {
             UserId  = user.Id,
@@ -32,11 +33,11 @@ public class NotificationDispatcher(
         };
         await unitOfWork.Notifications.AddAsync(notif, cancellationToken);
 
-        // 2. WhatsApp
+        _ = pusher.PushToUserAsync(user.Id.ToString(), "NewNotification", BuildPayload(notif));
+
         if (sendWhatsApp && !string.IsNullOrEmpty(user.WhatsAppNumber))
             _ = whatsApp.SendMessageAsync(user.WhatsAppNumber, $"*{title}*\n\n{message}\n\n— Misbahuda Team 🕌");
 
-        // 3. Email
         if (sendEmail && !string.IsNullOrEmpty(user.Email))
             _ = email.SendAsync(user.Email, user.FullName, title, BuildEmailHtml(title, message));
     }
@@ -63,6 +64,7 @@ public class NotificationDispatcher(
                 Event   = notifEvent
             };
             await unitOfWork.Notifications.AddAsync(notif, cancellationToken);
+            _ = pusher.PushToUserAsync(user.Id.ToString(), "NewNotification", BuildPayload(notif));
         }
 
         if (sendWhatsApp)
@@ -82,6 +84,17 @@ public class NotificationDispatcher(
                 _ = email.BroadcastAsync(recipients, title, html);
         }
     }
+
+    private static object BuildPayload(Notification n) => new
+    {
+        id        = n.Id,
+        title     = n.Title,
+        message   = n.Message,
+        type      = n.Type.ToString(),
+        @event    = n.Event.ToString(),
+        isRead    = false,
+        createdAt = n.CreatedAt
+    };
 
     private static string BuildEmailHtml(string title, string message) => $"""
         <!DOCTYPE html>

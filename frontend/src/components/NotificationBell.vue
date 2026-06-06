@@ -4,7 +4,27 @@ import { useNotificationStore } from '@/stores/notifications'
 
 const store = useNotificationStore()
 const open = ref(false)
-let interval = null
+let interval = null, hub = null
+
+async function connectSignalR() {
+  try {
+    const { HubConnectionBuilder, HttpTransportType } = await import('@microsoft/signalr')
+    hub = new HubConnectionBuilder()
+      .withUrl('/hubs/notifications', {
+        accessTokenFactory: () => localStorage.getItem('access_token') || '',
+        transport: HttpTransportType.WebSockets | HttpTransportType.LongPolling,
+      })
+      .withAutomaticReconnect()
+      .build()
+
+    hub.on('NewNotification', n => {
+      store.notifications.unshift(n)
+      store.unreadCount++
+    })
+
+    await hub.start()
+  } catch {}
+}
 
 const typeIcon = {
   General: '📢', Approval: '✅', RoomAllocation: '🏨',
@@ -30,12 +50,14 @@ function timeAgo(date) {
 
 onMounted(() => {
   store.fetchUnreadCount()
-  interval = setInterval(() => store.fetchUnreadCount(), 30000)
+  interval = setInterval(() => store.fetchUnreadCount(), 60000)
+  connectSignalR()
   document.addEventListener('click', handleOutside)
 })
 
 onUnmounted(() => {
   clearInterval(interval)
+  hub?.stop()
   document.removeEventListener('click', handleOutside)
 })
 

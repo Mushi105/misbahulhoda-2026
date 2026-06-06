@@ -2,19 +2,58 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Misbahuda.Application.Common;
+using Misbahuda.Application.Interfaces;
 using Misbahuda.Domain.Entities;
 using Misbahuda.Domain.Interfaces;
 
 namespace Misbahuda.API.Controllers;
 
 [Authorize]
-public class BusesController(IMediator mediator, IUnitOfWork unitOfWork) : BaseController(mediator)
+public class BusesController(
+    IMediator mediator,
+    IUnitOfWork unitOfWork,
+    ICurrentUserService currentUser) : BaseController(mediator)
 {
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
         var buses = await unitOfWork.Buses.GetAllAsync(cancellationToken);
         return Ok(ApiResponse<IEnumerable<Bus>>.Ok(buses));
+    }
+
+    /// <summary>Returns buses assigned to the currently logged-in driver.</summary>
+    [HttpGet("my")]
+    [Authorize(Roles = "Driver")]
+    public async Task<IActionResult> GetMy(CancellationToken cancellationToken)
+    {
+        if (currentUser.UserId is null) return Unauthorized();
+
+        var buses = await unitOfWork.Buses.FindAsync(
+            b => b.DriverUserId == currentUser.UserId, cancellationToken);
+
+        return Ok(ApiResponse<IEnumerable<Bus>>.Ok(buses));
+    }
+
+    /// <summary>Returns pilgrims assigned to a specific bus.</summary>
+    [HttpGet("{busId}/passengers")]
+    public async Task<IActionResult> GetPassengers(Guid busId, CancellationToken cancellationToken)
+    {
+        var pilgrims = await unitOfWork.Pilgrims.FindAsync(
+            p => p.BusId == busId, cancellationToken);
+
+        var userIds = pilgrims.Select(p => p.UserId).ToList();
+        var users   = await unitOfWork.Users.FindAsync(u => userIds.Contains(u.Id), cancellationToken);
+        var userMap = users.ToDictionary(u => u.Id);
+
+        var result = pilgrims.Select(p => new {
+            p.Id,
+            FullName = userMap.TryGetValue(p.UserId, out var u) ? u.FullName : "Unknown",
+            p.Country,
+            SeatNumber = (string?)null,
+            IsBoarded  = false
+        });
+
+        return Ok(ApiResponse<object>.Ok(result));
     }
 
     [HttpPost]
