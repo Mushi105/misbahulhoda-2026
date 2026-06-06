@@ -11,6 +11,15 @@ import { computed } from 'vue'
 
 const activeSection = ref('overview')
 
+const pilgrimActions = [
+  ['Approve pilgrim', 'Click pilgrim row → Approve — pilgrim receives instant notification + email'],
+  ['Reject pilgrim', 'Click pilgrim row → Reject → enter rejection reason'],
+  ['Mark Under Review', 'Click pilgrim row → Under Review'],
+  ['Allocate Room', 'Click pilgrim → Allocate Room → select available room'],
+  ['Allocate Bus', 'Click pilgrim → Allocate Bus → select bus'],
+  ['Search pilgrims', 'Use search box — filter by name, status, or country'],
+]
+
 const sections = [
   { id: 'overview',       label: '📖 Overview'             },
   { id: 'pilgrim',        label: '🕌 Pilgrim Guide'        },
@@ -278,14 +287,7 @@ const sections = [
               <th class="text-left py-2 text-slate-400 font-medium">How</th>
             </tr></thead>
             <tbody class="divide-y divide-dark-700">
-              <tr v-for="row in [
-                ['Approve pilgrim','Click pilgrim row → "Approve" — pilgrim receives instant notification + email'],
-                ['Reject pilgrim','Click pilgrim row → "Reject" → enter rejection reason'],
-                ['Mark Under Review','Click pilgrim row → "Under Review"'],
-                ['Allocate Room','Click pilgrim → "Allocate Room" → select available room'],
-                ['Allocate Bus','Click pilgrim → "Allocate Bus" → select bus'],
-                ['Search pilgrims','Use search box — filter by name, status, or country'],
-              ]" :key="row[0]">
+              <tr v-for="row in pilgrimActions" :key="row[0]">
                 <td class="py-2.5 text-white font-medium pr-4">{{ row[0] }}</td>
                 <td class="py-2.5 text-slate-400">{{ row[1] }}</td>
               </tr>
