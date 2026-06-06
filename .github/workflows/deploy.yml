@@ -30,9 +30,9 @@ jobs:
             git checkout "$VERSION"
 
             echo "=== Building containers (version: $VERSION) ==="
+            echo "APP_VERSION=$VERSION" >> .env
             docker compose down --remove-orphans
-            docker compose build --build-arg APP_VERSION="$VERSION"
-            docker compose up -d
+            docker compose up -d --build
 
             echo "=== Cleaning old images ==="
             docker image prune -f
