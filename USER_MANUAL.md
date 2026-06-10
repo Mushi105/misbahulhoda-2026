@@ -7,10 +7,11 @@
 
 1. [What is this System?](#1-what-is-this-system)
 2. [Who Uses It?](#2-who-uses-it)
-3. [Pilgrim Guide](#3-pilgrim-guide)
-4. [Volunteer Guide](#4-volunteer-guide)
-5. [Admin Guide](#5-admin-guide)
-6. [Key Benefits](#6-key-benefits)
+3. [Android App](#3-android-app)
+4. [Pilgrim Guide](#4-pilgrim-guide)
+5. [Volunteer Guide](#5-volunteer-guide)
+6. [Admin Guide](#6-admin-guide)
+7. [Key Benefits](#7-key-benefits)
 
 ---
 
@@ -42,7 +43,78 @@
 
 ---
 
-## 3. Pilgrim Guide
+## 3. Android App
+
+The **Misbah ul Hoda Android App** allows pilgrims and volunteers to access the system directly from their mobile phone — no browser needed.
+
+---
+
+### 3.1 How to Download
+
+**Option 1 — Website Direct Download:**
+
+1. Open your Android phone browser
+2. Go to: **misbahulhoda.mubashirhasan.dev**
+3. Scroll to the bottom footer
+4. Tap **"↓ Download"** next to Android App
+5. APK file will download automatically
+
+**Option 2 — Google Play Store:**
+
+Coming soon — app will be available on Google Play Store shortly.
+
+---
+
+### 3.2 How to Install APK
+
+After downloading the APK file:
+
+1. Open your phone **Settings**
+2. Go to **Security** or **Privacy**
+3. Enable **"Install from Unknown Sources"** or **"Allow from this source"**
+4. Go to your **Downloads** folder
+5. Tap **MisbahulHoda.apk**
+6. Tap **"Install"**
+7. App will appear on your home screen
+
+> ⚠️ **Note:** This step is only needed for direct APK install. Once on Google Play, installation will be automatic.
+
+---
+
+### 3.3 How to Use the App
+
+The app works exactly like the website:
+
+| Feature | Available |
+|---|---|
+| Pilgrim Registration | ✅ |
+| Application Status | ✅ |
+| Room & Bus Info | ✅ |
+| Majalis Schedule | ✅ |
+| Live Karwan Tracking | ✅ |
+| Notifications | ✅ |
+| Documents Upload | ✅ |
+| Tour Registration | ✅ |
+
+1. Open the **Misbah ul Hoda** app
+2. Tap **"Login"**
+3. Enter your email and password
+4. All your information will load automatically
+
+---
+
+### 3.4 App Requirements
+
+| | Requirement |
+|---|---|
+| **Android Version** | Android 7.0 or higher |
+| **Internet** | Required (WiFi or Mobile Data) |
+| **Storage** | ~50 MB |
+| **iOS (iPhone)** | Coming Soon |
+
+---
+
+## 4. Pilgrim Guide
 
 ### 3.1 How to Register
 
@@ -161,7 +233,7 @@ You will receive automatic notifications for:
 
 ---
 
-## 4. Volunteer Guide
+## 5. Volunteer Guide
 
 ### 4.1 How to Log In
 
@@ -201,7 +273,7 @@ If pilgrims are assigned to you:
 
 ---
 
-## 5. Admin Guide
+## 6. Admin Guide
 
 ### 5.1 Dashboard
 
@@ -370,7 +442,7 @@ Go to **Admin → Reports**:
 
 ---
 
-## 6. Key Benefits
+## 7. Key Benefits
 
 ### For Pilgrims
 | Benefit | Detail |
