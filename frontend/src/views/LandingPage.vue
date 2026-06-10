@@ -459,6 +459,14 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
                   <p class="text-xs" style="color:rgba(255,255,255,0.3);">misbahulhoda.mubashirhasan.dev</p>
                 </div>
               </div>
+              <div class="flex items-center gap-3 p-3"
+                 style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07); border-radius:3px; opacity:0.5;">
+                <span class="text-xl">🍎</span>
+                <div class="flex-1">
+                  <p class="text-white text-xs font-medium">iPhone App</p>
+                  <p class="text-xs" style="color:rgba(255,255,255,0.3);">Coming Soon — iOS</p>
+                </div>
+              </div>
               <a href="/misbahuda.apk" download="MisbahulHoda.apk"
                  class="flex items-center gap-3 p-3 transition-all cursor-pointer"
                  style="background:rgba(201,168,76,0.08); border:1px solid rgba(212,168,0,0.4); border-radius:3px; text-decoration:none;"
