@@ -42,7 +42,7 @@ jobs:
 
       - name: Decode keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > frontend/android/app/misbahuda-release.keystore
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > /home/runner/work/misbahuda-release.keystore
 
       - name: Decode google-services.json
         run: |
@@ -60,7 +60,7 @@ jobs:
       - name: Build release APK
         working-directory: frontend/android
         env:
-          KEYSTORE_PATH:     "app/misbahuda-release.keystore"
+          KEYSTORE_PATH:     "/home/runner/work/misbahuda-release.keystore"
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS:         ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD:      ${{ secrets.KEY_PASSWORD }}
