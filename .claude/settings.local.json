@@ -168,7 +168,22 @@
       "Bash(git push *)",
       "Bash(kill -9 12699)",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d['data']['accessToken'][:50]\\)\")",
-      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); rows=d.get\\('data',[]\\); print\\('Count:',len\\(rows\\)\\); print\\('First row:',json.dumps\\(rows[0]\\) if rows else 'EMPTY'\\)\")"
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); rows=d.get\\('data',[]\\); print\\('Count:',len\\(rows\\)\\); print\\('First row:',json.dumps\\(rows[0]\\) if rows else 'EMPTY'\\)\")",
+      "Bash(git tag *)",
+      "Bash(python3 -c \"from PIL import Image, ImageDraw, ImageFont; print\\('PIL available'\\)\")",
+      "Bash(python3)",
+      "Bash(find /tmp /var/folders -name \"*.png\" -newer /tmp 2>/dev/null | head -10 && ls ~/Downloads/ | grep -i \"flag\\\\|misbah\\\\|boy\\\\|splash\" 2>/dev/null | head -10)",
+      "Read(//private/var/folders/**)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(sed -i '' 's/^## 4\\\\. Volunteer Guide/## 5. Volunteer Guide/' /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/USER_MANUAL.md)",
+      "Bash(sed -i '' 's/^## 5\\\\. Admin Guide/## 6. Admin Guide/' /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/USER_MANUAL.md)",
+      "Bash(sed -i '' 's/^## 6\\\\. Key Benefits/## 7. Key Benefits/' /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/USER_MANUAL.md)",
+      "Bash(cp /Users/smmubashirhasan/Downloads/google-services.json /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/frontend/android/app/google-services.json)",
+      "Bash(keytool -genkey -v -keystore /Users/smmubashirhasan/Documents/claudeai/arbeen-2026/frontend/android/app/misbahuda-release.keystore -alias misbahuda -keyalg RSA -keysize 2048 -validity 10000 -storepass Misbahuda@2026 -keypass Misbahuda@2026 -dname 'CN=Misbah ul Hoda, OU=Arbaeen, O=Misbahuda, L=London, S=England, C=GB')"
+    ],
+    "additionalDirectories": [
+      "/Users/smmubashirhasan/Downloads"
     ]
   }
 }

@@ -47,6 +47,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<VolunteerPilgrimAssignment> VolunteerPilgrimAssignments => Set<VolunteerPilgrimAssignment>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<PilgrimRoomHistory> PilgrimRoomHistories => Set<PilgrimRoomHistory>();
+    public DbSet<DeviceToken> DeviceTokens => Set<DeviceToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

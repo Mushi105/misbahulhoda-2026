@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "605408475666",
+    "project_id": "misbahuda-5230a",
+    "storage_bucket": "misbahuda-5230a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605408475666:android:9952fe27ee535dba3b36cb",
+        "android_client_info": {
+          "package_name": "com.misbahulhoda.arbaeen2026"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSvoKAIWBsArijPwcPv0d-6Xwn4INtbBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

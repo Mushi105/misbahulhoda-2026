@@ -44,6 +44,7 @@ public interface IUnitOfWork : IDisposable
     IRepository<TourPackage>      TourPackages      { get; }
     IRepository<TourDaySchedule>  TourDaySchedules  { get; }
     IRepository<PilgrimFeedback>  PilgrimFeedbacks  { get; }
+    IRepository<DeviceToken>      DeviceTokens      { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);

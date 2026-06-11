@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Misbahuda.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8dd1b4cd500b6e089dcd4fb610b33ea3741aa1e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cedc0988c5e8857fb4f16d946010047acef0f986")]
 [assembly: System.Reflection.AssemblyProductAttribute("Misbahuda.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Misbahuda.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

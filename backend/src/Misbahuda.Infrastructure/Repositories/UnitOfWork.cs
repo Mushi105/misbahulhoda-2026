@@ -49,6 +49,7 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
     public IRepository<TourPackage>      TourPackages      { get; } = new Repository<TourPackage>(context);
     public IRepository<TourDaySchedule>  TourDaySchedules  { get; } = new Repository<TourDaySchedule>(context);
     public IRepository<PilgrimFeedback>  PilgrimFeedbacks  { get; } = new Repository<PilgrimFeedback>(context);
+    public IRepository<DeviceToken>      DeviceTokens      { get; } = new Repository<DeviceToken>(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
         await context.SaveChangesAsync(cancellationToken);

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { authApi } from '@/api/auth'
+import { registerPushNotifications, unregisterPushNotifications } from '@/services/pushNotifications'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(JSON.parse(localStorage.getItem('user') || 'null'))
@@ -19,6 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
     const { data, message } = res.data
     if (!data) throw new Error(message || 'Login failed.')
     setSession(data)
+    registerPushNotifications()
     return data
   }
 
@@ -45,6 +47,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   function logout() {
+    unregisterPushNotifications()
     user.value = null
     accessToken.value = null
     refreshTokenVal.value = null

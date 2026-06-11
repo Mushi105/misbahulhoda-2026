@@ -10,6 +10,12 @@ const scholarSummary = ref(null)
 const loading        = ref(true)
 const error          = ref('')
 const exporting      = ref('')
+const downloadSuccess = ref('')
+
+function showDownloadToast(filename) {
+  downloadSuccess.value = `✅ Downloaded: ${filename}`
+  setTimeout(() => downloadSuccess.value = '', 4000)
+}
 
 async function load() {
   try {
@@ -43,7 +49,9 @@ async function exportExcel(type) {
     XLSX.utils.book_append_sheet(wb, ws, type === 'pilgrims' ? 'Pilgrims' : 'Volunteers')
 
     const today = new Date().toISOString().slice(0, 10)
-    XLSX.writeFile(wb, `Misbahuda_${type}_${today}.xlsx`)
+    const filename = `Misbahuda_${type}_${today}.xlsx`
+    XLSX.writeFile(wb, filename)
+    showDownloadToast(filename)
   } catch {
     error.value = 'Excel export failed.'
   } finally { exporting.value = '' }
@@ -144,6 +152,7 @@ async function exportPdf(type) {
 
     const filename = `Misbahuda_${type}_${new Date().toISOString().slice(0, 10)}.pdf`
     doc.save(filename)
+    showDownloadToast(filename)
   } catch (e) {
     console.error(e)
     error.value = 'PDF export failed.'
@@ -252,7 +261,9 @@ function exportSummaryPdf() {
       doc.text(`Page ${i} of ${pageCount}  |  Misbahuda System — Confidential`, 14, doc.internal.pageSize.height - 6)
     }
 
-    doc.save(`Misbahuda_Summary_${new Date().toISOString().slice(0, 10)}.pdf`)
+    const summaryFile = `Misbahuda_Summary_${new Date().toISOString().slice(0, 10)}.pdf`
+    doc.save(summaryFile)
+    showDownloadToast(summaryFile)
   } catch (e) {
     console.error(e)
     error.value = 'Summary PDF export failed.'
@@ -269,7 +280,9 @@ async function exportScholarsExcel() {
     ws['!cols'] = Object.keys(rows[0] || {}).map(k => ({ wch: Math.max(k.length + 2, 16) }))
     const wb = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(wb, ws, 'Scholars & Reciters')
-    XLSX.writeFile(wb, `Misbahuda_Scholars_${new Date().toISOString().slice(0,10)}.xlsx`)
+    const scholarsXlsx = `Misbahuda_Scholars_${new Date().toISOString().slice(0,10)}.xlsx`
+    XLSX.writeFile(wb, scholarsXlsx)
+    showDownloadToast(scholarsXlsx)
   } catch { error.value = 'Scholar Excel export failed.' }
   finally { exporting.value = '' }
 }
@@ -333,7 +346,9 @@ async function exportScholarsPdf() {
       doc.setTextColor(148, 163, 184)
       doc.text(`Page ${i} of ${pageCount}  |  Misbahuda System — Confidential`, 14, doc.internal.pageSize.height - 6)
     }
-    doc.save(`Misbahuda_Scholars_${new Date().toISOString().slice(0,10)}.pdf`)
+    const scholarsFile = `Misbahuda_Scholars_${new Date().toISOString().slice(0,10)}.pdf`
+    doc.save(scholarsFile)
+    showDownloadToast(scholarsFile)
   } catch (e) { console.error(e); error.value = 'Scholar PDF export failed.' }
   finally { exporting.value = '' }
 }
@@ -343,6 +358,15 @@ onMounted(load)
 
 <template>
   <div class="space-y-6">
+
+    <!-- Download Toast -->
+    <Transition name="toast">
+      <div v-if="downloadSuccess"
+        class="fixed bottom-6 left-1/2 z-50 px-5 py-3 rounded-lg shadow-xl text-sm font-medium"
+        style="transform:translateX(-50%); background:#1a6b3a; color:#fff; border:1px solid #c9a84c; min-width:280px; text-align:center;">
+        {{ downloadSuccess }}
+      </div>
+    </Transition>
 
     <!-- Header -->
     <div class="flex items-center justify-between flex-wrap gap-3">
@@ -672,3 +696,8 @@ onMounted(load)
     </template>
   </div>
 </template>
+
+<style scoped>
+.toast-enter-active, .toast-leave-active { transition: all 0.3s ease; }
+.toast-enter-from, .toast-leave-to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+</style>
