@@ -11,6 +11,20 @@ const scrolled       = ref(false)
 const statsVisible   = ref(false)
 const statsRef       = ref(null)
 
+const apkVersion = ref('v1.3.0')
+const apkUrl     = ref('https://github.com/Mushi105/misbahulhoda-2026/releases/latest/download/MisbahulHoda-1.3.0.apk')
+
+async function fetchLatestRelease() {
+  try {
+    const res = await fetch('https://api.github.com/repos/Mushi105/misbahulhoda-2026/releases/latest')
+    if (!res.ok) return
+    const data = await res.json()
+    apkVersion.value = data.tag_name || apkVersion.value
+    const asset = data.assets?.find(a => a.name.endsWith('.apk'))
+    if (asset) apkUrl.value = asset.browser_download_url
+  } catch { /* keep defaults */ }
+}
+
 const stats = [
   { value: '5000+', label: 'Pilgrims Served',  icon: '🕌' },
   { value: '200+',  label: 'Volunteers',        icon: '🤝' },
@@ -52,6 +66,7 @@ onMounted(() => {
     if (auth.isPilgrim)   return router.replace('/pilgrim/portal')
     if (auth.isVolunteer) return router.replace('/volunteer/dashboard')
   }
+  fetchLatestRelease()
   window.addEventListener('scroll', onScroll)
   const io = new IntersectionObserver(([e]) => {
     if (e.isIntersecting) { statsVisible.value = true; io.disconnect() }
@@ -467,7 +482,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
                   <p class="text-xs" style="color:rgba(255,255,255,0.3);">Coming Soon — iOS</p>
                 </div>
               </div>
-              <a href="/misbahuda.apk" download="MisbahulHoda.apk"
+              <a :href="apkUrl" target="_blank" rel="noopener"
                  class="flex items-center gap-3 p-3 transition-all cursor-pointer"
                  style="background:rgba(201,168,76,0.08); border:1px solid rgba(212,168,0,0.4); border-radius:3px; text-decoration:none;"
                  onmouseover="this.style.borderColor='#D4A800'; this.style.background='rgba(201,168,76,0.15)'"
@@ -475,7 +490,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
                 <span class="text-xl">📱</span>
                 <div class="flex-1">
                   <p class="text-white text-xs font-medium">Android App</p>
-                  <p class="text-xs" style="color:rgba(255,255,255,0.4);">Download APK — v1.0.0</p>
+                  <p class="text-xs" style="color:rgba(255,255,255,0.4);">Download APK — {{ apkVersion }}</p>
                 </div>
                 <span class="text-xs font-bold px-2 py-1 rounded" style="background:#D4A800; color:#000;">↓ Download</span>
               </a>

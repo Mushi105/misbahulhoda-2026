@@ -1,14 +1,14 @@
-name: Android Build & Deploy
+name: Android Build & Release
 
 on:
   push:
     tags:
-      - 'v*'        # v1.1.0, v1.2.0 — Play Store deploy
+      - 'v*'
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build & Upload AAB
+    name: Build APK & Create Release
     runs-on: ubuntu-latest
 
     steps:
@@ -51,13 +51,13 @@ jobs:
       - name: Extract version from tag
         id: version
         run: |
-          TAG="${GITHUB_REF_NAME:-1.0}"
+          TAG="${GITHUB_REF_NAME:-v1.0}"
           VERSION="${TAG#v}"
-          BUILD="${{ github.run_number }}"
-          echo "name=$VERSION" >> $GITHUB_OUTPUT
-          echo "code=$BUILD"   >> $GITHUB_OUTPUT
+          echo "name=$VERSION"              >> $GITHUB_OUTPUT
+          echo "tag=$TAG"                   >> $GITHUB_OUTPUT
+          echo "code=${{ github.run_number }}" >> $GITHUB_OUTPUT
 
-      - name: Build release AAB
+      - name: Build release APK
         working-directory: frontend/android
         env:
           KEYSTORE_PATH:     "app/misbahuda-release.keystore"
@@ -66,11 +66,31 @@ jobs:
           KEY_PASSWORD:      ${{ secrets.KEY_PASSWORD }}
           APP_VERSION:       ${{ steps.version.outputs.name }}
           BUILD_NUMBER:      ${{ steps.version.outputs.code }}
-        run: ./gradlew bundleRelease --no-daemon
+        run: ./gradlew assembleRelease --no-daemon
 
-      - name: Upload AAB artifact
-        uses: actions/upload-artifact@v4
+      - name: Rename APK
+        run: |
+          cp frontend/android/app/build/outputs/apk/release/app-release.apk \
+             MisbahulHoda-${{ steps.version.outputs.name }}.apk
+
+      - name: Create GitHub Release & Upload APK
+        uses: softprops/action-gh-release@v2
         with:
-          name: misbahuda-${{ steps.version.outputs.name }}.aab
-          path: frontend/android/app/build/outputs/bundle/release/app-release.aab
-          retention-days: 30
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: Misbahuda v${{ steps.version.outputs.name }}
+          body: |
+            ## Misbah ul Hoda — Arbaeen 2026
+            **Version:** ${{ steps.version.outputs.name }}
+
+            ### Install
+            1. Download `MisbahulHoda-${{ steps.version.outputs.name }}.apk`
+            2. Enable "Install from unknown sources" in Android settings
+            3. Open the downloaded file
+
+            ### What's New
+            - Push notifications support
+            - Performance improvements
+          files: MisbahulHoda-${{ steps.version.outputs.name }}.apk
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
