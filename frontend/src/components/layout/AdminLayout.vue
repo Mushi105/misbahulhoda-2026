@@ -60,9 +60,10 @@ const navGroups = [
     ]
   },
   {
-    label: 'Support',
+    label: 'System',
     links: [
-      { path: '/admin/help', icon: '❓', label: 'Help & Guide' },
+      { path: '/admin/activity-log', icon: '📋', label: 'Activity Log' },
+      { path: '/admin/help',         icon: '❓', label: 'Help & Guide' },
     ]
   },
 ]

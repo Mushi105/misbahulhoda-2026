@@ -63,6 +63,7 @@ public static class DependencyInjection
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IWhatsAppService, WhatsAppService>();
         services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IAuditLogService, AuditLogService>();
         services.AddScoped<NotificationDispatcher>();
         // Register as singleton so controller can inject it for manual trigger
         services.AddSingleton<TravelReminderService>();

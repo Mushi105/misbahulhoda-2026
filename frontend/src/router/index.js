@@ -32,6 +32,7 @@ const routes = [
       { path: 'scholars', component: () => import('@/views/admin/ScholarsManagement.vue') },
       { path: 'documents', component: () => import('@/views/admin/DocumentsManagement.vue') },
       { path: 'reports', component: () => import('@/views/admin/ReportsAdmin.vue') },
+      { path: 'activity-log', component: () => import('@/views/admin/ActivityLog.vue') },
       { path: 'finance', component: () => import('@/views/admin/FinanceManagement.vue') },
       { path: 'international', component: () => import('@/views/admin/InternationalFinance.vue') },
       { path: 'itinerary', component: () => import('@/views/admin/ItineraryAdmin.vue') },

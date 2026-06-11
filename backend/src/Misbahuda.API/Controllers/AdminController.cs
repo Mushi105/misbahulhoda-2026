@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Misbahuda.Application.Common;
 using Misbahuda.Application.DTOs.Pilgrim;
+using Misbahuda.Application.Interfaces;
 using Misbahuda.Domain.Entities;
 using Misbahuda.Domain.Enums;
 using Misbahuda.Domain.Interfaces;
@@ -11,7 +12,7 @@ using Misbahuda.Infrastructure.Services;
 namespace Misbahuda.API.Controllers;
 
 [Authorize(Roles = "SuperAdmin,Admin")]
-public class AdminController(IMediator mediator, IUnitOfWork unitOfWork, IWhatsAppService whatsApp, IEmailService email) : BaseController(mediator)
+public class AdminController(IMediator mediator, IUnitOfWork unitOfWork, IWhatsAppService whatsApp, IEmailService email, IAuditLogService auditLog, ICurrentUserService currentUser) : BaseController(mediator)
 {
     [HttpGet("dashboard")]
     public async Task<IActionResult> GetDashboard(CancellationToken cancellationToken)
@@ -455,6 +456,10 @@ public class AdminController(IMediator mediator, IUnitOfWork unitOfWork, IWhatsA
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
+        await auditLog.LogAsync("PILGRIM_APPROVED", "Pilgrim", pilgrim.Id.ToString(),
+            $"Pilgrim application approved (UserId: {pilgrim.UserId})",
+            currentUser.UserId, HttpContext.Connection.RemoteIpAddress?.ToString(), null, cancellationToken);
+
         var user = await unitOfWork.Users.GetByIdAsync(pilgrim.UserId, cancellationToken);
         if (user is not null)
         {
@@ -516,6 +521,10 @@ public class AdminController(IMediator mediator, IUnitOfWork unitOfWork, IWhatsA
         }, cancellationToken);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        await auditLog.LogAsync("PILGRIM_REJECTED", "Pilgrim", pilgrim.Id.ToString(),
+            $"Pilgrim application rejected. Reason: {request.Reason}",
+            currentUser.UserId, HttpContext.Connection.RemoteIpAddress?.ToString(), null, cancellationToken);
 
         var user = await unitOfWork.Users.GetByIdAsync(pilgrim.UserId, cancellationToken);
         if (user is not null)
